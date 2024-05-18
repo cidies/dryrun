@@ -2,7 +2,6 @@ from flask import Flask, render_template, request, jsonify
 from threading import Timer
 import json
 import os
-import time
 
 app = Flask(__name__)
 
@@ -49,7 +48,7 @@ def schedule_exercise():
 
     if data['type'] == 'timed':
         for idx, inject in enumerate(exercise_injects):
-            delay = idx * data['interval'] * 60
+            delay = idx * data['interval'] * 60  # convert minutes to seconds
             Timer(delay, execute_inject, [inject]).start()
     elif data['type'] == 'manual':
         save_json('scheduled_injects.json', exercise_injects)
@@ -89,7 +88,7 @@ def api_exercises():
 
 @app.route('/api/scenarios', methods=['GET', 'POST'])
 def api_scenarios():
-    if request.method == 'GET':
+    if request.method == 'GET'):
         return jsonify(load_json('scenarios.json'))
     elif request.method == 'POST':
         data = request.json
@@ -100,7 +99,7 @@ def api_scenarios():
 def api_reports():
     if request.method == 'GET':
         return jsonify(load_json('reports.json'))
-    elif request.method == 'POST':
+    elif request.method == 'POST'):
         data = request.json
         save_json('reports.json', data)
         return jsonify({"status": "success"}), 200

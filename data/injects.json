@@ -133,4 +133,7 @@
         "title": "Entführung einer Benutzersitzung",
         "description": "Ein Benutzer meldet, dass seine Sitzung beendet wurde und er nicht mehr auf das System zugreifen kann.",
         "exercise_benefit": "Übt die Erkennung und Reaktion auf Session-Hijacking-Angriffe.",
-        "expected_response": "Die Teilnehmer sollten die Sitzungsprotokolle überprüfen, die Sitzung zurücksetzen und die Sicherheitsvorkehrungen verstärken
+        "expected_response": "Die Teilnehmer sollten die Sitzungsprotokolle überprüfen, die Sitzung zurücksetzen und die Sicherheitsvorkehrungen verstärken"
+    }
+]
+    

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Berichte</h2>
+<div class="reports">
+    <ul>
+        {% for report in reports %}
+            <li>{{ report.date }} - Übung: {{ report.exercise }} - Team: {{ report.team }} - Leistung: {{ report.performance }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

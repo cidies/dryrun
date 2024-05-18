@@ -6,6 +6,7 @@
 <div class="injects">
     <table>
         <tr>
+            <th>Id</th>
             <th>Titel</th>
             <th>Kommunikationsart</th>
             <th>Beschreibung</th>
@@ -16,6 +17,7 @@
         </tr>
         {% for inject in injects %}
             <tr>
+                <td>{{ inject.id }}</td>
                 <td>{{ inject.title }}</td>
                 <td>{{ inject.communication_type }}</td>
                 <td>{{ inject.description }}</td>
@@ -23,6 +25,7 @@
                 <td>{{ inject.expected_response }}</td>
                 <td>{{ inject.assigned_scenarios | join(', ') }}</td>
                 <td><button onclick="editInject({{ loop.index0 }})">Bearbeiten</button></td>
+                <td><a href="/edit_inject/{{ inject.id }}" target="_blank">Bearbeiten</a></td>
             </tr>
         {% endfor %}
     </table>

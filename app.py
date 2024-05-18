@@ -35,12 +35,17 @@ def reports():
     reports = load_json('reports.json')
     return render_template('reports.html', reports=reports)
 
-@app.route('/injects')
-def injects():
-    injects = load_json('injects.json')
-    return render_template('injects.html', injects=injects)
+@app.route('/injects', endpoint='injects')
+def injects_route():
+    injects_data = load_json('injects.json')
+    return render_template('injects.html', injects=injects_data)
 
-
+def get_inject_by_id(inject_id):
+    injects_data = load_json('injects.json')
+    for inject in injects_data:
+        if inject['id'] == inject_id:
+            return inject
+    return None
 
 @app.route('/schedule_exercise', methods=['POST'])
 def schedule_exercise():
@@ -74,8 +79,56 @@ def execute_inject(inject):
     print(f"Executing inject: {inject['title']} via {inject['communication_type']}")
     # In real implementation, send email, text, call, or personal notification here
 
-@app.route('/edit_inject/<int:inject_id>', methods=['GET', 'POST'])
-def edit_inject(inject_id):
+
+from flask import request
+
+@app.route('/edit_inject1/<int:inject_id>', methods=['GET', 'POST'])
+def edit_inject1(inject_id):
+    # Hier holen Sie das Inject aus Ihrer Datenbank
+    inject = get_inject_by_id(inject_id)
+
+    # Überprüfen Sie, ob das Inject existiert
+    if inject is None:
+        return "Inject not found", 404
+
+    if request.method == 'POST':
+        # Hier verarbeiten Sie die Formulardaten und aktualisieren das Inject
+        # Sie müssen diese Logik entsprechend Ihrer Anwendung anpassen
+        # form_data = request.form
+        # update_inject(inject_id, form_data)
+        pass
+
+    # Rendern Sie die Bearbeitungsseite mit dem Inject als Kontext
+    return render_template('edit_inject.html', inject=inject)
+
+
+
+@app.route('/edit_inject2/<int:inject_id>', methods=['GET', 'POST'])
+def edit_inject2(inject_id):
+    injects = load_json('injects.json')
+    inject = injects[inject_id]
+
+    if request.method == 'POST':
+        data = request.json
+        inject['id'] = data.get('id', inject['id'])
+        inject['title'] = data.get('title', inject['title'])
+        inject['description'] = data.get('description', inject['description'])
+        inject['exercise_benefit'] = data.get('exercise_benefit', inject['exercise_benefit'])
+        inject['expected_response'] = data.get('expected_response', inject['expected_response'])
+        inject['communication_type'] = data.get('communication_type', inject['communication_type'])
+        inject['assigned_scenarios'] = data.get('assigned_scenarios', inject['assigned_scenarios'])
+        
+        injects[inject_id] = inject
+        save_json('injects.json', injects)
+        return jsonify({"status": "success", "inject": inject}), 200
+
+    # Rendern Sie die Bearbeitungsseite mit dem Inject als Kontext
+    return render_template('edit_inject.html', inject=inject)
+
+
+
+@app.route('/edit_inject3/<int:inject_id>', methods=['GET', 'POST'])
+def edit_inject3(inject_id):
     injects = load_json('injects.json')
     inject = injects[inject_id]
 

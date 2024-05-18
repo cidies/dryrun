@@ -34,6 +34,11 @@ def reports():
     reports = load_json('reports.json')
     return render_template('reports.html', reports=reports)
 
+@app.route('/injects')
+def injects():
+    injects = load_json('injects.json')
+    return render_template('injects.html', injects=injects)
+
 @app.route('/api/notifications', methods=['GET', 'POST'])
 def api_notifications():
     if request.method == 'GET':
@@ -68,6 +73,15 @@ def api_reports():
     elif request.method == 'POST':
         data = request.json
         save_json('reports.json', data)
+        return jsonify({"status": "success"}), 200
+
+@app.route('/api/injects', methods=['GET', 'POST'])
+def api_injects():
+    if request.method == 'GET':
+        return jsonify(load_json('injects.json'))
+    elif request.method == 'POST':
+        data = request.json
+        save_json('injects.json', data)
         return jsonify({"status": "success"}), 200
 
 if __name__ == '__main__':

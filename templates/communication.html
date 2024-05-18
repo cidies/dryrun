@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Kommunikation</h2>
+<div class="chat">
+    <h3>Team-Chat</h3>
+    <div id="chat-window">
+        <!-- Chat-Nachrichten werden hier angezeigt -->
+    </div>
+    <input type="text" id="chat-input" placeholder="Nachricht eingeben">
+    <button id="send-button">Senden</button>
+</div>
+<div class="video-calls">
+    <h3>Video-Calls</h3>
+    <button>Meeting starten</button>
+    <button>Meeting beitreten</button>
+</div>
+<div class="forums">
+    <h3>Foren</h3>
+    <div id="forum">
+        <p><strong>Thema:</strong> Neue Bedrohungen</p>
+        <p>Beitrag: Analyse der neuesten Ransomware-Varianten</p>
+        <p>Beitrag: Strategien zur Verhinderung von DDoS-Angriffen</p>
+    </div>
+</div>
+{% endblock %}

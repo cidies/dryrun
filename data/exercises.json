@@ -1,0 +1,14 @@
+[
+    {
+        "name": "Ransomware Angriff",
+        "status": "Geplant"
+    },
+    {
+        "name": "Phishing Angriff",
+        "status": "Läuft"
+    },
+    {
+        "name": "DDoS-Simulation",
+        "status": "Abgeschlossen"
+    }
+]

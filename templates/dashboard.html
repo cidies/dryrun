@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Dashboard</h2>
+<div class="notifications">
+    <h3>Benachrichtigungen</h3>
+    <ul>
+        {% for notification in notifications %}
+            <li>{{ notification }}</li>
+        {% endfor %}
+    </ul>
+</div>
+<div class="exercises">
+    <h3>Aktuelle Übungen</h3>
+    <ul>
+        {% for exercise in exercises %}
+            <li>{{ exercise.name }} - Status: {{ exercise.status }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

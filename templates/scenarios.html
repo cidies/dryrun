@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Szenarien</h2>
+<div class="scenarios">
+    <ul>
+        {% for scenario in scenarios %}
+            <li>{{ scenario.name }} - Beschreibung: {{ scenario.description }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

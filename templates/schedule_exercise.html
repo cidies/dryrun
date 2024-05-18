@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Übung Planen</h2>
+<div>
+    <h3>Übungsdetails</h3>
+    <form id="schedule-form">
+        <label for="type">Typ:</label>
+        <select id="type" name="type">
+            <option value="timed">Zeitgesteuert</option>
+            <option value="manual">Manuell</option>
+        </select><br>
+        <div id="timed-options">
+            <label for="interval">Intervall (Minuten):</label>
+            <input type="number" id="interval" name="interval"><br>
+        </div>
+        <label for="inject_titles">Inject Titel (Komma getrennt):</label>
+        <input type="text" id="inject_titles" name="inject_titles"><br>
+        <button type="submit">Planen</button>
+    </form>
+</div>
+<script>
+document.getElementById('schedule-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    var formData = {
+        type: document.getElementById('type').value,
+        interval: document.getElementById('interval').value,
+        inject_titles: document.getElementById('inject_titles').value.split(',').map(s => s.trim())
+    };
+    fetch('/schedule_exercise', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'scheduled') {
+            alert('Übung erfolgreich geplant.');
+        } else {
+            alert('Fehler beim Planen der Übung.');
+        }
+    });
+});
+
+document.getElementById('type').addEventListener('change', function(event) {
+    if (event.target.value === 'timed') {
+        document.getElementById('timed-options').style.display = 'block';
+    } else {
+        document.getElementById('timed-options').style.display = 'none';
+    }
+});
+</script>
+{% endblock %}

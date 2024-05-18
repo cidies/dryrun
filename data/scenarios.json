@@ -1,0 +1,14 @@
+[
+    {
+        "name": "Ransomware Angriff",
+        "description": "Simulation eines Ransomware-Angriffs auf die interne IT-Infrastruktur"
+    },
+    {
+        "name": "Phishing Angriff",
+        "description": "Simulation eines gezielten Phishing-Angriffs"
+    },
+    {
+        "name": "DDoS-Simulation",
+        "description": "Simulation eines DDoS-Angriffs auf den Webserver"
+    }
+]

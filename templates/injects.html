@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Injects</h2>
+<div class="injects">
+    <ul>
+        {% for inject in injects %}
+            <li>
+                <strong>{{ inject.title }}</strong> ({{ inject.communication_type }})
+                <p><em>Beschreibung:</em> {{ inject.description }}</p>
+                <p><em>Übungsnutzen:</em> {{ inject.exercise_benefit }}</p>
+                <p><em>Erwarteter Umgang:</em> {{ inject.expected_response }}</p>
+                <p><em>Zugewiesene Szenarien:</em> {{ inject.assigned_scenarios | join(', ') }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+<div>
+    <h3>Neuen Inject planen</h3>
+    <form id="inject-form">
+        <label for="title">Titel:</label>
+        <input type="text" id="title" name="title"><br>
+        <label for="description">Beschreibung:</label>
+        <textarea id="description" name="description"></textarea><br>
+        <label for="exercise_benefit">Übungsnutzen:</label>
+        <textarea id="exercise_benefit" name="exercise_benefit"></textarea><br>
+        <label for="expected_response">Erwarteter Umgang:</label>
+        <textarea id="expected_response" name="expected_response"></textarea><br>
+        <label for="assigned_scenarios">Zugewiesene Szenarien (Komma getrennt):</label>
+        <input type="text" id="assigned_scenarios" name="assigned_scenarios"><br>
+        <label for="communication_type">Kommunikationsart:</label>
+        <select id="communication_type" name="communication_type">
+            <option value="email">Email</option>
+            <option value="text">Text</option>
+            <option value="call">Anruf</option>
+            <option value="personally">Persönlich</option>
+        </select><br>
+        <button type="submit">Hinzufügen</button>
+    </form>
+</div>
+<script>
+document.getElementById('inject-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    var formData = {
+        title: document.getElementById('title').value,
+        description: document.getElementById('description').value,
+        exercise_benefit: document.getElementById('exercise_benefit').value,
+        expected_response: document.getElementById('expected_response').value,
+        assigned_scenarios: document.getElementById('assigned_scenarios').value.split(',').map(s => s.trim()),
+        communication_type: document.getElementById('communication_type').value
+    };
+    fetch('/api/injects', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            location.reload();
+        } else {
+            alert('Fehler beim Hinzufügen des Injects.');
+        }
+    });
+});
+</script>
+{% endblock %}

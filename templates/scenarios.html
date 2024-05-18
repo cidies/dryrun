@@ -3,10 +3,17 @@
 {% block content %}
 <h2>Szenarien</h2>
 <div class="scenarios">
-    <ul>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Beschreibung</th>
+        </tr>
         {% for scenario in scenarios %}
-            <li>{{ scenario.name }} - Beschreibung: {{ scenario.description }}</li>
+            <tr>
+                <td>{{ scenario.name }}</td>
+                <td>{{ scenario.description }}</td>
+            </tr>
         {% endfor %}
-    </ul>
+    </table>
 </div>
 {% endblock %}

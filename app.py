@@ -40,26 +40,32 @@ def injects():
     injects = load_json('injects.json')
     return render_template('injects.html', injects=injects)
 
+
+
 @app.route('/schedule_exercise', methods=['POST'])
 def schedule_exercise():
     data = request.json
-    injects = load_json('injects.json')
-    exercise_injects = [inject for inject in injects if inject['title'] in data['inject_titles']]
-
+    exercises = load_json('exercises.json')
+    exercises.append(data)
+    save_json('exercises.json', exercises)
     if data['type'] == 'timed':
-        for idx, inject in enumerate(exercise_injects):
-            delay = idx * data['interval'] * 60  # convert minutes to seconds
-            Timer(delay, execute_inject, [inject]).start()
-    elif data['type'] == 'manual':
-        save_json('scheduled_injects.json', exercise_injects)
-
+        schedule_timed_exercise(data)
     return jsonify({"status": "scheduled"}), 200
 
-@app.route('/execute_inject/<inject_title>')
-def execute_inject_route(inject_title):
-    injects = load_json('scheduled_injects.json')
-    inject = next((inject for inject in injects if inject['title'] == inject_title), None)
-    if inject:
+def schedule_timed_exercise(exercise):
+    injects = load_json('injects.json')
+    for idx, inject_idx in enumerate(exercise['inject_order']):
+        inject = injects[inject_idx]
+        delay = idx * exercise['interval'] * 60  # convert minutes to seconds
+        Timer(delay, execute_inject, [inject]).start()
+
+@app.route('/execute_inject/<exercise_name>/<inject_idx>')
+def execute_inject_route(exercise_name, inject_idx):
+    exercises = load_json('exercises.json')
+    injects = load_json('injects.json')
+    exercise = next((ex for ex in exercises if ex['name'] == exercise_name), None)
+    if exercise:
+        inject = injects[int(inject_idx)]
         execute_inject(inject)
     return jsonify({"status": "executed"}), 200
 
@@ -67,6 +73,38 @@ def execute_inject(inject):
     # Simulate sending inject via the specified communication type
     print(f"Executing inject: {inject['title']} via {inject['communication_type']}")
     # In real implementation, send email, text, call, or personal notification here
+
+@app.route('/edit_inject/<int:inject_id>', methods=['GET', 'POST'])
+def edit_inject(inject_id):
+    injects = load_json('injects.json')
+    inject = injects[inject_id]
+
+    if request.method == 'POST':
+        data = request.json
+        inject['title'] = data.get('title', inject['title'])
+        inject['description'] = data.get('description', inject['description'])
+        inject['exercise_benefit'] = data.get('exercise_benefit', inject['exercise_benefit'])
+        inject['expected_response'] = data.get('expected_response', inject['expected_response'])
+        inject['communication_type'] = data.get('communication_type', inject['communication_type'])
+        inject['assigned_scenarios'] = data.get('assigned_scenarios', inject['assigned_scenarios'])
+        
+        injects[inject_id] = inject
+        save_json('injects.json', injects)
+        return jsonify({"status": "success", "inject": inject}), 200
+
+    return jsonify(inject), 200
+
+
+
+@app.route('/save_exercise_order', methods=['POST'])
+def save_exercise_order():
+    data = request.json
+    exercises = load_json('exercises.json')
+    exercise = next((ex for ex in exercises if ex['name'] == data['exercise_name']), None)
+    if exercise:
+        exercise['inject_order'] = data['order']
+        save_json('exercises.json', exercises)
+    return jsonify({"status": "success"}), 200
 
 @app.route('/api/notifications', methods=['GET', 'POST'])
 def api_notifications():
@@ -88,7 +126,7 @@ def api_exercises():
 
 @app.route('/api/scenarios', methods=['GET', 'POST'])
 def api_scenarios():
-    if request.method == 'GET'):
+    if request.method == 'GET':
         return jsonify(load_json('scenarios.json'))
     elif request.method == 'POST':
         data = request.json
@@ -99,7 +137,7 @@ def api_scenarios():
 def api_reports():
     if request.method == 'GET':
         return jsonify(load_json('reports.json'))
-    elif request.method == 'POST'):
+    elif request.method == 'POST':
         data = request.json
         save_json('reports.json', data)
         return jsonify({"status": "success"}), 200
@@ -113,5 +151,6 @@ def api_injects():
         save_json('injects.json', data)
         return jsonify({"status": "success"}), 200
 
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=5010)

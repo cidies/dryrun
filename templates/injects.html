@@ -1,19 +1,31 @@
+
 {% extends 'base.html' %}
 
 {% block content %}
 <h2>Injects</h2>
 <div class="injects">
-    <ul>
+    <table>
+        <tr>
+            <th>Titel</th>
+            <th>Kommunikationsart</th>
+            <th>Beschreibung</th>
+            <th>Übungsnutzen</th>
+            <th>Erwarteter Umgang</th>
+            <th>Zugewiesene Szenarien</th>
+            <th>Aktionen</th>
+        </tr>
         {% for inject in injects %}
-            <li>
-                <strong>{{ inject.title }}</strong> ({{ inject.communication_type }})
-                <p><em>Beschreibung:</em> {{ inject.description }}</p>
-                <p><em>Übungsnutzen:</em> {{ inject.exercise_benefit }}</p>
-                <p><em>Erwarteter Umgang:</em> {{ inject.expected_response }}</p>
-                <p><em>Zugewiesene Szenarien:</em> {{ inject.assigned_scenarios | join(', ') }}</p>
-            </li>
+            <tr>
+                <td>{{ inject.title }}</td>
+                <td>{{ inject.communication_type }}</td>
+                <td>{{ inject.description }}</td>
+                <td>{{ inject.exercise_benefit }}</td>
+                <td>{{ inject.expected_response }}</td>
+                <td>{{ inject.assigned_scenarios | join(', ') }}</td>
+                <td><button onclick="editInject({{ loop.index0 }})">Bearbeiten</button></td>
+            </tr>
         {% endfor %}
-    </ul>
+    </table>
 </div>
 <div>
     <h3>Neuen Inject planen</h3>
@@ -38,6 +50,34 @@
         <button type="submit">Hinzufügen</button>
     </form>
 </div>
+
+<!-- Edit Inject Modal -->
+<div id="editInjectModal" style="display:none;">
+    <h3>Inject Bearbeiten</h3>
+    <form id="edit-inject-form">
+        <input type="hidden" id="edit-inject-id">
+        <label for="edit-title">Titel:</label>
+        <input type="text" id="edit-title"><br>
+        <label for="edit-description">Beschreibung:</label>
+        <textarea id="edit-description"></textarea><br>
+        <label for="edit-exercise-benefit">Übungsnutzen:</label>
+        <textarea id="edit-exercise-benefit"></textarea><br>
+        <label for="edit-expected-response">Erwarteter Umgang:</label>
+        <textarea id="edit-expected-response"></textarea><br>
+        <label for="edit-assigned-scenarios">Zugewiesene Szenarien (Komma getrennt):</label>
+        <input type="text" id="edit-assigned-scenarios"><br>
+        <label for="edit-communication_type">Kommunikationsart:</label>
+        <select id="edit-communication_type">
+            <option value="email">Email</option>
+            <option value="text">Text</option>
+            <option value="call">Anruf</option>
+            <option value="personally">Persönlich</option>
+        </select><br>
+        <button type="submit">Speichern</button>
+        <button type="button" onclick="closeEditModal()">Abbrechen</button>
+    </form>
+</div>
+
 <script>
 document.getElementById('inject-form').addEventListener('submit', function(event) {
     event.preventDefault();
@@ -65,5 +105,48 @@ document.getElementById('inject-form').addEventListener('submit', function(event
         }
     });
 });
+
+function editInject(injectId) {
+    fetch(`/edit_inject/${injectId}`)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('edit-inject-id').value = injectId;
+            document.getElementById('edit-title').value = data.title;
+            document.getElementById('edit-description').value = data.description;
+            document.getElementById('edit-exercise-benefit').value = data.exercise_benefit;
+            document.getElementById('edit-expected-response').value = data.expected_response;
+            document.getElementById('edit-communication_type').value = data.communication_type;
+            document.getElementById('edit-assigned-scenarios').value = data.assigned_scenarios.join(', ');
+            document.getElementById('editInjectModal').style.display = 'block';
+        });
+}
+
+document.getElementById('edit-inject-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const injectId = document.getElementById('edit-inject-id').value;
+    const data = {
+        title: document.getElementById('edit-title').value,
+        description: document.getElementById('edit-description').value,
+        exercise_benefit: document.getElementById('edit-exercise-benefit').value,
+        expected_response: document.getElementById('edit-expected-response').value,
+        communication_type: document.getElementById('edit-communication_type').value,
+        assigned_scenarios: document.getElementById('edit-assigned-scenarios').value.split(',').map(s => s.trim())
+    };
+    fetch(`/edit_inject/${injectId}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }).then(response => response.json()).then(result => {
+        if (result.status === 'success') {
+            location.reload();
+        }
+    });
+});
+
+function closeEditModal() {
+    document.getElementById('editInjectModal').style.display = 'none';
+}
 </script>
 {% endblock %}

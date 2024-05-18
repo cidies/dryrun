@@ -1,139 +1,173 @@
 [
     {
-        "assigned_scenarios": ["Ransomware Angriff", "Phishing Angriff"],
-        "communication_type": "email",
-        "title": "Verdächtige E-Mail entdeckt",
-        "description": "Ein Mitarbeiter meldet eine verdächtige E-Mail, die einen Anhang mit einem seltsamen Namen enthält.",
-        "exercise_benefit": "Übt das Erkennen und Melden von Phishing-Versuchen.",
-        "expected_response": "Die Teilnehmer sollten die E-Mail analysieren, den Anhang nicht öffnen und die IT-Sicherheitsabteilung informieren."
+        "assigned_scenarios": [
+            "Ransomware Angriff",
+            "Phishing Angriff"
+        ],
+        "communication_type": "text",
+        "title": "Verdaechtige E-Mail entdeckt",
+        "description": "Ein Mitarbeiter meldet eine verd\u00c3\u00a4chtige E-Mail, die einen Anhang mit einem seltsamen Namen enth\u00c3\u00a4lt.",
+        "exercise_benefit": "Uebt das Erkennen und Melden von Phishing-Versuchen.",
+        "expected_response": "Die Teilnehmer sollten die E-Mail analysieren, den Anhang nicht \u00c3\u00b6ffnen und die IT-Sicherheitsabteilung informieren."
     },
     {
-        "assigned_scenarios": ["DDoS-Simulation"],
+        "assigned_scenarios": [
+            "DDoS-Simulation"
+        ],
         "communication_type": "text",
         "title": "Webseite nicht erreichbar",
         "description": "Ein Benutzer meldet per SMS, dass die Firmenwebseite nicht erreichbar ist.",
-        "exercise_benefit": "Übt die Erkennung und Reaktion auf DDoS-Angriffe.",
-        "expected_response": "Die Teilnehmer sollten den Netzwerkverkehr überwachen, den DDoS-Angriff identifizieren und Maßnahmen zur Eindämmung einleiten."
+        "exercise_benefit": "\u00c3\u0153bt die Erkennung und Reaktion auf DDoS-Angriffe.",
+        "expected_response": "Die Teilnehmer sollten den Netzwerkverkehr \u00c3\u00bcberwachen, den DDoS-Angriff identifizieren und Ma\u00c3\u0178nahmen zur Eind\u00c3\u00a4mmung einleiten."
     },
     {
-        "assigned_scenarios": ["Man-in-the-Middle Angriff"],
+        "assigned_scenarios": [
+            "Man-in-the-Middle Angriff"
+        ],
         "communication_type": "call",
-        "title": "Verzögerte Kommunikation",
-        "description": "Ein Mitarbeiter ruft an und meldet, dass die Kommunikation über das interne Netzwerk ungewöhnlich langsam ist.",
-        "exercise_benefit": "Übt die Identifikation von Netzwerkmanipulationen.",
-        "expected_response": "Die Teilnehmer sollten die Netzwerklogs überprüfen, den Man-in-the-Middle-Angriff identifizieren und geeignete Gegenmaßnahmen ergreifen."
+        "title": "Verz\u00c3\u00b6gerte Kommunikation",
+        "description": "Ein Mitarbeiter ruft an und meldet, dass die Kommunikation \u00c3\u00bcber das interne Netzwerk ungew\u00c3\u00b6hnlich langsam ist.",
+        "exercise_benefit": "\u00c3\u0153bt die Identifikation von Netzwerkmanipulationen.",
+        "expected_response": "Die Teilnehmer sollten die Netzwerklogs \u00c3\u00bcberpr\u00c3\u00bcfen, den Man-in-the-Middle-Angriff identifizieren und geeignete Gegenma\u00c3\u0178nahmen ergreifen."
     },
     {
-        "assigned_scenarios": ["SQL Injection"],
+        "assigned_scenarios": [
+            "SQL Injection"
+        ],
         "communication_type": "personally",
         "title": "Datenbankfehler",
-        "description": "Ein Datenbankadministrator meldet persönlich, dass ungewöhnliche SQL-Abfragen die Datenbank belasten.",
-        "exercise_benefit": "Übt die Erkennung und Reaktion auf SQL-Injection-Angriffe.",
-        "expected_response": "Die Teilnehmer sollten die Log-Dateien der Datenbank analysieren, die SQL-Injection-Angriffe identifizieren und die Schwachstellen schließen."
+        "description": "Ein Datenbankadministrator meldet pers\u00c3\u00b6nlich, dass ungew\u00c3\u00b6hnliche SQL-Abfragen die Datenbank belasten.",
+        "exercise_benefit": "\u00c3\u0153bt die Erkennung und Reaktion auf SQL-Injection-Angriffe.",
+        "expected_response": "Die Teilnehmer sollten die Log-Dateien der Datenbank analysieren, die SQL-Injection-Angriffe identifizieren und die Schwachstellen schlie\u00c3\u0178en."
     },
     {
-        "assigned_scenarios": ["Malware-Verteilung"],
+        "assigned_scenarios": [
+            "Malware-Verteilung"
+        ],
         "communication_type": "email",
         "title": "Malware-Alarm",
         "description": "Das Antivirenprogramm meldet einen Malware-Fund auf einem Mitarbeiter-PC.",
-        "exercise_benefit": "Übt die Reaktion auf Malware-Infektionen.",
+        "exercise_benefit": "\u00c3\u0153bt die Reaktion auf Malware-Infektionen.",
         "expected_response": "Die Teilnehmer sollten die Malware isolieren, das infizierte System bereinigen und die Quelle der Infektion identifizieren."
     },
     {
-        "assigned_scenarios": ["Zero-Day Exploit"],
+        "assigned_scenarios": [
+            "Zero-Day Exploit"
+        ],
         "communication_type": "text",
-        "title": "Sicherheitslücke entdeckt",
-        "description": "Ein Mitarbeiter erhält eine SMS mit der Information über eine neu entdeckte Sicherheitslücke, die ausgenutzt wird.",
-        "exercise_benefit": "Übt die Reaktion auf Zero-Day-Angriffe.",
-        "expected_response": "Die Teilnehmer sollten schnellstmöglich Patches anwenden oder Workarounds implementieren und das System überwachen."
+        "title": "Sicherheitsl\u00c3\u00bccke entdeckt",
+        "description": "Ein Mitarbeiter erh\u00c3\u00a4lt eine SMS mit der Information \u00c3\u00bcber eine neu entdeckte Sicherheitsl\u00c3\u00bccke, die ausgenutzt wird.",
+        "exercise_benefit": "\u00c3\u0153bt die Reaktion auf Zero-Day-Angriffe.",
+        "expected_response": "Die Teilnehmer sollten schnellstm\u00c3\u00b6glich Patches anwenden oder Workarounds implementieren und das System \u00c3\u00bcberwachen."
     },
     {
-        "assigned_scenarios": ["Brute-Force Angriff"],
+        "assigned_scenarios": [
+            "Brute-Force Angriff"
+        ],
         "communication_type": "email",
         "title": "Anomalie bei Anmeldeversuchen",
         "description": "Das Sicherheitssystem meldet eine hohe Anzahl fehlgeschlagener Anmeldeversuche.",
-        "exercise_benefit": "Übt die Erkennung und Reaktion auf Brute-Force-Angriffe.",
-        "expected_response": "Die Teilnehmer sollten die IP-Adressen blockieren, von denen die Angriffe ausgehen, und die betroffenen Konten überwachen."
+        "exercise_benefit": "\u00c3\u0153bt die Erkennung und Reaktion auf Brute-Force-Angriffe.",
+        "expected_response": "Die Teilnehmer sollten die IP-Adressen blockieren, von denen die Angriffe ausgehen, und die betroffenen Konten \u00c3\u00bcberwachen."
     },
     {
-        "assigned_scenarios": ["Social Engineering"],
+        "assigned_scenarios": [
+            "Social Engineering"
+        ],
         "communication_type": "call",
-        "title": "Verdächtiger Anruf",
-        "description": "Ein Mitarbeiter berichtet von einem verdächtigen Anruf, bei dem nach vertraulichen Informationen gefragt wurde.",
-        "exercise_benefit": "Übt die Identifikation und Meldung von Social-Engineering-Versuchen.",
-        "expected_response": "Die Teilnehmer sollten den Vorfall dokumentieren, die betroffenen Mitarbeiter informieren und Sicherheitsmaßnahmen verstärken."
+        "title": "Verd\u00c3\u00a4chtiger Anruf",
+        "description": "Ein Mitarbeiter berichtet von einem verd\u00c3\u00a4chtigen Anruf, bei dem nach vertraulichen Informationen gefragt wurde.",
+        "exercise_benefit": "\u00c3\u0153bt die Identifikation und Meldung von Social-Engineering-Versuchen.",
+        "expected_response": "Die Teilnehmer sollten den Vorfall dokumentieren, die betroffenen Mitarbeiter informieren und Sicherheitsma\u00c3\u0178nahmen verst\u00c3\u00a4rken."
     },
     {
-        "assigned_scenarios": ["Advanced Persistent Threat (APT)"],
+        "assigned_scenarios": [
+            "Advanced Persistent Threat (APT)"
+        ],
         "communication_type": "email",
-        "title": "Ungewöhnlicher Netzwerkverkehr",
-        "description": "Das Sicherheitsüberwachungssystem meldet ungewöhnlichen, verdächtigen Netzwerkverkehr.",
-        "exercise_benefit": "Übt die Erkennung und Reaktion auf fortschrittliche Bedrohungen.",
-        "expected_response": "Die Teilnehmer sollten den Netzwerkverkehr analysieren, die Bedrohung identifizieren und langfristige Überwachungsmaßnahmen einleiten."
+        "title": "Ungew\u00c3\u00b6hnlicher Netzwerkverkehr",
+        "description": "Das Sicherheits\u00c3\u00bcberwachungssystem meldet ungew\u00c3\u00b6hnlichen, verd\u00c3\u00a4chtigen Netzwerkverkehr.",
+        "exercise_benefit": "\u00c3\u0153bt die Erkennung und Reaktion auf fortschrittliche Bedrohungen.",
+        "expected_response": "Die Teilnehmer sollten den Netzwerkverkehr analysieren, die Bedrohung identifizieren und langfristige \u00c3\u0153berwachungsma\u00c3\u0178nahmen einleiten."
     },
     {
-        "assigned_scenarios": ["Cross-Site Scripting (XSS)"],
+        "assigned_scenarios": [
+            "Cross-Site Scripting (XSS)"
+        ],
         "communication_type": "email",
-        "title": "Verdächtige Webaktivität",
-        "description": "Ein Webentwickler meldet ungewöhnliche JavaScript-Aktivitäten auf der Firmenwebseite.",
-        "exercise_benefit": "Übt die Erkennung und Reaktion auf XSS-Angriffe.",
-        "expected_response": "Die Teilnehmer sollten den Schadcode entfernen, die Sicherheitslücke schließen und die Webseite überwachen."
+        "title": "Verd\u00c3\u00a4chtige Webaktivit\u00c3\u00a4t",
+        "description": "Ein Webentwickler meldet ungew\u00c3\u00b6hnliche JavaScript-Aktivit\u00c3\u00a4ten auf der Firmenwebseite.",
+        "exercise_benefit": "\u00c3\u0153bt die Erkennung und Reaktion auf XSS-Angriffe.",
+        "expected_response": "Die Teilnehmer sollten den Schadcode entfernen, die Sicherheitsl\u00c3\u00bccke schlie\u00c3\u0178en und die Webseite \u00c3\u00bcberwachen."
     },
     {
-        "assigned_scenarios": ["DNS Spoofing"],
+        "assigned_scenarios": [
+            "DNS Spoofing"
+        ],
         "communication_type": "text",
         "title": "Umleitung auf falsche Webseiten",
         "description": "Ein Mitarbeiter meldet, dass er auf eine falsche Webseite umgeleitet wurde, als er versuchte, auf die Firmenwebseite zuzugreifen.",
-        "exercise_benefit": "Übt die Erkennung und Reaktion auf DNS-Spoofing-Angriffe.",
-        "expected_response": "Die Teilnehmer sollten die DNS-Einstellungen überprüfen, die falschen Einträge entfernen und die betroffenen Systeme bereinigen."
+        "exercise_benefit": "\u00c3\u0153bt die Erkennung und Reaktion auf DNS-Spoofing-Angriffe.",
+        "expected_response": "Die Teilnehmer sollten die DNS-Einstellungen \u00c3\u00bcberpr\u00c3\u00bcfen, die falschen Eintr\u00c3\u00a4ge entfernen und die betroffenen Systeme bereinigen."
     },
     {
-        "assigned_scenarios": ["Insider Bedrohung"],
+        "assigned_scenarios": [
+            "Insider Bedrohung"
+        ],
         "communication_type": "personally",
-        "title": "Verdächtiges Verhalten eines Mitarbeiters",
-        "description": "Ein Mitarbeiter meldet persönlich verdächtiges Verhalten eines Kollegen, der unbefugt auf sensible Daten zugreift.",
-        "exercise_benefit": "Übt die Erkennung und Reaktion auf Insider-Bedrohungen.",
-        "expected_response": "Die Teilnehmer sollten den Vorfall untersuchen, die Zugriffsprotokolle überprüfen und geeignete Maßnahmen gegen den Insider ergreifen."
+        "title": "Verd\u00c3\u00a4chtiges Verhalten eines Mitarbeiters",
+        "description": "Ein Mitarbeiter meldet pers\u00c3\u00b6nlich verd\u00c3\u00a4chtiges Verhalten eines Kollegen, der unbefugt auf sensible Daten zugreift.",
+        "exercise_benefit": "\u00c3\u0153bt die Erkennung und Reaktion auf Insider-Bedrohungen.",
+        "expected_response": "Die Teilnehmer sollten den Vorfall untersuchen, die Zugriffsprotokolle \u00c3\u00bcberpr\u00c3\u00bcfen und geeignete Ma\u00c3\u0178nahmen gegen den Insider ergreifen."
     },
     {
-        "assigned_scenarios": ["Spear Phishing"],
+        "assigned_scenarios": [
+            "Spear Phishing"
+        ],
         "communication_type": "email",
         "title": "Gezielte Phishing-E-Mail",
         "description": "Ein hochrangiger Mitarbeiter meldet den Erhalt einer gezielten Phishing-E-Mail, die sehr echt aussieht.",
-        "exercise_benefit": "Übt die Erkennung und Reaktion auf gezielte Phishing-Angriffe.",
-        "expected_response": "Die Teilnehmer sollten die E-Mail analysieren, den Anhang nicht öffnen und die IT-Sicherheitsabteilung informieren."
+        "exercise_benefit": "\u00c3\u0153bt die Erkennung und Reaktion auf gezielte Phishing-Angriffe.",
+        "expected_response": "Die Teilnehmer sollten die E-Mail analysieren, den Anhang nicht \u00c3\u00b6ffnen und die IT-Sicherheitsabteilung informieren."
     },
     {
-        "assigned_scenarios": ["Credential Stuffing"],
+        "assigned_scenarios": [
+            "Credential Stuffing"
+        ],
         "communication_type": "email",
         "title": "Massenhafte Anmeldeversuche",
         "description": "Das Sicherheitssystem meldet massenhafte Anmeldeversuche mit bekannten Anmeldedaten.",
-        "exercise_benefit": "Übt die Erkennung und Reaktion auf Credential-Stuffing-Angriffe.",
-        "expected_response": "Die Teilnehmer sollten die betroffenen Konten sperren, die IP-Adressen blockieren und die Benutzer zur Passwortänderung auffordern."
+        "exercise_benefit": "\u00c3\u0153bt die Erkennung und Reaktion auf Credential-Stuffing-Angriffe.",
+        "expected_response": "Die Teilnehmer sollten die betroffenen Konten sperren, die IP-Adressen blockieren und die Benutzer zur Passwort\u00c3\u00a4nderung auffordern."
     },
     {
-        "assigned_scenarios": ["Supply Chain Attack"],
+        "assigned_scenarios": [
+            "Supply Chain Attack"
+        ],
         "communication_type": "call",
         "title": "Lieferant meldet Sicherheitsvorfall",
-        "description": "Ein Lieferant ruft an und meldet einen Sicherheitsvorfall, der möglicherweise die Lieferkette betrifft.",
-        "exercise_benefit": "Übt die Reaktion auf Angriffe auf die Lieferkette.",
-        "expected_response": "Die Teilnehmer sollten den Vorfall untersuchen, die betroffenen Systeme isolieren und den Lieferanten unterstützen."
+        "description": "Ein Lieferant ruft an und meldet einen Sicherheitsvorfall, der m\u00c3\u00b6glicherweise die Lieferkette betrifft.",
+        "exercise_benefit": "\u00c3\u0153bt die Reaktion auf Angriffe auf die Lieferkette.",
+        "expected_response": "Die Teilnehmer sollten den Vorfall untersuchen, die betroffenen Systeme isolieren und den Lieferanten unterst\u00c3\u00bctzen."
     },
     {
-        "assigned_scenarios": ["Privilege Escalation"],
+        "assigned_scenarios": [
+            "Privilege Escalation"
+        ],
         "communication_type": "email",
-        "title": "Unbefugte Berechtigungserhöhung",
-        "description": "Das System meldet eine unbefugte Berechtigungserhöhung eines Benutzerkontos.",
-        "exercise_benefit": "Übt die Erkennung und Reaktion auf Privilege-Escalation-Angriffe.",
-        "expected_response": "Die Teilnehmer sollten das Konto sperren, die Protokolle überprüfen und die Schwachstelle beheben."
+        "title": "Unbefugte Berechtigungserh\u00c3\u00b6hung",
+        "description": "Das System meldet eine unbefugte Berechtigungserh\u00c3\u00b6hung eines Benutzerkontos.",
+        "exercise_benefit": "\u00c3\u0153bt die Erkennung und Reaktion auf Privilege-Escalation-Angriffe.",
+        "expected_response": "Die Teilnehmer sollten das Konto sperren, die Protokolle \u00c3\u00bcberpr\u00c3\u00bcfen und die Schwachstelle beheben."
     },
     {
-        "assigned_scenarios": ["Session Hijacking"],
+        "assigned_scenarios": [
+            "Session Hijacking"
+        ],
         "communication_type": "email",
-        "title": "Entführung einer Benutzersitzung",
+        "title": "Entf\u00c3\u00bchrung einer Benutzersitzung",
         "description": "Ein Benutzer meldet, dass seine Sitzung beendet wurde und er nicht mehr auf das System zugreifen kann.",
-        "exercise_benefit": "Übt die Erkennung und Reaktion auf Session-Hijacking-Angriffe.",
-        "expected_response": "Die Teilnehmer sollten die Sitzungsprotokolle überprüfen, die Sitzung zurücksetzen und die Sicherheitsvorkehrungen verstärken"
+        "exercise_benefit": "\u00c3\u0153bt die Erkennung und Reaktion auf Session-Hijacking-Angriffe.",
+        "expected_response": "Die Teilnehmer sollten die Sitzungsprotokolle \u00c3\u00bcberpr\u00c3\u00bcfen, die Sitzung zur\u00c3\u00bccksetzen und die Sicherheitsvorkehrungen verst\u00c3\u00a4rkenHier ist die erweiterte `injects.json`-Datei, die verschiedene Arten von Injects f\u00c3\u00bcr \u00c3\u0153bungen enth\u00c3\u00a4lt. Diese Injects beinhalten Informationen wie das zugewiesene Szenario, die Kommunikationsart, den Titel, die Beschreibung, den \u00c3\u0153bungsnutzen und den erwarteten Umgang damit durch die \u00c3\u0153bungsteilnehmer."
     }
 ]
-    

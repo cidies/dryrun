@@ -5,6 +5,8 @@
 <div>
     <h3>Übungsdetails</h3>
     <form id="schedule-form">
+        <label for="name">Übungsname:</label>
+        <input type="text" id="name" name="name"><br>
         <label for="type">Typ:</label>
         <select id="type" name="type">
             <option value="timed">Zeitgesteuert</option>
@@ -19,37 +21,41 @@
         <button type="submit">Planen</button>
     </form>
 </div>
-<script>
-document.getElementById('schedule-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-    var formData = {
-        type: document.getElementById('type').value,
-        interval: document.getElementById('interval').value,
-        inject_titles: document.getElementById('inject_titles').value.split(',').map(s => s.trim())
-    };
-    fetch('/schedule_exercise', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.status === 'scheduled') {
-            alert('Übung erfolgreich geplant.');
-        } else {
-            alert('Fehler beim Planen der Übung.');
-        }
-    });
-});
 
-document.getElementById('type').addEventListener('change', function(event) {
-    if (event.target.value === 'timed') {
-        document.getElementById('timed-options').style.display = 'block';
-    } else {
-        document.getElementById('timed-options').style.display = 'none';
+<h3>Inject Reihenfolge</h3>
+<ul id="inject-list">
+    {% for inject in injects %}
+        <li data-id="{{ loop.index0 }}">{{ inject.title }}</li>
+    {% endfor %}
+</ul>
+<button id="save-order">Reihenfolge speichern</button>
+
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.14.0/Sortable.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var injectList = document.getElementById('inject-list');
+    var sortable = Sortable.create(injectList);
+
+    document.getElementById('save-order').addEventListener('clickUm die Reihenfolge der Injects pro Übung zu speichern und zu verwalten, müssen wir die Datenstruktur und die Benutzeroberfläche anpassen. Hier ist die vollständige Implementierung:
+
+### Datenstruktur
+
+1. **Exercises JSON**: Enthält die geplanten Übungen und die Reihenfolge der Injects.
+2. **Injects JSON**: Enthält die verfügbaren Injects.
+
+### Beispiel `exercises.json`
+
+```json
+[
+    {
+        "name": "Cybersecurity Drill 1",
+        "inject_order": [0, 2, 1],
+        "type": "timed",
+        "interval": 5  # Intervall in Minuten für zeitgesteuerte Übungen
+    },
+    {
+        "name": "Cybersecurity Drill 2",
+        "inject_order": [1, 0, 2],
+        "type": "manual"
     }
-});
-</script>
-{% endblock %}
+]

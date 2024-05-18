@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, jsonify
+from threading import Timer
 import json
 import os
+import time
 
 app = Flask(__name__)
 
@@ -38,6 +40,34 @@ def reports():
 def injects():
     injects = load_json('injects.json')
     return render_template('injects.html', injects=injects)
+
+@app.route('/schedule_exercise', methods=['POST'])
+def schedule_exercise():
+    data = request.json
+    injects = load_json('injects.json')
+    exercise_injects = [inject for inject in injects if inject['title'] in data['inject_titles']]
+
+    if data['type'] == 'timed':
+        for idx, inject in enumerate(exercise_injects):
+            delay = idx * data['interval'] * 60
+            Timer(delay, execute_inject, [inject]).start()
+    elif data['type'] == 'manual':
+        save_json('scheduled_injects.json', exercise_injects)
+
+    return jsonify({"status": "scheduled"}), 200
+
+@app.route('/execute_inject/<inject_title>')
+def execute_inject_route(inject_title):
+    injects = load_json('scheduled_injects.json')
+    inject = next((inject for inject in injects if inject['title'] == inject_title), None)
+    if inject:
+        execute_inject(inject)
+    return jsonify({"status": "executed"}), 200
+
+def execute_inject(inject):
+    # Simulate sending inject via the specified communication type
+    print(f"Executing inject: {inject['title']} via {inject['communication_type']}")
+    # In real implementation, send email, text, call, or personal notification here
 
 @app.route('/api/notifications', methods=['GET', 'POST'])
 def api_notifications():

@@ -1,0 +1,14 @@
+[
+    {
+        "date": "01.05.2024",
+        "exercise": "Ransomware Angriff",
+        "team": "IT-Sicherheit",
+        "performance": "85%"
+    },
+    {
+        "date": "27.04.2024",
+        "exercise": "Phishing Angriff",
+        "team": "Helpdesk",
+        "performance": "90%"
+    }
+]

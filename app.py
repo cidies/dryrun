@@ -98,12 +98,15 @@ def edit_inject(inject_id):
         # Das was aus dem Webformular kommt, wird in data gespeichert
         data = request.get_json()
     
+        # Konvertieren Sie die inject_id in eine Zahl
+        inject_id = int(data.get('id', inject['id']))
+        
         # Debugging-Ausgabe
         # Zeigt die Webform Daten an
         print("Received data:", data)
     
         # Aktualisieren Sie das Inject mit den neuen Daten aus dem Webformular
-        inject['id'] = data.get('id', inject['id'])
+        inject['id'] = int(data.get('id', inject['id']))
         inject['title'] = data.get('title', inject['title'])
         inject['description'] = data.get('description', inject['description'])
         print("[*] DESCRIPTION:", data.get('description', inject['description']))
@@ -122,7 +125,8 @@ def edit_inject(inject_id):
     
         # Debugging-Ausgabe
         print("[*] Updated inject:", inject)
-
+        
+        injects = None
         injects = load_json('injects.json')
         print("[*] RELOEDED INJECT:", injects[inject_id])
 

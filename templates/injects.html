@@ -24,7 +24,7 @@
                 <td>{{ inject.exercise_benefit }}</td>
                 <td>{{ inject.expected_response }}</td>
                 <td>{{ inject.assigned_scenarios | join(', ') }}</td>
-                <td><button onclick="editInject({{ loop.index0 }})">Bearbeiten</button></td>
+                <!--- <td><button onclick="editInject({{ loop.index0 }})">Bearbeiten</button></td> --->
                 <td><a href="/edit_inject/{{ inject.id }}" target="_blank">Bearbeiten</a></td>
             </tr>
         {% endfor %}

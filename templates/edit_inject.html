@@ -2,7 +2,8 @@
 
 {% block content %}
 <h2>Inject Bearbeiten</h2>
-<form id="edit-inject-form" style="display: flex; flex-direction: column; align-items: start;">
+<form id="edit-inject-form" action="{{ url_for('edit_inject', inject_id=inject.id) }}" method="post" style="display: flex; flex-direction: column; align-items: start;">
+
     <input type="hidden" id="edit-inject-id" value="{{ inject.id }}">
     <label for="edit-title">Titel:</label>
     <input type="text" id="edit-title" value="{{ inject.title }}" style="margin-bottom: 10px;">
@@ -23,4 +24,40 @@
     </select>
     <button type="submit">Speichern</button>
 </form>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(window).on('load', function() {
+    $('#edit-inject-form').on('submit', function(e) {
+        e.preventDefault();
+        console.log('Formular abgesendet');
+
+        var data = {
+            id: $('#edit-inject-id').val(),
+            title: $('#edit-title').val(),
+            description: $('#edit-description').val(),
+            exercise_benefit: $('#edit-exercise-benefit').val(),
+            expected_response: $('#edit-expected-response').val(),
+            communication_type: $('#edit-communication_type').val(),
+            assigned_scenarios: $('#edit-assigned-scenarios').val().split(',')
+        };
+
+        $.ajax({
+            url: $(this).attr('action'),
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            success: function(response) {
+                // Dieser Code wird ausgeführt, wenn der Server eine erfolgreiche Antwort sendet
+                alert('Daten erfolgreich gespeichert!');
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                // Dieser Code wird ausgeführt, wenn der Server einen Fehler zurückgibt
+                alert('Ein Fehler ist aufgetreten: ' + textStatus);
+            }
+        });
+    });
+});
+</script>
 {% endblock %}

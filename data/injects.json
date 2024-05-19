@@ -1,6 +1,6 @@
 [
     {
-        "id":1,
+        "id": 1,
         "assigned_scenarios": [
             "Ransomware Angriff",
             "Phishing Angriff"
@@ -12,18 +12,19 @@
         "expected_response": "Die Teilnehmer sollten die E-Mail analysieren, den Anhang nicht \u00c3\u00b6ffnen und die IT-Sicherheitsabteilung informieren."
     },
     {
-        "id":2,
+        "id": "1",
         "assigned_scenarios": [
-            "DDoS-Simulation"
+            "['Ransomware Angriff'",
+            " 'Phishing Angriff']"
         ],
         "communication_type": "text",
-        "title": "Webseite nicht erreichbar",
-        "description": "Ein Benutzer meldet per SMS, dass die Firmenwebseite nicht erreichbar ist.",
-        "exercise_benefit": "\u00c3\u0153bt die Erkennung und Reaktion auf DDoS-Angriffe.",
-        "expected_response": "Die Teilnehmer sollten den Netzwerkverkehr \u00c3\u00bcberwachen, den DDoS-Angriff identifizieren und Ma\u00c3\u0178nahmen zur Eind\u00c3\u00a4mmung einleiten."
+        "title": "Verdaechtige E-Mail entdeckt",
+        "description": "AAAA Ein Mitarbeiter meldet eine verd\u00c3\u00a4chtige E-Mail, die einen Anhang mit einem seltsamen Namen enth\u00c3\u00a4lt.",
+        "exercise_benefit": "Uebt das Erkennen und Melden von Phishing-Versuchen.",
+        "expected_response": "Die Teilnehmer sollten die E-Mail analysieren, den Anhang nicht \u00c3\u00b6ffnen und die IT-Sicherheitsabteilung informieren."
     },
     {
-        "id":3,
+        "id": 3,
         "assigned_scenarios": [
             "Man-in-the-Middle Angriff"
         ],
@@ -34,7 +35,7 @@
         "expected_response": "Die Teilnehmer sollten die Netzwerklogs \u00c3\u00bcberpr\u00c3\u00bcfen, den Man-in-the-Middle-Angriff identifizieren und geeignete Gegenma\u00c3\u0178nahmen ergreifen."
     },
     {
-        "id":4,
+        "id": 4,
         "assigned_scenarios": [
             "SQL Injection"
         ],
@@ -45,7 +46,7 @@
         "expected_response": "Die Teilnehmer sollten die Log-Dateien der Datenbank analysieren, die SQL-Injection-Angriffe identifizieren und die Schwachstellen schlie\u00c3\u0178en."
     },
     {
-        "id":5,
+        "id": 5,
         "assigned_scenarios": [
             "Malware-Verteilung"
         ],
@@ -56,7 +57,7 @@
         "expected_response": "Die Teilnehmer sollten die Malware isolieren, das infizierte System bereinigen und die Quelle der Infektion identifizieren."
     },
     {
-        "id":6,
+        "id": 6,
         "assigned_scenarios": [
             "Zero-Day Exploit"
         ],
@@ -67,7 +68,7 @@
         "expected_response": "Die Teilnehmer sollten schnellstm\u00c3\u00b6glich Patches anwenden oder Workarounds implementieren und das System \u00c3\u00bcberwachen."
     },
     {
-        "id":7,
+        "id": 7,
         "assigned_scenarios": [
             "Brute-Force Angriff"
         ],
@@ -78,7 +79,7 @@
         "expected_response": "Die Teilnehmer sollten die IP-Adressen blockieren, von denen die Angriffe ausgehen, und die betroffenen Konten \u00c3\u00bcberwachen."
     },
     {
-        "id":8,
+        "id": 8,
         "assigned_scenarios": [
             "Social Engineering"
         ],
@@ -89,7 +90,7 @@
         "expected_response": "Die Teilnehmer sollten den Vorfall dokumentieren, die betroffenen Mitarbeiter informieren und Sicherheitsma\u00c3\u0178nahmen verst\u00c3\u00a4rken."
     },
     {
-        "id":9,
+        "id": 9,
         "assigned_scenarios": [
             "Advanced Persistent Threat (APT)"
         ],
@@ -100,7 +101,7 @@
         "expected_response": "Die Teilnehmer sollten den Netzwerkverkehr analysieren, die Bedrohung identifizieren und langfristige \u00c3\u0153berwachungsma\u00c3\u0178nahmen einleiten."
     },
     {
-        "id":10,
+        "id": 10,
         "assigned_scenarios": [
             "Cross-Site Scripting (XSS)"
         ],
@@ -111,7 +112,7 @@
         "expected_response": "Die Teilnehmer sollten den Schadcode entfernen, die Sicherheitsl\u00c3\u00bccke schlie\u00c3\u0178en und die Webseite \u00c3\u00bcberwachen."
     },
     {
-        "id":11,
+        "id": 11,
         "assigned_scenarios": [
             "DNS Spoofing"
         ],
@@ -122,7 +123,7 @@
         "expected_response": "Die Teilnehmer sollten die DNS-Einstellungen \u00c3\u00bcberpr\u00c3\u00bcfen, die falschen Eintr\u00c3\u00a4ge entfernen und die betroffenen Systeme bereinigen."
     },
     {
-        "id":12,
+        "id": 12,
         "assigned_scenarios": [
             "Insider Bedrohung"
         ],
@@ -133,7 +134,7 @@
         "expected_response": "Die Teilnehmer sollten den Vorfall untersuchen, die Zugriffsprotokolle \u00c3\u00bcberpr\u00c3\u00bcfen und geeignete Ma\u00c3\u0178nahmen gegen den Insider ergreifen."
     },
     {
-        "id":13,
+        "id": 13,
         "assigned_scenarios": [
             "Spear Phishing"
         ],
@@ -144,7 +145,7 @@
         "expected_response": "Die Teilnehmer sollten die E-Mail analysieren, den Anhang nicht \u00c3\u00b6ffnen und die IT-Sicherheitsabteilung informieren."
     },
     {
-        "id":14,
+        "id": 14,
         "assigned_scenarios": [
             "Credential Stuffing"
         ],
@@ -155,7 +156,7 @@
         "expected_response": "Die Teilnehmer sollten die betroffenen Konten sperren, die IP-Adressen blockieren und die Benutzer zur Passwort\u00c3\u00a4nderung auffordern."
     },
     {
-        "id":15,
+        "id": 15,
         "assigned_scenarios": [
             "Supply Chain Attack"
         ],
@@ -166,7 +167,7 @@
         "expected_response": "Die Teilnehmer sollten den Vorfall untersuchen, die betroffenen Systeme isolieren und den Lieferanten unterst\u00c3\u00bctzen."
     },
     {
-        "id":16,
+        "id": 16,
         "assigned_scenarios": [
             "Privilege Escalation"
         ],
@@ -177,7 +178,7 @@
         "expected_response": "Die Teilnehmer sollten das Konto sperren, die Protokolle \u00c3\u00bcberpr\u00c3\u00bcfen und die Schwachstelle beheben."
     },
     {
-        "id":17,
+        "id": 17,
         "assigned_scenarios": [
             "Session Hijacking"
         ],

@@ -1,0 +1,126 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #FAFAFA;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #3F51B5;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2em;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 15px;
+    margin: 0 5px;
+    background-color: #3F51B5;
+    border-radius: 2px;
+    transition: background-color 0.3s;
+}
+
+nav a:hover {
+    background-color: #303F9F;
+}
+
+main {
+    padding: 20px;
+}
+
+h2 {
+    color: #212121;
+}
+
+.notifications, .exercises, .scenarios, .chat, .video-calls, .forums, .reports {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 2px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+    margin-bottom: 20px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin: 5px 0;
+}
+
+#chat-window {
+    border: 1px solid #ddd;
+    padding: 10px;
+    height: 200px;
+    overflow-y: scroll;
+}
+
+#chat-input {
+    width: 80%;
+    padding: 10px;
+    margin-right: 10px;
+}
+
+#send-button {
+    padding: 10px 20px;
+    background-color: #3F51B5;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#send-button:hover {
+    background-color: #303F9F;
+}
+
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background-color: #3F51B5;
+    color: #fff;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+/* style.css */
+#edit-inject-form {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+#edit-inject-form input[type="text"],
+#edit-inject-form select {
+    margin-bottom: 10px;
+    border-radius: 2px;
+    border: none;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+}
+
+#edit-inject-form textarea {
+    height: 100px;
+    width: 300px;
+    margin-bottom: 10px;
+    border-radius: 2px;
+    border: none;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+}

@@ -97,6 +97,54 @@ def edit_inject(inject_id):
 
         # Das was aus dem Webformular kommt, wird in data gespeichert
         data = request.get_json()
+        
+        # Debugging-Ausgabe
+        print("Received data:", data)
+        
+        # Aktualisieren Sie das Inject mit den neuen Daten aus dem Webformular
+        updated_inject = {
+            'id': inject_id,
+            'title': data.get('title', inject['title']),
+            'description': data.get('description', inject['description']),
+            'exercise_benefit': data.get('exercise_benefit', inject['exercise_benefit']),
+            'expected_response': data.get('expected_response', inject['expected_response']),
+            'communication_type': data.get('communication_type', inject['communication_type']),
+            'assigned_scenarios': data.get('assigned_scenarios', inject['assigned_scenarios'])
+        }
+        
+        # Suchen Sie das Inject mit der entsprechenden ID und aktualisieren Sie es
+        inject_index = next((index for (index, d) in enumerate(injects) if d['id'] == inject_id), None)
+        
+        if inject_index is not None:
+            injects[inject_index] = updated_inject
+        else:
+            return "Inject not found in database", 404
+
+        # Speichern Sie die Daten, nachdem alle Änderungen vorgenommen wurden
+        save_json('injects.json', injects)
+        
+        # Debugging-Ausgabe
+        print("[*] Updated inject:", updated_inject)
+
+    # Rendern Sie die Bearbeitungsseite mit dem Inject als Kontext
+    return render_template('edit_inject.html', inject=inject)
+    
+
+@app.route('/edit_injectBAK/<int:inject_id>', methods=['GET', 'POST'])
+def edit_injectBAK(inject_id):
+    # Hier holen Sie das Inject aus Ihrer Datenbank
+    inject = get_inject_by_id(inject_id)
+
+    # Überprüfen Sie, ob das Inject existiert
+    if inject is None:
+        return "Inject not found", 404
+
+    if request.method == 'POST':
+        # Die ganze json wird geladen
+        injects = load_json('injects.json')
+
+        # Das was aus dem Webformular kommt, wird in data gespeichert
+        data = request.get_json()
     
         # Konvertieren Sie die inject_id in eine Zahl
         inject_id = int(data.get('id', inject['id']))

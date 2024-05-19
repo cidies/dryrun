@@ -136,52 +136,6 @@ def edit_inject(inject_id):
 
 
 
-# @app.route('/save_inject/<int:inject_id>', methods=['GET', 'POST'])
-# def edit_inject2(inject_id):
-#     injects = load_json('injects.json')
-#     inject = injects[inject_id]
-
-#     if request.method == 'POST':
-#         data = request.get_json()
-#         inject['id'] = data.get('id', inject['id'])
-#         inject['title'] = data.get('title', inject['title'])
-#         inject['description'] = data.get('description', inject['description'])
-#         inject['exercise_benefit'] = data.get('exercise_benefit', inject['exercise_benefit'])
-#         inject['expected_response'] = data.get('expected_response', inject['expected_response'])
-#         inject['communication_type'] = data.get('communication_type', inject['communication_type'])
-#         inject['assigned_scenarios'] = data.get('assigned_scenarios', inject['assigned_scenarios'])
-        
-#         injects[inject_id] = inject
-#         save_json('injects.json', injects)
-#         return jsonify({"status": "success", "inject": inject}), 200
-
-#     # Rendern Sie die Bearbeitungsseite mit dem Inject als Kontext
-#     return render_template('edit_inject.html', inject=inject)
-
-
-
-# @app.route('/edit_inject3/<int:inject_id>', methods=['GET', 'POST'])
-# def edit_inject3(inject_id):
-#     injects = load_json('injects.json')
-#     inject = injects[inject_id]
-
-#     if request.method == 'POST':
-#         data = request.json
-#         inject['title'] = data.get('title', inject['title'])
-#         inject['description'] = data.get('description', inject['description'])
-#         inject['exercise_benefit'] = data.get('exercise_benefit', inject['exercise_benefit'])
-#         inject['expected_response'] = data.get('expected_response', inject['expected_response'])
-#         inject['communication_type'] = data.get('communication_type', inject['communication_type'])
-#         inject['assigned_scenarios'] = data.get('assigned_scenarios', inject['assigned_scenarios'])
-        
-#         injects[inject_id] = inject
-#         save_json('injects.json', injects)
-#         return jsonify({"status": "success", "inject": inject}), 200
-
-#     return jsonify(inject), 200
-
-
-
 @app.route('/save_exercise_order', methods=['POST'])
 def save_exercise_order():
     data = request.json

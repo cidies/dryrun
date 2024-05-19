@@ -103,7 +103,7 @@ def edit_inject1(inject_id):
 
 
 
-@app.route('/edit_inject2/<int:inject_id>', methods=['GET', 'POST'])
+@app.route('/save_inject/<int:inject_id>', methods=['GET', 'POST'])
 def edit_inject2(inject_id):
     injects = load_json('injects.json')
     inject = injects[inject_id]

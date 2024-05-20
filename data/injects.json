@@ -1,49 +1,39 @@
 [
     {
         "id": 1,
-        "assigned_scenarios": [
-            "[\"['Ransomware Angriff'\"",
-            " \" 'Phishing Angriff']\"]"
-        ],
-        "communication_type": "text",
-        "title": "Verdaechtige E-Mail entdeckt",
-        "description": "WWWWEin Mitarbeiter meldet eine verd\u00c3\u00a4chtige E-Mail, die einen Anhang mit einem seltsamen Namen enth\u00c3\u00a4lt.",
+        "title": "Verd\u00e4chtige E-Mail entdeckt",
+        "description": "Ein Mitarbeiter meldet eine verd\u00e4chtige E-Mail, die einen Anhang mit einem seltsamen Namen enth\u00e4lt.",
         "exercise_benefit": "Uebt das Erkennen und Melden von Phishing-Versuchen.",
-        "expected_response": "Die Teilnehmer sollten die E-Mail analysieren, den Anhang nicht \u00c3\u00b6ffnen und die IT-Sicherheitsabteilung informieren."
-    },
-    {
-        "id": 1,
-        "assigned_scenarios": [
-            "['[\"[\\'Ransomware Angriff\\'\"'",
-            " ' \" \\'Phishing Angriff\\']\"]']"
-        ],
+        "expected_response": "Die Teilnehmer sollten die E-Mail analysieren, den Anhang nicht \u00f6ffnen und die IT-Sicherheitsabteilung informieren.",
         "communication_type": "text",
-        "title": "Verdaechtige E-Mail entdeckt",
-        "description": "Ein Mitarbeiter meldet eine verdaechtige E-Mail, die einen Anhang mit einem seltsamen Namen enthaelt.",
-        "exercise_benefit": "Uebt das Erkennen und Melden von Phishing-Versuchen.",
-        "expected_response": "Die Teilnehmer sollten die E-Mail analysieren, den Anhang nicht \u00c3\u00b6ffnen und die IT-Sicherheitsabteilung informieren."
+        "assigned_scenarios": [
+            "['[\\'[\"[\\\\\\'Ransomware Angriff\\\\\\'\"\\''",
+            " ' \\' \" \\\\\\'Phishing Angriff\\\\\\']\"]\\']']"
+        ]
     },
     {
         "id": 3,
-        "assigned_scenarios": [
-            "Man-in-the-Middle Angriff"
-        ],
-        "communication_type": "call",
-        "title": "Verz\u00c3\u00b6gerte Kommunikation",
-        "description": "Ein Mitarbeiter ruft an und meldet, dass die Kommunikation \u00c3\u00bcber das interne Netzwerk ungew\u00c3\u00b6hnlich langsam ist.",
+        "title": "Verz\u00f6gerte Kommunikation",
+        "description": "Ein Mitarbeiter ruft an und meldet, dass die Kommunikation \u00fcber das interne Netzwerk ungew\u00f6hnlich langsam ist.",
         "exercise_benefit": "\u00c3\u0153bt die Identifikation von Netzwerkmanipulationen.",
-        "expected_response": "Die Teilnehmer sollten die Netzwerklogs \u00c3\u00bcberpr\u00c3\u00bcfen, den Man-in-the-Middle-Angriff identifizieren und geeignete Gegenma\u00c3\u0178nahmen ergreifen."
+        "expected_response": "Die Teilnehmer sollten die Netzwerklogs \u00c3\u00bcberpr\u00c3\u00bcfen, den Man-in-the-Middle-Angriff identifizieren und geeignete Gegenma\u00c3\u0178nahmen ergreifen.",
+        "communication_type": "personally",
+        "assigned_scenarios": [
+            "1"
+        ]
     },
     {
         "id": 4,
-        "assigned_scenarios": [
-            "SQL Injection"
-        ],
-        "communication_type": "personally",
         "title": "Datenbankfehler",
-        "description": "Ein Datenbankadministrator meldet pers\u00c3\u00b6nlich, dass ungew\u00c3\u00b6hnliche SQL-Abfragen die Datenbank belasten.",
-        "exercise_benefit": "\u00c3\u0153bt die Erkennung und Reaktion auf SQL-Injection-Angriffe.",
-        "expected_response": "Die Teilnehmer sollten die Log-Dateien der Datenbank analysieren, die SQL-Injection-Angriffe identifizieren und die Schwachstellen schlie\u00c3\u0178en."
+        "description": "Ein Datenbankadministrator meldet pers\u00f6nlich, dass ungew\u00f6hnliche SQL-Abfragen die Datenbank belasten.",
+        "exercise_benefit": "\u00dcbt die Erkennung und Reaktion auf SQL-Injection-Angriffe.",
+        "expected_response": "Die Teilnehmer sollten die Log-Dateien der Datenbank analysieren, die SQL-Injection-Angriffe identifizieren und die Schwachstellen schliessen.",
+        "communication_type": "personally",
+        "assigned_scenarios": [
+            "1",
+            "2",
+            "3"
+        ]
     },
     {
         "id": 5,
@@ -179,13 +169,16 @@
     },
     {
         "id": 17,
-        "assigned_scenarios": [
-            "Session Hijacking"
-        ],
-        "communication_type": "email",
-        "title": "Entf\u00c3\u00bchrung einer Benutzersitzung",
+        "title": "Hijacking einer Benutzersitzung",
         "description": "Ein Benutzer meldet, dass seine Sitzung beendet wurde und er nicht mehr auf das System zugreifen kann.",
-        "exercise_benefit": "\u00c3\u0153bt die Erkennung und Reaktion auf Session-Hijacking-Angriffe.",
-        "expected_response": "Die Teilnehmer sollten die Sitzungsprotokolle \u00c3\u00bcberpr\u00c3\u00bcfen, die Sitzung zur\u00c3\u00bccksetzen und die Sicherheitsvorkehrungen verst\u00c3\u00a4rkenHier ist die erweiterte `injects.json`-Datei, die verschiedene Arten von Injects f\u00c3\u00bcr \u00c3\u0153bungen enth\u00c3\u00a4lt. Diese Injects beinhalten Informationen wie das zugewiesene Szenario, die Kommunikationsart, den Titel, die Beschreibung, den \u00c3\u0153bungsnutzen und den erwarteten Umgang damit durch die \u00c3\u0153bungsteilnehmer."
+        "exercise_benefit": "\u00dcbt die Erkennung und Reaktion auf Session-Hijacking-Angriffe.",
+        "expected_response": "Die Teilnehmer sollten die Sitzungsprotokolle \u00fcberpr\u00fcfen, die Sitzung zur\u00fccksetzen und die Sicherheitsvorkehrungen verst\u00e4rken.",
+        "communication_type": "email",
+        "assigned_scenarios": [
+            "4",
+            "7",
+            "10",
+            "18"
+        ]
     }
 ]

@@ -1,100 +1,120 @@
 [
     {
+        "id": 1,
         "name": "Ransomware Angriff",
         "description": "Simulation eines Ransomware-Angriffs auf die interne IT-Infrastruktur",
         "difficulty": "Mittel"
     },
     {
+        "id": 2,
         "name": "Phishing Angriff",
         "description": "Simulation eines gezielten Phishing-Angriffs, der darauf abzielt, vertrauliche Informationen zu stehlen",
         "difficulty": "Einfach"
     },
     {
+        "id": 3,
         "name": "DDoS-Simulation",
         "description": "Simulation eines DDoS-Angriffs auf den Webserver der Organisation",
         "difficulty": "Schwer"
     },
     {
+        "id": 4,
         "name": "Man-in-the-Middle Angriff",
         "description": "Simulation eines Man-in-the-Middle-Angriffs, bei dem Daten zwischen zwei Parteien abgefangen und manipuliert werden",
         "difficulty": "Schwer"
     },
     {
+        "id": 5,
         "name": "SQL Injection",
         "description": "Simulation eines SQL-Injection-Angriffs auf die Datenbank der Organisation",
         "difficulty": "Mittel"
     },
     {
+        "id": 6,
         "name": "Malware-Verteilung",
         "description": "Simulation der Verteilung von Malware über infizierte E-Mail-Anhänge",
         "difficulty": "Einfach"
     },
     {
+        "id": 7,
         "name": "Zero-Day Exploit",
         "description": "Simulation eines Angriffs unter Ausnutzung einer Zero-Day-Schwachstelle",
         "difficulty": "Sehr Schwer"
     },
     {
+        "id": 8,
         "name": "Brute-Force Angriff",
         "description": "Simulation eines Brute-Force-Angriffs auf Benutzerkonten, um Passwörter zu knacken",
         "difficulty": "Mittel"
     },
     {
+        "id": 9,
         "name": "Social Engineering",
         "description": "Simulation eines Social-Engineering-Angriffs, bei dem Mitarbeiter manipuliert werden, um vertrauliche Informationen preiszugeben",
         "difficulty": "Mittel"
     },
     {
+        "id": 10,
         "name": "Advanced Persistent Threat (APT)",
         "description": "Simulation eines langanhaltenden, gezielten Angriffs durch eine fortschrittliche Bedrohungsgruppe",
         "difficulty": "Sehr Schwer"
     },
     {
+        "id": 11,
         "name": "Cross-Site Scripting (XSS)",
         "description": "Simulation eines Cross-Site-Scripting-Angriffs auf eine Webanwendung",
         "difficulty": "Mittel"
     },
     {
+        "id": 12,
         "name": "DNS Spoofing",
         "description": "Simulation eines DNS-Spoofing-Angriffs, bei dem Benutzer auf gefälschte Websites umgeleitet werden",
         "difficulty": "Schwer"
     },
     {
+        "id": 13,
         "name": "Insider Bedrohung",
         "description": "Simulation eines Angriffs durch einen böswilligen Insider innerhalb der Organisation",
         "difficulty": "Schwer"
     },
     {
+        "id": 14,
         "name": "Spear Phishing",
         "description": "Simulation eines gezielten Phishing-Angriffs auf hochrangige Mitarbeiter der Organisation",
         "difficulty": "Mittel"
     },
     {
+        "id": 15,
         "name": "Credential Stuffing",
         "description": "Simulation eines Angriffs, bei dem gestohlene Anmeldedaten verwendet werden, um Zugriff auf Konten zu erlangen",
         "difficulty": "Einfach"
     },
     {
+        "id": 16,
         "name": "Supply Chain Attack",
         "description": "Simulation eines Angriffs auf die Lieferkette der Organisation, um Schadsoftware einzuschleusen",
         "difficulty": "Sehr Schwer"
     },
     {
+        "id": 17,
         "name": "Privilege Escalation",
         "description": "Simulation eines Angriffs, bei dem ein Benutzer versucht, seine Berechtigungen unbefugt zu erhöhen",
         "difficulty": "Mittel"
     },
     {
+        "id": 18,
         "name": "Session Hijacking",
         "description": "Simulation eines Angriffs, bei dem eine Benutzersitzung entführt wird, um Zugang zu sensiblen Daten zu erhalten",
         "difficulty": "Schwer"
     },
     {
+        "id": 19,
         "name": "Watering Hole Angriff",
         "description": "Simulation eines Angriffs, bei dem eine häufig besuchte Website kompromittiert wird, um gezielt Benutzer zu infizieren",
         "difficulty": "Sehr Schwer"
     },
     {
+        "id": 20,
         "name": "Firmware Attack",
         "description": "Simulation eines Angriffs auf die Firmware von Geräten innerhalb der Organisation",
         "difficulty": "Sehr Schwer"

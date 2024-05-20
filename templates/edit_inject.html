@@ -2,19 +2,39 @@
 
 {% block content %}
 <h2>Inject Bearbeiten</h2>
-<form id="edit-inject-form" action="{{ url_for('edit_inject', inject_id=inject.id) }}" method="post" style="display: flex; flex-direction: column; align-items: start;">
+<form id="edit-inject-form" action="{{ url_for('edit_inject', inject_id=inject.id) }}" method="post" style="display: flex; flex-direction: column; align-items: start; overflow: auto; height: 80vh;">
 
     <input type="hidden" id="edit-inject-id" value="{{ inject.id }}">
+
     <label for="edit-title">Titel:</label>
     <input type="text" id="edit-title" value="{{ inject.title }}" style="margin-bottom: 10px;">
-    <label for="edit-description">Beschreibung:</label>
-    <textarea id="edit-description" style="height: 100px; width: 300px; margin-bottom: 10px;">{{ inject.description }}</textarea>
-    <label for="edit-exercise-benefit">Übungsnutzen:</label>
-    <textarea id="edit-exercise-benefit" style="height: 100px; width: 300px; margin-bottom: 10px;">{{ inject.exercise_benefit }}</textarea>
+
+    <div style="display: flex; justify-content: space-between;">
+        <div style="flex: 1; margin-right: 10px;">
+            <label for="edit-description">Beschreibung:</label>
+            <textarea id="edit-description" style="height: 100px; width: 100%; margin-bottom: 10px;">{{ inject.description }}</textarea>
+        </div>
+    
+        <div style="flex: 1; margin-left: 10px;">
+            <label for="edit-exercise-benefit">Übungsnutzen:</label>
+            <textarea id="edit-exercise-benefit" style="height: 100px; width: 100%; margin-bottom: 10px;">{{ inject.exercise_benefit }}</textarea>
+        </div>
+    </div>
     <label for="edit-expected-response">Erwarteter Umgang:</label>
     <textarea id="edit-expected-response" style="height: 100px; width: 300px; margin-bottom: 10px;">{{ inject.expected_response }}</textarea>
-    <label for="edit-assigned-scenarios">Zugewiesene Szenarien (Komma getrennt):</label>
-    <input type="text" id="edit-assigned-scenarios" value="{{ inject.assigned_scenarios }}" style="margin-bottom: 10px;">
+
+    <label for="edit-assigned-scenarios">Zugewiesene Szenarien:</label>
+    <select id="edit-assigned-scenarios" name="scenarios" multiple>
+        {% for scenario in scenarios %}
+            <option value="{{ scenario.id }}" {% if scenario.id|string in inject.assigned_scenarios %}selected{% endif %}>{{ scenario.name }} (ID: {{ scenario.id }})</option>
+        {% endfor %}
+    </select>
+    
+
+    <!-- 
+        <input type="text" id="edit-assigned-scenarios" value="{{ inject.assigned_scenarios }}" style="margin-bottom: 10px;"> 
+    -->
+
     <label for="edit-communication_type">Kommunikationsart:</label>
     <select id="edit-communication_type" style="margin-bottom: 10px;">
         <option value="email" {% if inject.communication_type == 'email' %}selected{% endif %}>Email</option>
@@ -22,8 +42,13 @@
         <option value="call" {% if inject.communication_type == 'call' %}selected{% endif %}>Anruf</option>
         <option value="personally" {% if inject.communication_type == 'personally' %}selected{% endif %}>Persönlich</option>
     </select>
+
     <button type="submit">Speichern</button>
 </form>
+<p>Assigned Scenarios: {{ inject.assigned_scenarios }}</p>
+<br><hr>
+<p>Scenarios: {{ scenarios }}</p>
+
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -33,6 +58,14 @@ $(window).on('load', function() {
         e.preventDefault();
         console.log('Formular abgesendet');
 
+        var assigned_scenarios = $('#edit-assigned-scenarios option:selected').map(function() {
+            console.log('Option value:', this.value);
+            if (this.value) {
+                return this.value;
+            }
+        }).get().filter(Boolean);
+        console.log('Assigned Scenarios:',assigned_scenarios);
+
         var data = {
             id: $('#edit-inject-id').val(),
             title: $('#edit-title').val(),
@@ -40,7 +73,7 @@ $(window).on('load', function() {
             exercise_benefit: $('#edit-exercise-benefit').val(),
             expected_response: $('#edit-expected-response').val(),
             communication_type: $('#edit-communication_type').val(),
-            assigned_scenarios: $('#edit-assigned-scenarios').val().split(',')
+            assigned_scenarios: assigned_scenarios
         };
 
         $.ajax({

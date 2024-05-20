@@ -87,17 +87,19 @@ def edit_inject(inject_id):
     # Hier holen Sie das Inject aus Ihrer Datenbank
     inject = get_inject_by_id(inject_id)
 
+    scenarios = load_json('scenarios.json')  # Laden Sie die Szenarien aus der JSON-Datei
+    # Die ganze json wird geladen
+    injects = load_json('injects.json')
+
     # Überprüfen Sie, ob das Inject existiert
     if inject is None:
         return "Inject not found", 404
 
     if request.method == 'POST':
-        # Die ganze json wird geladen
-        injects = load_json('injects.json')
 
         # Das was aus dem Webformular kommt, wird in data gespeichert
         data = request.get_json()
-        
+                
         # Debugging-Ausgabe
         print("Received data:", data)
         
@@ -127,7 +129,8 @@ def edit_inject(inject_id):
         print("[*] Updated inject:", updated_inject)
 
     # Rendern Sie die Bearbeitungsseite mit dem Inject als Kontext
-    return render_template('edit_inject.html', inject=inject)
+    #return render_template('edit_inject.html', inject=inject)
+    return render_template('edit_inject.html', inject=inject, scenarios=scenarios)
     
 
 @app.route('/edit_injectBAK/<int:inject_id>', methods=['GET', 'POST'])
@@ -238,6 +241,15 @@ def api_injects():
         data = request.json
         save_json('injects.json', data)
         return jsonify({"status": "success"}), 200
+
+@app.template_filter('id_to_name')
+def id_to_name(id):
+    scenarios = load_json('scenarios.json')  # Laden Sie die Szenarien aus der JSON-Datei
+    scenario = next((s for s in scenarios if s['id'] == str(id)), None)
+    if scenario is not None:
+        return scenario['name']
+    else:
+        return 'Unbekanntes Szenario'
 
 
 if __name__ == '__main__':

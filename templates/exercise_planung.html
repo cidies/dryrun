@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- schedule_exercise.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Schedule Exercise</title>
+</head>
+<body>
+    <h1>Schedule Exercise</h1>
+    <form id="scheduleExerciseForm" method="post">
+        <label for="name">Exercise Name:</label>
+        <input type="text" id="name" name="name" required><br>
+        
+        <label for="type">Type:</label>
+        <select id="type" name="type">
+            <option value="timed">Timed</option>
+            <!-- Add other types if needed -->
+        </select><br>
+        
+        <label for="inject_order">Inject Order (comma-separated IDs):</label>
+        <input type="text" id="inject_order" name="inject_order" required><br>
+        
+        <label for="interval">Interval (minutes):</label>
+        <input type="number" id="interval" name="interval" required><br>
+        
+        <button type="button" onclick="submitForm()">Schedule Exercise</button>
+    </form>
+
+    <script>
+        function submitForm() {
+            const form = document.getElementById('scheduleExerciseForm');
+            const formData = new FormData(form);
+            const data = {};
+            formData.forEach((value, key) => { data[key] = value });
+            data['inject_order'] = data['inject_order'].split(',').map(Number);
+
+            fetch('/schedule_exercise', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                alert('Exercise scheduled successfully!');
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>
+{% endblock %}

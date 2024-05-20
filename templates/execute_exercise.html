@@ -1,0 +1,44 @@
+<!-- execute_inject.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Execute Inject</title>
+</head>
+<body>
+    <h1>Execute Inject</h1>
+    <form id="executeInjectForm" method="post">
+        <label for="exercise_name">Exercise Name:</label>
+        <input type="text" id="exercise_name" name="exercise_name" required><br>
+        
+        <label for="inject_idx">Inject Index:</label>
+        <input type="number" id="inject_idx" name="inject_idx" required><br>
+        
+        <button type="button" onclick="submitForm()">Execute Inject</button>
+    </form>
+
+    <script>
+        function submitForm() {
+            const form = document.getElementById('executeInjectForm');
+            const formData = new FormData(form);
+            const data = {};
+            formData.forEach((value, key) => { data[key] = value });
+
+            fetch(`/execute_inject/${data.exercise_name}/${data.inject_idx}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                alert('Inject executed successfully!');
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>

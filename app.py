@@ -49,6 +49,36 @@ def get_inject_by_id(inject_id):
             return inject
     return None
 
+@app.template_filter('id_to_name')
+def id_to_name(id):
+    scenarios = load_json('scenarios.json')  # Laden Sie die Szenarien aus der JSON-Datei
+    scenario = next((s for s in scenarios if s['id'] == str(id)), None)
+    if scenario is not None:
+        return scenario['name']
+    else:
+        return 'Unbekanntes Szenario'
+
+
+@app.route('/schedule_exercise_form')
+def schedule_exercise_form():
+    return render_template('exercise_planung.html')
+
+@app.route('/edit_inject_form/<int:inject_id>')
+def edit_inject_form(inject_id):
+    inject = get_inject_by_id(inject_id)
+    if inject is None:
+        return "Inject not found", 404
+    scenarios = load_json('scenarios.json')
+    return render_template('edit_inject.html', inject=inject, scenarios=scenarios)
+
+@app.route('/execute_inject_form')
+def execute_inject_form():
+    return render_template('execute_exercise.html')
+
+
+
+
+
 @app.route('/schedule_exercise', methods=['POST'])
 def schedule_exercise():
     data = request.json
@@ -242,14 +272,7 @@ def api_injects():
         save_json('injects.json', data)
         return jsonify({"status": "success"}), 200
 
-@app.template_filter('id_to_name')
-def id_to_name(id):
-    scenarios = load_json('scenarios.json')  # Laden Sie die Szenarien aus der JSON-Datei
-    scenario = next((s for s in scenarios if s['id'] == str(id)), None)
-    if scenario is not None:
-        return scenario['name']
-    else:
-        return 'Unbekanntes Szenario'
+
 
 
 if __name__ == '__main__':

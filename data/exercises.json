@@ -5,10 +5,21 @@
     },
     {
         "name": "Phishing Angriff",
-        "status": "Läuft"
+        "status": "L\u00c3\u00a4uft"
     },
     {
         "name": "DDoS-Simulation",
         "status": "Abgeschlossen"
+    },
+    {
+        "name": "1111",
+        "type": "timed",
+        "inject_order": [
+            1,
+            2,
+            3,
+            4
+        ],
+        "interval": "20"
     }
 ]

@@ -7,6 +7,42 @@
 # und auch in den Berichten
 # Die Reaktionen können auch in den Szenarien angezeigt werden
 
+# Das Feld last_performed in den Übungen wird nicht gespeichert
+# Im grunde muss nach jeder vollst#ndigen Ausführung einer Übung
+# das Feld last_performed aktualisiert werden.
+
+# Ich muss eine Übung auch anhalten oder stoppen können
+# dazu brauche ich einen Button in der Übungsausführung
+# und eine Funktion, die die Ausführung stoppt
+# und die Ausführung auch wieder fortsetzen kann
+# Die Funktion muss auch die Ausführung beenden können
+
+# Ich muss auch noch klären, wie und wo ich die Reaktionen kommentieren kann
+# Ich kann die Reaktionen in den Berichten kommentieren
+# und auch in den Szenarien
+# Ich kann auch die Reaktionen in den Übungen kommentieren
+# und auch in den Injekten
+# Dazu brauche ich ein Feld für die Kommentare
+
+
+# Die Ausführungslogik ist nur rudimentär implementiert
+# Im Moment sind es immer nur 10 Sekunden Sleep
+# Ich muss die Ausführungslogik noch implementieren
+# Es kann halt sein, das ein "Ready" button zu drücken ist
+# und dann die Ausführung gestartet wird oder
+# zu einer bestimmten Zeit die Ausführung gestartet wird.
+# Oder nach einer bestimmten Zeit die Ausführung gestartet wird.
+# Das kann ich dann in der Übung spezifizieren
+# und auch in den Injekten
+
+# Die Injects können über verschiedene Wege kommuniziert werden.
+# Im Moment nur auf der executed_exercise.html Seite
+# Ich muss das noch implementieren, dass die Injects auch
+# über Email, SMS oder Telefon kommuniziert werden können
+# Dazu brauche ich dann auch die entsprechenden Felder
+# in den Injekten und auch die Funktionen, die die Kommunikation
+# durchführen
+
 
 
 

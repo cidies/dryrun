@@ -5,7 +5,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
 <script>
     var socket = io.connect('http://' + document.domain + ':' + location.port);
+    console.log('[*] Socket.IO connection established on domain: ' + document.domain + ' and port: ' + location.port);
     socket.on('message', function(message) {
+        console.log('[*] Message received: ', message.data, ' from domain: ', document.domain, ' on port: ', location.port);
         var ul = document.getElementById('messages');
         var li = document.createElement('li');
         li.appendChild(document.createTextNode(message.data));
@@ -15,7 +17,7 @@
 <h1>{{ exercise.title }}</h1>
 <p>{{ exercise.description }}</p>
 <p>Status: {{ status }}</p>
-<h2>Messages</h2>
+<h2>Inject Status</h2>
 <ul id="messages">
 {% for message in messages %}
     <li>{{ message }}</li>

@@ -140,11 +140,15 @@ def perform_exercise(exercise):
         print("[*] Error: exercise cannot be None")
         return False
 
-    print("[*] Loading exercises and injects from JSON file")
+    print("[*] Loading exercises from exercises.json")
     exercises = load_json('exercises.json')
 
-    # Print the exercises for debugging
+    print("[*] Loading injects from injects.json")
+    injects = load_json('injects.json')
+
+    # Print the exercises and injects for debugging
     print(f"[*] Loaded exercises: {exercises}")
+    print(f"[*] Loaded injects: {injects}")
 
     if not 'inject_order' in exercise:
         print("[*] No inject_order in exercise")
@@ -153,7 +157,8 @@ def perform_exercise(exercise):
     print("[*] Running through injects in the order specified in the exercise")
     for inject_id in exercise['inject_order']:
         print(f"[*] Looking for inject with ID {inject_id}")
-        inject = next((inject for inject in exercises if inject['id'] == inject_id), None)
+        inject = next((inject for inject in injects if inject['id'] == inject_id), None)
+        print(f"[*] Found inject: {inject}")
 
         if inject is None:
             print(f"[*] No inject found with ID {inject_id}")
@@ -409,7 +414,8 @@ def api_injects():
         return jsonify({"status": "success"}), 200
 
 
-
-
 if __name__ == '__main__':
-    app.run(debug=True, port=5010)
+    #app.run(debug=True, port=5010)
+    socketio.run(app, debug=True, host="0.0.0.0", port=5010)
+
+

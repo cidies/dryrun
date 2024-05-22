@@ -59,9 +59,33 @@ def id_to_name(id):
         return 'Unbekanntes Szenario'
 
 
+#### E X E R C I S E S ####
+
 @app.route('/schedule_exercise_form')
 def schedule_exercise_form():
     return render_template('exercise_planung.html')
+
+@app.route('/exercises')
+def exercises():
+    exercises = load_json('exercises.json')  # Load the exercises from the JSON file
+    print(exercises)  # Print the exercises data
+    return render_template('exercises.html', exercises=exercises)  # Pass the exercises to the template
+
+def load_exercise(id):
+    exercises = load_json('exercises.json')  # Load the exercises from the JSON file
+    for exercise in exercises:
+        if exercise['id'] == id:
+            return exercise
+    return None
+
+@app.route('/edit_exercise/<id>')
+def edit_exercise(id):
+    exercise = load_exercise(id)
+    if exercise is not None:
+        return render_template('edit_exercise.html', exercise=exercise)
+    else:
+        return "Exercise not found", 404
+
 
 @app.route('/edit_inject_form/<int:inject_id>')
 def edit_inject_form(inject_id):

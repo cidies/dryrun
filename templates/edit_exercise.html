@@ -6,12 +6,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Edit Exercise</title>
+    
 </head>
 <body>
     <h1>Edit Exercise</h1>
     <form method="post" action="{{ url_for('update_exercise', id=exercise.id) }}">
         <label for="name">Exercise Name:</label><br>
         <input type="text" id="name" name="name" value="{{ exercise.name }}"><br>
+        <label for="description">Description:</label><br>
+        <textarea id="description" name="description">{{ exercise.description }}</textarea><br>
+        <label for="target_team">Target Team:</label><br>
+        <input type="text" id="target_team" name="target_team" value="{{ exercise.target_team }}"><br>
+        <label for="last_performed">Last Performed:</label><br>
+        <input type="date" id="last_performed" name="last_performed" value="{{ exercise.last_performed }}"><br>
         <label for="id">Inject Index:</label><br>
         <input type="text" id="id" name="id" value="{{ exercise.id }}" readonly><br>
         <!-- Add more fields here for other exercise properties -->
@@ -19,4 +26,6 @@
     </form>
 </body>
 </html>
+
+
 {% endblock %}

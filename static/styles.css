@@ -124,3 +124,19 @@ footer {
     padding: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
 }
+
+
+@keyframes fadeout {
+    from {opacity: 1;}
+    to {opacity: 0;}
+}
+.toast {
+    color: white;
+    background-color: red;
+    padding: 10px;
+    margin-bottom: 10px;
+    animation-name: fadeout;
+    animation-duration: 4s;
+    animation-delay: 4s;
+    animation-fill-mode: forwards;
+}

@@ -1,13 +1,50 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, redirect, url_for
 from threading import Timer
 import json
 import os
+from flask_toastr import Toastr
+from flask import flash, get_flashed_messages
 
 
 
 app = Flask(__name__)
+app.secret_key = os.environ.get('SECRET_KEY', 'default-secret-key')
+toastr = Toastr(app)
 
 DATA_DIR = 'data'
+
+
+
+
+@app.route('/update_exercise/<id>', methods=['POST'])
+def update_exercise(id):
+    # Load the exercises from the JSON file
+    exercises = load_json('exercises.json')
+
+    # Find the exercise with the given ID
+    for exercise in exercises:
+        if exercise['id'] == int(id):
+            # Update the exercise with the form data
+            exercise['name'] = request.form['name']
+            exercise['description'] = request.form['description']
+            exercise['target_team'] = request.form['target_team']
+            exercise['last_performed'] = request.form['last_performed']
+            # Add more lines here to update other exercise properties
+
+            # Save the exercises back to the JSON file
+            save_json('exercises.json', exercises)
+
+            # Show a toast message
+            flash('Exercise updated successfully')
+            print('[*] Flashed message:', 'Exercise updated successfully')
+
+            # Return a response
+            return redirect(url_for('exercises'))
+
+    # If no exercise with the given ID was found, return an error
+    flash('Exercise not found')
+    #return redirect(url_for('dashboard'))
+    return redirect(url_for('exercises'))
 
 def load_json(filename):
     with open(os.path.join(DATA_DIR, filename), 'r') as file:
@@ -74,7 +111,7 @@ def exercises():
 def load_exercise(id):
     exercises = load_json('exercises.json')  # Load the exercises from the JSON file
     for exercise in exercises:
-        if exercise['id'] == id:
+        if exercise['id'] == int(id):  # Convert the ID to an integer before comparing
             return exercise
     return None
 
@@ -85,7 +122,33 @@ def edit_exercise(id):
         return render_template('edit_exercise.html', exercise=exercise)
     else:
         return "Exercise not found", 404
+    
+# @app.route('/update_exercise/<id>', methods=['POST'])
+# def update_exercise(id):
+#     # Load the exercises from the JSON file
+#     exercises = load_json('exercises.json')
 
+#     # Find the exercise with the given ID
+#     for exercise in exercises:
+#         if exercise['id'] == int(id):
+#             # Update the exercise with the form data
+#             exercise['name'] = request.form['name']
+#             exercise['description'] = request.form['description']
+#             exercise['target_team'] = request.form['target_team']
+#             exercise['last_performed'] = request.form['last_performed']
+#             # Add more lines here to update other exercise properties
+
+#             # Save the exercises back to the JSON file
+#             save_json('exercises.json', exercises)
+
+#             # Return a response
+#             return "Exercise updated successfully"
+
+#     # If no exercise with the given ID was found, return an error
+    return "Exercise not found", 404
+
+
+#### I N J E C T S ####
 
 @app.route('/edit_inject_form/<int:inject_id>')
 def edit_inject_form(inject_id):

@@ -1,6 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class="flashes">
+      {% for message in messages %}
+        <div class="toast">
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
 <h2>Dashboard</h2>
 <div class="notifications">
     <h3>Benachrichtigungen</h3>

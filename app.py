@@ -1,3 +1,15 @@
+# Noch zu tun:
+# Die Reaktionen des Teams können als Freitext eingegeben werden
+# oder wie beim Bullshit Bingo ausgewählt werden
+# dazu breauen wir eine Liste mit möglichen Reaktionen
+# und eine Liste mit den Reaktionen, die bereits ausgewählt wurden
+# Die Reaktionen können dann in der Übersicht angezeigt werden
+# und auch in den Berichten
+# Die Reaktionen können auch in den Szenarien angezeigt werden
+
+
+
+
 from flask import Flask, render_template, request, jsonify, redirect, url_for, session
 from threading import Timer
 import json
@@ -70,10 +82,6 @@ def id_to_name(id):
 
 #### E X E R C I S E S ####
 
-
-
-
-
 @app.route('/update_exercise/<id>', methods=['POST'])
 def update_exercise(id):
     # Load the exercises from the JSON file
@@ -115,8 +123,6 @@ def exercises():
     return render_template('exercises.html', exercises=exercises)  # Pass the exercises to the template
 
 
-
-
 def load_exercise(id):
     exercises = load_json('exercises.json')  # Load the exercises from the JSON file
     for exercise in exercises:
@@ -132,43 +138,48 @@ def edit_exercise(id):
     else:
         return "Exercise not found", 404
     
-@socketio.on('connect')
+@socketio.on('start_exercise')
 def perform_exercise(exercise):
-    print("[*] perform_exercise called")
+    time.sleep(10)
+    print("[PE.01] perform_exercise called")
+    socketio.emit('message', {'data': 'Execution started!'})
 
     if exercise is None:
         print("[*] Error: exercise cannot be None")
+        socketio.emit('message', {'data': 'Error: exercise not found'})
         return False
 
-    print("[*] Loading exercises from exercises.json")
+    print("[PE.02] Loading exercises from exercises.json")
     exercises = load_json('exercises.json')
 
-    print("[*] Loading injects from injects.json")
+    print("[PE.03] Loading injects from injects.json")
     injects = load_json('injects.json')
 
     # Print the exercises and injects for debugging
-    print(f"[*] Loaded exercises: {exercises}")
-    print(f"[*] Loaded injects: {injects}")
+    #print(f"[*] Loaded exercises: {exercises}")
+    #print(f"[*] Loaded injects: {injects}")
 
     if not 'inject_order' in exercise:
         print("[*] No inject_order in exercise")
+        socketio.emit('message', {'data': 'Error: No inject_order in exercise'})
         return False
 
-    print("[*] Running through injects in the order specified in the exercise")
+    print("[PE.04] Running through injects in the order specified in the exercise")
     for inject_id in exercise['inject_order']:
-        print(f"[*] Looking for inject with ID {inject_id}")
+        print(f"[PE.05] Looking for inject with ID {inject_id}")
         inject = next((inject for inject in injects if inject['id'] == inject_id), None)
-        print(f"[*] Found inject: {inject}")
+        # Print the inject for debugging
+        #print(f"[*] Found inject: {inject}")
 
         if inject is None:
             print(f"[*] No inject found with ID {inject_id}")
             continue
 
         title = inject.get('title', 'No title')
-        print(f"[*] Executing inject {inject_id}: {title}")
+        print(f"[PE.05] Executing inject {inject_id}: {title}")
         socketio.emit('message', {'data': f'Inject {inject_id} wird ausgeführt: {title}'})
 
-        print("[*] Waiting for 10 seconds")
+        print("[PE.06] Waiting for 10 seconds")
         time.sleep(10)
 
     print("[*] Finished executing injects")

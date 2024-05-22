@@ -12,6 +12,17 @@
         ]
     },
     {
+        "id": 2,
+        "title": "Verz\u00f6gerte Kommunikation",
+        "description": "Ein Mitarbeiter ruft an und meldet, dass die Kommunikation \u00fcber das interne Netzwerk ungew\u00f6hnlich langsam ist.",
+        "exercise_benefit": "\u00c3\u0153bt die Identifikation von Netzwerkmanipulationen.",
+        "expected_response": "Die Teilnehmer sollten die Netzwerklogs \u00c3\u00bcberpr\u00c3\u00bcfen, den Man-in-the-Middle-Angriff identifizieren und geeignete Gegenma\u00c3\u0178nahmen ergreifen.",
+        "communication_type": "personally",
+        "assigned_scenarios": [
+            "1"
+        ]
+    },
+    {
         "id": 3,
         "title": "Verz\u00f6gerte Kommunikation",
         "description": "Ein Mitarbeiter ruft an und meldet, dass die Kommunikation \u00fcber das interne Netzwerk ungew\u00f6hnlich langsam ist.",

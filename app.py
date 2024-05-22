@@ -1,9 +1,10 @@
-from flask import Flask, render_template, request, jsonify, redirect, url_for
+from flask import Flask, render_template, request, jsonify, redirect, url_for, session
 from threading import Timer
 import json
 import os
 from flask_toastr import Toastr
 from flask import flash, get_flashed_messages
+import time
 
 
 
@@ -14,37 +15,6 @@ toastr = Toastr(app)
 DATA_DIR = 'data'
 
 
-
-
-@app.route('/update_exercise/<id>', methods=['POST'])
-def update_exercise(id):
-    # Load the exercises from the JSON file
-    exercises = load_json('exercises.json')
-
-    # Find the exercise with the given ID
-    for exercise in exercises:
-        if exercise['id'] == int(id):
-            # Update the exercise with the form data
-            exercise['name'] = request.form['name']
-            exercise['description'] = request.form['description']
-            exercise['target_team'] = request.form['target_team']
-            exercise['last_performed'] = request.form['last_performed']
-            # Add more lines here to update other exercise properties
-
-            # Save the exercises back to the JSON file
-            save_json('exercises.json', exercises)
-
-            # Show a toast message
-            flash('Exercise updated successfully')
-            print('[*] Flashed message:', 'Exercise updated successfully')
-
-            # Return a response
-            return redirect(url_for('exercises'))
-
-    # If no exercise with the given ID was found, return an error
-    flash('Exercise not found')
-    #return redirect(url_for('dashboard'))
-    return redirect(url_for('exercises'))
 
 def load_json(filename):
     with open(os.path.join(DATA_DIR, filename), 'r') as file:
@@ -98,6 +68,40 @@ def id_to_name(id):
 
 #### E X E R C I S E S ####
 
+
+
+
+
+@app.route('/update_exercise/<id>', methods=['POST'])
+def update_exercise(id):
+    # Load the exercises from the JSON file
+    exercises = load_json('exercises.json')
+
+    # Find the exercise with the given ID
+    for exercise in exercises:
+        if exercise['id'] == int(id):
+            # Update the exercise with the form data
+            exercise['name'] = request.form['name']
+            exercise['description'] = request.form['description']
+            exercise['target_team'] = request.form['target_team']
+            exercise['last_performed'] = request.form['last_performed']
+            # Add more lines here to update other exercise properties
+
+            # Save the exercises back to the JSON file
+            save_json('exercises.json', exercises)
+
+            # Show a toast message
+            flash('Exercise updated successfully')
+            print('[*] Flashed message:', 'Exercise updated successfully')
+
+            # Return a response
+            return redirect(url_for('exercises'))
+
+    # If no exercise with the given ID was found, return an error
+    flash('Exercise not found')
+    #return redirect(url_for('dashboard'))
+    return redirect(url_for('exercises'))
+
 @app.route('/schedule_exercise_form')
 def schedule_exercise_form():
     return render_template('exercise_planung.html')
@@ -107,6 +111,9 @@ def exercises():
     exercises = load_json('exercises.json')  # Load the exercises from the JSON file
     print(exercises)  # Print the exercises data
     return render_template('exercises.html', exercises=exercises)  # Pass the exercises to the template
+
+
+
 
 def load_exercise(id):
     exercises = load_json('exercises.json')  # Load the exercises from the JSON file
@@ -123,31 +130,56 @@ def edit_exercise(id):
     else:
         return "Exercise not found", 404
     
-# @app.route('/update_exercise/<id>', methods=['POST'])
-# def update_exercise(id):
-#     # Load the exercises from the JSON file
-#     exercises = load_json('exercises.json')
 
-#     # Find the exercise with the given ID
-#     for exercise in exercises:
-#         if exercise['id'] == int(id):
-#             # Update the exercise with the form data
-#             exercise['name'] = request.form['name']
-#             exercise['description'] = request.form['description']
-#             exercise['target_team'] = request.form['target_team']
-#             exercise['last_performed'] = request.form['last_performed']
-#             # Add more lines here to update other exercise properties
+def perform_exercise(exercise):
+    # Laden der Übungen und Injects aus der JSON-Datei
+    exercises = load_json('exercises.json')
 
-#             # Save the exercises back to the JSON file
-#             save_json('exercises.json', exercises)
+    # Überprüfen, ob die Übung Injects hat
+    if not 'inject_order' in exercise:
+        flash('Die Übung hat keine Injects.')
+        return False
 
-#             # Return a response
-#             return "Exercise updated successfully"
+    # Durchlaufen der Injects in der Reihenfolge, die in der Übung angegeben ist
+    for inject_id in exercise['inject_order']:
+        # Finden des entsprechenden Injects
+        inject = next((inject for inject in exercises if inject['id'] == inject_id and inject.get('exercise_id') == exercise['id']), None)
 
-#     # If no exercise with the given ID was found, return an error
-    return "Exercise not found", 404
+        # Überprüfen, ob der Inject gefunden wurde
+        if inject is None:
+            flash(f'Inject {inject_id} wurde nicht gefunden.')
+            continue
 
+        # Den Inject ausführen (in diesem Fall wird eine Flash-Nachricht angezeigt)
+        title = inject.get('title', 'No title')
+        flash(f'Inject {inject_id} wird ausgeführt: {title}')
 
+        # Warten für 10 Sekunden
+        time.sleep(10)
+
+    return True
+
+@app.route('/execute_exercise/<int:exercise_id>', methods=['POST'])
+def execute_exercise(exercise_id):
+    exercise = load_exercise(exercise_id)
+
+    # Check if the exercise exists
+    if exercise is None:
+        return jsonify({"error": "Exercise not found"}), 404
+
+    # Perform the exercise
+    result = perform_exercise(exercise)
+
+    # Get flash messages
+    flash_messages = session.pop('_flashes', [])
+
+    # Check if the exercise was successfully performed
+    if result:
+        return jsonify({"status": "Exercise executed successfully", "messages": flash_messages}), 200
+    else:
+        return jsonify({"error": "Failed to execute exercise", "messages": flash_messages}), 500
+
+    return True
 #### I N J E C T S ####
 
 @app.route('/edit_inject_form/<int:inject_id>')

@@ -4,17 +4,35 @@
         "name": "Ransomware Angriff",
         "status": "Geplant",
         "description": "",
+        "inject_order": [
+            1,
+            2,
+            3,
+            4
+        ],
         "target_team": "",
         "last_performed": ""
     },
     {
         "id": 2,
         "name": "Phishing Angriff",
+        "inject_order": [
+            1,
+            2,
+            3,
+            4
+        ],
         "status": "L\u00c3\u00a4uft"
     },
     {
         "id": 3,
         "name": "DDoS-Simulation",
+        "inject_order": [
+            1,
+            2,
+            3,
+            4
+        ],
         "status": "Abgeschlossen"
     },
     {

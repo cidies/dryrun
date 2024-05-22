@@ -5,12 +5,14 @@ import os
 from flask_toastr import Toastr
 from flask import flash, get_flashed_messages
 import time
-
+from flask_socketio import SocketIO
+from threading import Thread
 
 
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY', 'default-secret-key')
 toastr = Toastr(app)
+socketio = SocketIO(app)
 
 DATA_DIR = 'data'
 
@@ -130,56 +132,71 @@ def edit_exercise(id):
     else:
         return "Exercise not found", 404
     
-
+@socketio.on('connect')
 def perform_exercise(exercise):
-    # Laden der Übungen und Injects aus der JSON-Datei
-    exercises = load_json('exercises.json')
+    print("[*] perform_exercise called")
 
-    # Überprüfen, ob die Übung Injects hat
-    if not 'inject_order' in exercise:
-        flash('Die Übung hat keine Injects.')
+    if exercise is None:
+        print("[*] Error: exercise cannot be None")
         return False
 
-    # Durchlaufen der Injects in der Reihenfolge, die in der Übung angegeben ist
-    for inject_id in exercise['inject_order']:
-        # Finden des entsprechenden Injects
-        inject = next((inject for inject in exercises if inject['id'] == inject_id and inject.get('exercise_id') == exercise['id']), None)
+    print("[*] Loading exercises and injects from JSON file")
+    exercises = load_json('exercises.json')
 
-        # Überprüfen, ob der Inject gefunden wurde
+    # Print the exercises for debugging
+    print(f"[*] Loaded exercises: {exercises}")
+
+    if not 'inject_order' in exercise:
+        print("[*] No inject_order in exercise")
+        return False
+
+    print("[*] Running through injects in the order specified in the exercise")
+    for inject_id in exercise['inject_order']:
+        print(f"[*] Looking for inject with ID {inject_id}")
+        inject = next((inject for inject in exercises if inject['id'] == inject_id), None)
+
         if inject is None:
-            flash(f'Inject {inject_id} wurde nicht gefunden.')
+            print(f"[*] No inject found with ID {inject_id}")
             continue
 
-        # Den Inject ausführen (in diesem Fall wird eine Flash-Nachricht angezeigt)
         title = inject.get('title', 'No title')
-        flash(f'Inject {inject_id} wird ausgeführt: {title}')
+        print(f"[*] Executing inject {inject_id}: {title}")
+        socketio.emit('message', {'data': f'Inject {inject_id} wird ausgeführt: {title}'})
 
-        # Warten für 10 Sekunden
+        print("[*] Waiting for 10 seconds")
         time.sleep(10)
 
+    print("[*] Finished executing injects")
     return True
+
+
 
 @app.route('/execute_exercise/<int:exercise_id>', methods=['POST'])
 def execute_exercise(exercise_id):
+    print(f"[*] execute_exercise called with exercise_id: {exercise_id}")
+
+    print("[*] Loading exercise")
     exercise = load_exercise(exercise_id)
 
     # Check if the exercise exists
     if exercise is None:
-        return jsonify({"error": "Exercise not found"}), 404
+        print("[*] Error: Exercise not found")
+        return render_template('error.html', message="Exercise not found"), 404
 
-    # Perform the exercise
-    result = perform_exercise(exercise)
+    print("[*] Starting a new thread to perform the exercise")
+    # Perform the exercise in a separate thread
+    thread = Thread(target=perform_exercise, args=(exercise,))
+    thread.start()
 
-    # Get flash messages
-    flash_messages = session.pop('_flashes', [])
+    print("[*] Rendering the executed_exercise.html page")
+    # Render the executed_exercise.html page immediately
+    return render_template('executed_exercise.html', exercise=exercise, status="Exercise is being executed")
 
-    # Check if the exercise was successfully performed
-    if result:
-        return jsonify({"status": "Exercise executed successfully", "messages": flash_messages}), 200
-    else:
-        return jsonify({"error": "Failed to execute exercise", "messages": flash_messages}), 500
 
-    return True
+
+
+
+
 #### I N J E C T S ####
 
 @app.route('/edit_inject_form/<int:inject_id>')

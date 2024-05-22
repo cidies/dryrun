@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
+<script>
+    var socket = io.connect('http://' + document.domain + ':' + location.port);
+    socket.on('message', function(message) {
+        var ul = document.getElementById('messages');
+        var li = document.createElement('li');
+        li.appendChild(document.createTextNode(message.data));
+        ul.appendChild(li);
+    });
+</script>
+<h1>{{ exercise.title }}</h1>
+<p>{{ exercise.description }}</p>
+<p>Status: {{ status }}</p>
+<h2>Messages</h2>
+<ul id="messages">
+{% for message in messages %}
+    <li>{{ message }}</li>
+{% endfor %}
+</ul>
+{% endblock %}

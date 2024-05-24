@@ -4,23 +4,62 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
 <script>
+window.onload = function() {
     var socket = io.connect('http://' + document.domain + ':' + location.port);
     console.log('[*] Socket.IO connection established on domain: ' + document.domain + ' and port: ' + location.port);
     socket.on('message', function(message) {
         console.log('[*] Message received: ', message.data, ' from domain: ', document.domain, ' on port: ', location.port);
-        var ul = document.getElementById('messages');
-        var li = document.createElement('li');
-        li.appendChild(document.createTextNode(message.data));
-        ul.appendChild(li);
+        var table = document.getElementById('injectTable');
+        var row = table.insertRow(-1);
+        var cell1 = row.insertCell(0);
+        cell1.appendChild(document.createTextNode(message.data));
+        var cell2 = row.insertCell(1);
+        var input = document.createElement('input');
+        input.type = 'text';
+        input.placeholder = 'Enter your comment';
+        input.id = 'commentInput' + (table.rows.length - 1);
+        cell2.appendChild(input);
     });
+
+    document.getElementById('injectTable').addEventListener('keypress', function(e) {
+        console.log('[*] Keypress event triggered');
+        if (e.target.tagName === 'INPUT' && e.key === 'Enter') {
+            console.log('[*] Enter key pressed in an input field');
+            e.preventDefault();  // Prevent the default action (form submission)
+            var comment = e.target.value;
+            var index = e.target.id.replace('commentInput', '');
+            var exerciseId = document.getElementById('exerciseId').value;
+            console.log('[*] Comment: ', comment, ', Index: ', index, ', Exercise ID: ', exerciseId);
+            socket.emit('comment', {data: comment, index: index});
+            console.log('[*] Comment emitted through socket');
+    
+            // Send an AJAX request to the server
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/update_comment');
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.send(JSON.stringify({id: exerciseId, index: index, comment: comment}));
+            console.log('[*] AJAX request sent to /update_comment');
+        }
+    });
+};
 </script>
 <h1>{{ exercise.title }}</h1>
 <p>{{ exercise.description }}</p>
 <p>Status: {{ status }}</p>
+<input type="hidden" id="exerciseId" value="{{ exercise.id }}">
 <h2>Inject Status</h2>
-<ul id="messages">
-{% for message in messages %}
-    <li>{{ message }}</li>
-{% endfor %}
-</ul>
+<table id="injectTable">
+    <tr>
+        <th>Inject</th>
+        <th>Comment</th>
+    </tr>
+    {% for i in range(messages|length) %}
+        <tr>
+            <td>{{ messages[i] }}</td>
+            <td>
+                <input type="text" id="commentInput{{ i }}" placeholder="Enter your comment" value="{{ comments[i] }}">
+            </td>
+        </tr>
+    {% endfor %}
+</table>
 {% endblock %}

@@ -1,39 +1,5 @@
 # Noch zu tun:
-# Die Reaktionen des Teams können als Freitext eingegeben werden
-# oder wie beim Bullshit Bingo ausgewählt werden
-# dazu breauen wir eine Liste mit möglichen Reaktionen
-# und eine Liste mit den Reaktionen, die bereits ausgewählt wurden
-# Die Reaktionen können dann in der Übersicht angezeigt werden
-# und auch in den Berichten
-# Die Reaktionen können auch in den Szenarien angezeigt werden
-
-# Das Feld last_performed in den Übungen wird nicht gespeichert
-# Im grunde muss nach jeder vollst#ndigen Ausführung einer Übung
-# das Feld last_performed aktualisiert werden.
-
-# Ich muss eine Übung auch anhalten oder stoppen können
-# dazu brauche ich einen Button in der Übungsausführung
-# und eine Funktion, die die Ausführung stoppt
-# und die Ausführung auch wieder fortsetzen kann
-# Die Funktion muss auch die Ausführung beenden können
-
-# Ich muss auch noch klären, wie und wo ich die Reaktionen kommentieren kann
-# Ich kann die Reaktionen in den Berichten kommentieren
-# und auch in den Szenarien
-# Ich kann auch die Reaktionen in den Übungen kommentieren
-# und auch in den Injekten
-# Dazu brauche ich ein Feld für die Kommentare
-
-
-# Die Ausführungslogik ist nur rudimentär implementiert
-# Im Moment sind es immer nur 10 Sekunden Sleep
-# Ich muss die Ausführungslogik noch implementieren
-# Es kann halt sein, das ein "Ready" button zu drücken ist
-# und dann die Ausführung gestartet wird oder
-# zu einer bestimmten Zeit die Ausführung gestartet wird.
-# Oder nach einer bestimmten Zeit die Ausführung gestartet wird.
-# Das kann ich dann in der Übung spezifizieren
-# und auch in den Injekten
+# Siehe github issues
 
 # Die Injects können über verschiedene Wege kommuniziert werden.
 # Im Moment nur auf der executed_exercise.html Seite
@@ -55,6 +21,7 @@ from flask import flash, get_flashed_messages
 import time
 from flask_socketio import SocketIO
 from threading import Thread
+import logging
 
 
 app = Flask(__name__)
@@ -64,7 +31,7 @@ socketio = SocketIO(app)
 
 DATA_DIR = 'data'
 
-
+logging.basicConfig(level=logging.INFO)
 
 def load_json(filename):
     with open(os.path.join(DATA_DIR, filename), 'r') as file:
@@ -148,6 +115,7 @@ def update_exercise(id):
     #return redirect(url_for('dashboard'))
     return redirect(url_for('exercises'))
 
+
 @app.route('/schedule_exercise_form')
 def schedule_exercise_form():
     return render_template('exercise_planung.html')
@@ -204,8 +172,6 @@ def perform_exercise(exercise):
     for inject_id in exercise['inject_order']:
         print(f"[PE.05] Looking for inject with ID {inject_id}")
         inject = next((inject for inject in injects if inject['id'] == inject_id), None)
-        # Print the inject for debugging
-        #print(f"[*] Found inject: {inject}")
 
         if inject is None:
             print(f"[*] No inject found with ID {inject_id}")
@@ -243,6 +209,80 @@ def execute_exercise(exercise_id):
     print("[*] Rendering the executed_exercise.html page")
     # Render the executed_exercise.html page immediately
     return render_template('executed_exercise.html', exercise=exercise, status="Exercise is being executed")
+
+
+
+@app.route('/update_comment', methods=['POST'])
+def update_comment():
+    logging.info('[UC.1] update_comment function called')
+
+    try:
+        data = request.get_json()
+        logging.info(f'[UC.2] Received data: {data}')
+
+        if 'id' in data and 'index' in data and 'comment' in data:
+            try:
+                exercise_id = int(data['id'])
+                inject_index = int(data['index'])
+                logging.info(f'[UC.3] Converting id and index to integer, exercise_id: {exercise_id}, inject_index: {inject_index}')
+            except ValueError:
+                logging.error('[*] Error: Invalid type for id or index')
+                return jsonify({'status': 'error', 'message': 'Invalid type for id or index'})
+
+            comment = data['comment']
+            logging.info(f'[UC.4] Exercise ID: {exercise_id}, Inject Index: {inject_index}, Comment: {comment}')
+
+            try:
+                exercises = load_json('exercises.json')
+                logging.info(f'[UC.5] Loaded exercises: {exercises}')
+            except FileNotFoundError:
+                logging.error('[*] Error: exercises.json file not found')
+                return jsonify({'status': 'error', 'message': 'File not found'})
+            except json.JSONDecodeError:
+                logging.error('[*] Error: JSON decode error')
+                return jsonify({'status': 'error', 'message': 'Error reading JSON file'})
+
+            # Suche nach der Übung mit der entsprechenden ID
+            exercise = None
+            for ex in exercises:
+                if ex['id'] == exercise_id:
+                    exercise = ex
+                    break
+
+            if exercise:
+                if 'inject_comment' not in exercise or not isinstance(exercise['inject_comment'], dict):
+                    exercise['inject_comment'] = {}
+                elif isinstance(exercise['inject_comment'], list):
+                    # Konvertiere die Liste zu einem Wörterbuch
+                    inject_comment_dict = {}
+                    for i, val in enumerate(exercise['inject_comment']):
+                        inject_comment_dict[str(i)] = val
+                    exercise['inject_comment'] = inject_comment_dict
+                
+                exercise['inject_comment'][str(inject_index)] = comment
+                logging.info(f'[UC.6] Updated inject_comment: {exercise["inject_comment"]}')
+                logging.info(f'[UC.7] Updated exercise object: {exercise}')
+
+                # Speichern der gesamten Liste zurück in die JSON-Datei
+                try:
+                    save_json('exercises.json', exercises)
+                except IOError:
+                    logging.error('[*] Error: Unable to write to exercises.json file')
+                    return jsonify({'status': 'error', 'message': 'Unable to write to file'})
+
+                logging.info('[UC.8] Saved exercises back to JSON file')
+
+                return jsonify({'status': 'success'})
+            else:
+                logging.error(f'[*] Error: Exercise not found. Received id: {exercise_id}')
+                return jsonify({'status': 'error', 'message': 'Exercise not found'})
+        else:
+            logging.error(f'[*] Error: Missing key in data. Received data: {data}')
+            return jsonify({'status': 'error', 'message': 'Missing key in data'})
+
+    except Exception as e:
+        logging.error(f'[*] Error: {str(e)}')
+        return jsonify({'status': 'error', 'message': 'Internal server error'})
 
 
 

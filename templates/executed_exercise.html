@@ -9,36 +9,31 @@ window.onload = function() {
     console.log('[*] Socket.IO connection established on domain: ' + document.domain + ' and port: ' + location.port);
     socket.on('message', function(message) {
         console.log('[*] Message received: ', message.data, ' from domain: ', document.domain, ' on port: ', location.port);
-        var table = document.getElementById('injectTable');
-        var row = table.insertRow(-1);
-        var cell1 = row.insertCell(0);
-        cell1.appendChild(document.createTextNode(message.data));
-        var cell2 = row.insertCell(1);
-        var input = document.createElement('input');
-        input.type = 'text';
-        input.placeholder = 'Enter your comment';
-        input.id = 'commentInput' + (table.rows.length - 1);
-        cell2.appendChild(input);
-    });
-
-    document.getElementById('injectTable').addEventListener('keypress', function(e) {
-        console.log('[*] Keypress event triggered');
-        if (e.target.tagName === 'INPUT' && e.key === 'Enter') {
-            console.log('[*] Enter key pressed in an input field');
-            e.preventDefault();  // Prevent the default action (form submission)
-            var comment = e.target.value;
-            var index = e.target.id.replace('commentInput', '');
-            var exerciseId = document.getElementById('exerciseId').value;
-            console.log('[*] Comment: ', comment, ', Index: ', index, ', Exercise ID: ', exerciseId);
-            socket.emit('comment', {data: comment, index: index});
-            console.log('[*] Comment emitted through socket');
-    
-            // Send an AJAX request to the server
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', '/update_comment');
-            xhr.setRequestHeader('Content-Type', 'application/json');
-            xhr.send(JSON.stringify({id: exerciseId, index: index, comment: comment}));
-            console.log('[*] AJAX request sent to /update_comment');
+        if (message.data.startsWith('Inject')) {
+            var table = document.getElementById('injectTable');
+            var row = table.insertRow(-1);
+            var cell1 = row.insertCell(0);
+            cell1.appendChild(document.createTextNode(message.data));
+            var cell2 = row.insertCell(1);
+            var textarea = document.createElement('textarea');
+            textarea.rows = '4';  // Set the number of rows in the textarea
+            textarea.cols = '50';  // Set the number of columns in the textarea
+            textarea.placeholder = 'Enter your comment';
+            textarea.id = 'commentInput' + (table.rows.length - 1);
+            textarea.oninput = function() {
+                var comment = textarea.value;
+                console.log('Comment: ', comment);
+                var index = textarea.id.replace('commentInput', '');
+                var exerciseId = document.getElementById('exerciseId').value;
+                socket.emit('comment', {data: comment, index: index});
+                console.log('[*] Comment emitted through socket');
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', '/update_comment');
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.send(JSON.stringify({id: exerciseId, index: index, comment: comment}));
+                console.log('[*] AJAX request sent to /update_comment');
+            };
+            cell2.appendChild(textarea);
         }
     });
 };
@@ -57,7 +52,7 @@ window.onload = function() {
         <tr>
             <td>{{ messages[i] }}</td>
             <td>
-                <input type="text" id="commentInput{{ i }}" placeholder="Enter your comment" value="{{ comments[i] }}">
+                <textarea rows="4" cols="50" id="commentInput{{ i }}" placeholder="Enter your comment">{{ comments[i] }}</textarea>
             </td>
         </tr>
     {% endfor %}

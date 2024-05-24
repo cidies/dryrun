@@ -189,24 +189,25 @@ def perform_exercise(exercise):
 
 
 
+
 @app.route('/execute_exercise/<int:exercise_id>', methods=['POST'])
 def execute_exercise(exercise_id):
-    print(f"[*] execute_exercise called with exercise_id: {exercise_id}")
+    logging.info(f"[*] execute_exercise called with exercise_id: {exercise_id}")
 
-    print("[*] Loading exercise")
+    logging.info("[*] Loading exercise")
     exercise = load_exercise(exercise_id)
 
     # Check if the exercise exists
     if exercise is None:
-        print("[*] Error: Exercise not found")
+        logging.error("[*] Error: Exercise not found")
         return render_template('error.html', message="Exercise not found"), 404
 
-    print("[*] Starting a new thread to perform the exercise")
+    logging.info("[*] Starting a new thread to perform the exercise")
     # Perform the exercise in a separate thread
     thread = Thread(target=perform_exercise, args=(exercise,))
     thread.start()
 
-    print("[*] Rendering the executed_exercise.html page")
+    logging.info("[*] Rendering the executed_exercise.html page")
     # Render the executed_exercise.html page immediately
     return render_template('executed_exercise.html', exercise=exercise, status="Exercise is being executed")
 

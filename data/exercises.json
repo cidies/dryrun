@@ -11,11 +11,11 @@
             4
         ],
         "inject_comment": {
-            "2": "Es hat ewig gedauert. Bis alle geschnallt, was los ist.",
+            "2": "Hier auch.",
             "5": "Endlich",
-            "1": "Tut",
-            "3": "Unendeckt. Musste darauf hinweisen.",
-            "4": "Ja"
+            "1": "OK Es tut.",
+            "3": "Aber es \u00fcberschreibt die vorherigen LOGS?!?!?!?!",
+            "4": "Und was passiert, wenn zwei gleichzeitig darauf zugreifen?"
         },
         "target_team": "",
         "last_performed": ""
@@ -32,7 +32,8 @@
         "status": "L\u00c3\u00a4uft",
         "comment": "AAAAAAAAA",
         "inject_comment": {
-            "1": "AAAAAAA"
+            "1": "JEP",
+            "2": "OK"
         }
     },
     {

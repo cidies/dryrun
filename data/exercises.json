@@ -1,7 +1,7 @@
 [
     {
         "id": 1,
-        "name": "Ransomware Angriff",
+        "name": "Ransomware Angriff - Pharma Batchumgebung",
         "status": "Geplant",
         "description": "",
         "inject_order": [
@@ -22,7 +22,7 @@
     },
     {
         "id": 2,
-        "name": "Phishing Angriff",
+        "name": "Phishing Angriff - Anwaltskanzlei",
         "inject_order": [
             1,
             2,
@@ -30,7 +30,6 @@
             4
         ],
         "status": "L\u00c3\u00a4uft",
-        "comment": "AAAAAAAAA",
         "inject_comment": {
             "1": "JEP",
             "2": "OK"
@@ -38,7 +37,7 @@
     },
     {
         "id": 3,
-        "name": "DDoS-Simulation",
+        "name": "DDoS Angriff - Webshop",
         "inject_order": [
             1,
             2,
@@ -47,7 +46,8 @@
         ],
         "status": "Abgeschlossen",
         "inject_comment": {
-            "2": "AAASSSXXX"
+            "2": "AAASSSXXX",
+            "1": "OK.Done"
         }
     },
     {

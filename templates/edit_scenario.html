@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Scenario</title>
+</head>
+<body>
+    <h1>Edit Scenario</h1>
+    <form method="post" action="{{ url_for('update_scenario', id=scenario.id) }}">
+        <label for="name">Scenario Name:</label><br>
+        <input type="text" id="name" name="name" value="{{ scenario.name }}"><br>
+        <label for="description">Description:</label><br>
+        <textarea id="description" name="description">{{ scenario.description }}</textarea><br>
+        <!-- Add more fields here for other scenario properties -->
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
+{% endblock %}

@@ -7,13 +7,39 @@
         <tr>
             <th>Name</th>
             <th>Beschreibung</th>
+            <th>Aktionen</th>
         </tr>
         {% for scenario in scenarios %}
             <tr>
                 <td>{{ scenario.name }}</td>
                 <td>{{ scenario.description }}</td>
+                <td>
+                    <button onclick="openEditForm('{{ scenario.id }}')">Bearbeiten</button>
+                </td>
             </tr>
         {% endfor %}
     </table>
 </div>
+
+<!-- Edit form -->
+<div id="editForm" style="display: none;">
+    <h2>Szenario bearbeiten</h2>
+    <form action="/update_scenario" method="post">
+        <input type="hidden" id="scenarioId" name="scenarioId">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name"><br>
+        <label for="description">Beschreibung:</label><br>
+        <textarea id="description" name="description"></textarea><br>
+        <input type="submit" value="Speichern">
+    </form>
+</div>
+
+<script>
+function openEditForm(id) {
+    document.getElementById('editForm').style.display = 'block';
+    document.getElementById('scenarioId').value = id;
+    // Here you can fetch the current scenario data and fill the form fields
+}
+</script>
+
 {% endblock %}

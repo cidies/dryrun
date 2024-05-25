@@ -1,4 +1,4 @@
-[
+9[
     {
         "id": 1,
         "name": "Ransomware Angriff",
@@ -118,5 +118,131 @@
         "name": "Firmware Attack",
         "description": "Simulation eines Angriffs auf die Firmware von Geräten innerhalb der Organisation",
         "difficulty": "Sehr Schwer"
+    },
+    {
+        "id": 21,
+        "name": "Phishing-Simulationen",
+        "description": "Versenden gefälschter E-Mails, die Anmeldedaten oder andere sensible Informationen anfordern.",
+        "difficulty": "Mittel"
+    },
+    {
+        "id": 22,
+        "name": "Spear Phishing",
+        "description": "Zielgerichtete Phishing-E-Mails, die auf spezifische Mitarbeiter oder Abteilungen abzielen.",
+        "difficulty": "Mittel"
+    },
+    {
+        "id": 23,
+        "name": "Voice Phishing (Vishing)",
+        "description": "Durchführung von Anrufen, bei denen Sie sich als vertrauenswürdige Person ausgeben, um sensible Informationen zu erhalten.",
+        "difficulty": "Mittel"
+    },
+    {
+        "id": 24,
+        "name": "SMS Phishing (Smishing)",
+        "description": "Versenden gefälschter SMS-Nachrichten, die dazu auffordern, auf einen Link zu klicken oder Informationen preiszugeben.",
+        "difficulty": "Leicht"
+    },
+    {
+        "id": 25,
+        "name": "Pretexting",
+        "description": "Ausgeben als IT-Support oder eine andere legitime Person, um sensible Informationen zu erhalten.",
+        "difficulty": "Schwer"
+    },
+    {
+        "id": 26,
+        "name": "Tailgating",
+        "description": "Versuch, durch das Mitgehen hinter einem Mitarbeiter Zugang zu gesicherten Bereichen zu erhalten.",
+        "difficulty": "Mittel"
+    },
+    {
+        "id": 27,
+        "name": "Baiting",
+        "description": "Platzieren physischer Medien (z.B. USB-Sticks) an Orten, wo sie von Mitarbeitern gefunden und verwendet werden könnten.",
+        "difficulty": "Mittel"
+    },
+    {
+        "id": 28,
+        "name": "Quid Pro Quo",
+        "description": "Angebot eines gefälschten Service oder Vorteil im Austausch für sensible Informationen.",
+        "difficulty": "Schwer"
+    },
+    {
+        "id": 29,
+        "name": "Authority",
+        "description": "Ausgeben als autoritäre Figur (z.B. Führungskraft), um Mitarbeiter zur Preisgabe von Informationen zu bewegen.",
+        "difficulty": "Mittel"
+    },
+    {
+        "id": 30,
+        "name": "Scarcity",
+        "description": "Erzeugen eines Gefühls der Dringlichkeit, um Mitarbeiter zu schnellen und unüberlegten Handlungen zu bewegen.",
+        "difficulty": "Leicht"
+    },
+    {
+        "id": 31,
+        "name": "Dumpster Diving",
+        "description": "Durchsuchen von Mülleimern und Recyclingbehältern nach vertraulichen Dokumenten.",
+        "difficulty": "Mittel"
+    },
+    {
+        "id": 32,
+        "name": "Office Reconnaissance",
+        "description": "Unauffälliges Sammeln von Informationen aus Büros oder Arbeitsplätzen, z.B. durch Fotografieren von Whiteboards oder Dokumenten.",
+        "difficulty": "Schwer"
+    },
+    {
+        "id": 33,
+        "name": "LinkedIn Phishing",
+        "description": "Erstellen gefälschter LinkedIn-Profile, um Verbindungen zu Mitarbeitern herzustellen und Informationen zu sammeln.",
+        "difficulty": "Mittel"
+    },
+    {
+        "id": 34,
+        "name": "Facebook Phishing",
+        "description": "Verwenden gefälschter Facebook-Profile oder Nachrichten, um Informationen von Mitarbeitern zu erhalten.",
+        "difficulty": "Leicht"
+    },
+    {
+        "id": 35,
+        "name": "Fake Surveys",
+        "description": "Versenden gefälschter Umfragen oder Fragebögen, die dazu dienen, sensible Informationen zu sammeln.",
+        "difficulty": "Mittel"
+    },
+    {
+        "id": 36,
+        "name": "On-site Interviews",
+        "description": "Ausgeben als Journalist oder Marktforscher, um vertrauliche Informationen durch Interviews zu sammeln.",
+        "difficulty": "Schwer"
+    },
+    {
+        "id": 37,
+        "name": "Job Application Scams",
+        "description": "Ausgeben als Bewerber, um Informationen über interne Abläufe und Sicherheitsmaßnahmen zu erhalten.",
+        "difficulty": "Mittel"
+    },
+    {
+        "id": 38,
+        "name": "Placement of Malicious Devices",
+        "description": "Platzieren präparierter Geräte wie Keylogger oder bösartige USB-Sticks in der Nähe von Arbeitsplätzen.",
+        "difficulty": "Schwer"
+    },
+    {
+        "id": 39,
+        "name": "Security Badge Cloning",
+        "description": "Versuch, Sicherheitsbadges zu klonen oder gefälschte Badges zu verwenden, um Zugang zu gesicherten Bereichen zu erhalten.",
+        "difficulty": "Schwer"
+    },
+    {
+        "id": 40,
+        "name": "Fake Maintenance Personnel",
+        "description": "Ausgeben als Wartungspersonal, um Zugang zu sensiblen Bereichen oder Informationen zu erhalten.",
+        "difficulty": "Mittel"
+    },
+    {
+        "id": 41,
+        "name": "Gefälschte Umfrage per Brief",
+        "description": "Versenden einer gefälschten Umfrage, die angeblich von einer nationalen Sicherheitsbehörde stammt, um sensible Informationen zu sammeln.",
+        "difficulty": "Schwer"
     }
 ]

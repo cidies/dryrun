@@ -184,12 +184,6 @@
         "description": "Ein Benutzer meldet, dass seine Sitzung beendet wurde und er nicht mehr auf das System zugreifen kann.",
         "exercise_benefit": "\u00dcbt die Erkennung und Reaktion auf Session-Hijacking-Angriffe.",
         "expected_response": "Die Teilnehmer sollten die Sitzungsprotokolle \u00fcberpr\u00fcfen, die Sitzung zur\u00fccksetzen und die Sicherheitsvorkehrungen verst\u00e4rken.",
-        "communication_type": "email",
-        "assigned_scenarios": [
-            "4",
-            "7",
-            "10",
-            "18"
-        ]
+        "communication_type": "email"
     }
 ]

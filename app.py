@@ -19,6 +19,7 @@ import os
 from flask_toastr import Toastr
 from flask import flash, get_flashed_messages
 import time
+from datetime import datetime
 from flask_socketio import SocketIO
 from threading import Thread
 import logging
@@ -151,9 +152,6 @@ def load_scenario(id):
 
 
 
-
-
-
 #### E X E R C I S E S ####
 
 @app.route('/update_exercise/<id>', methods=['POST'])
@@ -259,16 +257,28 @@ def perform_exercise(exercise):
         time.sleep(10)
 
     print("[*] Finished executing injects")
-    return True
 
+    # Update the last_performed field with the current date and time
+    exercise['last_performed'] = datetime.now().isoformat()
+
+        # Find the exercise in the list of exercises and update it
+    for i, ex in enumerate(exercises):
+        if ex['id'] == exercise['id']:
+            exercises[i] = exercise
+            break
+
+    # Save the updated exercises back to the JSON file
+    save_json('exercises.json', exercises)
+
+    return True
 
 
 
 @app.route('/execute_exercise/<int:exercise_id>', methods=['POST'])
 def execute_exercise(exercise_id):
-    logging.info(f"[*] execute_exercise called with exercise_id: {exercise_id}")
+    logging.info(f"[EE.01] execute_exercise called with exercise_id: {exercise_id}")
 
-    logging.info("[*] Loading exercise")
+    logging.info("[EE.02] Loading exercise")
     exercise = load_exercise(exercise_id)
 
     # Check if the exercise exists
@@ -276,12 +286,13 @@ def execute_exercise(exercise_id):
         logging.error("[*] Error: Exercise not found")
         return render_template('error.html', message="Exercise not found"), 404
 
-    logging.info("[*] Starting a new thread to perform the exercise")
+    
+    logging.info("[EE.03] Starting a new thread to perform the exercise")
     # Perform the exercise in a separate thread
     thread = Thread(target=perform_exercise, args=(exercise,))
     thread.start()
 
-    logging.info("[*] Rendering the executed_exercise.html page")
+    logging.info("[EE.04] Rendering the executed_exercise.html page")
     # Render the executed_exercise.html page immediately
     return render_template('executed_exercise.html', exercise=exercise, status="Exercise is being executed")
 

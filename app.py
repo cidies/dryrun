@@ -270,6 +270,8 @@ def perform_exercise(exercise):
     # Save the updated exercises back to the JSON file
     save_json('exercises.json', exercises)
 
+    socketio.emit('message', {'data': 'Scenario updated successfully'})
+
     return True
 
 

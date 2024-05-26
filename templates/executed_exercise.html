@@ -2,6 +2,8 @@
 
 {% block content %}
 
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
 <script>
 window.onload = function() {
@@ -9,34 +11,43 @@ window.onload = function() {
     console.log('[*] Socket.IO connection established on domain: ' + document.domain + ' and port: ' + location.port);
     socket.on('message', function(message) {
         console.log('[*] Message received: ', message.data, ' from domain: ', document.domain, ' on port: ', location.port);
+        
+        // Display the message as a toast notification
+        toastr.info(message.data);
+
         if (message.data.startsWith('Inject')) {
             var table = document.getElementById('injectTable');
-            var row = table.insertRow(-1);
-            var cell1 = row.insertCell(0);
-            cell1.appendChild(document.createTextNode(message.data));
-            var cell2 = row.insertCell(1);
-            var textarea = document.createElement('textarea');
-            textarea.rows = '4';  // Set the number of rows in the textarea
-            textarea.cols = '50';  // Set the number of columns in the textarea
-            textarea.placeholder = 'Enter your comment';
-            textarea.id = 'commentInput' + (table.rows.length - 1);
-            textarea.oninput = function() {
-                var comment = textarea.value;
-                console.log('Comment: ', comment);
-                var index = textarea.id.replace('commentInput', '');
-                var exerciseId = document.getElementById('exerciseId').value;
-                socket.emit('comment', {data: comment, index: index});
-                console.log('[*] Comment emitted through socket');
-                var xhr = new XMLHttpRequest();
-                xhr.open('POST', '/update_comment');
-                xhr.setRequestHeader('Content-Type', 'application/json');
-                xhr.send(JSON.stringify({id: exerciseId, index: index, comment: comment}));
-                console.log('[*] AJAX request sent to /update_comment');
-            };
-            cell2.appendChild(textarea);
+            if (table) {
+                var row = table.insertRow(-1);
+                var cell1 = row.insertCell(0);
+                cell1.appendChild(document.createTextNode(message.data));
+                var cell2 = row.insertCell(1);
+                var textarea = document.createElement('textarea');
+                textarea.rows = '4';  // Set the number of rows in the textarea
+                textarea.cols = '50';  // Set the number of columns in the textarea
+                textarea.placeholder = 'Enter your comment';
+                textarea.id = 'commentInput' + (table.rows.length - 1);
+                textarea.oninput = function() {
+                    var comment = textarea.value;
+                    console.log('Comment: ', comment);
+                    var index = textarea.id.replace('commentInput', '');
+                    var exerciseId = document.getElementById('exerciseId').value;
+                    socket.emit('comment', {data: comment, index: index});
+                    console.log('[*] Comment emitted through socket');
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('POST', '/update_comment');
+                    xhr.setRequestHeader('Content-Type', 'application/json');
+                    xhr.send(JSON.stringify({id: exerciseId, index: index, comment: comment}));
+                    console.log('[*] AJAX request sent to /update_comment');
+                };
+                cell2.appendChild(textarea);
+            } else {
+                console.error('No element with id "injectTable" found');
+            }
         }
     });
 };
+
 </script>
 <h1>{{ exercise.title }}</h1>
 <p>{{ exercise.description }}</p>

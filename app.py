@@ -213,11 +213,7 @@ def edit_exercise(id):
     else:
         return "Exercise not found", 404
 
-
-
     
-from datetime import datetime
-
 @socketio.on('start_exercise')
 def perform_exercise(exercise):
     print("[PE.01] perform_exercise called")

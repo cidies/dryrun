@@ -207,10 +207,12 @@ def load_exercise(id):
 @app.route('/edit_exercise/<id>')
 def edit_exercise(id):
     exercise = load_exercise(id)
+    injects = load_json('injects.json')  # Load injects from JSON file
     if exercise is not None:
-        return render_template('edit_exercise.html', exercise=exercise)
+        return render_template('edit_exercise.html', exercise=exercise, injects=injects)
     else:
         return "Exercise not found", 404
+
 
 
     

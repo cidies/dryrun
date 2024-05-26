@@ -2,6 +2,35 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+
+    /* Verkleinern Sie die Breite der Spalte "Exercise Name" */
+    th:nth-child(1) {
+        width: 15%;
+    }
+
+    /* Vergrößern Sie die Breite der Spalte "Description" */
+    th:nth-child(3) {
+        width: 50%;
+    }
+
+    /* Verkleinern Sie die Breite der Spalte "Last Performed" */
+    th:nth-child(4) {
+        width: 15%;
+    }
+</style>
 <h2>Injects</h2>
 <div class="injects">
     <table>
@@ -31,55 +60,7 @@
     </table>
 </div>
 <div>
-    <h3>Neuen Inject planen</h3>
-    <form id="inject-form">
-        <label for="title">Titel:</label>
-        <input type="text" id="title" name="title"><br>
-        <label for="description">Beschreibung:</label>
-        <textarea id="description" name="description"></textarea><br>
-        <label for="exercise_benefit">Übungsnutzen:</label>
-        <textarea id="exercise_benefit" name="exercise_benefit"></textarea><br>
-        <label for="expected_response">Erwarteter Umgang:</label>
-        <textarea id="expected_response" name="expected_response"></textarea><br>
-        <label for="assigned_scenarios">Zugewiesene Szenarien (Komma getrennt):</label>
-        <input type="text" id="assigned_scenarios" name="assigned_scenarios"><br>
-        <label for="communication_type">Kommunikationsart:</label>
-        <select id="communication_type" name="communication_type">
-            <option value="email">Email</option>
-            <option value="text">Text</option>
-            <option value="call">Anruf</option>
-            <option value="personally">Persönlich</option>
-        </select><br>
-        <button type="submit">Hinzufügen</button>
-    </form>
-</div>
 
-<!-- Edit Inject Modal -->
-<div id="editInjectModal" style="display:none;">
-    <h3>Inject Bearbeiten</h3>
-    <form id="edit-inject-form">
-        <input type="hidden" id="edit-inject-id">
-        <label for="edit-title">Titel:</label>
-        <input type="text" id="edit-title"><br>
-        <label for="edit-description">Beschreibung:</label>
-        <textarea id="edit-description"></textarea><br>
-        <label for="edit-exercise-benefit">Übungsnutzen:</label>
-        <textarea id="edit-exercise-benefit"></textarea><br>
-        <label for="edit-expected-response">Erwarteter Umgang:</label>
-        <textarea id="edit-expected-response"></textarea><br>
-        <label for="edit-assigned-scenarios">Zugewiesene Szenarien (Komma getrennt):</label>
-        <input type="text" id="edit-assigned-scenarios"><br>
-        <label for="edit-communication_type">Kommunikationsart:</label>
-        <select id="edit-communication_type">
-            <option value="email">Email</option>
-            <option value="text">Text</option>
-            <option value="call">Anruf</option>
-            <option value="personally">Persönlich</option>
-        </select><br>
-        <button type="submit">Speichern</button>
-        <button type="button" onclick="closeEditModal()">Abbrechen</button>
-    </form>
-</div>
 
 <script>
 document.getElementById('inject-form').addEventListener('submit', function(event) {

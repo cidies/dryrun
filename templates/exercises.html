@@ -19,6 +19,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Exercises</title>
+    <button onclick="location.href='{{ url_for('schedule_exercise_form') }}'">Plan Exercise</button>
     <style>
         table {
             width: 100%;
@@ -34,18 +35,26 @@
 
         /* Verkleinern Sie die Breite der Spalte "Exercise Name" */
         th:nth-child(1) {
-            width: 15%;
+            width: 5%;
         }
 
         /* Vergrößern Sie die Breite der Spalte "Description" */
-        th:nth-child(3) {
-            width: 50%;
+        th:nth-child(2) {
+            width: 30%;
         }
 
         /* Verkleinern Sie die Breite der Spalte "Last Performed" */
+        th:nth-child(3) {
+            width: 50%;
+        }
+        /* Verkleinern Sie die Breite der Spalte "Last Performed" */
         th:nth-child(4) {
             width: 15%;
-        }
+        }        
+        /* Verkleinern Sie die Breite der Spalte "Last Performed" */
+        th:nth-child(5) {
+            width: 15%;
+        }                
     </style>
 </head>
 <body>
@@ -73,8 +82,8 @@
         </tr>
         {% for exercise in exercises %}
         <tr>
-            <td>{{ exercise.name }}</td>
             <td>{{ exercise.id }}</td>
+            <td>{{ exercise.name }}</td>
             <td>{{ exercise.description }}</td> 
             <td>{{ exercise.last_performed }}</td>             
             <td>

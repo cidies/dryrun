@@ -117,11 +117,13 @@
             9,
             14
         ],
-        "last_performed": "2024-05-26T23:20:22.474870",
+        "last_performed": "2024-05-26T23:54:13.394055",
         "inject_comment": {
             "5": "qqqq",
             "1": "aaaaaaasasfdskasdfaklsfjaklsdj"
-        }
+        },
+        "description": "",
+        "target_team": ""
     },
     {
         "id": 8,
@@ -143,7 +145,10 @@
             8,
             11
         ],
-        "id": 9
+        "id": 9,
+        "description": "",
+        "target_team": "",
+        "last_performed": ""
     },
     {
         "name": "\u00dcbung Kunde1",

@@ -1,41 +1,160 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<!-- schedule_exercise.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Schedule Exercise</title>
+    <style>
+        .inject-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .inject-list li {
+            padding: 5px;
+            border: 1px solid #ccc;
+            margin-bottom: 5px;
+            cursor: move;
+        }
+        .inject-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        .inject-item label {
+            margin-left: 5px;
+        }
+    </style>
 </head>
 <body>
     <h1>Schedule Exercise</h1>
     <form id="scheduleExerciseForm" method="post">
         <label for="name">Exercise Name:</label>
         <input type="text" id="name" name="name" required><br>
-        
+
         <label for="type">Type:</label>
         <select id="type" name="type">
             <option value="timed">Timed</option>
             <!-- Add other types if needed -->
         </select><br>
-        
-        <label for="inject_order">Inject Order (comma-separated IDs):</label>
-        <input type="text" id="inject_order" name="inject_order" required><br>
+
+        <label for="injects">Select Injects:</label>
+        <div id="availableInjects">
+            {% for inject in injects %}
+            <div class="inject-item">
+                <input type="checkbox" id="inject_{{ inject.id }}" name="injects" value="{{ inject.id }}">
+                <label for="inject_{{ inject.id }}">{{ inject.title }}</label>
+            </div>
+        {% endfor %}        </div>
+        <button type="button" onclick="addSelectedInjects()">Add Selected Injects</button><br><br>
+
+        <label for="selectedInjects">Selected Injects (drag to reorder):</label>
+        <ul id="injectList" class="inject-list"></ul>
         
         <label for="interval">Interval (minutes):</label>
         <input type="number" id="interval" name="interval" required><br>
-        
+
         <button type="button" onclick="submitForm()">Schedule Exercise</button>
     </form>
 
     <script>
+        function addSelectedInjects() {
+            const selectedInjects = document.querySelectorAll('#availableInjects input[name="injects"]:checked');
+            const injectList = document.getElementById('injectList');
+
+            selectedInjects.forEach(function (inject) {
+                const injectId = inject.value;
+                const injectTitle = inject.nextElementSibling.innerText;
+
+                const li = document.createElement('li');
+                li.setAttribute('data-id', injectId);
+                li.innerText = injectTitle;
+                li.setAttribute('draggable', 'true');
+
+                injectList.appendChild(li);
+
+                // Uncheck and disable the checkbox to prevent duplicate selection
+                inject.checked = false;
+                inject.disabled = true;
+            });
+
+            addDragAndDropHandlers();
+        }
+
+        function addDragAndDropHandlers() {
+            let items = document.querySelectorAll('.inject-list li');
+            items.forEach(function(item) {
+                item.addEventListener('dragstart', handleDragStart, false);
+                item.addEventListener('dragenter', handleDragEnter, false);
+                item.addEventListener('dragover', handleDragOver, false);
+                item.addEventListener('dragleave', handleDragLeave, false);
+                item.addEventListener('drop', handleDrop, false);
+                item.addEventListener('dragend', handleDragEnd, false);
+            });
+        }
+
+        let dragSrcEl = null;
+
+        function handleDragStart(e) {
+            this.style.opacity = '0.4';
+            dragSrcEl = this;
+
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/html', this.innerHTML);
+        }
+
+        function handleDragOver(e) {
+            if (e.preventDefault) {
+                e.preventDefault(); // Necessary. Allows us to drop.
+            }
+
+            e.dataTransfer.dropEffect = 'move';  // See the section on the DataTransfer object.
+
+            return false;
+        }
+
+        function handleDragEnter(e) {
+            this.classList.add('over');
+        }
+
+        function handleDragLeave(e) {
+            this.classList.remove('over');
+        }
+
+        function handleDrop(e) {
+            if (e.stopPropagation) {
+                e.stopPropagation(); // Stops some browsers from redirecting.
+            }
+
+            // Don't do anything if dropping the same column we're dragging.
+            if (dragSrcEl != this) {
+                dragSrcEl.innerHTML = this.innerHTML;
+                this.innerHTML = e.dataTransfer.getData('text/html');
+            }
+
+            return false;
+        }
+
+        function handleDragEnd(e) {
+            this.style.opacity = '1';
+
+            items.forEach(function (item) {
+                item.classList.remove('over');
+            });
+        }
+
         function submitForm() {
             const form = document.getElementById('scheduleExerciseForm');
             const formData = new FormData(form);
             const data = {};
             formData.forEach((value, key) => { data[key] = value });
-            data['inject_order'] = data['inject_order'].split(',').map(Number);
+
+            const injectOrder = [];
+            document.querySelectorAll('#injectList li').forEach(function (item) {
+                injectOrder.push(item.getAttribute('data-id'));
+            });
+            data['inject_order'] = injectOrder.map(Number);
 
             fetch('/schedule_exercise', {
                 method: 'POST',
@@ -53,6 +172,8 @@
                 console.error('Error:', error);
             });
         }
+
+        document.addEventListener('DOMContentLoaded', addDragAndDropHandlers);
     </script>
 </body>
 </html>

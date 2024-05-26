@@ -189,7 +189,8 @@ def update_exercise(id):
 
 @app.route('/schedule_exercise_form')
 def schedule_exercise_form():
-    return render_template('exercise_planung.html')
+    injects = load_json('injects.json')
+    return render_template('exercise_planung.html', injects=injects)
 
 @app.route('/exercises')
 def exercises():
@@ -212,6 +213,8 @@ def edit_exercise(id):
         return render_template('edit_exercise.html', exercise=exercise)
     else:
         return "Exercise not found", 404
+
+
     
 @socketio.on('start_exercise')
 def perform_exercise(exercise):
@@ -358,6 +361,39 @@ def update_comment():
 
 
 
+@app.route('/schedule_exercise', methods=['POST'])
+def schedule_exercise():
+    data = request.json
+    exercises = load_json('exercises.json')
+
+# Generate a new unique ID for the exercise
+    if exercises:
+        new_id = max(exercise['id'] for exercise in exercises) + 1
+    else:
+        new_id = 1
+
+    data['id'] = new_id
+
+
+       # Create a new ordered dictionary with 'id' first
+    ordered_data = {'id': data['id']}
+    for key, value in data.items():
+        if key != 'id':
+            ordered_data[key] = value
+ 
+
+    exercises.append(data)
+    save_json('exercises.json', exercises)
+    if data['type'] == 'timed':
+        schedule_timed_exercise(data)
+    return jsonify({"status": "scheduled", "id": new_id}), 200
+
+def schedule_timed_exercise(exercise):
+    injects = load_json('injects.json')
+    for idx, inject_idx in enumerate(exercise['inject_order']):
+        inject = injects[inject_idx]
+        delay = idx * exercise['interval'] * 60  # convert minutes to seconds
+        Timer(delay, execute_inject, [inject]).start()
 
 
 
@@ -379,22 +415,6 @@ def execute_inject_form():
 
 
 
-@app.route('/schedule_exercise', methods=['POST'])
-def schedule_exercise():
-    data = request.json
-    exercises = load_json('exercises.json')
-    exercises.append(data)
-    save_json('exercises.json', exercises)
-    if data['type'] == 'timed':
-        schedule_timed_exercise(data)
-    return jsonify({"status": "scheduled"}), 200
-
-def schedule_timed_exercise(exercise):
-    injects = load_json('injects.json')
-    for idx, inject_idx in enumerate(exercise['inject_order']):
-        inject = injects[inject_idx]
-        delay = idx * exercise['interval'] * 60  # convert minutes to seconds
-        Timer(delay, execute_inject, [inject]).start()
 
 @app.route('/execute_inject/<exercise_name>/<inject_idx>')
 def execute_inject_route(exercise_name, inject_idx):

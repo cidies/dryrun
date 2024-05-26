@@ -47,10 +47,6 @@ def dashboard():
     exercises = load_json('exercises.json')
     return render_template('dashboard.html', notifications=notifications, exercises=exercises)
 
-@app.route('/scenarios')
-def scenarios():
-    scenarios = load_json('scenarios.json')
-    return render_template('scenarios.html', scenarios=scenarios)
 
 @app.route('/communication')
 def communication():
@@ -81,6 +77,81 @@ def id_to_name(id):
         return scenario['name']
     else:
         return 'Unbekanntes Szenario'
+
+
+#### S C E N A R I O S ####
+
+@app.route('/scenarios')
+def scenarios():
+    try:
+        logging.info('Loading scenarios from scenarios.json')
+        scenarios = load_json('scenarios.json')
+        logging.info('Loaded scenarios: %s', scenarios)
+        return render_template('scenarios.html', scenarios=scenarios)
+    except Exception as e:
+        logging.error('Failed to load scenarios: %s', e)
+        return "Failed to load scenarios", 500
+
+@app.route('/edit_scenario/<id>')
+def edit_scenario(id):
+    try:
+        logging.info('[ES01] Loading scenario with id: %s', id)
+        scenario = load_scenario(id)
+        if scenario is not None:
+            logging.info('[ES02] Loaded scenario: %s', scenario)
+            return render_template('edit_scenario.html', scenario=scenario)
+        else:
+            logging.error('Scenario not found with id: %s', id)
+            return "Scenario not found", 404
+    except Exception as e:
+        logging.error('Failed to load scenario: %s', e)
+        return "Failed to load scenario", 500
+
+
+@app.route('/update_scenario/<id>', methods=['POST'])
+def update_scenario(id):
+    # Load the exercises from the JSON file
+    scenarios = load_json('scenarios.json')
+
+    # Find the exercise with the given ID
+    for scenario in scenarios:
+        if scenario['id'] == int(id):
+            # Update the exercise with the form data
+            scenario['name'] = request.form['name']
+            scenario['description'] = request.form['description']
+            scenario['difficulty'] = request.form['difficulty']
+            # Add more lines here to update other exercise properties
+
+            # Save the exercises back to the JSON file
+            save_json('scenarios.json', scenarios)
+
+            # Show a toast message
+            flash('Scenario updated successfully')
+            print('[*] Flashed message:', 'Scenario updated successfully')
+
+            # Return a response
+            return redirect(url_for('scenarios'))
+
+    # If no exercise with the given ID was found, return an error
+    flash('Scenario not found')
+    return redirect(url_for('scenarios'))
+
+
+
+def load_scenario(id):
+    logging.debug('load_scenario called with id: %s', id)
+    scenarios = load_json('scenarios.json')  # Load the exercises from the JSON file
+    logging.debug('Loaded scenarios: %s', scenarios)
+    for scenario in scenarios:
+        if scenario['id'] == int(id):  # Convert the ID to an integer before comparing
+            logging.debug('Found matching scenario: %s', scenario)
+            return scenario
+    logging.debug('No matching scenario found')
+    return None
+
+
+
+
 
 
 #### E X E R C I S E S ####
@@ -391,58 +462,6 @@ def edit_inject(inject_id):
     #return render_template('edit_inject.html', inject=inject)
     return render_template('edit_inject.html', inject=inject, scenarios=scenarios)
     
-
-@app.route('/edit_injectBAK/<int:inject_id>', methods=['GET', 'POST'])
-def edit_injectBAK(inject_id):
-    # Hier holen Sie das Inject aus Ihrer Datenbank
-    inject = get_inject_by_id(inject_id)
-
-    # Überprüfen Sie, ob das Inject existiert
-    if inject is None:
-        return "Inject not found", 404
-
-    if request.method == 'POST':
-        # Die ganze json wird geladen
-        injects = load_json('injects.json')
-
-        # Das was aus dem Webformular kommt, wird in data gespeichert
-        data = request.get_json()
-    
-        # Konvertieren Sie die inject_id in eine Zahl
-        inject_id = int(data.get('id', inject['id']))
-        
-        # Debugging-Ausgabe
-        # Zeigt die Webform Daten an
-        print("Received data:", data)
-    
-        # Aktualisieren Sie das Inject mit den neuen Daten aus dem Webformular
-        inject['id'] = int(data.get('id', inject['id']))
-        inject['title'] = data.get('title', inject['title'])
-        inject['description'] = data.get('description', inject['description'])
-        print("[*] DESCRIPTION:", data.get('description', inject['description']))
-        inject['exercise_benefit'] = data.get('exercise_benefit', inject['exercise_benefit'])
-        inject['expected_response'] = data.get('expected_response', inject['expected_response'])
-        inject['communication_type'] = data.get('communication_type', inject['communication_type'])
-        inject['assigned_scenarios'] = data.get('assigned_scenarios', inject['assigned_scenarios'])
-        
-        # Speichern Sie das aktualisierte Inject in der Datenbank "injects.json"
-        injects[inject_id] = inject
-        print("[*] INJECTS:", injects[inject_id])
-
-    
-        # Speichern Sie die Daten, nachdem alle Änderungen vorgenommen wurden
-        save_json('injects.json', injects)
-    
-        # Debugging-Ausgabe
-        print("[*] Updated inject:", inject)
-        
-        injects = None
-        injects = load_json('injects.json')
-        print("[*] RELOEDED INJECT:", injects[inject_id])
-
-    
-    # Rendern Sie die Bearbeitungsseite mit dem Inject als Kontext
-    return render_template('edit_inject.html', inject=inject)
 
 
 

@@ -3,6 +3,9 @@ body {
     background-color: #FAFAFA;
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 header {
@@ -16,6 +19,11 @@ header {
 header h1 {
     margin: 0;
     font-size: 2em;
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #faf6f6;
+    text-align: center;
+        
 }
 
 nav {
@@ -94,9 +102,10 @@ footer {
     padding: 10px 0;
     background-color: #3F51B5;
     color: #fff;
-    position: absolute;
+    position: sticky;
     bottom: 0;
     width: 100%;
+    margin-top: auto;
 }
 
 /* style.css */
@@ -139,4 +148,51 @@ footer {
     animation-duration: 4s;
     animation-delay: 4s;
     animation-fill-mode: forwards;
+}
+
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 600px;
+    margin: 50px auto; /* Adjusted margin to space out from top */
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+    color: #555;
+}
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #333;
+}
+input[type="text"]:read-only {
+    background-color: #f4f4f9;
+}
+textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+}
+input[type="submit"]:hover {
+    background-color: #45a049;
 }

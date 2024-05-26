@@ -2,7 +2,7 @@
     {
         "id": 1,
         "name": "Ransomware Angriff",
-        "description": "Simulation eines Ransomware-Angriffs auf die interne IT-Infrastruktur",
+        "description": "Simulation eines Ransomware-Angriffs auf die interne IT-Infrastruktur.",
         "difficulty": "Mittel"
     },
     {
@@ -32,7 +32,7 @@
     {
         "id": 6,
         "name": "Malware-Verteilung",
-        "description": "Simulation der Verteilung von Malware über infizierte E-Mail-Anhänge",
+        "description": "Simulation der Verteilung von Malware \u00fcber infizierte E-Mail-Anh\u00e4nge",
         "difficulty": "Einfach"
     },
     {
@@ -44,7 +44,7 @@
     {
         "id": 8,
         "name": "Brute-Force Angriff",
-        "description": "Simulation eines Brute-Force-Angriffs auf Benutzerkonten, um Passwörter zu knacken",
+        "description": "Simulation eines Brute-Force-Angriffs auf Benutzerkonten, um Passw\u00f6rter zu knacken",
         "difficulty": "Mittel"
     },
     {
@@ -68,13 +68,13 @@
     {
         "id": 12,
         "name": "DNS Spoofing",
-        "description": "Simulation eines DNS-Spoofing-Angriffs, bei dem Benutzer auf gefälschte Websites umgeleitet werden",
+        "description": "Simulation eines DNS-Spoofing-Angriffs, bei dem Benutzer auf gef\u00c3\u00a4lschte Websites umgeleitet werden",
         "difficulty": "Schwer"
     },
     {
         "id": 13,
         "name": "Insider Bedrohung",
-        "description": "Simulation eines Angriffs durch einen böswilligen Insider innerhalb der Organisation",
+        "description": "Simulation eines Angriffs durch einen b\u00f6swilligen Insider innerhalb der Organisation",
         "difficulty": "Schwer"
     },
     {
@@ -98,31 +98,31 @@
     {
         "id": 17,
         "name": "Privilege Escalation",
-        "description": "Simulation eines Angriffs, bei dem ein Benutzer versucht, seine Berechtigungen unbefugt zu erhöhen",
+        "description": "Simulation eines Angriffs, bei dem ein Benutzer versucht, seine Berechtigungen unbefugt zu erh\u00f6hen",
         "difficulty": "Mittel"
     },
     {
         "id": 18,
         "name": "Session Hijacking",
-        "description": "Simulation eines Angriffs, bei dem eine Benutzersitzung entführt wird, um Zugang zu sensiblen Daten zu erhalten",
+        "description": "Simulation eines Angriffs, bei dem eine Benutzersitzung entf\u00c3\u00bchrt wird, um Zugang zu sensiblen Daten zu erhalten",
         "difficulty": "Schwer"
     },
     {
         "id": 19,
         "name": "Watering Hole Angriff",
-        "description": "Simulation eines Angriffs, bei dem eine häufig besuchte Website kompromittiert wird, um gezielt Benutzer zu infizieren",
+        "description": "Simulation eines Angriffs, bei dem eine h\u00c3\u00a4ufig besuchte Website kompromittiert wird, um gezielt Benutzer zu infizieren",
         "difficulty": "Sehr Schwer"
     },
     {
         "id": 20,
         "name": "Firmware Attack",
-        "description": "Simulation eines Angriffs auf die Firmware von Geräten innerhalb der Organisation",
+        "description": "Simulation eines Angriffs auf die Firmware von Ger\u00c3\u00a4ten innerhalb der Organisation",
         "difficulty": "Sehr Schwer"
     },
     {
         "id": 21,
         "name": "Phishing-Simulationen",
-        "description": "Versenden gefälschter E-Mails, die Anmeldedaten oder andere sensible Informationen anfordern.",
+        "description": "Versenden gef\u00c3\u00a4lschter E-Mails, die Anmeldedaten oder andere sensible Informationen anfordern.",
         "difficulty": "Mittel"
     },
     {
@@ -134,13 +134,13 @@
     {
         "id": 23,
         "name": "Voice Phishing (Vishing)",
-        "description": "Durchführung von Anrufen, bei denen Sie sich als vertrauenswürdige Person ausgeben, um sensible Informationen zu erhalten.",
+        "description": "Durchf\u00c3\u00bchrung von Anrufen, bei denen Sie sich als vertrauensw\u00c3\u00bcrdige Person ausgeben, um sensible Informationen zu erhalten.",
         "difficulty": "Mittel"
     },
     {
         "id": 24,
         "name": "SMS Phishing (Smishing)",
-        "description": "Versenden gefälschter SMS-Nachrichten, die dazu auffordern, auf einen Link zu klicken oder Informationen preiszugeben.",
+        "description": "Versenden gef\u00c3\u00a4lschter SMS-Nachrichten, die dazu auffordern, auf einen Link zu klicken oder Informationen preiszugeben.",
         "difficulty": "Leicht"
     },
     {
@@ -158,55 +158,55 @@
     {
         "id": 27,
         "name": "Baiting",
-        "description": "Platzieren physischer Medien (z.B. USB-Sticks) an Orten, wo sie von Mitarbeitern gefunden und verwendet werden könnten.",
+        "description": "Platzieren physischer Medien (z.B. USB-Sticks) an Orten, wo sie von Mitarbeitern gefunden und verwendet werden k\u00c3\u00b6nnten.",
         "difficulty": "Mittel"
     },
     {
         "id": 28,
         "name": "Quid Pro Quo",
-        "description": "Angebot eines gefälschten Service oder Vorteil im Austausch für sensible Informationen.",
+        "description": "Angebot eines gef\u00c3\u00a4lschten Service oder Vorteil im Austausch f\u00c3\u00bcr sensible Informationen.",
         "difficulty": "Schwer"
     },
     {
         "id": 29,
         "name": "Authority",
-        "description": "Ausgeben als autoritäre Figur (z.B. Führungskraft), um Mitarbeiter zur Preisgabe von Informationen zu bewegen.",
+        "description": "Ausgeben als autorit\u00c3\u00a4re Figur (z.B. F\u00c3\u00bchrungskraft), um Mitarbeiter zur Preisgabe von Informationen zu bewegen.",
         "difficulty": "Mittel"
     },
     {
         "id": 30,
         "name": "Scarcity",
-        "description": "Erzeugen eines Gefühls der Dringlichkeit, um Mitarbeiter zu schnellen und unüberlegten Handlungen zu bewegen.",
+        "description": "Erzeugen eines Gef\u00c3\u00bchls der Dringlichkeit, um Mitarbeiter zu schnellen und un\u00c3\u00bcberlegten Handlungen zu bewegen.",
         "difficulty": "Leicht"
     },
     {
         "id": 31,
         "name": "Dumpster Diving",
-        "description": "Durchsuchen von Mülleimern und Recyclingbehältern nach vertraulichen Dokumenten.",
+        "description": "Durchsuchen von M\u00c3\u00bclleimern und Recyclingbeh\u00c3\u00a4ltern nach vertraulichen Dokumenten.",
         "difficulty": "Mittel"
     },
     {
         "id": 32,
         "name": "Office Reconnaissance",
-        "description": "Unauffälliges Sammeln von Informationen aus Büros oder Arbeitsplätzen, z.B. durch Fotografieren von Whiteboards oder Dokumenten.",
+        "description": "Unauff\u00c3\u00a4lliges Sammeln von Informationen aus B\u00c3\u00bcros oder Arbeitspl\u00c3\u00a4tzen, z.B. durch Fotografieren von Whiteboards oder Dokumenten.",
         "difficulty": "Schwer"
     },
     {
         "id": 33,
         "name": "LinkedIn Phishing",
-        "description": "Erstellen gefälschter LinkedIn-Profile, um Verbindungen zu Mitarbeitern herzustellen und Informationen zu sammeln.",
+        "description": "Erstellen gef\u00c3\u00a4lschter LinkedIn-Profile, um Verbindungen zu Mitarbeitern herzustellen und Informationen zu sammeln.",
         "difficulty": "Mittel"
     },
     {
         "id": 34,
         "name": "Facebook Phishing",
-        "description": "Verwenden gefälschter Facebook-Profile oder Nachrichten, um Informationen von Mitarbeitern zu erhalten.",
+        "description": "Verwenden gef\u00c3\u00a4lschter Facebook-Profile oder Nachrichten, um Informationen von Mitarbeitern zu erhalten.",
         "difficulty": "Leicht"
     },
     {
         "id": 35,
         "name": "Fake Surveys",
-        "description": "Versenden gefälschter Umfragen oder Fragebögen, die dazu dienen, sensible Informationen zu sammeln.",
+        "description": "Versenden gef\u00c3\u00a4lschter Umfragen oder Frageb\u00c3\u00b6gen, die dazu dienen, sensible Informationen zu sammeln.",
         "difficulty": "Mittel"
     },
     {
@@ -218,19 +218,19 @@
     {
         "id": 37,
         "name": "Job Application Scams",
-        "description": "Ausgeben als Bewerber, um Informationen über interne Abläufe und Sicherheitsmaßnahmen zu erhalten.",
+        "description": "Ausgeben als Bewerber, um Informationen \u00c3\u00bcber interne Abl\u00c3\u00a4ufe und Sicherheitsma\u00c3\u0178nahmen zu erhalten.",
         "difficulty": "Mittel"
     },
     {
         "id": 38,
         "name": "Placement of Malicious Devices",
-        "description": "Platzieren präparierter Geräte wie Keylogger oder bösartige USB-Sticks in der Nähe von Arbeitsplätzen.",
+        "description": "Platzieren pr\u00e4parierter Ger\u00e4te wie Keylogger oder b\u00f6sartige USB-Sticks in der N\u00e4he von Arbeitspl\u00e4tzen.",
         "difficulty": "Schwer"
     },
     {
         "id": 39,
         "name": "Security Badge Cloning",
-        "description": "Versuch, Sicherheitsbadges zu klonen oder gefälschte Badges zu verwenden, um Zugang zu gesicherten Bereichen zu erhalten.",
+        "description": "Versuch, Sicherheitsbadges zu klonen oder gef\u00c3\u00a4lschte Badges zu verwenden, um Zugang zu gesicherten Bereichen zu erhalten.",
         "difficulty": "Schwer"
     },
     {
@@ -241,8 +241,8 @@
     },
     {
         "id": 41,
-        "name": "Gefälschte Umfrage per Brief",
-        "description": "Versenden einer gefälschten Umfrage, die angeblich von einer nationalen Sicherheitsbehörde stammt, um sensible Informationen zu sammeln.",
+        "name": "Gef\u00e4lschte Umfrage per Brief",
+        "description": "Versenden einer gef\u00e4lschten Umfrage, die angeblich von einer nationalen Sicherheitsbeh\u00f6rde stammt, um sensible Informationen zu sammeln.",
         "difficulty": "Schwer"
     }
 ]

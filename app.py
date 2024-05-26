@@ -214,9 +214,10 @@ def edit_exercise(id):
 
 
     
+from datetime import datetime
+
 @socketio.on('start_exercise')
 def perform_exercise(exercise):
-    time.sleep(10)
     print("[PE.01] perform_exercise called")
     socketio.emit('message', {'data': 'Execution started!'})
 
@@ -230,10 +231,6 @@ def perform_exercise(exercise):
 
     print("[PE.03] Loading injects from injects.json")
     injects = load_json('injects.json')
-
-    # Print the exercises and injects for debugging
-    #print(f"[*] Loaded exercises: {exercises}")
-    #print(f"[*] Loaded injects: {injects}")
 
     if not 'inject_order' in exercise:
         print("[*] No inject_order in exercise")
@@ -250,18 +247,19 @@ def perform_exercise(exercise):
             continue
 
         title = inject.get('title', 'No title')
-        print(f"[PE.05] Executing inject {inject_id}: {title}")
-        socketio.emit('message', {'data': f'Inject {inject_id} wird ausgeführt: {title}'})
+        duration = inject.get('duration', 10)  # Default to 10 seconds if duration is not specified
+        print(f"[PE.05] Executing inject {inject_id}: {title} for {duration} seconds")
+        socketio.emit('message', {'data': f'Inject {inject_id} wird ausgeführt: {title} für {duration} Sekunden'})
 
-        print("[PE.06] Waiting for 10 seconds")
-        time.sleep(10)
+        print(f"[PE.06] Waiting for {duration} seconds")
+        time.sleep(duration)
 
     print("[*] Finished executing injects")
 
     # Update the last_performed field with the current date and time
     exercise['last_performed'] = datetime.now().isoformat()
 
-        # Find the exercise in the list of exercises and update it
+    # Find the exercise in the list of exercises and update it
     for i, ex in enumerate(exercises):
         if ex['id'] == exercise['id']:
             exercises[i] = exercise
@@ -273,6 +271,7 @@ def perform_exercise(exercise):
     socketio.emit('message', {'data': 'Scenario updated successfully'})
 
     return True
+
 
 
 

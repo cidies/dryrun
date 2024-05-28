@@ -32,9 +32,18 @@
     th:nth-child(4) {
         width: 15%;
     }
+
+
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
 <script>
+
+
+toastr.options = {
+    "positionClass": "toast-top-right",
+    "preventDuplicates": true
+}
+
 window.onload = function() {
     var socket = io.connect('http://' + document.domain + ':' + location.port);
     console.log('[*] Socket.IO connection established on domain: ' + document.domain + ' and port: ' + location.port);
@@ -43,6 +52,12 @@ window.onload = function() {
         
         // Display the message as a toast notification
         toastr.info(message.data);
+
+    // Update the status if the exercise is finished
+    if (message.data === 'Exercise finished') {
+        document.getElementById('status').textContent = 'Status: Finished';
+    }
+
 
         if (message.data.startsWith('Inject')) {
             var table = document.getElementById('injectTable');
@@ -73,6 +88,7 @@ window.onload = function() {
             } else {
                 console.error('No element with id "injectTable" found');
             }
+
         }
     });
 };
@@ -80,13 +96,14 @@ window.onload = function() {
 </script>
 <h1>{{ exercise.title }}</h1>
 <p>{{ exercise.description }}</p>
-<p>Status: {{ status }}</p>
+<p id="status">Status: {{ status }}</p>
 <input type="hidden" id="exerciseId" value="{{ exercise.id }}">
 <h2>Inject Status</h2>
 <table id="injectTable">
     <tr>
         <th>Inject</th>
         <th>Comment</th>
+        <th>Date and Time</th> <!-- Neue Spalte hinzugefügt -->
     </tr>
     {% for i in range(messages|length) %}
         <tr>
@@ -94,10 +111,10 @@ window.onload = function() {
             <td>
                 <textarea rows="4" cols="50" id="commentInput{{ i }}" placeholder="Enter your comment">{{ comments[i] }}</textarea>
             </td>
+            <td>{{ now().strftime('%Y-%m-%d %H:%M:%S') }}</td> <!-- Aktuelles Datum und Uhrzeit -->
         </tr>
     {% endfor %}
 </table>
-
 
 </body>
 </html>

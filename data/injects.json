@@ -16,6 +16,7 @@
         "exercise_benefit": "\u00dcbt die Identifikation von Netzwerkmanipulationen.",
         "expected_response": "Die Teilnehmer sollten die Netzwerklogs \u00dcberpr\u00dcfen, den Man-in-the-Middle-Angriff identifizieren und geeignete Gegenma\u00c3\u0178nahmen ergreifen.",
         "communication_type": "personally",
+        "duration": 18,
         "assigned_scenarios": [
             "1"
         ]

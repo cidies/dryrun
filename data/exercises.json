@@ -3,12 +3,14 @@
         "id": 1,
         "name": "Ransomware Angriff - Pharma Batchumgebung",
         "status": "Geplant",
-        "description": "",
+        "description": "Ein gezielter Ransomware-Angriff hat die Produktionssysteme der Pharma Batchumgebung lahmgelegt und die Produktionsdaten verschl\u00fcsselt. Die Unterbrechung der Systeme f\u00fchrte zu einem sofortigen Produktionsstopp und gef\u00e4hrdete die termingerechte Lieferung kritischer Medikamente. Die IT-Abteilung arbeitet daran, die Malware zu entfernen und die Systeme mithilfe von Backups wiederherzustellen, w\u00e4hrend gleichzeitig Ma\u00dfnahmen zur Verhinderung zuk\u00fcnftiger Angriffe implementiert werden.",
         "inject_order": [
             1,
-            2,
             3,
-            4
+            28,
+            4,
+            2,
+            29
         ],
         "inject_comment": {
             "2": "Hier auch.",
@@ -18,23 +20,28 @@
             "4": "Hier fehlt noch eine Ende-Meldung."
         },
         "target_team": "",
-        "last_performed": "2024-05-27T00:06:05.311747"
+        "last_performed": "2024-05-28T13:12:06.298780"
     },
     {
         "id": 2,
-        "name": "Phishing Angriff - Anwaltskanzlei",
+        "name": "Phishing Angriff - Anwaltskanzlei K\u00f6ln",
         "inject_order": [
-            1,
-            2,
-            3,
-            4
+            25,
+            26,
+            25,
+            27,
+            4,
+            28,
+            29
         ],
         "status": "L\u00c3\u00a4uft",
         "inject_comment": {
             "1": "JEP",
             "2": "OK"
         },
-        "last_performed": "2024-05-26T23:01:23.577178"
+        "last_performed": "2024-05-28T13:07:31.907333",
+        "description": "Die \u00dcbung soll die Reaktionsf\u00e4higkeit der Anwaltskanzlei auf Phishing-Angriffe testen und verbessern. Es sollen Schwachstellen in den bestehenden Sicherheitsprotokollen identifiziert und behoben sowie die allgemeine Sicherheitsbewusstsein der Mitarbeiter gest\u00e4rkt werden.",
+        "target_team": ""
     },
     {
         "id": 3,

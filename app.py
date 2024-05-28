@@ -109,34 +109,6 @@ def edit_scenario(id):
         return "Failed to load scenario", 500
 
 
-@app.route('/update_scenario/<id>', methods=['POST'])
-def update_scenario(id):
-    # Load the exercises from the JSON file
-    scenarios = load_json('scenarios.json')
-
-    # Find the exercise with the given ID
-    for scenario in scenarios:
-        if scenario['id'] == int(id):
-            # Update the exercise with the form data
-            scenario['name'] = request.form['name']
-            scenario['description'] = request.form['description']
-            scenario['difficulty'] = request.form['difficulty']
-            # Add more lines here to update other exercise properties
-
-            # Save the exercises back to the JSON file
-            save_json('scenarios.json', scenarios)
-
-            # Show a toast message
-            flash('Scenario updated successfully')
-            print('[*] Flashed message:', 'Scenario updated successfully')
-
-            # Return a response
-            return redirect(url_for('scenarios'))
-
-    # If no exercise with the given ID was found, return an error
-    flash('Scenario not found')
-    return redirect(url_for('scenarios'))
-
 
 
 def load_scenario(id):
@@ -156,32 +128,45 @@ def load_scenario(id):
 
 @app.route('/update_exercise/<id>', methods=['POST'])
 def update_exercise(id):
+    logging.info('[UE.1] Updating exercise with ID: %s', id)
+
     # Load the exercises from the JSON file
     exercises = load_json('exercises.json')
+    logging.info('[UE.2] Loaded exercises from JSON file')
 
     # Find the exercise with the given ID
     for exercise in exercises:
         if exercise['id'] == int(id):
+            logging.info('[UE.3] Found exercise with matching ID')
+
             # Update the exercise with the form data
             exercise['name'] = request.form['name']
             exercise['description'] = request.form['description']
             exercise['target_team'] = request.form['target_team']
             exercise['last_performed'] = request.form['last_performed']
-            # Add more lines here to update other exercise properties
+            
+            # Convert the inject_order from a comma-separated string to a list of integers
+            inject_order = request.form['inject_order'].split(',')
+            exercise['inject_order'] = [int(i) for i in inject_order]
+            logging.info('[UE.4] Updated exercise properties')
+
+            # Log the inject_order from the form data
+            logging.info('[UE.5] RAW inject_order from client: %s', request.form['inject_order'])
+            logging.info('[UE.5] inject_order from client: %s', inject_order)
 
             # Save the exercises back to the JSON file
             save_json('exercises.json', exercises)
+            logging.info('[UE.6] Saved exercises to JSON file')
 
             # Show a toast message
             flash('Exercise updated successfully')
-            print('[*] Flashed message:', 'Exercise updated successfully')
+            logging.info('[UE.7] Flashed message: Exercise updated successfully')
 
             # Return a response
             return redirect(url_for('exercises'))
 
-    # If no exercise with the given ID was found, return an error
+    logging.warning('[UE.8] No exercise found with ID: %s', id)
     flash('Exercise not found')
-    #return redirect(url_for('dashboard'))
     return redirect(url_for('exercises'))
 
 
@@ -193,7 +178,7 @@ def schedule_exercise_form():
 @app.route('/exercises')
 def exercises():
     exercises = load_json('exercises.json')  # Load the exercises from the JSON file
-    print(exercises)  # Print the exercises data
+    #print(exercises)  # Print the exercises data
     return render_template('exercises.html', exercises=exercises)  # Pass the exercises to the template
 
 
@@ -253,6 +238,8 @@ def perform_exercise(exercise):
         time.sleep(duration)
 
     print("[*] Finished executing injects")
+    socketio.emit('message', {'data': 'Exercise finished'})
+    
 
     # Update the last_performed field with the current date and time
     exercise['last_performed'] = datetime.now().isoformat()

@@ -355,8 +355,31 @@ def update_comment():
     except Exception as e:
         logging.error(f'[*] Error: {str(e)}')
         return jsonify({'status': 'error', 'message': 'Internal server error'})
+    
 
 
+
+@app.route('/view_inject_comments/<int:exercise_id>', methods=['GET'])
+def view_inject_comments(exercise_id):
+    logging.info(f"[VIC.01] view_inject_comments called with exercise_id: {exercise_id}")
+
+    logging.info("[VIC.02] Loading exercise")
+    exercise = load_exercise(exercise_id)
+
+    # Check if the exercise exists
+    if exercise is None:
+        logging.error("[*] Error: Exercise not found")
+        return render_template('error.html', message="Exercise not found"), 404
+
+    # Check if 'inject_comments' exists in exercise
+    if 'inject_comments' in exercise:
+        print(exercise['inject_comment'])  # Debug output
+    else:
+        logging.error("[*] Error: 'inject_comments' not found in exercise")
+
+    logging.info("[VIC.03] Rendering the inject_comments.html page")
+    # Render the inject_comments.html page
+    return render_template('inject_comments.html', exercise=exercise)
 
 @app.route('/schedule_exercise', methods=['POST'])
 def schedule_exercise():

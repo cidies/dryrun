@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Inject Comments for Exercise {{ exercise.id }}</h1>
+
+{% if exercise.inject_comments %}
+    <ul>
+    {% for comment in exercise.inject_comments %}
+        <li>{{ comment }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No inject comments for this exercise.</p>
+{% endif %}
+
+<a href="{{ url_for('exercises') }}">Back to exercises</a>
+{% endblock %}

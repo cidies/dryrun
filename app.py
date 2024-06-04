@@ -515,9 +515,11 @@ def edit_inject(inject_id):
     #return render_template('edit_inject.html', inject=inject)
     return render_template('edit_inject.html', inject=inject, scenarios=scenarios)
 
+import requests
+import json
+import logging
 
 def textnote(title, description):
-
     # Load the config file
     config_path = 'c:\\temp\\config.json'
     with open(config_path, 'r') as f:
@@ -526,7 +528,7 @@ def textnote(title, description):
     # Define the Slack API URL and headers
     url = "https://slack.com/api/chat.postMessage"
     headers = {
-        "Authorization": {config.get('text_token_keys')},
+        "Authorization": f"Bearer {config.get('text_token_keys')}",
         "Content-type": "application/json"
     }
 
@@ -543,8 +545,6 @@ def textnote(title, description):
         logging.info(f"[textnote] Sent Slack notification with title: {title} and description: {description}")
     except Exception as e:
         logging.error(f"[textnote] Failed to send Slack notification with title: {title} and description: {description}. Error: {e}")
-
-
 
 def email(title, description):
     # Load the config file

@@ -5,12 +5,13 @@
         "status": "Geplant",
         "description": "Ein gezielter Ransomware-Angriff hat die Produktionssysteme der Pharma Batchumgebung lahmgelegt und die Produktionsdaten verschl\u00fcsselt. Die Unterbrechung der Systeme f\u00fchrte zu einem sofortigen Produktionsstopp und gef\u00e4hrdete die termingerechte Lieferung kritischer Medikamente. Die IT-Abteilung arbeitet daran, die Malware zu entfernen und die Systeme mithilfe von Backups wiederherzustellen, w\u00e4hrend gleichzeitig Ma\u00dfnahmen zur Verhinderung zuk\u00fcnftiger Angriffe implementiert werden.",
         "inject_order": [
-            1,
+            7,
             3,
             28,
             4,
             2,
-            29
+            29,
+            1
         ],
         "inject_comment": {
             "2": "Hier auch.",
@@ -20,7 +21,7 @@
             "4": "Hier fehlt noch eine Ende-Meldung."
         },
         "target_team": "",
-        "last_performed": "2024-06-04T13:55:59.864292"
+        "last_performed": ""
     },
     {
         "id": 2,

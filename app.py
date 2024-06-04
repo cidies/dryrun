@@ -25,6 +25,9 @@ from threading import Thread
 import logging
 import smtplib
 from email.mime.text import MIMEText
+import requests
+
+
 
 
 app = Flask(__name__)
@@ -201,61 +204,67 @@ def edit_exercise(id):
         return "Exercise not found", 404
 
     
+
+
 @socketio.on('start_exercise')
 def perform_exercise(exercise):
-    print("[PE.01] perform_exercise called")
+    logging.info("[PE.01] perform_exercise called")
     socketio.emit('message', {'data': 'Execution started!'})
 
     if exercise is None:
-        print("[*] Error: exercise cannot be None")
+        logging.error("[*] Error: exercise cannot be None")
         socketio.emit('message', {'data': 'Error: exercise not found'})
         return False
 
-    print("[PE.02] Loading exercises from exercises.json")
+    logging.info("[PE.02] Loading exercises from exercises.json")
     exercises = load_json('exercises.json')
 
-    print("[PE.03] Loading injects from injects.json")
+    logging.info("[PE.03] Loading injects from injects.json")
     injects = load_json('injects.json')
 
-
     if not 'inject_order' in exercise:
-        print("[*] No inject_order in exercise")
+        logging.error("[*] No inject_order in exercise")
         socketio.emit('message', {'data': 'Error: No inject_order in exercise'})
         return False
 
-    print("[PE.04] Running through injects in the order specified in the exercise")
+    logging.info("[PE.04] Running through injects in the order specified in the exercise")
     for inject_id in exercise['inject_order']:
-        print(f"[PE.05] Looking for inject with ID {inject_id}")
+        logging.info(f"[PE.05] Looking for inject with ID {inject_id}")
         inject = next((inject for inject in injects if inject['id'] == inject_id), None)
 
         if inject is None:
-            print(f"[*] No inject found with ID {inject_id}")
+            logging.error(f"[*] No inject found with ID {inject_id}")
             continue
 
         title = inject.get('title', 'No title')
         duration = inject.get('duration', 10)  # Default to 10 seconds if duration is not specified
-        print(f"[PE.05] Executing inject {inject_id}: {title} for {duration} seconds")
-        socketio.emit('message', {'data': f'Inject {inject_id} wird ausgeführt: {title} für {duration} Sekunden'})
-
-
         # Get the communication_type
         communication_type = inject.get('communication_type')
+        # Get the assigned scenarios
+        # Pause for 5 seconds
+        
+        
+        for i in range(5, 0, -1):
+            socketio.emit('message', {'data': f'Countdown: {i}'})
+            time.sleep(1)
+        
+        logging.info(f"[PE.05] Executing inject {inject_id}: {title} for {duration} seconds")
+        socketio.emit('message', {'data': f'Inject {inject_id} wird ausgeführt: {title} für {duration} Sekunden per {communication_type}'})
 
+        
         # Check if communication_type is not None
         if communication_type:
             # Call the appropriate function based on the communication_type
             if communication_type == 'text':
-                textnote(inject.get('title', 'No title'), inject.get('description', 'No description'))
+                textnote(f"[{exercise.get('name', 'No title')}] {inject.get('title', 'No title')}", inject.get('nachrichtentext', 'No description'))
             elif communication_type == 'email':
-                email(inject.get('title', 'No title'), inject.get('description', 'No description'))
+                email(f"[{exercise.get('name', 'No title')}] {inject.get('title', 'No title')}", inject.get('nachrichtentext', 'No description'))
 
-
-        print(f"[PE.06] Waiting for {duration} seconds")
+        logging.info(f"[PE.06] Waiting for {duration} seconds")
         time.sleep(duration)
 
-    print("[*] Finished executing injects")
+    logging.info("[*] Finished executing injects")
     socketio.emit('message', {'data': 'Exercise finished'})
-    
 
     # Update the last_performed field with the current date and time
     exercise['last_performed'] = datetime.now().isoformat()
@@ -485,6 +494,7 @@ def edit_inject(inject_id):
                 
         # Debugging-Ausgabe
         print("Received data:", data)
+        logging.info(f"Nachrichtentext as received from client: {data.get('nachrichtentext')}")
         
         # Aktualisieren Sie das Inject mit den neuen Daten aus dem Webformular
         updated_inject = {
@@ -494,7 +504,9 @@ def edit_inject(inject_id):
             'exercise_benefit': data.get('exercise_benefit', inject['exercise_benefit']),
             'expected_response': data.get('expected_response', inject['expected_response']),
             'communication_type': data.get('communication_type', inject['communication_type']),
-            'assigned_scenarios': data.get('assigned_scenarios', inject['assigned_scenarios'])
+            'duration': data.get('duration', inject['duration']),
+            'nachrichtentext': data.get('nachrichtentext', inject['nachrichtentext'])
+  
         }
         
         # Suchen Sie das Inject mit der entsprechenden ID und aktualisieren Sie es
@@ -509,21 +521,26 @@ def edit_inject(inject_id):
         save_json('injects.json', injects)
         
         # Debugging-Ausgabe
-        print("[*] Updated inject:", updated_inject)
+        # print("[*] Updated inject:", updated_inject)
+        logging.info(f"Nachrichtentext as packed into dictionary for JSON: {updated_inject['nachrichtentext']}")
 
     # Rendern Sie die Bearbeitungsseite mit dem Inject als Kontext
-    #return render_template('edit_inject.html', inject=inject)
     return render_template('edit_inject.html', inject=inject, scenarios=scenarios)
 
-import requests
-import json
-import logging
+
 
 def textnote(title, description):
     # Load the config file
     config_path = 'c:\\temp\\config.json'
-    with open(config_path, 'r') as f:
-        config = json.load(f)
+    try:
+        with open(config_path, 'r') as f:
+            config = json.load(f)
+    except FileNotFoundError:
+        logging.error(f"[textnote] Config file not found at {config_path}")
+        return
+    except json.JSONDecodeError:
+        logging.error(f"[textnote] Failed to parse JSON from config file at {config_path}")
+        return
 
     # Define the Slack API URL and headers
     url = "https://slack.com/api/chat.postMessage"
@@ -531,7 +548,7 @@ def textnote(title, description):
         "Authorization": f"Bearer {config.get('text_token_keys')}",
         "Content-type": "application/json"
     }
-
+    print(f"[**********] Bearer {config.get('text_token_keys')}")
     # Define the data to send
     data = {
         "channel": "alerts",
@@ -543,8 +560,11 @@ def textnote(title, description):
         response = requests.post(url, headers=headers, data=json.dumps(data))
         response.raise_for_status()
         logging.info(f"[textnote] Sent Slack notification with title: {title} and description: {description}")
+    except requests.exceptions.RequestException as e:
+        logging.error(f"[textnote] Failed to send Slack notification. RequestException: {e}")
     except Exception as e:
         logging.error(f"[textnote] Failed to send Slack notification with title: {title} and description: {description}. Error: {e}")
+
 
 def email(title, description):
     # Load the config file

@@ -6,7 +6,7 @@ import os
 socketio = SocketIO()
 
 def create_app():
-    app = Flask(__name__)
+    app = Flask(__name__, template_folder='../templates')
     app.secret_key = os.environ.get('SECRET_KEY', 'default-secret-key')
     toastr = Toastr(app)
 

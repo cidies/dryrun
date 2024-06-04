@@ -2,6 +2,14 @@
 
 {% block content %}
 <form method="POST">
+<h2>E-Mails</h2>
+<details>
+    <label for="leading_email_platform">Leading EMail Platform:</label><br>
+    <select id="leading_email_platform" name="leading_email_platform">
+        {% for platform in config['list_of_email_platforms'] %}
+            <option value="{{ platform }}" {% if config['leading_email_platform'] == platform %} selected {% endif %}>{{ platform }}</option>
+        {% endfor %}
+    </select><br>
     <label for="email_server">Email Server:</label><br>
     <input type="text" id="email_server" name="email_server" value="{{ config['email_server'] }}"><br>
     
@@ -19,7 +27,19 @@
     
     <label for="email_password">Email Password:</label><br>
     <input type="password" id="email_password" name="email_password" value="{{ config['email_password'] }}"><br>
-    
+
+
+</details>    
+<hr>
+<h2>Texting</h2>
+<details>
+    <label for="leading_text_platform">Leading Text Platform:</label><br>
+    <select id="leading_text_platform" name="leading_text_platform">
+        {% for platform in config['list_of_texting_platforms'] %}
+            <option value="{{ platform }}" {% if config['leading_text_platform'] == platform %} selected {% endif %}>{{ platform }}</option>
+        {% endfor %}
+    </select><br>
+
     <label for="text_platform">Text Platform:</label><br>
     <input type="text" id="text_platform" name="text_platform" value="{{ config['text_platform'] }}"><br>
     
@@ -34,10 +54,12 @@
     
     <label for="text_to">Text To:</label><br>
     <input type="text" id="text_to" name="text_to" value="{{ config['text_to'] }}"><br>
-    
-    <label for="screen_notify">Screen Notify:</label><br>
-    <input type="checkbox" id="screen_notify" name="screen_notify" value="true" {% if config['screen_notify'] %} checked {% endif %}><br>
-    
+</details>    
+<hr>
+<label for="screen_notify">Screen Notification:</label><input type="checkbox" id="screen_notify" name="screen_notify" value="true" {% if config['screen_notify'] %} checked {% endif %}><br>
+
+
     <input type="submit" value="Submit">
 </form>
+
 {% endblock %}

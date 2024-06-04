@@ -65,7 +65,7 @@
         "description": "Das Sicherheitssystem meldet eine hohe Anzahl fehlgeschlagener Anmeldeversuche.",
         "exercise_benefit": "\u00dcbt die Erkennung und Reaktion auf Brute-Force-Angriffe.",
         "expected_response": "Die Teilnehmer sollten die IP-Adressen blockieren, von denen die Angriffe ausgehen, und die betroffenen Konten \u00dcberwachen.",
-        "communication_type": "email",
+        "communication_type": "text",
         "duration": 10,
         "nachrichtentext": "[SYSTEMMELDUNG]\n\nALERT: Eine hohe Anzahl fehlgeschlagener Anmeldeversuche wurde registriert.\n\nDetails:\n\nDatum/Zeit: 2024-06-04 14:35:27\nBetroffene Benutzerkonten: user123, user456, admin01\nAnzahl fehlgeschlagener Versuche: 150\nUrsprungs-IP-Adressen: 192.168.1.10, 192.168.1.15, 203.0.113.5\nLogauszug:\n\nyaml\nCode kopieren\n2024-06-04 14:30:12 - LOGIN FAILED - user123 - 192.168.1.10\n2024-06-04 14:30:25 - LOGIN FAILED - user456 - 192.168.1.15\n2024-06-04 14:30:35 - LOGIN FAILED - admin01 - 203.0.113.5\n2024-06-04 14:31:05 - LOGIN FAILED - user123 - 192.168.1.10\n2024-06-04 14:31:15 - LOGIN FAILED - user456 - 192.168.1.15\n...\nEmpfohlene Ma\u00dfnahmen:\n\n\u00dcberpr\u00fcfen Sie die betroffenen Konten auf verd\u00e4chtige Aktivit\u00e4ten.\nSetzen Sie bei Bedarf Sicherheitsrichtlinien durch, wie z.B. Passwort-Resets.\n\u00dcberwachen Sie weiterhin die Anmeldeversuche und passen Sie die Sicherheitsma\u00dfnahmen entsprechend an.\nDiese Meldung wurde automatisch vom Sicherheitssystem generiert.\n\n[Sicherheitssystem]"
     },

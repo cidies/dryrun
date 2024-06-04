@@ -1,16 +1,4 @@
 # Noch zu tun:
-# Siehe github issues
-
-# Die Injects können über verschiedene Wege kommuniziert werden.
-# Im Moment nur auf der executed_exercise.html Seite
-# Ich muss das noch implementieren, dass die Injects auch
-# über Email, SMS oder Telefon kommuniziert werden können
-# Dazu brauche ich dann auch die entsprechenden Felder
-# in den Injekten und auch die Funktionen, die die Kommunikation
-# durchführen
-
-
-
 
 from flask import Flask, render_template, request, jsonify, redirect, url_for, session
 from threading import Timer
@@ -27,6 +15,7 @@ import smtplib
 from email.mime.text import MIMEText
 import requests
 
+from twilio.rest import Client
 
 
 
@@ -257,8 +246,11 @@ def perform_exercise(exercise):
             # Call the appropriate function based on the communication_type
             if communication_type == 'text':
                 textnote(f"[{exercise.get('name', 'No title')}] {inject.get('title', 'No title')}", inject.get('nachrichtentext', 'No description'))
+                #whatsapp_notification()
+
             elif communication_type == 'email':
                 email(f"[{exercise.get('name', 'No title')}] {inject.get('title', 'No title')}", inject.get('nachrichtentext', 'No description'))
+                #make_call_route()
 
         logging.info(f"[PE.06] Waiting for {duration} seconds")
         time.sleep(duration)
@@ -555,6 +547,39 @@ def textnote(title, description):
         "text": f"{title}: {description}"
     }
 
+def threema_message(title, description):
+    # Load the config file
+    config_path = 'c:\\temp\\config.json'
+    try:
+        with open(config_path, 'r') as f:
+            config = json.load(f)
+    except FileNotFoundError:
+        logging.error(f"[threema_message] Config file not found at {config_path}")
+        return
+    except json.JSONDecodeError:
+        logging.error(f"[threema_message] Failed to parse JSON from config file at {config_path}")
+        return
+
+    # Define the Threema Gateway API URL and headers
+    url = "https://msgapi.threema.ch/send_simple"
+    headers = {
+        "Content-type": "application/json"
+    }
+
+    # Define the data to send
+    data = {
+        "from": config.get('threema_from'),
+        "to": config.get('threema_to'),
+        "text": f"{title}: {description}"
+    }
+
+    # Send the request
+    response = requests.post(url, headers=headers, data=json.dumps(data), auth=(config.get('threema_api_identity'), config.get('threema_api_secret')))
+
+    # Check the response
+    if response.status_code != 200:
+        logging.error(f"[threema_message] Failed to send message: {response.content}") 
+
     # Send the request
     try:
         response = requests.post(url, headers=headers, data=json.dumps(data))
@@ -601,6 +626,82 @@ def email(title, description):
         logging.info(f"[emailnote] Sent email notification with title: {title} and description: {description}")
     except Exception as e:
         logging.error(f"[emailnote] Failed to send email notification with title: {title} and description: {description}. Error: {e}")
+
+
+
+def gmail(title, description):
+    # Load the config file
+    config_path = 'c:\\temp\\config.json'
+    with open(config_path, 'r') as f:
+        config = json.load(f)
+
+    # Define the SMTP server parameters
+    server = 'smtp.gmail.com'  # Google Mail SMTP server address
+    port = 587  # Google Mail SMTP server port
+    username = config.get('email_user')
+    password = config.get('email_password')
+
+    # Define the email parameters
+    sender = config.get('email_from')
+    receiver = config.get('email_to')
+    subject = title
+    body = description
+
+    # Create the email
+    msg = MIMEText(body)
+    msg['Subject'] = subject
+    msg['From'] = sender
+    msg['To'] = receiver
+
+    # Send the email
+    try:
+        smtp_server = smtplib.SMTP(server, port)
+        smtp_server.ehlo()
+        smtp_server.starttls()  # Call this before login
+        smtp_server.login(username, password)
+        smtp_server.sendmail(sender, receiver, msg.as_string())
+        smtp_server.close()
+        logging.info(f"[emailnote] Sent email notification with title: {title} and description: {description}")
+    except Exception as e:
+        logging.error(f"[emailnote] Failed to send email notification with title: {title} and description: {description}. Error: {e}")
+
+
+def make_call_route():
+    # Load the config file
+    config_path = 'c:\\temp\\config.json'
+    with open(config_path, 'r') as f:
+        config = json.load(f)
+
+    account_sid = config.get('twilio_account_sid')
+    auth_token = config.get('twilio_auth_token')
+    client = Client(account_sid, auth_token)
+
+    call = client.calls.create(
+        twiml='<Response><Say>Ahoy, World!</Say></Response>',
+        to=config.get('twilio_to'),
+        from_=config.get('twilio_from')
+                    )
+
+    print(call.sid)
+
+
+def whatsapp_notification(title, description):
+        # Load the config file
+    config_path = 'c:\\temp\\config.json'
+    with open(config_path, 'r') as f:
+        config = json.load(f)
+
+    account_sid = config.get('twilio_account_sid')
+    auth_token = config.get('twilio_auth_token')
+    client = Client(account_sid, auth_token)
+
+    message = client.messages.create(
+    from_='whatsapp:+14155238886',
+    body='{title}: {description}',
+    #to='whatsapp:+491726719759'
+    to='whatsapp:+491743039038'
+)
+
 
 
 @app.route('/save_exercise_order', methods=['POST'])
@@ -662,23 +763,27 @@ def api_injects():
 
 
 
+
 @app.route('/edit_config', methods=['GET', 'POST'])
 def edit_config():
     config_path = 'c:\\temp\\config.json'
     if request.method == 'POST':
-        # Update the config file with the form data
+        # Load the current config data
+        with open(config_path, 'r') as f:
+            config = json.load(f)
+        # Update the config data with the form data
+        form_data = request.form.to_dict()
+        config.update(form_data)
+        # Write the updated config data back to the file
         with open(config_path, 'w') as f:
-            json.dump(request.form.to_dict(), f)
-        return 'Config updated successfully!'
+            json.dump(config, f)
+        # Redirect back to the config page
+        return redirect(url_for('edit_config'))
     else:
         # Render the form with the current config data
         with open(config_path, 'r') as f:
             config = json.load(f)
         return render_template('config_form.html', config=config)
-
-
-
-
 
 if __name__ == '__main__':
     #app.run(debug=True, port=5010)

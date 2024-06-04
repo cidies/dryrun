@@ -1,33 +1,41 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{% with messages = get_flashed_messages() %}
-  {% if messages %}
-    <div class="flashes">
-      {% for message in messages %}
-        <div class="toast">
-          {{ message }}
-        </div>
-      {% endfor %}
-    </div>
-  {% endif %}
-{% endwith %}
+
+<style>
+    .exercise-container {
+        width: 100%;
+    }
+    .exercise {
+        padding: 8px;
+    }
+    .exercise:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+    .exercise:nth-child(odd) {
+        background-color: #ddd;
+    }
+</style>
 
 <h2>Dashboard</h2>
-<div class="notifications">
-    <h3>Benachrichtigungen</h3>
-    <ul>
-        {% for notification in notifications %}
-            <li>{{ notification }}</li>
-        {% endfor %}
-    </ul>
+<div class="exercise-container">
+  <h3>Aktuelle Übungen</h3>
+  {% for exercise in exercises %}
+    <div class="exercise">
+      <strong>Name:</strong> {{ exercise.name }}<br>
+      <strong>Status:</strong> {{ exercise.status }}<br>
+      <strong>Beschreibung:</strong> {{ exercise.description }}<br>
+      <strong>Letzte Durchführung:</strong> {{ exercise.last_performed }}<br>
+      {% if exercise.inject_comment %}
+        <strong>Kommentare:</strong>
+        <ul>
+          {% for key, value in exercise.inject_comment.items() %}
+            <li><strong>{{ key }}:</strong> {{ value }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+  {% endfor %}
 </div>
-<div class="exercises">
-    <h3>Aktuelle Übungen</h3>
-    <ul>
-        {% for exercise in exercises %}
-            <li>{{ exercise.name }} - Status: {{ exercise.status }}</li>
-        {% endfor %}
-    </ul>
-</div>
+
 {% endblock %}

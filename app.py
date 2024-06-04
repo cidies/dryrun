@@ -137,7 +137,8 @@ def update_exercise(id):
             exercise['name'] = request.form['name']
             exercise['description'] = request.form['description']
             exercise['target_team'] = request.form['target_team']
-            exercise['last_performed'] = request.form['last_performed']
+            #exercise['last_performed'] = request.form['last_performed']
+            exercise['planned'] = request.form['planned']
             
             # Convert the inject_order from a comma-separated string to a list of integers
             inject_order = request.form['inject_order'].split(',')

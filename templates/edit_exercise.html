@@ -37,16 +37,20 @@
 
 <body>
     <h1>Edit Exercise</h1>
-    <form id="editExerciseForm" method="post" action="{{ url_for('update_exercise', id=exercise.id) }}">
+    <div style="width: 50%; margin: 0 auto;"> <!-- Container hinzugefügt -->
+        <form id="editExerciseForm" method="post" action="{{ url_for('update_exercise', id=exercise.id) }}">
         <label for="name">Exercise Name:</label><br>
         <input type="text" id="name" name="name" value="{{ exercise.name }}"><br>
         <label for="description">Description:</label><br>
         <textarea id="description" name="description">{{ exercise.description }}</textarea><br>
         <label for="target_team">Target Team:</label><br>
         <input type="text" id="target_team" name="target_team" value="{{ exercise.target_team }}"><br>
+        <!-- ... -->
         <label for="last_performed">Last Performed:</label><br>
-        <input type="date" id="last_performed" name="last_performed" value="{{ exercise.last_performed }}"><br>
-        <label for="id">Inject Index:</label><br>
+        <p id="last_performed">{{ exercise.last_performed }}</p><br>
+        <label for="planned">Planned Date:</label><br>
+        <input type="datetime-local" id="planned" name="planned" value="{{ exercise.planned }}"><br><br>
+        <label for="id">Inject Index:</label>
         <input type="text" id="id" name="id" value="{{ exercise.id }}" readonly><br>
         <!-- Add more fields here for other exercise properties -->
 
@@ -88,6 +92,7 @@
         <input type="hidden" id="inject_order" name="inject_order" value="">
         <input type="submit" value="Submit">
     </form>
+  </div> <!-- Container geschlossen -->
 
     <script>
         function addSelectedInjects() {

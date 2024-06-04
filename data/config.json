@@ -1,0 +1,16 @@
+[
+    {
+        "email_server": "www4.zentric.com",
+        "email_from": "cds@zentric.com",
+        "email_to": "cds@zentric.com",
+        "email_subject": "[IR DRYRUN]",
+        "email_user": "cds",
+        "email_password": "AJAKJAKAJ",
+        "text_platform": "threema",
+        "text_token_keys": "AJAKJAKAJ",
+        "text_token_secret": "AJAKJAKAJ",
+        "text_from": "AJAKJAKAJ",
+        "text_to": "AJAKJAKAJ",
+        "screen_notify": true
+    }
+]

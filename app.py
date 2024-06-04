@@ -23,6 +23,8 @@ from datetime import datetime
 from flask_socketio import SocketIO
 from threading import Thread
 import logging
+import smtplib
+from email.mime.text import MIMEText
 
 
 app = Flask(__name__)
@@ -215,6 +217,7 @@ def perform_exercise(exercise):
     print("[PE.03] Loading injects from injects.json")
     injects = load_json('injects.json')
 
+
     if not 'inject_order' in exercise:
         print("[*] No inject_order in exercise")
         socketio.emit('message', {'data': 'Error: No inject_order in exercise'})
@@ -233,6 +236,19 @@ def perform_exercise(exercise):
         duration = inject.get('duration', 10)  # Default to 10 seconds if duration is not specified
         print(f"[PE.05] Executing inject {inject_id}: {title} for {duration} seconds")
         socketio.emit('message', {'data': f'Inject {inject_id} wird ausgeführt: {title} für {duration} Sekunden'})
+
+
+        # Get the communication_type
+        communication_type = inject.get('communication_type')
+
+        # Check if communication_type is not None
+        if communication_type:
+            # Call the appropriate function based on the communication_type
+            if communication_type == 'text':
+                textnote(inject.get('title', 'No title'), inject.get('description', 'No description'))
+            elif communication_type == 'email':
+                email(inject.get('title', 'No title'), inject.get('description', 'No description'))
+
 
         print(f"[PE.06] Waiting for {duration} seconds")
         time.sleep(duration)
@@ -258,8 +274,6 @@ def perform_exercise(exercise):
     return True
 
 
-
-
 @app.route('/execute_exercise/<int:exercise_id>', methods=['POST'])
 def execute_exercise(exercise_id):
     logging.info(f"[EE.01] execute_exercise called with exercise_id: {exercise_id}")
@@ -272,7 +286,7 @@ def execute_exercise(exercise_id):
         logging.error("[*] Error: Exercise not found")
         return render_template('error.html', message="Exercise not found"), 404
 
-    
+
     logging.info("[EE.03] Starting a new thread to perform the exercise")
     # Perform the exercise in a separate thread
     thread = Thread(target=perform_exercise, args=(exercise,))
@@ -281,7 +295,6 @@ def execute_exercise(exercise_id):
     logging.info("[EE.04] Rendering the executed_exercise.html page")
     # Render the executed_exercise.html page immediately
     return render_template('executed_exercise.html', exercise=exercise, status="Exercise is being executed")
-
 
 
 @app.route('/update_comment', methods=['POST'])
@@ -501,8 +514,73 @@ def edit_inject(inject_id):
     # Rendern Sie die Bearbeitungsseite mit dem Inject als Kontext
     #return render_template('edit_inject.html', inject=inject)
     return render_template('edit_inject.html', inject=inject, scenarios=scenarios)
-    
 
+
+def textnote(title, description):
+
+    # Load the config file
+    config_path = 'c:\\temp\\config.json'
+    with open(config_path, 'r') as f:
+        config = json.load(f)
+
+    # Define the Slack API URL and headers
+    url = "https://slack.com/api/chat.postMessage"
+    headers = {
+        "Authorization": {config.get('text_token_keys')},
+        "Content-type": "application/json"
+    }
+
+    # Define the data to send
+    data = {
+        "channel": "alerts",
+        "text": f"{title}: {description}"
+    }
+
+    # Send the request
+    try:
+        response = requests.post(url, headers=headers, data=json.dumps(data))
+        response.raise_for_status()
+        logging.info(f"[textnote] Sent Slack notification with title: {title} and description: {description}")
+    except Exception as e:
+        logging.error(f"[textnote] Failed to send Slack notification with title: {title} and description: {description}. Error: {e}")
+
+
+
+def email(title, description):
+    # Load the config file
+    config_path = 'c:\\temp\\config.json'
+    with open(config_path, 'r') as f:
+        config = json.load(f)
+
+    # Define the SMTP server parameters
+    server = config.get('email_server')
+    port = 25  # Change this to 25
+    username = config.get('email_user')
+    password = config.get('email_password')
+
+    # Define the email parameters
+    sender = config.get('email_from')
+    receiver = config.get('email_to')
+    subject = title
+    body = description
+
+    # Create the email
+    msg = MIMEText(body)
+    msg['Subject'] = subject
+    msg['From'] = sender
+    msg['To'] = receiver
+
+    # Send the email
+    try:
+        smtp_server = smtplib.SMTP(server, port)
+        smtp_server.ehlo()
+        smtp_server.starttls()  # Call this before login
+        smtp_server.login(username, password)
+        smtp_server.sendmail(sender, receiver, msg.as_string())
+        smtp_server.close()
+        logging.info(f"[emailnote] Sent email notification with title: {title} and description: {description}")
+    except Exception as e:
+        logging.error(f"[emailnote] Failed to send email notification with title: {title} and description: {description}. Error: {e}")
 
 
 @app.route('/save_exercise_order', methods=['POST'])
@@ -514,6 +592,8 @@ def save_exercise_order():
         exercise['inject_order'] = data['order']
         save_json('exercises.json', exercises)
     return jsonify({"status": "success"}), 200
+
+#### A P I ####
 
 @app.route('/api/notifications', methods=['GET', 'POST'])
 def api_notifications():
@@ -559,6 +639,25 @@ def api_injects():
         data = request.json
         save_json('injects.json', data)
         return jsonify({"status": "success"}), 200
+
+
+
+@app.route('/edit_config', methods=['GET', 'POST'])
+def edit_config():
+    config_path = 'c:\\temp\\config.json'
+    if request.method == 'POST':
+        # Update the config file with the form data
+        with open(config_path, 'w') as f:
+            json.dump(request.form.to_dict(), f)
+        return 'Config updated successfully!'
+    else:
+        # Render the form with the current config data
+        with open(config_path, 'r') as f:
+            config = json.load(f)
+        return render_template('config_form.html', config=config)
+
+
+
 
 
 if __name__ == '__main__':

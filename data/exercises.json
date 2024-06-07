@@ -184,5 +184,26 @@
         "inject_comment": {
             "4": "Hiernach hat d"
         }
+    },
+    {
+        "name": "CSL Batch Perfomance Down",
+        "description": "ww",
+        "target_team": "ww",
+        "planned": "2024-06-28T12:01",
+        "id": 11,
+        "type": "WAS",
+        "interval": "",
+        "inject_order": "1,2,4,5,6,7",
+        "last_performed": "2024-06-07T12:02:53.822700"
+    },
+    {
+        "name": "BBBB",
+        "description": "sdfsdfs",
+        "target_team": "sdsdf",
+        "planned": "",
+        "id": 12,
+        "type": "sdfs",
+        "interval": "",
+        "inject_order": "5,6"
     }
-]]
+]

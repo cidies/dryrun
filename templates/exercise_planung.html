@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Schedule Exercise</title>
+    <title>Create Exercise</title>
     <style>
         .inject-list {
             list-style-type: none;
@@ -25,38 +25,71 @@
         .inject-item label {
             margin-left: 5px;
         }
+        .injects-container {
+           display: flex;
+           justify-content: space-between;
+        }
+        #availableInjects {
+            font-size: 0.8em; /* Oder jede andere Größe, die Sie bevorzugen */
+        }
+        .float-message {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px;
+    background-color: #0f0;
+    color: #000;
+    border-radius: 5px;
+    z-index: 1000;
+}
     </style>
 </head>
 <body>
-    <h1>Schedule Exercise</h1>
-    <form id="scheduleExerciseForm" method="post">
-        <label for="name">Exercise Name:</label>
-        <input type="text" id="name" name="name" required><br>
-
-        <label for="type">Type:</label>
-        <select id="type" name="type">
-            <option value="timed">Timed</option>
-            <!-- Add other types if needed -->
-        </select><br>
-
-        <label for="injects">Select Injects:</label>
-        <div id="availableInjects">
-            {% for inject in injects %}
-            <div class="inject-item">
-                <input type="checkbox" id="inject_{{ inject.id }}" name="injects" value="{{ inject.id }}">
-                <label for="inject_{{ inject.id }}">{{ inject.title }}</label>
+    <h1>Create Exercise</h1>
+    <div style="width: 50%; margin: 0 auto;">
+        <form id="createExerciseForm">
+            <label for="name">Exercise Name:</label><br>
+            <input type="text" id="name" name="name" required><br>
+            <label for="description">Description:</label><br>
+            <textarea id="description" name="description" required></textarea><br>
+            <label for="target_team">Target Team:</label><br>
+            <input type="text" id="target_team" name="target_team" required><br>
+            <label for="last_performed">Last Performed:</label><br>
+            <br>
+            <label for="planned">Planned Date:</label><br>
+            <input type="datetime-local" id="planned" name="planned" required><br><br>
+            <label for="id">Inject Index:</label>
+            <input type="text" id="id" name="id" readonly><br>
+            <label for="type">Exercise Type:</label><br>
+            <input type="text" id="type" name="type" required><br>
+            <div class="injects-container">
+                <div>
+                    <label for="injects">Select Injects:</label>
+                    <div id="availableInjects">
+                        {% if injects %}
+                            {% for inject in injects %}
+                                <div class="inject-item">
+                                    <input type="checkbox" id="inject_{{ inject.id }}" name="injects" value="{{ inject.id }}">
+                                    <label for="inject_{{ inject.id }}">{{ inject.title }}</label>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <p>No injects available</p>
+                        {% endif %}
+                    </div>
+                    <button type="button" onclick="addSelectedInjects()">Add Selected Injects</button><br><br>
+                </div>
+                <div>
+                    <label for="selectedInjects">Selected Injects (drag to reorder):</label>
+                    <ul id="injectList" class="inject-list"></ul>
+                    <label for="interval">Interval (minutes):</label>
+                    <input type="number" id="interval" name="interval" required><br>
+                </div>
             </div>
-        {% endfor %}        </div>
-        <button type="button" onclick="addSelectedInjects()">Add Selected Injects</button><br><br>
-
-        <label for="selectedInjects">Selected Injects (drag to reorder):</label>
-        <ul id="injectList" class="inject-list"></ul>
-        
-        <label for="interval">Interval (minutes):</label>
-        <input type="number" id="interval" name="interval" required><br>
-
-        <button type="button" onclick="submitForm()">Schedule Exercise</button>
-    </form>
+            <input type="hidden" id="inject_order" name="inject_order" value="">
+            <button type="button" onclick="submitExercise()">Submit</button>
+        </form>
+    </div>
 
     <script>
         function addSelectedInjects() {
@@ -82,8 +115,10 @@
             addDragAndDropHandlers();
         }
 
+        let items = null;
+
         function addDragAndDropHandlers() {
-            let items = document.querySelectorAll('.inject-list li');
+            items = document.querySelectorAll('.inject-list li');
             items.forEach(function(item) {
                 item.addEventListener('dragstart', handleDragStart, false);
                 item.addEventListener('dragenter', handleDragEnter, false);
@@ -122,6 +157,15 @@
             this.classList.remove('over');
         }
 
+        function updateInjectOrder() {
+            const injectOrder = [];
+            document.querySelectorAll('#injectList li').forEach(function(item) {
+                injectOrder.push(item.getAttribute('data-id').toString());
+            });
+            
+            document.getElementById('inject_order').value = injectOrder.join(',');
+        }
+
         function handleDrop(e) {
             if (e.stopPropagation) {
                 e.stopPropagation(); // Stops some browsers from redirecting.
@@ -129,51 +173,100 @@
 
             // Don't do anything if dropping the same column we're dragging.
             if (dragSrcEl != this) {
+                // Swap the innerHTML and data-id of the source and target elements
+                let tempInnerHTML = dragSrcEl.innerHTML;
+                let tempDataId = dragSrcEl.getAttribute('data-id');
+
                 dragSrcEl.innerHTML = this.innerHTML;
-                this.innerHTML = e.dataTransfer.getData('text/html');
+                dragSrcEl.setAttribute('data-id', this.getAttribute('data-id'));
+
+                this.innerHTML = tempInnerHTML;
+                this.setAttribute('data-id', tempDataId);
             }
+
+            updateInjectOrder();
 
             return false;
         }
 
         function handleDragEnd(e) {
             this.style.opacity = '1';
-
             items.forEach(function (item) {
                 item.classList.remove('over');
             });
         }
 
-        function submitForm() {
-            const form = document.getElementById('scheduleExerciseForm');
+        function submitExercise() {
+            updateInjectOrder();
+
+            const form = document.getElementById('createExerciseForm');
             const formData = new FormData(form);
-            const data = {};
-            formData.forEach((value, key) => { data[key] = value });
+            const jsonData = {};
 
-            const injectOrder = [];
-            document.querySelectorAll('#injectList li').forEach(function (item) {
-                injectOrder.push(item.getAttribute('data-id'));
+            formData.forEach((value, key) => {
+                if (key === 'injects') {
+                    if (!jsonData[key]) {
+                        jsonData[key] = [];
+                    }
+                    jsonData[key].push(value);
+                } else {
+                    jsonData[key] = value;
+                }
             });
-            data['inject_order'] = injectOrder.map(Number);
 
-            fetch('/schedule_exercise', {
+            fetch('{{ url_for("schedule_exercise") }}', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(data),
+                body: JSON.stringify(jsonData)
             })
             .then(response => response.json())
             .then(data => {
-                console.log('Success:', data);
-                alert('Exercise scheduled successfully!');
+                console.log(data);
+                if (data.status === 'scheduled') {
+                    showFloatMessage(`Exercise scheduled successfully with ID: ${data.id}`);
+                } else {
+                    alert(`Failed to schedule exercise: ${data.message}`);
+                }
             })
-            .catch((error) => {
+            .catch(error => {
                 console.error('Error:', error);
             });
         }
 
-        document.addEventListener('DOMContentLoaded', addDragAndDropHandlers);
+        document.addEventListener('DOMContentLoaded', function() {
+            addDragAndDropHandlers();
+
+            const form = document.getElementById('createExerciseForm');
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                submitExercise();
+            });
+        });
+
+
+        function showFloatMessage(message) {
+            // Erstellen Sie ein neues div-Element
+            const floatMessage = document.createElement('div');
+        
+            // Fügen Sie eine Klasse hinzu, um das div zu stylen
+            floatMessage.className = 'float-message';
+        
+            // Fügen Sie die Nachricht in das div ein
+            floatMessage.textContent = message;
+        
+            // Fügen Sie das div zum Body hinzu
+            document.body.appendChild(floatMessage);
+        
+            // Entfernen Sie das div nach 3 Sekunden
+            setTimeout(() => {
+                document.body.removeChild(floatMessage);
+            }, 3000);
+        }
+        
+        // Verwenden Sie die Funktion anstelle von alert
+        showFloatMessage(`Exercise scheduled successfully with ID: ${data.id}`);
     </script>
 </body>
 </html>

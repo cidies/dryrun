@@ -14,7 +14,6 @@ import logging
 import smtplib
 from email.mime.text import MIMEText
 import requests
-
 from twilio.rest import Client
 
 
@@ -43,7 +42,10 @@ def dashboard():
     exercises = load_json('exercises.json')
     return render_template('dashboard.html', notifications=notifications, exercises=exercises)
 
+###############################
 ### C O M U N I C A T I O N ###
+###############################
+
 @app.route('/communication')
 def communication():
     return render_template('communication.html')
@@ -118,8 +120,10 @@ def id_to_name(id):
     else:
         return 'Unbekanntes Szenario'
 
-
+###########################
 #### S C E N A R I O S ####
+###########################
+
 
 @app.route('/scenarios')
 def scenarios():
@@ -162,9 +166,9 @@ def load_scenario(id):
     return None
 
 
-
+###########################
 #### E X E R C I S E S ####
-
+###########################
 
 
 @app.route('/schedule_exercise', methods=['POST'])
@@ -323,7 +327,6 @@ def perform_exercise(exercise):
         # Get the assigned scenarios
         # Pause for 5 seconds
         
-        
         for i in range(5, 0, -1):
             socketio.emit('message', {'data': f'Countdown: {i}'})
             time.sleep(1)
@@ -331,14 +334,11 @@ def perform_exercise(exercise):
         logging.info(f"[PE.05] Executing inject {inject_id}: {title} for {duration} seconds")
         socketio.emit('message', {'data': f'Inject {inject_id} wird ausgeführt: {title} für {duration} Sekunden per {communication_type}'})
 
-        
         # Check if communication_type is not None
         if communication_type:
             # Call the appropriate function based on the communication_type
             if communication_type == 'text':
-                #textnote(f"[{exercise.get('name', 'No title')}] {inject.get('title', 'No title')}", inject.get('nachrichtentext', 'No description'))
-                message = "[" + exercise.get('name', 'No title') + "] " + inject.get('title', 'No title') + ", " + inject.get('nachrichtentext', 'No description')
-                textnote_internal("forensician", message)
+                textnote(f"[{exercise.get('name', 'No title')}] {inject.get('title', 'No title')}", inject.get('nachrichtentext', 'No description'))
                 #whatsapp_notification()
 
             elif communication_type == 'email':
@@ -368,6 +368,7 @@ def perform_exercise(exercise):
     return True
 
 
+
 @app.route('/execute_exercise/<int:exercise_id>', methods=['POST'])
 def execute_exercise(exercise_id):
     logging.info(f"[EE.01] execute_exercise called with exercise_id: {exercise_id}")
@@ -389,6 +390,44 @@ def execute_exercise(exercise_id):
     logging.info("[EE.04] Rendering the executed_exercise.html page")
     # Render the executed_exercise.html page immediately
     return render_template('executed_exercise.html', exercise=exercise, status="Exercise is being executed")
+
+
+
+
+# Fügen Sie diese Zeile am Anfang Ihrer Datei hinzu
+current_inject_indices = {}
+
+
+@app.route('/next_inject/<int:exercise_id>')
+def next_inject(exercise_id):
+    logging.info('[NextI] Fetching next inject for exercise_id: %s', exercise_id)
+    exercise = load_exercise(exercise_id)
+    injects = load_json('injects.json')
+    if not exercise or not exercise.get('inject_order'):
+        logging.info('[NextI] No injects found for exercise_id: %s', exercise_id)
+        return jsonify({"status": "error", "message": "No injects found"}), 404
+
+    # Holen Sie den aktuellen Index für diese exerciseId, oder setzen Sie ihn auf 0, wenn er noch nicht existiert
+    current_index = current_inject_indices.get(exercise_id, 0)
+    logging.info('[NextI] Current index for exercise_id %s: %s', exercise_id, current_index)
+
+    # Überprüfen Sie, ob es noch weitere Injects gibt
+    if current_index >= len(exercise['inject_order']):
+        logging.info('[NextI] No more injects for exercise_id: %s', exercise_id)
+        return jsonify({"status": "error", "message": "No more injects"}), 404
+
+    next_inject_id = exercise['inject_order'][current_index]
+    next_inject = next((inject for inject in injects if inject['id'] == next_inject_id), None)
+    if not next_inject:
+        logging.info('[NextI] Next inject not found for exercise_id: %s', exercise_id)
+        return jsonify({"status": "error", "message": "Next inject not found"}), 404
+
+    # Aktualisieren Sie den Index für die nächste Anforderung
+    current_inject_indices[exercise_id] = current_index + 1
+    logging.info('[NextI] Updated index for exercise_id %s: %s', exercise_id, current_index + 1)
+
+    return jsonify({"status": "success", "inject": next_inject}), 200
+
 
 
 @app.route('/update_comment', methods=['POST'])

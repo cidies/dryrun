@@ -6,7 +6,7 @@
         "exercise_benefit": "\u00dcbt das Erkennen und Melden von Phishing-Versuchen.",
         "expected_response": "Die Teilnehmer sollten die E-Mail analysieren, den Anhang nicht \u00f6ffnen und die IT-Sicherheitsabteilung informieren.",
         "communication_type": "email",
-        "duration": 29,
+        "duration": 5,
         "nachrichtentext": "Hallo, \n\nich habe heute eine E-Mail bekommen, die durchaus vertrauensw\u00fcrdig erscheint. Allerdings schickt mir dieser Absender sonst keine solchen Anh\u00e4nge. Eventuell handelt es sich um eine Phishing Mail.\n\nBeste Gruesse\n\nKurt Lamensloh"
     },
     {
@@ -16,7 +16,7 @@
         "exercise_benefit": "\u00dcbt die Identifikation von Netzwerkmanipulationen.",
         "expected_response": "Die Teilnehmer sollten die Netzwerklogs \u00dcberpr\u00dcfen, den Man-in-the-Middle-Angriff identifizieren und geeignete Gegenma\u00dfnahmen ergreifen.",
         "communication_type": "text",
-        "duration": 10,
+        "duration": 5,
         "nachrichtentext": "Sehr geehrter IT-Support,\n\nich m\u00f6chte Ihnen mitteilen, dass ich seit heute Morgen eine ungew\u00f6hnlich langsame Netzwerkgeschwindigkeit in unserem internen Netzwerk bemerke. Diese Verz\u00f6gerungen beeintr\u00e4chtigen meine Arbeit erheblich, da sowohl das Abrufen von E-Mails als auch der Zugriff auf interne Server extrem langsam erfolgt.\n\nHier einige Details zur Problematik:\n\nDatum und Uhrzeit des Auftretens: Heute, seit ca. 09:00 Uhr\nBetroffene Anwendungen: E-Mail, internes CRM-System, Dokumentenmanagementsystem\nStandort: B\u00fcro Nr. 205, 2. Stock\nNetzwerkanbindung: Kabelgebunden\nIch habe bereits die \u00fcblichen Schritte zur Fehlerbehebung unternommen, wie das Neustarten meines Computers und das \u00dcberpr\u00fcfen der Kabelverbindungen. Leider hat dies keine Verbesserung gebracht.\n\nIch bitte Sie daher dringend, diese Angelegenheit zu pr\u00fcfen und zu beheben, da die aktuelle Situation die Arbeitsabl\u00e4ufe erheblich st\u00f6rt.\n\nVielen Dank im Voraus f\u00fcr Ihre schnelle Unterst\u00fctzung.\n\nMit freundlichen Gr\u00fc\u00dfen,\n\n[Ihr Name]\n[Ihre Position]\n[Abteilung]\n[Kontaktinformationen]"
     },
     {
@@ -26,7 +26,7 @@
         "exercise_benefit": "\u00dcbt die Identifikation von Netzwerkmanipulationen.",
         "expected_response": "Die Teilnehmer sollten die Netzwerklogs \u00dcberpr\u00dcfen, den Man-in-the-Middle-Angriff identifizieren und geeignete Gegenma\u00c3\u0178nahmen ergreifen.",
         "communication_type": "email",
-        "duration": 10,
+        "duration": 5,
         "nachrichtentext": "Hallo IT-Team,\n\nich wollte euch informieren, dass die Netzwerkgeschwindigkeit seit heute Morgen sehr langsam ist. Es dauert sehr lange, E-Mails zu laden und auf unsere internen Systeme zuzugreifen.\n\nIch bin mir nicht sicher, woran es liegt, aber es beeintr\u00e4chtigt meine Arbeit. K\u00f6nnt ihr das bitte \u00fcberpr\u00fcfen?\n\nVielen Dank f\u00fcr eure Hilfe.\n\nViele Gr\u00fc\u00dfe,\n\n[Ihr Name]\n[Abteilung]\n[Kontaktinformationen]"
     },
     {

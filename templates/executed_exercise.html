@@ -49,7 +49,7 @@ window.onload = function() {
     console.log('[*] Socket.IO connection established on domain: ' + document.domain + ' and port: ' + location.port);
     socket.on('message', function(message) {
         console.log('[*] Message received: ', message.data, ' from domain: ', document.domain, ' on port: ', location.port);
-        
+ 
         // Display the message as a toast notification
         toastr.info(message.data);
 
@@ -88,22 +88,91 @@ window.onload = function() {
             } else {
                 console.error('No element with id "injectTable" found');
             }
+             // Initialen nächsten Inject abrufen
+            
+            document.getElementById('next-inject-button').addEventListener('click', getNextInject);
+            console.log('[*] Listener getNextInject added to next-inject-button');
+            document.addEventListener('DOMContentLoaded', observeTableChanges);
+            console.log('[*] Listener observeTableChanges added to document');
+
 
         }
     });
 };
 
+    // Funktion, um den nächsten Inject abzurufen
+    function getNextInject() {
+        const exerciseElement = document.getElementById('exerciseId');
+        const exerciseId = exerciseElement ? exerciseElement.value : 'na';
+        fetch(`/next_inject/${exerciseId}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    const inject = data.inject;
+                    console.log('[*] Next inject:', inject);  // Ausgabe des nächsten Injects
+                    document.getElementById('next-inject-details').innerHTML = `<p>${inject.title}</p><p>${inject.description}</p>`;
+                } else {
+                    console.log('No next inject found.');  // Ausgabe, wenn kein nächster Inject gefunden wurde
+                    document.getElementById('next-inject-details').innerHTML = `<p>Kein nächster Inject gefunden.</p>`;
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching next inject:', error);  // Ausgabe des Fehlers
+                document.getElementById('next-inject-details').innerHTML = `<p>Fehler beim Abrufen des nächsten Injects.</p>`;
+            });
+    }
+
+
+// Funktion, die auf Änderungen in der Tabelle reagiert
+function observeTableChanges() {
+    // Wählen Sie die Tabelle aus
+    const table = document.getElementById('injectTable');
+    console.log('Table selected:', table);
+
+    // Erstellen Sie einen neuen MutationObserver
+    const observer = new MutationObserver(function(mutations) {
+        console.log('Mutation observed:', mutations);
+        mutations.forEach(function(mutation) {
+            // Wenn die Tabelle geändert wurde, rufen Sie getNextInject() auf
+            if (mutation.type === 'childList') {
+                console.log('Table has been modified. Fetching next inject...');
+                getNextInject();
+            }
+        });
+    });
+
+    // Starten Sie die Beobachtung der Tabelle
+    observer.observe(table, { childList: true });
+    console.log('Observation started on:', table);
+}
+
+
+    
+
 </script>
+
+
+
 <h1>{{ exercise.title }}</h1>
-<p>{{ exercise.description }}</p>
 <p id="status">Status: {{ status }}</p>
+<div id="next-inject-container">
+    <h3>Nächster Inject</h3>
+    <div id="next-inject-details">
+        <!-- Details des nächsten Injects werden hier angezeigt -->
+    </div>
+    <button id="next-inject-button">What next</button>
+</div>
+
+
+
+
 <input type="hidden" id="exerciseId" value="{{ exercise.id }}">
 <h2>Inject Status</h2>
 <table id="injectTable">
     <tr>
         <th>Inject</th>
         <th>Comment</th>
-        <th>Date and Time</th> <!-- Neue Spalte hinzugefügt -->
+        <th>Date and Time</th>
     </tr>
     {% for i in range(messages|length) %}
         <tr>

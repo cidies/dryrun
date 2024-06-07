@@ -10,7 +10,6 @@ import time
 from datetime import datetime
 from flask_socketio import SocketIO, emit, Namespace
 from threading import Thread
-import threading
 import logging
 import smtplib
 from email.mime.text import MIMEText
@@ -73,7 +72,7 @@ class ChatNamespace(Namespace):
     def on_disconnect(self):
         logging.info("Client disconnected from chat namespace")
 
-    def on_send_message(self, sid, data):
+    def on_send_message(self, data):
         save_message(data)
         self.emit('message', data, namespace='/chat')
 
@@ -170,8 +169,6 @@ def load_scenario(id):
 ###########################
 #### E X E R C I S E S ####
 ###########################
-
-
 
 
 @app.route('/schedule_exercise', methods=['POST'])
@@ -290,36 +287,10 @@ def edit_exercise(id):
     else:
         return "Exercise not found", 404
 
- # app.py
-import threading
-
-# Global variable to track the state of the exercise
-is_paused = False
-pause_event = threading.Event()
+    
 
 
-
-######  P A U S E ######
-
-@app.route('/pause_exercise', methods=['POST'])
-def pause_exercise():
-    global is_paused, pause_event
-    is_paused = True
-    pause_event.set()  # Unblock any waiting threads
-    data = {'user': "APPPY", 'message': "PAUSE!!!!"}
-    save_message(data)
-    #socketio.emit('message', data, namespace='/chat')
-    return jsonify({"status": "paused"}), 200
-
-@socketio.on('pause_exercise', namespace='/pause')
-def handle_pause_exercise():
-    global is_paused, pause_event
-    is_paused = True
-    pause_event.set()  # Unblock any waiting threads
-
-
-
-# Update the perform_exercise function to handle pause
+@socketio.on('start_exercise')
 def perform_exercise(exercise):
     logging.info("[PE.01] perform_exercise called")
     socketio.emit('message', {'data': 'Execution started!'})
@@ -342,13 +313,6 @@ def perform_exercise(exercise):
 
     logging.info("[PE.04] Running through injects in the order specified in the exercise")
     for inject_id in exercise['inject_order']:
-        global is_paused, pause_event
-        if is_paused:
-            logging.debug('Exercise is paused, waiting for pause to be lifted...')
-            #socketio.emit('message', {'data': 'Exercise paused'}, namespace='/break')
-            pause_event.wait()  # Wait until the pause is lifted
-            logging.debug('Pause lifted, resuming exercise...')
-
         logging.info(f"[PE.05] Looking for inject with ID {inject_id}")
         inject = next((inject for inject in injects if inject['id'] == inject_id), None)
 
@@ -358,7 +322,10 @@ def perform_exercise(exercise):
 
         title = inject.get('title', 'No title')
         duration = inject.get('duration', 10)  # Default to 10 seconds if duration is not specified
+        # Get the communication_type
         communication_type = inject.get('communication_type')
+        # Get the assigned scenarios
+        # Pause for 5 seconds
         
         for i in range(5, 0, -1):
             socketio.emit('message', {'data': f'Countdown: {i}'})
@@ -367,11 +334,19 @@ def perform_exercise(exercise):
         logging.info(f"[PE.05] Executing inject {inject_id}: {title} for {duration} seconds")
         socketio.emit('message', {'data': f'Inject {inject_id} wird ausgeführt: {title} für {duration} Sekunden per {communication_type}'})
 
+        # Check if communication_type is not None
         if communication_type:
+            # Call the appropriate function based on the communication_type
             if communication_type == 'text':
-                textnote(f"[{exercise.get('name', 'No title')}] {inject.get('title', 'No title')}", inject.get('nachrichtentext', 'No description'))
+                #textnote(f"[{exercise.get('name', 'No title')}] {inject.get('title', 'No title')}", inject.get('nachrichtentext', 'No description'))
+                #whatsapp_notification()
+                message = "[" + exercise.get('name', 'No title') + "] " + inject.get('title', 'No title') + ", " + inject.get('nachrichtentext', 'No description')
+                textnote_internal("forensician", message)
+
+
             elif communication_type == 'email':
                 email(f"[{exercise.get('name', 'No title')}] {inject.get('title', 'No title')}", inject.get('nachrichtentext', 'No description'))
+                #make_call_route()
 
         logging.info(f"[PE.06] Waiting for {duration} seconds")
         time.sleep(duration)
@@ -379,13 +354,16 @@ def perform_exercise(exercise):
     logging.info("[*] Finished executing injects")
     socketio.emit('message', {'data': 'Exercise finished'})
 
+    # Update the last_performed field with the current date and time
     exercise['last_performed'] = datetime.now().isoformat()
 
+    # Find the exercise in the list of exercises and update it
     for i, ex in enumerate(exercises):
         if ex['id'] == exercise['id']:
             exercises[i] = exercise
             break
 
+    # Save the updated exercises back to the JSON file
     save_json('exercises.json', exercises)
 
     socketio.emit('message', {'data': 'Scenario updated successfully'})
@@ -642,22 +620,10 @@ def edit_inject(inject_id):
     # Rendern Sie die Bearbeitungsseite mit dem Inject als Kontext
     return render_template('edit_inject.html', inject=inject, scenarios=scenarios)
 
-
-
-
-########################
-##### Internal Chat ####
-########################
-
-
 def textnote_internal(user, message):
     data = {'user': user, 'message': message}
     save_message(data)
     socketio.emit('message', data, namespace='/chat')
-
-
-
-
 
 def textnote(title, description):
     # Load the config file

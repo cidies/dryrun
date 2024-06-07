@@ -60,7 +60,10 @@
             "2": "AAASSSXXX",
             "1": "OK.Done"
         },
-        "last_performed": "2024-05-26T23:07:01.463142"
+        "last_performed": "2024-05-26T23:07:01.463142",
+        "description": "",
+        "target_team": "",
+        "planned": "2024-06-10T23:58"
     },
     {
         "id": 4,
@@ -164,7 +167,7 @@
         "last_performed": "2024-05-27T00:04:40.136378"
     },
     {
-        "name": "\u00dcbung Kunde1",
+        "name": "Wales Hospital - Cryptominer",
         "type": "timed",
         "interval": "",
         "inject_order": [
@@ -174,6 +177,12 @@
             13
         ],
         "id": 10,
-        "last_performed": "2024-05-26T23:23:05.150216"
+        "last_performed": "2024-06-05T00:14:56.459485",
+        "description": "",
+        "target_team": "",
+        "planned": "",
+        "inject_comment": {
+            "4": "Hiernach hat d"
+        }
     }
-]
+]]

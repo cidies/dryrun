@@ -73,7 +73,7 @@ class ChatNamespace(Namespace):
     def on_disconnect(self):
         logging.info("Client disconnected from chat namespace")
 
-    def on_send_message(self, data):
+    def on_send_message(self, sid, data):
         save_message(data)
         self.emit('message', data, namespace='/chat')
 
@@ -297,14 +297,21 @@ import threading
 is_paused = False
 pause_event = threading.Event()
 
+
+
+######  P A U S E ######
+
 @app.route('/pause_exercise', methods=['POST'])
 def pause_exercise():
     global is_paused, pause_event
     is_paused = True
     pause_event.set()  # Unblock any waiting threads
+    data = {'user': "APPPY", 'message': "PAUSE!!!!"}
+    save_message(data)
+    #socketio.emit('message', data, namespace='/chat')
     return jsonify({"status": "paused"}), 200
 
-@socketio.on('pause_exercise', namespace='/chat')
+@socketio.on('pause_exercise', namespace='/pause')
 def handle_pause_exercise():
     global is_paused, pause_event
     is_paused = True
@@ -315,11 +322,11 @@ def handle_pause_exercise():
 # Update the perform_exercise function to handle pause
 def perform_exercise(exercise):
     logging.info("[PE.01] perform_exercise called")
-    socketio.emit('message', {'data': 'Execution started!'}, namespace='/chat')
+    socketio.emit('message', {'data': 'Execution started!'})
 
     if exercise is None:
         logging.error("[*] Error: exercise cannot be None")
-        socketio.emit('message', {'data': 'Error: exercise not found'}, namespace='/chat')
+        socketio.emit('message', {'data': 'Error: exercise not found'})
         return False
 
     logging.info("[PE.02] Loading exercises from exercises.json")
@@ -330,7 +337,7 @@ def perform_exercise(exercise):
 
     if not 'inject_order' in exercise:
         logging.error("[*] No inject_order in exercise")
-        socketio.emit('message', {'data': 'Error: No inject_order in exercise'}, namespace='/chat')
+        socketio.emit('message', {'data': 'Error: No inject_order in exercise'})
         return False
 
     logging.info("[PE.04] Running through injects in the order specified in the exercise")
@@ -338,7 +345,7 @@ def perform_exercise(exercise):
         global is_paused, pause_event
         if is_paused:
             logging.debug('Exercise is paused, waiting for pause to be lifted...')
-            socketio.emit('message', {'data': 'Exercise paused'}, namespace='/chat')
+            #socketio.emit('message', {'data': 'Exercise paused'}, namespace='/break')
             pause_event.wait()  # Wait until the pause is lifted
             logging.debug('Pause lifted, resuming exercise...')
 
@@ -354,11 +361,11 @@ def perform_exercise(exercise):
         communication_type = inject.get('communication_type')
         
         for i in range(5, 0, -1):
-            socketio.emit('message', {'data': f'Countdown: {i}'}, namespace='/chat')
+            socketio.emit('message', {'data': f'Countdown: {i}'})
             time.sleep(1)
         
         logging.info(f"[PE.05] Executing inject {inject_id}: {title} for {duration} seconds")
-        socketio.emit('message', {'data': f'Inject {inject_id} wird ausgeführt: {title} für {duration} Sekunden per {communication_type}'}, namespace='/chat')
+        socketio.emit('message', {'data': f'Inject {inject_id} wird ausgeführt: {title} für {duration} Sekunden per {communication_type}'})
 
         if communication_type:
             if communication_type == 'text':
@@ -370,7 +377,7 @@ def perform_exercise(exercise):
         time.sleep(duration)
 
     logging.info("[*] Finished executing injects")
-    socketio.emit('message', {'data': 'Exercise finished'}, namespace='/chat')
+    socketio.emit('message', {'data': 'Exercise finished'})
 
     exercise['last_performed'] = datetime.now().isoformat()
 
@@ -381,7 +388,7 @@ def perform_exercise(exercise):
 
     save_json('exercises.json', exercises)
 
-    socketio.emit('message', {'data': 'Scenario updated successfully'}, namespace='/chat')
+    socketio.emit('message', {'data': 'Scenario updated successfully'})
 
     return True
 
@@ -635,10 +642,22 @@ def edit_inject(inject_id):
     # Rendern Sie die Bearbeitungsseite mit dem Inject als Kontext
     return render_template('edit_inject.html', inject=inject, scenarios=scenarios)
 
+
+
+
+########################
+##### Internal Chat ####
+########################
+
+
 def textnote_internal(user, message):
     data = {'user': user, 'message': message}
     save_message(data)
     socketio.emit('message', data, namespace='/chat')
+
+
+
+
 
 def textnote(title, description):
     # Load the config file

@@ -43,7 +43,8 @@ toastr.options = {
 }
 
 window.onload = function() {
-    var socket = io.connect('http://' + document.domain + ':' + location.port + '/chat');
+    var socket = io.connect('http://' + document.domain + ':' + location.port);
+    var socketChat = io.connect('http://' + document.domain + ':' + location.port + '/chat');
     console.log('[*] Socket.IO connection established on domain: ' + document.domain + ' and port: ' + location.port);
     socket.on('message', function(message) {
         console.log('[*] Message received: ', message.data, ' from domain: ', document.domain, ' on port: ', location.port);
@@ -57,7 +58,8 @@ window.onload = function() {
     }
 
 
-        if (message.data.startsWith('Inject')) {
+    if (message.data && message.data.startsWith('Inject')) {
+    
             var table = document.getElementById('injectTable');
             if (table) {
                 var row = table.insertRow(-1);
@@ -98,6 +100,8 @@ window.onload = function() {
     // Pause-Button Ereignis-Listener
     document.getElementById('pause-button').addEventListener('click', function() {
         socket.emit('pause_exercise');
+        socketChat.emit('send_message', "ölöl", "ölölöl");
+        console.log('[*] PUSH P A U S E !!!');
     });
 };
 

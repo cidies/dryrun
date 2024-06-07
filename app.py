@@ -8,7 +8,7 @@ from flask_toastr import Toastr
 from flask import flash, get_flashed_messages
 import time
 from datetime import datetime
-from flask_socketio import SocketIO
+from flask_socketio import SocketIO, emit, Namespace
 from threading import Thread
 import logging
 import smtplib
@@ -20,11 +20,12 @@ from twilio.rest import Client
 
 
 app = Flask(__name__)
-app.secret_key = os.environ.get('SECRET_KEY', 'default-secret-key')
+app.secret_key = os.environ.get('SECRET_KEY', '2309489358910358')
 toastr = Toastr(app)
 socketio = SocketIO(app)
 
 DATA_DIR = 'data'
+CHAT_LOG_FILE = 'chat_log.json'
 
 logging.basicConfig(level=logging.INFO)
 
@@ -42,10 +43,54 @@ def dashboard():
     exercises = load_json('exercises.json')
     return render_template('dashboard.html', notifications=notifications, exercises=exercises)
 
-
+### C O M U N I C A T I O N ###
 @app.route('/communication')
 def communication():
     return render_template('communication.html')
+
+
+
+def save_message(message):
+    try:
+        with open(CHAT_LOG_FILE, 'r') as file:
+            chat_log = json.load(file)
+    except FileNotFoundError:
+        chat_log = []
+
+    chat_log.append(message)
+
+    with open(CHAT_LOG_FILE, 'w') as file:
+        json.dump(chat_log, file)
+
+
+class ChatNamespace(Namespace):
+    def on_connect(self):
+        logging.info("Client connected to chat namespace")
+
+    def on_disconnect(self):
+        logging.info("Client disconnected from chat namespace")
+
+    def on_send_message(self, data):
+        save_message(data)
+        self.emit('message', data, namespace='/chat')
+
+socketio.on_namespace(ChatNamespace('/chat'))
+
+
+
+
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@socketio.on('send_message')
+def handle_send_message_event(data):
+    save_message(data)
+    socketio.emit('message', data, to=None)
+
+
+
 
 @app.route('/reports')
 def reports():
@@ -291,7 +336,9 @@ def perform_exercise(exercise):
         if communication_type:
             # Call the appropriate function based on the communication_type
             if communication_type == 'text':
-                textnote(f"[{exercise.get('name', 'No title')}] {inject.get('title', 'No title')}", inject.get('nachrichtentext', 'No description'))
+                #textnote(f"[{exercise.get('name', 'No title')}] {inject.get('title', 'No title')}", inject.get('nachrichtentext', 'No description'))
+                message = "[" + exercise.get('name', 'No title') + "] " + inject.get('title', 'No title') + ", " + inject.get('nachrichtentext', 'No description')
+                textnote_internal("forensician", message)
                 #whatsapp_notification()
 
             elif communication_type == 'email':
@@ -531,7 +578,10 @@ def edit_inject(inject_id):
     # Rendern Sie die Bearbeitungsseite mit dem Inject als Kontext
     return render_template('edit_inject.html', inject=inject, scenarios=scenarios)
 
-
+def textnote_internal(user, message):
+    data = {'user': user, 'message': message}
+    save_message(data)
+    socketio.emit('message', data, namespace='/chat')
 
 def textnote(title, description):
     # Load the config file

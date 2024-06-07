@@ -219,7 +219,6 @@
         "type": "111",
         "interval": "",
         "inject_order": [
-            1,
             2,
             3
         ],

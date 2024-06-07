@@ -204,6 +204,30 @@
         "id": 12,
         "type": "sdfs",
         "interval": "",
-        "inject_order": "5,6"
+        "inject_order": [
+            27,
+            28,
+            29
+        ]
+    },
+    {
+        "name": "BBBBB",
+        "description": "BBBBB",
+        "target_team": "BBBBB",
+        "planned": "2024-06-13T12:10",
+        "id": 13,
+        "type": "111",
+        "interval": "",
+        "inject_order": [
+            1,
+            2,
+            3
+        ],
+        "last_performed": "2024-06-07T12:11:55.460650",
+        "inject_comment": {
+            "1": "Lief gut.",
+            "2": "Message kam nicht an.",
+            "3": "Keine klare Ende Meldung!"
+        }
     }
 ]

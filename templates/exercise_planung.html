@@ -33,15 +33,15 @@
             font-size: 0.8em; /* Oder jede andere Größe, die Sie bevorzugen */
         }
         .float-message {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    padding: 10px;
-    background-color: #0f0;
-    color: #000;
-    border-radius: 5px;
-    z-index: 1000;
-}
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px;
+            background-color: #0f0;
+            color: #000;
+            border-radius: 5px;
+            z-index: 1000;
+        }
     </style>
 </head>
 <body>
@@ -160,10 +160,10 @@
         function updateInjectOrder() {
             const injectOrder = [];
             document.querySelectorAll('#injectList li').forEach(function(item) {
-                injectOrder.push(item.getAttribute('data-id').toString());
+                injectOrder.push(parseInt(item.getAttribute('data-id')));
             });
             
-            document.getElementById('inject_order').value = injectOrder.join(',');
+            document.getElementById('inject_order').value = JSON.stringify(injectOrder);
         }
 
         function handleDrop(e) {
@@ -209,6 +209,8 @@
                         jsonData[key] = [];
                     }
                     jsonData[key].push(value);
+                } else if (key === 'inject_order') {
+                    jsonData[key] = JSON.parse(value); // Parse inject_order to array
                 } else {
                     jsonData[key] = value;
                 }
@@ -245,28 +247,24 @@
             });
         });
 
-
         function showFloatMessage(message) {
-            // Erstellen Sie ein neues div-Element
+            // Create a new div element
             const floatMessage = document.createElement('div');
-        
-            // Fügen Sie eine Klasse hinzu, um das div zu stylen
+
+            // Add a class to style the div
             floatMessage.className = 'float-message';
-        
-            // Fügen Sie die Nachricht in das div ein
+
+            // Insert the message into the div
             floatMessage.textContent = message;
-        
-            // Fügen Sie das div zum Body hinzu
+
+            // Append the div to the body
             document.body.appendChild(floatMessage);
-        
-            // Entfernen Sie das div nach 3 Sekunden
+
+            // Remove the div after 3 seconds
             setTimeout(() => {
                 document.body.removeChild(floatMessage);
             }, 3000);
         }
-        
-        // Verwenden Sie die Funktion anstelle von alert
-        showFloatMessage(`Exercise scheduled successfully with ID: ${data.id}`);
     </script>
 </body>
 </html>

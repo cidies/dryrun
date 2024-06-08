@@ -52,7 +52,7 @@ def communication():
 
 
 
-from datetime import datetime
+
 
 def save_message(message):
     try:
@@ -730,7 +730,7 @@ def email(title, description):
     body = description
 
     # Create the email
-    msg = MIMEText(body)
+    msg = MIMEText(body, 'html')
     msg['Subject'] = subject
     msg['From'] = sender
     msg['To'] = receiver

@@ -257,7 +257,7 @@
         "expected_response": "Die Teilnehmer sollten die E-Mail ignorieren und die IT-Sicherheitsabteilung informieren.",
         "communication_type": "email",
         "duration": 10,
-        "nachrichtentext": "na"
+        "nachrichtentext": "<!DOCTYPE html>\n<html lang=\"de\">\n<head>\n    <meta charset=\"UTF-8\">\n    <title>Gef\u00e4lschter Preisgewinn - Weiterleitung zur Pr\u00fcfung</title>\n    <style>\n        body {\n            font-family: Arial, sans-serif;\n            margin: 20px;\n            line-height: 1.6;\n        }\n        .content {\n            max-width: 600px;\n            margin: auto;\n            padding: 20px;\n            border: 1px solid #ccc;\n            border-radius: 10px;\n            background-color: #f9f9f9;\n        }\n        h1 {\n            text-align: center;\n            color: #333;\n        }\n        .forwarded {\n            background-color: #e1f5fe;\n            padding: 10px;\n            border-left: 5px solid #2196F3;\n            margin-top: 20px;\n        }\n    </style>\n</head>\n<body>\n    <div class=\"content\">\n        <h1>Gef\u00e4lschter Preisgewinn - Weiterleitung zur Pr\u00fcfung</h1>\n        <p>Hallo IT-Support-Team,</p>\n        <p>ich habe eine verd\u00e4chtige E-Mail erhalten, die ich zur Pr\u00fcfung weiterleiten m\u00f6chte. Sie behauptet, dass ich einen Preis gewonnen habe und pers\u00f6nliche Informationen zur Best\u00e4tigung ben\u00f6tige. Ich vermute jedoch, dass es sich um einen Phishing-Versuch handelt.</p>\n        <div class=\"forwarded\">\n            <p><strong>Weitergeleitete Nachricht:</strong></p>\n            <p>Von: \"Gewinnspiel-Team\" &lt;fake@gewinnspiel.com&gt;<br>\n            Gesendet: Heute, 11:00 Uhr<br>\n            Betreff: Herzlichen Gl\u00fcckwunsch! Sie haben gewonnen!</p>\n            <p>Sehr geehrte/r Gewinner/in,</p>\n            <p>Herzlichen Gl\u00fcckwunsch! Sie wurden als einer unserer gl\u00fccklichen Gewinner ausgew\u00e4hlt. Um Ihren Preis zu best\u00e4tigen, ben\u00f6tigen wir einige pers\u00f6nliche Informationen.</p>\n            <p>Bitte klicken Sie auf den folgenden Link und f\u00fcllen Sie das Formular aus:</p>\n            <p><a href=\"http://fake-prize-link.com\">Hier best\u00e4tigen</a></p>\n            <p>Vielen Dank und herzlichen Gl\u00fcckwunsch!</p>\n            <p>Beste Gr\u00fc\u00dfe,<br>\n            Ihr Gewinnspiel-Team</p>\n        </div>\n        <p>Ich bin mir nicht sicher, welche Ma\u00dfnahmen ergriffen werden sollen. K\u00f6nnt ihr diese E-Mail bitte umgehend pr\u00fcfen und mir Anweisungen geben, wie weiter vorzugehen ist?</p>\n        <p>Vielen Dank f\u00fcr eure schnelle Unterst\u00fctzung.</p>\n        <p>Viele Gr\u00fc\u00dfe,</p>\n        <p>[Ihr Name]</p>\n        <p>[Abteilung]</p>\n        <p>[Kontaktinformationen]</p>\n    </div>\n</body>\n</html>\n"
     },
     {
         "id": 27,
@@ -267,7 +267,7 @@
         "expected_response": "Die Teilnehmer sollten die Umfrage ignorieren und die IT-Sicherheitsabteilung informieren.",
         "communication_type": "email",
         "duration": 10,
-        "nachrichtentext": "na"
+        "nachrichtentext": "<!DOCTYPE html>\n<html lang=\"de\">\n<head>\n    <meta charset=\"UTF-8\">\n    <title>Gef\u00e4lschte Umfrage - Weiterleitung zur Pr\u00fcfung</title>\n    <style>\n        body {\n            font-family: Arial, sans-serif;\n            margin: 20px;\n            line-height: 1.6;\n        }\n        .content {\n            max-width: 600px;\n            margin: auto;\n            padding: 20px;\n            border: 1px solid #ccc;\n            border-radius: 10px;\n            background-color: #f9f9f9;\n        }\n        h1 {\n            text-align: center;\n            color: #333;\n        }\n        .alert {\n            background-color: #ffcccc;\n            color: #ff0000;\n            padding: 10px;\n            border-radius: 5px;\n            font-family: monospace;\n            white-space: pre-wrap;\n        }\n        .forwarded {\n            background-color: #e1f5fe;\n            padding: 10px;\n            border-left: 5px solid #2196F3;\n            margin-top: 20px;\n        }\n    </style>\n</head>\n<body>\n    <div class=\"content\">\n        <h1>Gef\u00e4lschte Umfrage - Weiterleitung zur Pr\u00fcfung</h1>\n        <p>Hallo IT-Support-Team,</p>\n        <p>ich habe eine verd\u00e4chtige E-Mail erhalten, die ich zur Pr\u00fcfung weiterleiten m\u00f6chte. Sie enth\u00e4lt einen Link zu einer Umfrage, die angeblich von der Unternehmensleitung stammt. Ich vermute jedoch, dass es sich um einen Phishing-Versuch handelt.</p>\n        <div class=\"forwarded\">\n            <p><strong>Weitergeleitete Nachricht:</strong></p>\n            <p>Von: \"Unternehmensleitung\" &lt;fake@company.com&gt;<br>\n            Gesendet: Heute, 10:00 Uhr<br>\n            Betreff: Wichtige Umfrage f\u00fcr alle Mitarbeiter</p>\n            <p>Liebe Mitarbeiter,</p>\n            <p>bitte nehmen Sie sich einen Moment Zeit, um an unserer wichtigen Umfrage teilzunehmen. Ihre Meinung ist uns sehr wichtig.</p>\n            <p><a href=\"http://fake-survey-link.com\">Hier zur Umfrage</a></p>\n            <p>Vielen Dank f\u00fcr Ihre Teilnahme.</p>\n            <p>Beste Gr\u00fc\u00dfe,<br>\n            Unternehmensleitung</p>\n        </div>\n        <p>Ich bin mir nicht sicher, welche Ma\u00dfnahmen ergriffen werden sollen. K\u00f6nnt ihr diese E-Mail bitte umgehend pr\u00fcfen und mir Anweisungen geben, wie weiter vorzugehen ist?</p>\n        <p>Vielen Dank f\u00fcr eure schnelle Unterst\u00fctzung.</p>\n        <p>Viele Gr\u00fc\u00dfe,</p>\n        <p>[Ihr Name]</p>\n        <p>[Abteilung]</p>\n        <p>[Kontaktinformationen]</p>\n    </div>\n</body>\n</html>\n"
     },
     {
         "id": 28,
@@ -277,7 +277,7 @@
         "expected_response": "Do not talk about work.",
         "communication_type": "email",
         "duration": 120,
-        "nachrichtentext": "na"
+        "nachrichtentext": "\u00dcbungspause"
     },
     {
         "id": 29,
@@ -287,6 +287,6 @@
         "expected_response": "na",
         "communication_type": "email",
         "duration": 10,
-        "nachrichtentext": "na"
+        "nachrichtentext": "\u00dcbungsende"
     }
 ]

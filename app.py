@@ -16,6 +16,10 @@ from email.mime.text import MIMEText
 import requests
 from twilio.rest import Client
 
+from pptx import Presentation
+from pptx.util import Inches
+from flask import send_file
+
 
 
 app = Flask(__name__)
@@ -411,6 +415,52 @@ def execute_exercise(exercise_id):
     return render_template('executed_exercise.html', exercise=exercise, status="Exercise is being executed")
 
 
+@app.route('/create_and_download_presentation_for_exercise/<int:exercise_id>', methods=['POST'])
+def create_and_download_presentation_for_exercise(exercise_id):
+    exercises = load_json('exercises.json')
+    injects = load_json('injects.json')
+    exercise = next((ex for ex in exercises if ex['id'] == exercise_id), None)
+    
+    if exercise:
+        file_path = create_powerpoint_for_exercise(exercise, injects)
+        return send_file(file_path, as_attachment=True)
+    else:
+        flash('Exercise not found')
+        return redirect(url_for('exercises'))
+
+def create_powerpoint_for_exercise(exercise, injects):
+    inject_map = {inject['id']: inject for inject in injects}
+    prs = Presentation()
+
+    # Create title slide
+    title_slide_layout = prs.slide_layouts[0]
+    slide = prs.slides.add_slide(title_slide_layout)
+    title = slide.shapes.title
+    subtitle = slide.placeholders[1]
+    title.text = exercise.get('name', 'No title')
+    subtitle.text = exercise.get('description', 'No description')
+
+    # Create slides for each inject
+    inject_order = exercise.get('inject_order', [])
+    comments = exercise.get('inject_comment', {})
+
+    for inject_id in inject_order:
+        inject = inject_map.get(inject_id, {})
+        inject_title = inject.get('title', 'No title')
+        inject_duration = inject.get('duration', 'No duration')
+        inject_comment = comments.get(str(inject_id), 'No comment')
+        inject_description = inject.get('nachrichtentext', 'No description')
+
+        slide = prs.slides.add_slide(prs.slide_layouts[1])
+        title = slide.shapes.title
+        content = slide.placeholders[1]
+
+        title.text = f"Inject {inject_id}: {inject_title}"
+        content.text = f"Duration: {inject_duration} seconds\n\nDescription: {inject_description}\n\nComment: {inject_comment}"
+
+    file_path = f'static/{exercise["name"].replace(" ", "_")}_presentation.pptx'
+    prs.save(file_path)
+    return file_path
 
 
 # Fügen Sie diese Zeile am Anfang Ihrer Datei hinzu

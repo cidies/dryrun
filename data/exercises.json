@@ -16,8 +16,8 @@
         "inject_comment": {
             "2": "Hier auch.",
             "5": "Endlich",
-            "1": "TOP Alles gleich erkannt.",
-            "3": "Aber es \u00fcberschreibt die vorherigen LOGS?!?!?!?!",
+            "1": "Nachricht kommt brauchbar formatiert an.",
+            "3": "Die ist noch nicht formatiert.",
             "4": "Hier fehlt noch eine Ende-Meldung."
         },
         "target_team": "",
@@ -140,7 +140,7 @@
     },
     {
         "id": 8,
-        "name": "wwwww",
+        "name": "City Hospital L.A.",
         "type": "timed",
         "interval": "11",
         "inject_order": [
@@ -150,7 +150,8 @@
         ],
         "description": "",
         "target_team": "",
-        "last_performed": "2024-05-26T23:56:07.313291"
+        "last_performed": "2024-05-26T23:56:07.313291",
+        "planned": ""
     },
     {
         "name": "TEST202401010",

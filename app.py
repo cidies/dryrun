@@ -46,6 +46,8 @@ def dashboard():
     exercises = load_json('exercises.json')
     return render_template('dashboard.html', notifications=notifications, exercises=exercises)
 
+
+
 ###############################
 ### C O M U N I C A T I O N ###
 ###############################
@@ -53,9 +55,6 @@ def dashboard():
 @app.route('/communication')
 def communication():
     return render_template('communication.html')
-
-
-
 
 
 def save_message(message):
@@ -100,8 +99,6 @@ socketio.on_namespace(ChatNamespace('/chat'))
 
 
 
-
-
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -110,8 +107,6 @@ def index():
 def handle_send_message_event(data):
     save_message(data)
     socketio.emit('message', data, to=None)
-
-
 
 
 @app.route('/reports')
@@ -170,7 +165,6 @@ def edit_scenario(id):
     except Exception as e:
         logging.error('Failed to load scenario: %s', e)
         return "Failed to load scenario", 500
-
 
 
 
@@ -307,7 +301,6 @@ def edit_exercise(id):
     else:
         return "Exercise not found", 404
 
-    
 
 
 @socketio.on('start_exercise')
@@ -454,7 +447,7 @@ def create_powerpoint_for_exercise(exercise, injects):
         inject_title = inject.get('title', 'No title')
         inject_duration = inject.get('duration', 'No duration')
         inject_comment = comments.get(str(inject_id), 'No comment')
-        inject_description = inject.get('nachrichtentext', 'No description')
+        inject_description = inject.get('description', 'No description')
 
         slide_layout = prs.slide_layouts[1]  # You can use a different layout if needed
         slide = prs.slides.add_slide(slide_layout)

@@ -28,6 +28,10 @@
         <label for="edit-nachrichtentext">Nachrichtentext:</label>
         <textarea id="edit-nachrichtentext" style="height: 100px; width: 200%; margin-bottom: 10px;">{{ inject.nachrichtentext }}</textarea>
     </div>
+    <div style="flex: 1; margin-right: 10px;">
+        <label for="edit-nachrichtentextPlain">Nachrichtentext plain:</label>
+        <textarea id="edit-nachrichtentextPlain" style="height: 100px; width: 200%; margin-bottom: 10px;">{{ inject.nachrichtentextPlain }}</textarea>
+    </div>
     
     <label for="edit-duration">Dauer:</label>
     <input type="number" id="edit-duration" value="{{ inject.duration }}" style="margin-bottom: 10px;">
@@ -71,6 +75,7 @@ $(window).on('load', function() {
             communication_type: $('#edit-communication_type').val(),
             duration: parseInt($('#edit-duration').val(), 10),  // Add this line
             nachrichtentext:  $('#edit-nachrichtentext').val(),
+            nachrichtentextPlain:  $('#edit-nachrichtentextPlain').val(),
         };
 
         $.ajax({

@@ -447,7 +447,7 @@ def create_powerpoint_for_exercise(exercise, injects):
         inject_title = inject.get('title', 'No title')
         inject_duration = inject.get('duration', 'No duration')
         inject_comment = comments.get(str(inject_id), 'No comment')
-        inject_description = inject.get('description', 'No description')
+        inject_nachrichtentextPlain = inject.get('nachrichtentextPlain', 'No description')
 
         slide_layout = prs.slide_layouts[1]  # You can use a different layout if needed
         slide = prs.slides.add_slide(slide_layout)
@@ -455,7 +455,8 @@ def create_powerpoint_for_exercise(exercise, injects):
         content = slide.placeholders[1]
 
         title.text = f"Inject {inject_id}: {inject_title}"
-        content.text = f"Duration: {inject_duration} seconds\n\nDescription: {inject_description}\n\nComment: {inject_comment}"
+        #content.text = f"Duration: {inject_duration} seconds\n\nMessage: {inject_nachrichtentextPlain}\n\nComment: {inject_comment}"
+        content.text = f"{inject_nachrichtentextPlain}"
 
     file_path = f'static/{exercise["name"].replace(" ", "_")}_presentation.pptx'
     prs.save(file_path)
@@ -613,10 +614,6 @@ def execute_inject_form():
     return render_template('execute_exercise.html')
 
 
-
-
-
-
 @app.route('/execute_inject/<exercise_name>/<inject_idx>')
 def execute_inject_route(exercise_name, inject_idx):
     exercises = load_json('exercises.json')
@@ -632,59 +629,54 @@ def execute_inject(inject):
     print(f"Executing inject: {inject['title']} via {inject['communication_type']}")
     # In real implementation, send email, text, call, or personal notification here
 
-
 @app.route('/edit_inject/<int:inject_id>', methods=['GET', 'POST'])
 def edit_inject(inject_id):
-    # Hier holen Sie das Inject aus Ihrer Datenbank
-    inject = get_inject_by_id(inject_id)
+    try:
+        inject = get_inject_by_id(inject_id)
+        scenarios = load_json('scenarios.json')
+        injects = load_json('injects.json')
 
-    scenarios = load_json('scenarios.json')  # Laden Sie die Szenarien aus der JSON-Datei
-    # Die ganze json wird geladen
-    injects = load_json('injects.json')
+        if inject is None:
+            return "Inject not found", 404
 
-    # Überprüfen Sie, ob das Inject existiert
-    if inject is None:
-        return "Inject not found", 404
+        if request.method == 'POST':
+            data = request.get_json()
 
-    if request.method == 'POST':
+            print("Received data:", data)
+            logging.info(f"Nachrichtentext as received from client: {data.get('nachrichtentext')}")
 
-        # Das was aus dem Webformular kommt, wird in data gespeichert
-        data = request.get_json()
-                
-        # Debugging-Ausgabe
-        print("Received data:", data)
-        logging.info(f"Nachrichtentext as received from client: {data.get('nachrichtentext')}")
-        
-        # Aktualisieren Sie das Inject mit den neuen Daten aus dem Webformular
-        updated_inject = {
-            'id': inject_id,
-            'title': data.get('title', inject['title']),
-            'description': data.get('description', inject['description']),
-            'exercise_benefit': data.get('exercise_benefit', inject['exercise_benefit']),
-            'expected_response': data.get('expected_response', inject['expected_response']),
-            'communication_type': data.get('communication_type', inject['communication_type']),
-            'duration': data.get('duration', inject['duration']),
-            'nachrichtentext': data.get('nachrichtentext', inject['nachrichtentext'])
-  
-        }
-        
-        # Suchen Sie das Inject mit der entsprechenden ID und aktualisieren Sie es
-        inject_index = next((index for (index, d) in enumerate(injects) if d['id'] == inject_id), None)
-        
-        if inject_index is not None:
-            injects[inject_index] = updated_inject
-        else:
-            return "Inject not found in database", 404
+            # Set default values for missing fields
+            for field in ['title', 'description', 'exercise_benefit', 'expected_response', 'communication_type', 'duration', 'nachrichtentext', 'nachrichtentextPlain']:
+                inject.setdefault(field, "")
 
-        # Speichern Sie die Daten, nachdem alle Änderungen vorgenommen wurden
-        save_json('injects.json', injects)
-        
-        # Debugging-Ausgabe
-        # print("[*] Updated inject:", updated_inject)
-        logging.info(f"Nachrichtentext as packed into dictionary for JSON: {updated_inject['nachrichtentext']}")
+            updated_inject = {
+                'id': inject_id,
+                'title': data.get('title', inject['title']),
+                'description': data.get('description', inject['description']),
+                'exercise_benefit': data.get('exercise_benefit', inject['exercise_benefit']),
+                'expected_response': data.get('expected_response', inject['expected_response']),
+                'communication_type': data.get('communication_type', inject['communication_type']),
+                'duration': data.get('duration', inject['duration']),
+                'nachrichtentext': data.get('nachrichtentext', inject['nachrichtentext']),
+                'nachrichtentextPlain': data.get('nachrichtentextPlain', inject['nachrichtentextPlain'])
+            }
 
-    # Rendern Sie die Bearbeitungsseite mit dem Inject als Kontext
-    return render_template('edit_inject.html', inject=inject, scenarios=scenarios)
+            inject_index = next((index for (index, d) in enumerate(injects) if d['id'] == inject_id), None)
+
+            if inject_index is not None:
+                injects[inject_index] = updated_inject
+            else:
+                return "Inject not found in database", 404
+
+            save_json('injects.json', injects)
+
+            logging.debug(f"Nachrichtentext as packed into dictionary for JSON: {updated_inject['nachrichtentext']}")
+
+        return render_template('edit_inject.html', inject=inject, scenarios=scenarios)
+
+    except Exception as e:
+        logging.error(f"An error occurred: {e}")
+        return "An error occurred while processing your request", 500
 
 def textnote_internal(user, message):
     data = {'user': user, 'message': message}

@@ -221,5 +221,30 @@
         "user": "user3649",
         "message": "test <hr> test",
         "timestamp": "2024-06-08T10:47:39.483418"
+    },
+    {
+        "user": "user247",
+        "message": " <img src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Wanna_Cry_ransomware.png/320px-Wanna_Cry_ransomware.png\" alt=\"WannaCry\">",
+        "timestamp": "2024-06-08T10:48:57.572455"
+    },
+    {
+        "user": "user247",
+        "message": "<body>     <h1>Bild von WannaCry</h1>     <img src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Wanna_Cry_ransomware.png/320px-Wanna_Cry_ransomware.png\" alt=\"WannaCry\"> </body>",
+        "timestamp": "2024-06-08T10:49:06.540196"
+    },
+    {
+        "user": "user4951",
+        "message": "222",
+        "timestamp": "2024-06-08T10:50:58.132226"
+    },
+    {
+        "user": "user4951",
+        "message": "2222222",
+        "timestamp": "2024-06-08T10:51:03.880023"
+    },
+    {
+        "user": "user6200",
+        "message": "<img src=\"https://cdn1.vogel.de/unsafe/1000x0/smart/images.vogel.de/vogelonline/bdb/1651400/1651405/original.jpg\" alt=\"WannaCry\" width=\"25%\" height=\"25%\">",
+        "timestamp": "2024-06-08T11:10:01.167209"
     }
 ]

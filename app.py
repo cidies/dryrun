@@ -414,6 +414,8 @@ def execute_exercise(exercise_id):
     # Render the executed_exercise.html page immediately
     return render_template('executed_exercise.html', exercise=exercise, status="Exercise is being executed")
 
+from flask import send_file
+from pptx import Presentation
 
 @app.route('/create_and_download_presentation_for_exercise/<int:exercise_id>', methods=['POST'])
 def create_and_download_presentation_for_exercise(exercise_id):
@@ -430,7 +432,10 @@ def create_and_download_presentation_for_exercise(exercise_id):
 
 def create_powerpoint_for_exercise(exercise, injects):
     inject_map = {inject['id']: inject for inject in injects}
-    prs = Presentation()
+
+    # Load the PowerPoint template
+    template_path = 'static/template.pptx'  # Path to your PowerPoint template
+    prs = Presentation(template_path)
 
     # Create title slide
     title_slide_layout = prs.slide_layouts[0]
@@ -451,7 +456,8 @@ def create_powerpoint_for_exercise(exercise, injects):
         inject_comment = comments.get(str(inject_id), 'No comment')
         inject_description = inject.get('nachrichtentext', 'No description')
 
-        slide = prs.slides.add_slide(prs.slide_layouts[1])
+        slide_layout = prs.slide_layouts[1]  # You can use a different layout if needed
+        slide = prs.slides.add_slide(slide_layout)
         title = slide.shapes.title
         content = slide.placeholders[1]
 
@@ -461,6 +467,7 @@ def create_powerpoint_for_exercise(exercise, injects):
     file_path = f'static/{exercise["name"].replace(" ", "_")}_presentation.pptx'
     prs.save(file_path)
     return file_path
+
 
 
 # Fügen Sie diese Zeile am Anfang Ihrer Datei hinzu

@@ -37,7 +37,19 @@
         
         // Generiere zufällige ID
         const userId = 'user' + Math.floor(Math.random() * 10000);
-        
+
+        // Load saved chat messages
+        fetch('/get_chat_log')
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(message => {
+                    const messageElement = document.createElement('div');
+                    messageElement.textContent = message.user + ': ' + message.message;
+                    chatWindow.appendChild(messageElement);
+                });
+                chatWindow.scrollTop = chatWindow.scrollHeight;
+            });
+
         // Empfangene Nachrichten anzeigen
         socket.on('message', function(data) {
             const messageElement = document.createElement('div');

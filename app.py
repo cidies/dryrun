@@ -65,6 +65,18 @@ def save_message(message):
         json.dump(chat_log, file)
 
 
+@app.route('/get_chat_log')
+def get_chat_log():
+    try:
+        with open(CHAT_LOG_FILE, 'r') as file:
+            chat_log = json.load(file)
+    except FileNotFoundError:
+        chat_log = []
+
+    return jsonify(chat_log)
+
+
+
 class ChatNamespace(Namespace):
     def on_connect(self):
         logging.info("Client connected to chat namespace")

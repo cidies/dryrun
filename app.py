@@ -52,6 +52,8 @@ def communication():
 
 
 
+from datetime import datetime
+
 def save_message(message):
     try:
         with open(CHAT_LOG_FILE, 'r') as file:
@@ -59,10 +61,12 @@ def save_message(message):
     except FileNotFoundError:
         chat_log = []
 
+    message['timestamp'] = datetime.now().isoformat()
     chat_log.append(message)
 
     with open(CHAT_LOG_FILE, 'w') as file:
-        json.dump(chat_log, file)
+        json.dump(chat_log, file, indent=4)
+
 
 
 @app.route('/get_chat_log')

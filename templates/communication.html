@@ -38,13 +38,19 @@
         // Generiere zufällige ID
         const userId = 'user' + Math.floor(Math.random() * 10000);
 
+        // Format timestamp
+        function formatTimestamp(timestamp) {
+            const date = new Date(timestamp);
+            return date.toLocaleString();
+        }
+
         // Load saved chat messages
         fetch('/get_chat_log')
             .then(response => response.json())
             .then(data => {
                 data.forEach(message => {
                     const messageElement = document.createElement('div');
-                    messageElement.textContent = message.user + ': ' + message.message;
+                    messageElement.textContent = `[${formatTimestamp(message.timestamp)}] ${message.user}: ${message.message}`;
                     chatWindow.appendChild(messageElement);
                 });
                 chatWindow.scrollTop = chatWindow.scrollHeight;
@@ -53,7 +59,7 @@
         // Empfangene Nachrichten anzeigen
         socket.on('message', function(data) {
             const messageElement = document.createElement('div');
-            messageElement.textContent = data.user + ': ' + data.message;
+            messageElement.textContent = `[${formatTimestamp(data.timestamp)}] ${data.user}: ${data.message}`;
             chatWindow.appendChild(messageElement);
             chatWindow.scrollTop = chatWindow.scrollHeight;
             
@@ -64,7 +70,8 @@
         // Nachricht senden
         sendButton.addEventListener('click', () => {
             const message = chatInput.value;
-            socket.emit('send_message', {user: userId, message: message});
+            const timestamp = new Date().toISOString();
+            socket.emit('send_message', {user: userId, message: message, timestamp: timestamp});
             chatInput.value = '';
         });
         

@@ -201,5 +201,25 @@
         "user": "user1924",
         "message": "wwww",
         "timestamp": "2024-06-08T10:45:02.584276"
+    },
+    {
+        "user": "user3649",
+        "message": "TEST <br>",
+        "timestamp": "2024-06-08T10:46:56.637903"
+    },
+    {
+        "user": "user3649",
+        "message": "<h1>TEST</h1>",
+        "timestamp": "2024-06-08T10:47:08.804096"
+    },
+    {
+        "user": "user3649",
+        "message": "sdfjklasdjakljfklsjflka\u00f6jflkdsa\u00f6jaflj <hl> skdfjklsdjfkdsjfl",
+        "timestamp": "2024-06-08T10:47:29.917062"
+    },
+    {
+        "user": "user3649",
+        "message": "test <hr> test",
+        "timestamp": "2024-06-08T10:47:39.483418"
     }
 ]

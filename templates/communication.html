@@ -4,11 +4,11 @@
 <h2>Kommunikation</h2>
 <div class="chat">
     <h3>Team-Chat</h3>
-    <div id="chat-window" style="border: 1px solid #ccc; height: 300px; overflow-y: scroll; padding: 10px;">
+    <div id="chat-window" class="chat-window">
         <!-- Chat-Nachrichten werden hier angezeigt -->
     </div>
-    <input type="text" id="chat-input" placeholder="Nachricht eingeben">
-    <button id="send-button">Senden</button>
+    <input type="text" id="chat-input" class="chat-input" placeholder="Nachricht eingeben">
+    <button id="send-button" class="send-button">Senden</button>
 </div>
 <div class="video-calls">
     <h3>Video-Calls</h3>
@@ -25,6 +25,48 @@
 </div>
 
 <audio id="ping-sound" src="/static/sounds/newmessage.wav" preload="auto"></audio>
+
+<style>
+    .chat-window {
+        border: 1px solid #ccc;
+        height: 300px;
+        overflow-y: scroll;
+        padding: 10px;
+        background-color: #f9f9f9;
+    }
+    .chat-input {
+        width: 80%;
+        padding: 10px;
+        margin-top: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    .send-button {
+        padding: 10px 20px;
+        margin-top: 10px;
+        border: none;
+        background-color: #4CAF50;
+        color: white;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    .send-button:hover {
+        background-color: #45a049;
+    }
+    .message {
+        margin-bottom: 10px;
+        padding: 10px;
+        border-radius: 4px;
+        background-color: #e1f5fe;
+    }
+    .message .timestamp {
+        font-size: 0.8em;
+        color: #999;
+    }
+    .message .user {
+        font-weight: bold;
+    }
+</style>
 
 <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
 <script>
@@ -49,21 +91,15 @@
             .then(response => response.json())
             .then(data => {
                 data.forEach(message => {
-                    const messageElement = document.createElement('div');
-                    messageElement.textContent = `[${formatTimestamp(message.timestamp)}] ${message.user}: ${message.message}`;
-                    chatWindow.appendChild(messageElement);
+                    displayMessage(message);
                 });
                 chatWindow.scrollTop = chatWindow.scrollHeight;
             });
 
         // Empfangene Nachrichten anzeigen
         socket.on('message', function(data) {
-            const messageElement = document.createElement('div');
-            messageElement.textContent = `[${formatTimestamp(data.timestamp)}] ${data.user}: ${data.message}`;
-            chatWindow.appendChild(messageElement);
+            displayMessage(data);
             chatWindow.scrollTop = chatWindow.scrollHeight;
-            
-            // Spiele den Ping-Ton
             pingSound.play();
         });
         
@@ -71,7 +107,9 @@
         sendButton.addEventListener('click', () => {
             const message = chatInput.value;
             const timestamp = new Date().toISOString();
-            socket.emit('send_message', {user: userId, message: message, timestamp: timestamp});
+            const messageData = {user: userId, message: message, timestamp: timestamp};
+            socket.emit('send_message', messageData);
+            displayMessage(messageData);
             chatInput.value = '';
         });
         
@@ -81,6 +119,14 @@
                 sendButton.click();
             }
         });
+
+        // Display message function
+        function displayMessage(data) {
+            const messageElement = document.createElement('div');
+            messageElement.className = 'message';
+            messageElement.innerHTML = `<span class="timestamp">${formatTimestamp(data.timestamp)}</span><br><span class="user">${data.user}</span>: ${data.message}`;
+            chatWindow.appendChild(messageElement);
+        }
     });
 </script>
 {% endblock %}

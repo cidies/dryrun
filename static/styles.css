@@ -74,7 +74,7 @@ li {
 #chat-window {
     border: 1px solid #ddd;
     padding: 10px;
-    height: 200px;
+    height: 450px;
     overflow-y: scroll;
 }
 

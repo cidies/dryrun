@@ -9,6 +9,7 @@
     <input type="text" id="chat-input" class="chat-input" placeholder="Nachricht eingeben">
     <button id="send-button" class="send-button">Senden</button>
 </div>
+<!--
 <div class="video-calls">
     <h3>Video-Calls</h3>
     <button>Meeting starten</button>
@@ -22,33 +23,13 @@
         <p>Beitrag: Strategien zur Verhinderung von DDoS-Angriffen</p>
     </div>
 </div>
+-->
 
 <audio id="ping-sound" src="/static/sounds/newmessage.wav" preload="auto"></audio>
 
 <style>
-    .chat-window {
-        border: 1px solid #ccc;
-        height: 300px;
-        overflow-y: scroll;
-        padding: 10px;
-        background-color: #f9f9f9;
-    }
-    .chat-input {
-        width: 80%;
-        padding: 10px;
-        margin-top: 10px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-    }
-    .send-button {
-        padding: 10px 20px;
-        margin-top: 10px;
-        border: none;
-        background-color: #4CAF50;
-        color: white;
-        border-radius: 4px;
-        cursor: pointer;
-    }
+
+    
     .send-button:hover {
         background-color: #45a049;
     }
@@ -66,6 +47,7 @@
         font-weight: bold;
     }
 </style>
+
 
 <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
 <script>
@@ -108,7 +90,7 @@
             const timestamp = new Date().toISOString();
             const messageData = {user: userId, message: message, timestamp: timestamp};
             socket.emit('send_message', messageData);
-            displayMessage(messageData);
+            //displayMessage(messageData);
             chatInput.value = '';
         });
         

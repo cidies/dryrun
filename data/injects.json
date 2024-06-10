@@ -291,5 +291,49 @@
         "communication_type": "email",
         "duration": 10,
         "nachrichtentext": "\u00dcbungsende"
-    }
+    },
+{
+            "id": 101,
+            "title": "Erste Warnung",
+            "description": "Ein Benutzer meldet verdächtige Aktivitäten auf seinem Computer.",
+            "exercise_benefit": "Übt das Erkennen und Melden von verdächtigen Aktivitäten.",
+            "expected_response": "Die Teilnehmer sollten die Warnung ernst nehmen und sofort Maßnahmen zur Untersuchung ergreifen.",
+            "communication_type": "email",
+            "duration": 5,
+            "nachrichtentext": "<!DOCTYPE html>\n<html lang=\"de\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Text in HTML</title>\n</head>\n<body>\n    <p>Hallo,</p>\n\n    <p>ich habe heute eine E-Mail bekommen, die durchaus vertrauenswürdig erscheint. Allerdings schickt mir dieser Absender sonst keine solchen Anhänge. Eventuell handelt es sich um eine Phishing Mail.</p>\n\n    <p>Beste Grüße,</p>\n\n    <p>Kurt Lamensloh</p>\n</body>\n</html>\n",
+            "nachrichtentextPlain": "Hallo, \nich habe heute eine E-Mail bekommen, die durchaus vertrauenswürdig erscheint. Allerdings schickt mir dieser Absender sonst keine solchen Anhänge. Eventuell handelt es sich um eine Phishing Mail.\nBeste Grüße \nKurt Lamensloh"
+        },
+        {
+            "id": 102,
+            "title": "Systemausfall",
+            "description": "Mehrere Systeme beginnen, nicht mehr zu reagieren.",
+            "exercise_benefit": "Übt die Reaktion auf einen Systemausfall.",
+            "expected_response": "Die Teilnehmer sollten die Ursache des Ausfalls ermitteln und entsprechende Maßnahmen zur Wiederherstellung ergreifen.",
+            "communication_type": "text",
+            "duration": 10,
+            "nachrichtentext": "Systemausfall: Mehrere Systeme reagieren nicht mehr."
+        },
+        {
+            "id": 201,
+            "title": "Phishing-E-Mail",
+            "description": "Ein Mitarbeiter erhält eine verdächtige E-Mail, die nach Anmeldeinformationen fragt.",
+            "exercise_benefit": "Übt die Erkennung und Reaktion auf Phishing-E-Mails.",
+            "expected_response": "Die Teilnehmer sollten die E-Mail analysieren, den Anhang nicht öffnen und die IT-Sicherheitsabteilung informieren.",
+            "communication_type": "email",
+            "duration": 3,
+            "nachrichtentext": "<!DOCTYPE html>\n<html lang=\"de\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Phishing E-Mail</title>\n</head>\n<body>\n    <p>Hallo,</p>\n\n    <p>ich habe eine E-Mail erhalten, die verdächtig erscheint. Sie fordert mich auf, auf einen Link zu klicken und meine Anmeldeinformationen einzugeben.</p>\n\n    <p>Beste Grüße,</p>\n\n    <p>Ein Mitarbeiter</p>\n</body>\n</html>\n",
+            "nachrichtentextPlain": "Hallo,\nich habe eine E-Mail erhalten, die verdächtig erscheint. Sie fordert mich auf, auf einen Link zu klicken und meine Anmeldeinformationen einzugeben.\nBeste Grüße,\nEin Mitarbeiter"
+        },
+        {
+            "id": 202,
+            "title": "Datendiebstahl",
+            "description": "Vertrauliche Daten werden von einem kompromittierten Konto gestohlen.",
+            "exercise_benefit": "Übt die Reaktion auf Datendiebstahl.",
+            "expected_response": "Die Teilnehmer sollten die Sicherheitslücke schließen und weitere unbefugte Zugriffe verhindern.",
+            "communication_type": "text",
+            "duration": 7,
+            "nachrichtentext": "Datendiebstahl: Vertrauliche Daten wurden gestohlen."
+        }
+    
+    
 ]

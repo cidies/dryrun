@@ -3,246 +3,287 @@
         "id": 1,
         "name": "Ransomware Angriff",
         "description": "Simulation eines Ransomware-Angriffs auf die interne IT-Infrastruktur.",
-        "difficulty": "Mittel"
+        "difficulty": "Mittel",
+        "injects": [101, 102]
     },
     {
         "id": 2,
         "name": "Phishing Angriff",
         "description": "Simulation eines gezielten Phishing-Angriffs, der darauf abzielt, vertrauliche Informationen zu stehlen",
-        "difficulty": "Einfach"
+        "difficulty": "Einfach",
+        "injects": [101, 102]
     },
     {
         "id": 3,
         "name": "DDoS-Simulation",
         "description": "Simulation eines DDoS-Angriffs auf den Webserver der Organisation",
-        "difficulty": "Schwer"
+        "difficulty": "Schwer",
+        "injects": [101, 102]
     },
     {
         "id": 4,
         "name": "Man-in-the-Middle Angriff",
         "description": "Simulation eines Man-in-the-Middle-Angriffs, bei dem Daten zwischen zwei Parteien abgefangen und manipuliert werden",
-        "difficulty": "Schwer"
+        "difficulty": "Schwer",
+        "injects": [101, 102]
     },
     {
         "id": 5,
         "name": "SQL Injection",
         "description": "Simulation eines SQL-Injection-Angriffs auf die Datenbank der Organisation",
-        "difficulty": "Mittel"
+        "difficulty": "Mittel",
+        "injects": [101, 102]
     },
     {
         "id": 6,
         "name": "Malware-Verteilung",
         "description": "Simulation der Verteilung von Malware \u00fcber infizierte E-Mail-Anh\u00e4nge",
-        "difficulty": "Einfach"
+        "difficulty": "Einfach",
+        "injects": [101, 102]
     },
     {
         "id": 7,
         "name": "Zero-Day Exploit",
         "description": "Simulation eines Angriffs unter Ausnutzung einer Zero-Day-Schwachstelle",
-        "difficulty": "Sehr Schwer"
+        "difficulty": "Sehr Schwer",
+        "injects": [101, 102]
     },
     {
         "id": 8,
         "name": "Brute-Force Angriff",
         "description": "Simulation eines Brute-Force-Angriffs auf Benutzerkonten, um Passw\u00f6rter zu knacken",
-        "difficulty": "Mittel"
+        "difficulty": "Mittel",
+        "injects": [101, 102]
     },
     {
         "id": 9,
         "name": "Social Engineering",
         "description": "Simulation eines Social-Engineering-Angriffs, bei dem Mitarbeiter manipuliert werden, um vertrauliche Informationen preiszugeben",
-        "difficulty": "Mittel"
+        "difficulty": "Mittel",
+        "injects": [101, 102]
     },
     {
         "id": 10,
         "name": "Advanced Persistent Threat (APT)",
         "description": "Simulation eines langanhaltenden, gezielten Angriffs durch eine fortschrittliche Bedrohungsgruppe",
-        "difficulty": "Sehr Schwer"
+        "difficulty": "Sehr Schwer",
+        "injects": [101, 102]
     },
     {
         "id": 11,
         "name": "Cross-Site Scripting (XSS)",
         "description": "Simulation eines Cross-Site-Scripting-Angriffs auf eine Webanwendung",
-        "difficulty": "Mittel"
+        "difficulty": "Mittel",
+        "injects": [101, 102]
     },
     {
         "id": 12,
         "name": "DNS Spoofing",
         "description": "Simulation eines DNS-Spoofing-Angriffs, bei dem Benutzer auf gef\u00c3\u00a4lschte Websites umgeleitet werden",
-        "difficulty": "Schwer"
+        "difficulty": "Schwer",
+        "injects": [101, 102]
     },
     {
         "id": 13,
         "name": "Insider Bedrohung",
         "description": "Simulation eines Angriffs durch einen b\u00f6swilligen Insider innerhalb der Organisation",
-        "difficulty": "Schwer"
+        "difficulty": "Schwer",
+        "injects": [101, 102]
     },
     {
         "id": 14,
         "name": "Spear Phishing",
         "description": "Simulation eines gezielten Phishing-Angriffs auf hochrangige Mitarbeiter der Organisation",
-        "difficulty": "Mittel"
+        "difficulty": "Mittel",
+        "injects": [101, 102]
     },
     {
         "id": 15,
         "name": "Credential Stuffing",
         "description": "Simulation eines Angriffs, bei dem gestohlene Anmeldedaten verwendet werden, um Zugriff auf Konten zu erlangen",
-        "difficulty": "Einfach"
+        "difficulty": "Einfach",
+        "injects": [101, 102]
     },
     {
         "id": 16,
         "name": "Supply Chain Attack",
         "description": "Simulation eines Angriffs auf die Lieferkette der Organisation, um Schadsoftware einzuschleusen",
-        "difficulty": "Sehr Schwer"
+        "difficulty": "Sehr Schwer",
+        "injects": [101, 102]
     },
     {
         "id": 17,
         "name": "Privilege Escalation",
         "description": "Simulation eines Angriffs, bei dem ein Benutzer versucht, seine Berechtigungen unbefugt zu erh\u00f6hen",
-        "difficulty": "Mittel"
+        "difficulty": "Mittel",
+        "injects": [101, 102]
     },
     {
         "id": 18,
         "name": "Session Hijacking",
         "description": "Simulation eines Angriffs, bei dem eine Benutzersitzung entf\u00c3\u00bchrt wird, um Zugang zu sensiblen Daten zu erhalten",
-        "difficulty": "Schwer"
+        "difficulty": "Schwer",
+        "injects": [101, 102]
     },
     {
         "id": 19,
         "name": "Watering Hole Angriff",
         "description": "Simulation eines Angriffs, bei dem eine h\u00c3\u00a4ufig besuchte Website kompromittiert wird, um gezielt Benutzer zu infizieren",
-        "difficulty": "Sehr Schwer"
+        "difficulty": "Sehr Schwer",
+        "injects": [101, 102]
     },
     {
         "id": 20,
         "name": "Firmware Attack",
         "description": "Simulation eines Angriffs auf die Firmware von Ger\u00c3\u00a4ten innerhalb der Organisation",
-        "difficulty": "Sehr Schwer"
+        "difficulty": "Sehr Schwer",
+        "injects": [101, 102]
     },
     {
         "id": 21,
         "name": "Phishing-Simulationen",
         "description": "Versenden gef\u00c3\u00a4lschter E-Mails, die Anmeldedaten oder andere sensible Informationen anfordern.",
-        "difficulty": "Mittel"
+        "difficulty": "Mittel",
+        "injects": [101, 102]
     },
     {
         "id": 22,
         "name": "Spear Phishing",
         "description": "Zielgerichtete Phishing-E-Mails, die auf spezifische Mitarbeiter oder Abteilungen abzielen.",
-        "difficulty": "Mittel"
+        "difficulty": "Mittel",
+        "injects": [101, 102]
     },
     {
         "id": 23,
         "name": "Voice Phishing (Vishing)",
         "description": "Durchf\u00c3\u00bchrung von Anrufen, bei denen Sie sich als vertrauensw\u00c3\u00bcrdige Person ausgeben, um sensible Informationen zu erhalten.",
-        "difficulty": "Mittel"
+        "difficulty": "Mittel",
+        "injects": [101, 102]
     },
     {
         "id": 24,
         "name": "SMS Phishing (Smishing)",
         "description": "Versenden gef\u00c3\u00a4lschter SMS-Nachrichten, die dazu auffordern, auf einen Link zu klicken oder Informationen preiszugeben.",
-        "difficulty": "Leicht"
+        "difficulty": "Leicht",
+        "injects": [101, 102]
     },
     {
         "id": 25,
         "name": "Pretexting",
         "description": "Ausgeben als IT-Support oder eine andere legitime Person, um sensible Informationen zu erhalten.",
-        "difficulty": "Schwer"
+        "difficulty": "Schwer",
+        "injects": [101, 102]
     },
     {
         "id": 26,
         "name": "Tailgating",
         "description": "Versuch, durch das Mitgehen hinter einem Mitarbeiter Zugang zu gesicherten Bereichen zu erhalten.",
-        "difficulty": "Mittel"
+        "difficulty": "Mittel",
+        "injects": [101, 102]
     },
     {
         "id": 27,
         "name": "Baiting",
         "description": "Platzieren physischer Medien (z.B. USB-Sticks) an Orten, wo sie von Mitarbeitern gefunden und verwendet werden k\u00c3\u00b6nnten.",
-        "difficulty": "Mittel"
+        "difficulty": "Mittel",
+        "injects": [101, 102]
     },
     {
         "id": 28,
         "name": "Quid Pro Quo",
         "description": "Angebot eines gef\u00c3\u00a4lschten Service oder Vorteil im Austausch f\u00c3\u00bcr sensible Informationen.",
-        "difficulty": "Schwer"
+        "difficulty": "Schwer",
+        "injects": [101, 102]
     },
     {
         "id": 29,
         "name": "Authority",
         "description": "Ausgeben als autorit\u00c3\u00a4re Figur (z.B. F\u00c3\u00bchrungskraft), um Mitarbeiter zur Preisgabe von Informationen zu bewegen.",
-        "difficulty": "Mittel"
+        "difficulty": "Mittel",
+        "injects": [101, 102]
     },
     {
         "id": 30,
         "name": "Scarcity",
         "description": "Erzeugen eines Gef\u00c3\u00bchls der Dringlichkeit, um Mitarbeiter zu schnellen und un\u00c3\u00bcberlegten Handlungen zu bewegen.",
-        "difficulty": "Leicht"
+        "difficulty": "Leicht",
+        "injects": [101, 102]
     },
     {
         "id": 31,
         "name": "Dumpster Diving",
         "description": "Durchsuchen von M\u00c3\u00bclleimern und Recyclingbeh\u00c3\u00a4ltern nach vertraulichen Dokumenten.",
-        "difficulty": "Mittel"
+        "difficulty": "Mittel",
+        "injects": [101, 102]
     },
     {
         "id": 32,
         "name": "Office Reconnaissance",
         "description": "Unauff\u00c3\u00a4lliges Sammeln von Informationen aus B\u00c3\u00bcros oder Arbeitspl\u00c3\u00a4tzen, z.B. durch Fotografieren von Whiteboards oder Dokumenten.",
-        "difficulty": "Schwer"
+        "difficulty": "Schwer",
+        "injects": [101, 102]
     },
     {
         "id": 33,
         "name": "LinkedIn Phishing",
         "description": "Erstellen gef\u00c3\u00a4lschter LinkedIn-Profile, um Verbindungen zu Mitarbeitern herzustellen und Informationen zu sammeln.",
-        "difficulty": "Mittel"
+        "difficulty": "Mittel",
+        "injects": [101, 102]
     },
     {
         "id": 34,
         "name": "Facebook Phishing",
         "description": "Verwenden gef\u00c3\u00a4lschter Facebook-Profile oder Nachrichten, um Informationen von Mitarbeitern zu erhalten.",
-        "difficulty": "Leicht"
+        "difficulty": "Leicht",
+        "injects": [101, 102]
     },
     {
         "id": 35,
         "name": "Fake Surveys",
         "description": "Versenden gef\u00c3\u00a4lschter Umfragen oder Frageb\u00c3\u00b6gen, die dazu dienen, sensible Informationen zu sammeln.",
-        "difficulty": "Mittel"
+        "difficulty": "Mittel",
+        "injects": [101, 102]
     },
     {
         "id": 36,
         "name": "On-site Interviews",
         "description": "Ausgeben als Journalist oder Marktforscher, um vertrauliche Informationen durch Interviews zu sammeln.",
-        "difficulty": "Schwer"
+        "difficulty": "Schwer",
+        "injects": [101, 102]
     },
     {
         "id": 37,
         "name": "Job Application Scams",
         "description": "Ausgeben als Bewerber, um Informationen \u00c3\u00bcber interne Abl\u00c3\u00a4ufe und Sicherheitsma\u00c3\u0178nahmen zu erhalten.",
-        "difficulty": "Mittel"
+        "difficulty": "Mittel",
+        "injects": [101, 102]
     },
     {
         "id": 38,
         "name": "Placement of Malicious Devices",
         "description": "Platzieren pr\u00e4parierter Ger\u00e4te wie Keylogger oder b\u00f6sartige USB-Sticks in der N\u00e4he von Arbeitspl\u00e4tzen.",
-        "difficulty": "Schwer"
+        "difficulty": "Schwer",
+        "injects": [101, 102]
     },
     {
         "id": 39,
         "name": "Security Badge Cloning",
         "description": "Versuch, Sicherheitsbadges zu klonen oder gef\u00c3\u00a4lschte Badges zu verwenden, um Zugang zu gesicherten Bereichen zu erhalten.",
-        "difficulty": "Schwer"
+        "difficulty": "Schwer",
+        "injects": [101, 102]
     },
     {
         "id": 40,
         "name": "Fake Maintenance Personnel",
         "description": "Ausgeben als Wartungspersonal, um Zugang zu sensiblen Bereichen oder Informationen zu erhalten.",
-        "difficulty": "Mittel"
+        "difficulty": "Mittel",
+        "injects": [101, 102]
     },
     {
         "id": 41,
         "name": "Gef\u00e4lschte Umfrage per Brief",
         "description": "Versenden einer gef\u00e4lschten Umfrage, die angeblich von einer nationalen Sicherheitsbeh\u00f6rde stammt, um sensible Informationen zu sammeln.",
-        "difficulty": "Schwer"
+        "difficulty": "Schwer",
+        "injects": [101, 102]
     }
 ]

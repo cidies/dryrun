@@ -33,6 +33,8 @@ socketio = SocketIO(app)
 
 DATA_DIR = 'data'
 CHAT_LOG_FILE = 'chat_log.json'
+#config_path = 'c:\\temp\\config.json'
+config_path = '/tmp/config.json'
 
 logging.basicConfig(level=logging.INFO)
 
@@ -689,7 +691,8 @@ def textnote_internal(user, message):
 
 def textnote(title, description):
     # Load the config file
-    config_path = 'c:\\temp\\config.json'
+    #config_path = 'c:\\temp\\config.json'
+    #config_path = '\\tmp\\config.json'
     try:
         with open(config_path, 'r') as f:
             config = json.load(f)
@@ -715,7 +718,8 @@ def textnote(title, description):
 
 def threema_message(title, description):
     # Load the config file
-    config_path = 'c:\\temp\\config.json'
+    #config_path = 'c:\\temp\\config.json'
+    #config_path = '\\tmp\\config.json'
     try:
         with open(config_path, 'r') as f:
             config = json.load(f)
@@ -759,7 +763,8 @@ def threema_message(title, description):
 
 def email(title, description):
     # Load the config file
-    config_path = 'c:\\temp\\config.json'
+    #config_path = 'c:\\temp\\config.json'
+    #config_path = '\\tmp\\config.json'
     with open(config_path, 'r') as f:
         config = json.load(f)
 
@@ -797,7 +802,8 @@ def email(title, description):
 
 def gmail(title, description):
     # Load the config file
-    config_path = 'c:\\temp\\config.json'
+    #config_path = 'c:\\temp\\config.json'
+    #config_path = '\\tmp\\config.json'
     with open(config_path, 'r') as f:
         config = json.load(f)
 
@@ -834,7 +840,7 @@ def gmail(title, description):
 
 def make_call_route():
     # Load the config file
-    config_path = 'c:\\temp\\config.json'
+    #config_path = 'c:\\temp\\config.json'
     with open(config_path, 'r') as f:
         config = json.load(f)
 
@@ -853,7 +859,8 @@ def make_call_route():
 
 def whatsapp_notification(title, description):
         # Load the config file
-    config_path = 'c:\\temp\\config.json'
+    #config_path = 'c:\\temp\\config.json'
+    #config_path = '\\tmp\\config.json'
     with open(config_path, 'r') as f:
         config = json.load(f)
 
@@ -932,7 +939,8 @@ def api_injects():
 
 @app.route('/edit_config', methods=['GET', 'POST'])
 def edit_config():
-    config_path = 'c:\\temp\\config.json'
+    #config_path = 'c:\\temp\\config.json'
+    #config_path = '\\tmp\\config.json'
     if request.method == 'POST':
         # Load the current config data
         with open(config_path, 'r') as f:

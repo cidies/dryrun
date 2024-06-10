@@ -20,11 +20,15 @@ from pptx import Presentation
 from pptx.util import Inches
 from flask import send_file
 
+from flask_cors import CORS
+import schedule
+
 
 
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY', '2309489358910358')
 toastr = Toastr(app)
+CORS(app)
 socketio = SocketIO(app)
 
 DATA_DIR = 'data'

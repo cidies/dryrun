@@ -24,7 +24,8 @@
         },
         "target_team": "",
         "planned": "",
-        "last_performed": "2024-06-08T13:27:11.769008"
+        "last_performed": "2024-06-08T13:27:11.769008",
+        "execution_type": "manual"
     },
     {
         "id": 2,

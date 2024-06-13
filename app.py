@@ -234,47 +234,37 @@ def schedule_timed_exercise(exercise):
 
 
 
-@app.route('/update_exercise/<id>', methods=['POST'])
+@app.route('/update_exercise/<int:id>', methods=['POST'])
 def update_exercise(id):
     logging.info('[UE.1] Updating exercise with ID: %s', id)
 
-    # Load the exercises from the JSON file
     exercises = load_json('exercises.json')
     logging.info('[UE.2] Loaded exercises from JSON file')
 
-    # Find the exercise with the given ID
     for exercise in exercises:
         if exercise['id'] == int(id):
             logging.info('[UE.3] Found exercise with matching ID')
 
-            # Update the exercise with the form data
             exercise['name'] = request.form['name']
             exercise['description'] = request.form['description']
             exercise['target_team'] = request.form['target_team']
-            #exercise['last_performed'] = request.form['last_performed']
             exercise['planned'] = request.form['planned']
-            
-            # Convert the inject_order from a comma-separated string to a list of integers
+            exercise['execution_type'] = request.form['execution_type']
+
             inject_order = request.form['inject_order'].split(',')
-            exercise['inject_order'] = [int(i) for i in inject_order]
+            exercise['inject_order'] = [int(i) for i in inject_order if i]
+
             logging.info('[UE.4] Updated exercise properties')
 
-            # Log the inject_order from the form data
-            logging.info('[UE.5] RAW inject_order from client: %s', request.form['inject_order'])
-            logging.info('[UE.5] inject_order from client: %s', inject_order)
-
-            # Save the exercises back to the JSON file
             save_json('exercises.json', exercises)
-            logging.info('[UE.6] Saved exercises to JSON file')
+            logging.info('[UE.5] Saved exercises to JSON file')
 
-            # Show a toast message
             flash('Exercise updated successfully')
-            logging.info('[UE.7] Flashed message: Exercise updated successfully')
+            logging.info('[UE.6] Flashed message: Exercise updated successfully')
 
-            # Return a response
             return redirect(url_for('exercises'))
 
-    logging.warning('[UE.8] No exercise found with ID: %s', id)
+    logging.warning('[UE.7] No exercise found with ID: %s', id)
     flash('Exercise not found')
     return redirect(url_for('exercises'))
 

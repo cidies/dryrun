@@ -16,6 +16,8 @@
             border: 1px solid #ccc;
             margin-bottom: 5px;
             cursor: move;
+            display: flex;
+            justify-content: space-between;
         }
         .inject-item {
             display: flex;
@@ -26,73 +28,94 @@
             margin-left: 5px;
         }
         .injects-container {
-           display: flex;
-          justify-content: space-between;
+            display: flex;
+            justify-content: space-between;
         }
         #availableInjects {
-    font-size: 0.8em; /* Oder jede andere Größe, die Sie bevorzugen */
-}
+            font-size: 0.8em; /* Oder jede andere Größe, die Sie bevorzugen */
+        }
+        .button {
+            padding: 5px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+            border: none;
+        }
+        .button-execute {
+            background-color: #4CAF50;
+            color: white;
+        }
     </style>
 </head>
 
 <body>
     <h1>Edit Exercise</h1>
-    <div style="width: 50%; margin: 0 auto;"> <!-- Container hinzugefügt -->
+    <div style="width: 50%; margin: 0 auto;">
         <form id="editExerciseForm" method="post" action="{{ url_for('update_exercise', id=exercise.id) }}">
-        <label for="name">Exercise Name:</label><br>
-        <input type="text" id="name" name="name" value="{{ exercise.name }}"><br>
-        <label for="description">Description:</label><br>
-        <textarea id="description" name="description">{{ exercise.description }}</textarea><br>
-        <label for="target_team">Target Team:</label><br>
-        <input type="text" id="target_team" name="target_team" value="{{ exercise.target_team }}"><br>
-        <!-- ... -->
-        <label for="last_performed">Last Performed:</label><br>
-        <p id="last_performed">{{ exercise.last_performed }}</p><br>
-        <label for="planned">Planned Date:</label><br>
-        <input type="datetime-local" id="planned" name="planned" value="{{ exercise.planned }}"><br><br>
-        <label for="id">Inject Index:</label>
-        <input type="text" id="id" name="id" value="{{ exercise.id }}" readonly><br>
-        <!-- Add more fields here for other exercise properties -->
+            <label for="name">Exercise Name:</label><br>
+            <input type="text" id="name" name="name" value="{{ exercise.name }}"><br>
+            <label for="description">Description:</label><br>
+            <textarea id="description" name="description">{{ exercise.description }}</textarea><br>
+            <label for="target_team">Target Team:</label><br>
+            <input type="text" id="target_team" name="target_team" value="{{ exercise.target_team }}"><br>
+            <label for="last_performed">Last Performed:</label><br>
+            <p id="last_performed">{{ exercise.last_performed }}</p><br>
+            <label for="planned">Planned Date:</label><br>
+            <input type="datetime-local" id="planned" name="planned" value="{{ exercise.planned }}"><br><br>
+            <label for="id">Inject Index:</label>
+            <input type="text" id="id" name="id" value="{{ exercise.id }}" readonly><br>
+            
+            <!-- New field for type of execution -->
+            <label for="execution_type">Type of Execution:</label><br>
+            <select id="execution_type" name="execution_type">
+                <option value="manual" {% if exercise.execution_type == 'manual' %}selected{% endif %}>Manual</option>
+                <option value="scheduled" {% if exercise.execution_type == 'scheduled' %}selected{% endif %}>Scheduled</option>
+            </select><br><br>
 
-        <div class="injects-container">
-          <div>
-            <label for="injects">Select Injects:</label>
-            <div id="availableInjects" >
-              {% if injects %}
-                {% for inject in injects %}
-                  <div class="inject-item">
-                    <input type="checkbox" id="inject_{{ inject.id }}" name="injects" value="{{ inject.id }}">
-                    <label for="inject_{{ inject.id }}">{{ inject.title }}</label>
-                  </div>
-                {% endfor %}
-              {% else %}
-                <p>No injects available</p>
-              {% endif %}
+            <div class="injects-container">
+                <div>
+                    <label for="injects">Select Injects:</label>
+                    <div id="availableInjects">
+                        {% if injects %}
+                            {% for inject in injects %}
+                                <div class="inject-item">
+                                    <input type="checkbox" id="inject_{{ inject.id }}" name="injects" value="{{ inject.id }}">
+                                    <label for="inject_{{ inject.id }}">{{ inject.title }}</label>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <p>No injects available</p>
+                        {% endif %}
+                    </div>
+                    <button type="button" onclick="addSelectedInjects()">Add Selected Injects</button><br><br>
+                </div>
+
+                <div>
+                    <label for="selectedInjects">Selected Injects (drag to reorder):</label>
+                    <ul id="injectList" class="inject-list">
+                        {% if exercise.inject_order %}
+                            {% for inject_id in exercise.inject_order %}
+                                {% set inject = injects | selectattr('id', 'equalto', inject_id) | first %}
+                                {% if inject %}
+                                    <li data-id="{{ inject.id }}" draggable="true" ondblclick="removeInject(this)">
+                                        {{ inject.title }}
+                                        <button class="button button-execute" type="button" onclick="planInjectExecution({{ inject.id }})">Plan Execute</button>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    </ul>
+                </div>
             </div>
-            <button type="button" onclick="addSelectedInjects()">Add Selected Injects</button><br><br>
-          </div>
 
-          <div>
-            <label for="selectedInjects">Selected Injects (drag to reorder):</label>
-            <ul id="injectList" class="inject-list">
-              {% if exercise.inject_order %}
-                {% for inject_id in exercise.inject_order %}
-                  {% set inject = injects | selectattr('id', 'equalto', inject_id) | first %}
-                  {% if inject %}
-                    <li data-id="{{ inject.id }}" draggable="true" ondblclick="removeInject(this)">{{ inject.title }}</li>
-                  {% endif %}
-                {% endfor %}
-              {% endif %}
-            </ul>
-          </div>
-        </div>
-        
-
-
-        <input type="hidden" id="inject_order" name="inject_order" value="">
-        <input type="submit" value="Submit">
-    </form>
-  </div> <!-- Container geschlossen -->
+            <input type="hidden" id="inject_order" name="inject_order" value="">
+            <input type="submit" value="Submit">
+        </form>
+    </div>
 
     <script>
         function addSelectedInjects() {
@@ -107,10 +130,10 @@
                 li.setAttribute('data-id', injectId);
                 li.innerText = injectTitle;
                 li.setAttribute('draggable', 'true');
+                li.innerHTML = `${injectTitle} <button class="button button-execute" type="button" onclick="planInjectExecution(${injectId})">Plan Execute</button>`;
 
                 injectList.appendChild(li);
 
-                // Uncheck and disable the checkbox to prevent duplicate selection
                 inject.checked = false;
                 inject.disabled = true;
             });
@@ -120,17 +143,17 @@
 
         let items = null;
 
-function addDragAndDropHandlers() {
-    items = document.querySelectorAll('.inject-list li');
-    items.forEach(function(item) {
-        item.addEventListener('dragstart', handleDragStart, false);
-        item.addEventListener('dragenter', handleDragEnter, false);
-        item.addEventListener('dragover', handleDragOver, false);
-        item.addEventListener('dragleave', handleDragLeave, false);
-        item.addEventListener('drop', handleDrop, false);
-        item.addEventListener('dragend', handleDragEnd, false);
-    });
-}
+        function addDragAndDropHandlers() {
+            items = document.querySelectorAll('.inject-list li');
+            items.forEach(function(item) {
+                item.addEventListener('dragstart', handleDragStart, false);
+                item.addEventListener('dragenter', handleDragEnter, false);
+                item.addEventListener('dragover', handleDragOver, false);
+                item.addEventListener('dragleave', handleDragLeave, false);
+                item.addEventListener('drop', handleDrop, false);
+                item.addEventListener('dragend', handleDragEnd, false);
+            });
+        }
 
         let dragSrcEl = null;
 
@@ -147,7 +170,7 @@ function addDragAndDropHandlers() {
                 e.preventDefault(); // Necessary. Allows us to drop.
             }
 
-            e.dataTransfer.dropEffect = 'move';  // See the section on the DataTransfer object.
+            e.dataTransfer.dropEffect = 'move';
 
             return false;
         }
@@ -160,79 +183,65 @@ function addDragAndDropHandlers() {
             this.classList.remove('over');
         }
 
+        function updateInjectOrder() {
+            const injectOrder = [];
+            document.querySelectorAll('#injectList li').forEach(function(item) {
+                injectOrder.push(item.getAttribute('data-id').toString());
+            });
 
-function updateInjectOrder() {
-  const injectOrder = [];
-  document.querySelectorAll('#injectList li').forEach(function(item) {
-    injectOrder.push(item.getAttribute('data-id').toString());
-  });
-  
-  // Log the injectOrder array to the console
-  console.log("[UIE.01] " + injectOrder);
-  
-  document.getElementById('inject_order').value = injectOrder.join(',');
-}
+            document.getElementById('inject_order').value = injectOrder.join(',');
+        }
 
+        function handleDrop(e) {
+            if (e.stopPropagation) {
+                e.stopPropagation();
+            }
 
-function handleDrop(e) {
-    console.log('Drop event triggered');
-  
-    if (e.stopPropagation) {
-      e.stopPropagation(); // Stops some browsers from redirecting.
-      console.log('[hD.01] Event propagation stopped');
-    }
-  
-    // Don't do anything if dropping the same column we're dragging.
-    if (dragSrcEl != this) {
-        // Swap the innerHTML and data-id of the source and target elements
-        let tempInnerHTML = dragSrcEl.innerHTML;
-        let tempDataId = dragSrcEl.getAttribute('data-id');
+            if (dragSrcEl != this) {
+                let tempInnerHTML = dragSrcEl.innerHTML;
+                let tempDataId = dragSrcEl.getAttribute('data-id');
 
-        dragSrcEl.innerHTML = this.innerHTML;
-        dragSrcEl.setAttribute('data-id', this.getAttribute('data-id'));
+                dragSrcEl.innerHTML = this.innerHTML;
+                dragSrcEl.setAttribute('data-id', this.getAttribute('data-id'));
 
-        this.innerHTML = tempInnerHTML;
-        this.setAttribute('data-id', tempDataId);
-    } else {
-      console.log('[hD.02] Drag source element is the same as this element');
-    }
-  
-    updateInjectOrder();
-    console.log('[hD.03] Inject order updated');
-  
-    // Log the updated inject_order
-    const injectOrder = document.getElementById('inject_order').value;
-    console.log('[hD.04] Updated inject_order: ' + injectOrder);
-  
-    return false;
-  }
+                this.innerHTML = tempInnerHTML;
+                this.setAttribute('data-id', tempDataId);
+            }
 
-function removeInject(element) {
-  element.parentNode.removeChild(element);
-}
+            updateInjectOrder();
+        }
 
-  function handleDragEnd(e) {
-    console.log('Drag end event triggered');
-  
-    this.style.opacity = '1';
-    console.log('Opacity set to 1');
-  
-    items.forEach(function (item) {
-      item.classList.remove('over');
-      console.log('Removed "over" class from item');
-    });
-  
-    console.log('Finished handling drag end event');
-  }
+        function removeInject(element) {
+            element.parentNode.removeChild(element);
+        }
 
-document.addEventListener('DOMContentLoaded', function() {
-    addDragAndDropHandlers();
+        function handleDragEnd(e) {
+            this.style.opacity = '1';
 
-    const form = document.getElementById('editExerciseForm');
-    form.addEventListener('submit', function(event) {
-        updateInjectOrder();
-    });
-});
+            items.forEach(function (item) {
+                item.classList.remove('over');
+            });
+        }
+
+        function planInjectExecution(injectId) {
+            const injectList = document.getElementById('inject_order').value.split(',');
+            if (!injectList.includes(injectId.toString())) {
+                injectList.push(injectId.toString());
+                document.getElementById('inject_order').value = injectList.join(',');
+                toastr.success(`Inject ${injectId} zur Ausführung geplant.`);
+            } else {
+                toastr.error(`Inject ${injectId} ist bereits geplant.`);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            addDragAndDropHandlers();
+
+            const form = document.getElementById('editExerciseForm');
+            form.addEventListener('submit', function(event) {
+                updateInjectOrder();
+            });
+        });
     </script>
 </body>
 </html>

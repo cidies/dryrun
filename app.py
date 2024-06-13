@@ -630,10 +630,39 @@ def execute_inject_route(exercise_name, inject_idx):
         execute_inject(inject)
     return jsonify({"status": "executed"}), 200
 
+@app.route('/execute_inject/<int:inject_id>', methods=['POST'])
+def execute_single_inject(inject_id):
+    logging.info(f"[EI.01] execute_single_inject called with inject_id: {inject_id}")
+
+    injects = load_json('injects.json')
+    inject = next((inject for inject in injects if inject['id'] == inject_id), None)
+
+    if inject is None:
+        logging.error("[*] Error: Inject not found")
+        return jsonify({"status": "error", "message": "Inject not found"}), 404
+
+    # Execute the inject (placeholder for the actual logic)
+    execute_inject(inject)
+
+    logging.info(f"[EI.02] Inject {inject_id} executed")
+    return jsonify({"status": "success", "message": f"Inject {inject_id} executed"}), 200
+
 def execute_inject(inject):
-    # Simulate sending inject via the specified communication type
-    print(f"Executing inject: {inject['title']} via {inject['communication_type']}")
-    # In real implementation, send email, text, call, or personal notification here
+    logging.info(f"Executing inject: {inject['title']}")
+    # Simulate the inject execution logic
+    communication_type = inject.get('communication_type')
+    if communication_type == 'text':
+        message = inject.get('nachrichtentext', 'No description')
+        textnote_internal("forensician", message)
+    elif communication_type == 'email':
+        email(inject.get('title', 'No title'), inject.get('nachrichtentext', 'No description'))
+    # Add other communication types as needed
+    logging.info(f"Inject executed: {inject['title']} via {communication_type}")
+
+
+
+
+
 
 @app.route('/edit_inject/<int:inject_id>', methods=['GET', 'POST'])
 def edit_inject(inject_id):

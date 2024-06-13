@@ -31,7 +31,6 @@
         th {
             background-color: #f2f2f2;
         }
-
         th:nth-child(1) {
             width: 5%;
         }
@@ -43,16 +42,43 @@
         }
         th:nth-child(4) {
             width: 15%;
-        }        
+        }
         th:nth-child(5) {
             width: 15%;
-        }                
+        }
+        .button {
+            padding: 5px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+            border: none;
+        }
+        .button-edit {
+            background-color: #008CBA;
+            color: white;
+        }
+        .button-view {
+            background-color: #f0ad4e;
+            color: white;
+        }
+        .button-execute {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .button-download {
+            background-color: #5bc0de;
+            color: white;
+        }
     </style>
 </head>
 <body>
     <h1>Exercises</h1>
 
-    <button onclick="location.href='{{ url_for('schedule_exercise_form') }}'">Plan Exercise</button>
+    <button class="button button-edit" onclick="location.href='{{ url_for('schedule_exercise_form') }}'">Plan Exercise</button>
 
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
@@ -81,13 +107,13 @@
             <td>{{ exercise.description }}</td> 
             <td>{{ exercise.last_performed }}</td>             
             <td>
-                <button onclick="location.href='{{ url_for('edit_exercise', id=exercise.id) }}'">Edit</button>
-                <button onclick="location.href='{{ url_for('view_inject_comments', exercise_id=exercise.id) }}'">View Inject Comments</button>
+                <button class="button button-edit" onclick="location.href='{{ url_for('edit_exercise', id=exercise.id) }}'">Edit</button>
+                <button class="button button-view" onclick="location.href='{{ url_for('view_inject_comments', exercise_id=exercise.id) }}'">View Inject Comments</button>
                 <form action="{{ url_for('execute_exercise', exercise_id=exercise.id) }}" method="post" style="display:inline;">
-                    <button type="submit">Execute</button>
+                    <button class="button button-execute" type="submit">Execute</button>
                 </form>
                 <form action="{{ url_for('create_and_download_presentation_for_exercise', exercise_id=exercise.id) }}" method="post" style="display:inline;">
-                    <button type="submit">Download Presentation</button>
+                    <button class="button button-download" type="submit">Download Presentation</button>
                 </form>
             </td>
         </tr>

@@ -1,136 +1,182 @@
-
 {% extends 'base.html' %}
 
 {% block content %}
-
-<style>
-    table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-    th, td {
-        border: 1px solid #ddd;
-        padding: 8px;
-    }
-    th {
-        background-color: #f2f2f2;
-    }
-
-    /* Verkleinern Sie die Breite der Spalte "Exercise Name" */
-    th:nth-child(1) {
-        width: 15%;
-    }
-
-    /* Vergrößern Sie die Breite der Spalte "Description" */
-    th:nth-child(3) {
-        width: 50%;
-    }
-
-    /* Verkleinern Sie die Breite der Spalte "Last Performed" */
-    th:nth-child(4) {
-        width: 15%;
-    }
-</style>
-<h2>Injects</h2>
-<div class="injects">
-    <table>
-        <tr>
-            <th>Id</th>
-            <th>Titel</th>
-            <th>Kommunikationsart</th>
-            <th>Beschreibung</th>
-            <th>Übungsnutzen</th>
-            <th>Erwarteter Umgang</th>
-            <th>Zugewiesene Szenarien</th>
-            <th>Aktionen</th>
-        </tr>
-        {% for inject in injects %}
-            <tr>
-                <td>{{ inject.id }}</td>
-                <td>{{ inject.title }}</td>
-                <td>{{ inject.communication_type }}</td>
-                <td>{{ inject.description }}</td>
-                <td>{{ inject.exercise_benefit }}</td>
-                <td>{{ inject.expected_response }}</td>
-                <td>{{ inject.assigned_scenarios | map('id_to_name') | join(', ') }}</td>
-                <!--- <td><button onclick="editInject({{ loop.index0 }})">Bearbeiten</button></td> --->
-                <td><a href="/edit_inject/{{ inject.id }}" target="_blank">Bearbeiten</a></td>
-            </tr>
-        {% endfor %}
-    </table>
-</div>
-<div>
-
-
-<script>
-document.getElementById('inject-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-    var formData = {
-        title: document.getElementById('title').value,
-        description: document.getElementById('description').value,
-        exercise_benefit: document.getElementById('exercise_benefit').value,
-        expected_response: document.getElementById('expected_response').value,
-        assigned_scenarios: document.getElementById('assigned_scenarios').value.split(',').map(s => s.trim()),
-        communication_type: document.getElementById('communication_type').value
-    };
-    fetch('/api/injects', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.status === 'success') {
-            location.reload();
-        } else {
-            alert('Fehler beim Hinzufügen des Injects.');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Injects</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
         }
-    });
-});
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        th:nth-child(1) {
+            width: 15%;
+        }
+        th:nth-child(3) {
+            width: 50%;
+        }
+        th:nth-child(4) {
+            width: 15%;
+        }
+        .button {
+            padding: 5px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+            border: none;
+        }
+        .button-execute {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .button-edit {
+            background-color: #008CBA;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h2>Injects</h2>
+    <div class="injects">
+        <table>
+            <tr>
+                <th>Id</th>
+                <th>Titel</th>
+                <th>Kommunikationsart</th>
+                <th>Beschreibung</th>
+                <th>Übungsnutzen</th>
+                <th>Erwarteter Umgang</th>
+                <th>Zugewiesene Szenarien</th>
+                <th>Aktionen</th>
+            </tr>
+            {% for inject in injects %}
+                <tr>
+                    <td>{{ inject.id }}</td>
+                    <td>{{ inject.title }}</td>
+                    <td>{{ inject.communication_type }}</td>
+                    <td>{{ inject.description }}</td>
+                    <td>{{ inject.exercise_benefit }}</td>
+                    <td>{{ inject.expected_response }}</td>
+                    <td>{{ inject.assigned_scenarios | map('id_to_name') | join(', ') }}</td>
+                    <td>
+                        <button class="button button-execute" onclick="executeInject({{ inject.id }})">Ausführen</button>
+                        <button class="button button-edit" onclick="window.open('/edit_inject/{{ inject.id }}', '_blank')">Bearbeiten</button>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
 
-function editInject(injectId) {
-    fetch(`/edit_inject/${injectId}`)
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+    function executeInject(injectId) {
+        fetch(`/execute_inject/${injectId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
         .then(response => response.json())
         .then(data => {
-            document.getElementById('edit-inject-id').value = injectId;
-            document.getElementById('edit-title').value = data.title;
-            document.getElementById('edit-description').value = data.description;
-            document.getElementById('edit-exercise-benefit').value = data.exercise_benefit;
-            document.getElementById('edit-expected-response').value = data.expected_response;
-            document.getElementById('edit-communication_type').value = data.communication_type;
-            document.getElementById('edit-assigned-scenarios').value = data.assigned_scenarios.join(', ');
-            document.getElementById('editInjectModal').style.display = 'block';
+            if (data.status === 'success') {
+                toastr.success(`Inject ${injectId} erfolgreich ausgeführt.`);
+            } else {
+                toastr.error(`Fehler beim Ausführen des Injects ${injectId}: ${data.message}`);
+            }
         });
-}
+    }
 
-document.getElementById('edit-inject-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-    const injectId = document.getElementById('edit-inject-id').value;
-    const data = {
-        title: document.getElementById('edit-title').value,
-        description: document.getElementById('edit-description').value,
-        exercise_benefit: document.getElementById('edit-exercise-benefit').value,
-        expected_response: document.getElementById('edit-expected-response').value,
-        communication_type: document.getElementById('edit-communication_type').value,
-        assigned_scenarios: document.getElementById('edit-assigned-scenarios').value.split(',').map(s => s.trim())
-    };
-    fetch(`/edit_inject/${injectId}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    }).then(response => response.json()).then(result => {
-        if (result.status === 'success') {
-            location.reload();
-        }
+    document.getElementById('inject-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        var formData = {
+            title: document.getElementById('title').value,
+            description: document.getElementById('description').value,
+            exercise_benefit: document.getElementById('exercise_benefit').value,
+            expected_response: document.getElementById('expected_response').value,
+            assigned_scenarios: document.getElementById('assigned_scenarios').value.split(',').map(s => s.trim()),
+            communication_type: document.getElementById('communication_type').value
+        };
+        fetch('/api/injects', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                toastr.success('Inject erfolgreich hinzugefügt.');
+                location.reload();
+            } else {
+                toastr.error('Fehler beim Hinzufügen des Injects.');
+            }
+        });
     });
-});
 
-function closeEditModal() {
-    document.getElementById('editInjectModal').style.display = 'none';
-}
-</script>
+    function editInject(injectId) {
+        fetch(`/edit_inject/${injectId}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('edit-inject-id').value = injectId;
+                document.getElementById('edit-title').value = data.title;
+                document.getElementById('edit-description').value = data.description;
+                document.getElementById('edit-exercise-benefit').value = data.exercise_benefit;
+                document.getElementById('edit-expected-response').value = data.expected_response;
+                document.getElementById('edit-communication_type').value = data.communication_type;
+                document.getElementById('edit-assigned-scenarios').value = data.assigned_scenarios.join(', ');
+                document.getElementById('editInjectModal').style.display = 'block';
+            });
+    }
+
+    document.getElementById('edit-inject-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const injectId = document.getElementById('edit-inject-id').value;
+        const data = {
+            title: document.getElementById('edit-title').value,
+            description: document.getElementById('edit-description').value,
+            exercise_benefit: document.getElementById('edit-exercise-benefit').value,
+            expected_response: document.getElementById('edit-expected-response').value,
+            communication_type: document.getElementById('edit-communication_type').value,
+            assigned_scenarios: document.getElementById('edit-assigned-scenarios').value.split(',').map(s => s.trim())
+        };
+        fetch(`/edit_inject/${injectId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }).then(response => response.json()).then(result => {
+            if (result.status === 'success') {
+                toastr.success('Inject erfolgreich bearbeitet.');
+                location.reload();
+            } else {
+                toastr.error('Fehler beim Bearbeiten des Injects.');
+            }
+        });
+    });
+
+    function closeEditModal() {
+        document.getElementById('editInjectModal').style.display = 'none';
+    }
+    </script>
+</body>
+</html>
+
 {% endblock %}

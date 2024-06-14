@@ -25,6 +25,7 @@ import schedule
 
 
 
+
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY', '2309489358910358')
 toastr = Toastr(app)
@@ -36,11 +37,14 @@ CHAT_LOG_FILE = 'chat_log.json'
 #config_path = 'c:\\temp\\config.json'
 config_path = '/tmp/config.json'
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(__name__)
 
 def load_json(filename):
+    logger.info('Dies ist ein Info-Log-Eintrag')
     with open(os.path.join(DATA_DIR, filename), 'r') as file:
         return json.load(file)
+    
 
 def save_json(filename, data):
     with open(os.path.join(DATA_DIR, filename), 'w') as file:
@@ -403,8 +407,6 @@ def execute_exercise(exercise_id):
     # Render the executed_exercise.html page immediately
     return render_template('executed_exercise.html', exercise=exercise, status="Exercise is being executed")
 
-from flask import send_file
-from pptx import Presentation
 
 @app.route('/create_and_download_presentation_for_exercise/<int:exercise_id>', methods=['POST'])
 def create_and_download_presentation_for_exercise(exercise_id):

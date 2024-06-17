@@ -56,13 +56,13 @@
         <table>
             <tr>
                 <th>Id</th>
-                <th>Titel</th>
-                <th>Kommunikationsart</th>
-                <th>Beschreibung</th>
-                <th>Übungsnutzen</th>
-                <th>Erwarteter Umgang</th>
-                <th>Zugewiesene Szenarien</th>
-                <th>Aktionen</th>
+                <th>Title</th>
+                <th>Type of communication</th>
+                <th>Description</th>
+                <th>Exercise benefit</th>
+                <th>Expected handling</th>
+                <th>Assigned scenarios</th>
+                <th>Actions</th>
             </tr>
             {% for inject in injects %}
                 <tr>
@@ -74,8 +74,8 @@
                     <td>{{ inject.expected_response }}</td>
                     <td>{{ inject.assigned_scenarios | map('id_to_name') | join(', ') }}</td>
                     <td>
-                        <button class="button button-execute" onclick="executeInject({{ inject.id }})">Ausführen</button>
-                        <button class="button button-edit" onclick="window.open('/edit_inject/{{ inject.id }}', '_blank')">Bearbeiten</button>
+                        <button class="button button-execute" onclick="executeInject({{ inject.id }})">Execute</button>
+                        <button class="button button-edit" onclick="window.open('/edit_inject/{{ inject.id }}', '_blank')">Edit</button>
                     </td>
                 </tr>
             {% endfor %}

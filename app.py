@@ -34,8 +34,8 @@ socketio = SocketIO(app)
 
 DATA_DIR = 'data'
 CHAT_LOG_FILE = 'chat_log.json'
-#config_path = 'c:\\temp\\config.json'
-config_path = '/tmp/config.json'
+config_path = 'c:\\temp\\config.json'
+#config_path = '/tmp/config.json'
 
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)

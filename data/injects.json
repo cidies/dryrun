@@ -1,21 +1,21 @@
 [
     {
         "id": 1,
-        "title": "Verd\u00e4chtige E-Mail entdeckt",
-        "description": "Ein Mitarbeiter meldet eine verd\u00e4chtige E-Mail, die einen Anhang mit einem seltsamen Namen enth\u00e4lt.",
-        "exercise_benefit": "\u00dcbt das Erkennen und Melden von Phishing-Versuchen.",
-        "expected_response": "Die Teilnehmer sollten die E-Mail analysieren, den Anhang nicht \u00f6ffnen und die IT-Sicherheitsabteilung informieren.",
+        "title": "Suspicious email discovered",
+        "description": "An employee reports a suspicious email that contains an attachment with a strange name.",
+        "exercise_benefit": "Practice recognizing and reporting phishing attempts.",
+        "expected_response": "Participants should analyze the email, avoid opening the attachment, and inform the IT security department.",
         "communication_type": "email",
         "duration": 5,
         "nachrichtentext": "<!DOCTYPE html>\n<html lang=\"de\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Text in HTML</title>\n</head>\n<body>\n    <p>Hallo,</p>\n\n    <p>ich habe heute eine E-Mail bekommen, die durchaus vertrauensw\u00fcrdig erscheint. Allerdings schickt mir dieser Absender sonst keine solchen Anh\u00e4nge. Eventuell handelt es sich um eine Phishing Mail.</p>\n\n    <p>Beste Gr\u00fc\u00dfe,</p>\n\n    <p>Kurt Lamensloh</p>\n</body>\n</html>\n",
-        "nachrichtentextPlain": "Hallo, \nich habe heute eine E-Mail bekommen, die durchaus vertrauensw\u00fcrdig erscheint. Allerdings schickt mir dieser Absender sonst keine solchen Anh\u00e4nge. Eventuell handelt es sich um eine Phishing Mail.\nbeste Gr\u016b\u00dfe \nKurt Lamensloh"
+        "nachrichtentextPlain": "Hello,\n\nToday I received an email that appears quite trustworthy. However, this sender usually does not send such attachments. It might be a phishing email.\n\nBest regards,  \nKurt Lamensloh"
     },
     {
         "id": 2,
-        "title": "Auff\u00e4llig schnelle Kommunikation",
-        "description": "Ein Mitarbeiter ruft an und meldet, dass die Kommunikation \u00dcber das interne Netzwerk ungew\u00f6hnlich langsam ist.",
-        "exercise_benefit": "\u00dcbt die Identifikation von Netzwerkmanipulationen.",
-        "expected_response": "Die Teilnehmer sollten die Netzwerklogs \u00dcberpr\u00dcfen, den Man-in-the-Middle-Angriff identifizieren und geeignete Gegenma\u00dfnahmen ergreifen.",
+        "title": "Suspiciously fast communication",
+        "description": "An employee calls and reports that communication over the internal network is unusually slow.",
+        "exercise_benefit": "Practice identifying network manipulations.",
+        "expected_response": "Participants should review the network logs, identify the Man-in-the-Middle attack, and take appropriate countermeasures.",
         "communication_type": "text",
         "duration": 5,
         "nachrichtentext": "<!DOCTYPE html>\n<html lang=\"de\">\n<head>\n    <meta charset=\"UTF-8\">\n    <title>Netzwerkgeschwindigkeitsproblem</title>\n    <style>\n        body {\n            font-family: Arial, sans-serif;\n            margin: 20px;\n            line-height: 1.6;\n        }\n        .content {\n            max-width: 600px;\n            margin: auto;\n            padding: 20px;\n            border: 1px solid #ccc;\n            border-radius: 10px;\n            background-color: #f9f9f9;\n        }\n        h1 {\n            text-align: center;\n            color: #333;\n        }\n        .details {\n            margin-top: 20px;\n        }\n        .details p {\n            margin: 5px 0;\n        }\n    </style>\n</head>\n<body>\n    <div class=\"content\">\n        <h1>Netzwerkgeschwindigkeitsproblem</h1>\n        <p>Sehr geehrter IT-Support,</p>\n        <p>ich m\u00f6chte Ihnen mitteilen, dass ich seit heute Morgen eine ungew\u00f6hnlich langsame Netzwerkgeschwindigkeit in unserem internen Netzwerk bemerke. Diese Verz\u00f6gerungen beeintr\u00e4chtigen meine Arbeit erheblich, da sowohl das Abrufen von E-Mails als auch der Zugriff auf interne Server extrem langsam erfolgt.</p>\n        \n        <div class=\"details\">\n            <p><strong>Hier einige Details zur Problematik:</strong></p>\n            <p><strong>Datum und Uhrzeit des Auftretens:</strong> Heute, seit ca. 09:00 Uhr</p>\n            <p><strong>Betroffene Anwendungen:</strong> E-Mail, internes CRM-System, Dokumentenmanagementsystem</p>\n            <p><strong>Standort:</strong> B\u00fcro Nr. 205, 2. Stock</p>\n            <p><strong>Netzwerkanbindung:</strong> Kabelgebunden</p>\n        </div>\n        \n        <p>Ich habe bereits die \u00fcblichen Schritte zur Fehlerbehebung unternommen, wie das Neustarten meines Computers und das \u00dcberpr\u00fcfen der Kabelverbindungen. Leider hat dies keine Verbesserung gebracht.</p>\n        \n        <p>Ich bitte Sie daher dringend, diese Angelegenheit zu pr\u00fcfen und zu beheben, da die aktuelle Situation die Arbeitsabl\u00e4ufe erheblich st\u00f6rt.</p>\n        \n        <p>Vielen Dank im Voraus f\u00fcr Ihre schnelle Unterst\u00fctzung.</p>\n        \n        <p>Mit freundlichen Gr\u00fc\u00dfen,</p>\n        <p>[Ihr Name]</p>\n        <p>[Ihre Position]</p>\n        <p>[Abteilung]</p>\n        <p>[Kontaktinformationen]</p>\n    </div>\n</body>\n</html>\n",
@@ -23,10 +23,10 @@
     },
     {
         "id": 3,
-        "title": "Verz\u00f6gerte Kommunikation",
-        "description": "Ein Mitarbeiter ruft an und meldet, dass die Kommunikation \u00dcber das interne Netzwerk ungew\u00f6hnlich langsam ist.",
-        "exercise_benefit": "\u00dcbt die Identifikation von Netzwerkmanipulationen.",
-        "expected_response": "Die Teilnehmer sollten die Netzwerklogs \u00dcberpr\u00dcfen, den Man-in-the-Middle-Angriff identifizieren und geeignete Gegenma\u00c3\u0178nahmen ergreifen.",
+        "title": "Delayed Communication",
+        "description": "An employee calls and reports that communication over the internal network is unusually slow.",
+        "exercise_benefit": "Practices identifying network manipulations.",
+        "expected_response": "Participants should review the network logs, identify the Man-in-the-Middle attack, and take appropriate countermeasures.",
         "communication_type": "email",
         "duration": 5,
         "nachrichtentext": "<!DOCTYPE html>\n<html lang=\"de\">\n<head>\n    <meta charset=\"UTF-8\">\n    <title>Langsame Netzwerkgeschwindigkeit</title>\n    <style>\n        body {\n            font-family: Arial, sans-serif;\n            margin: 20px;\n            line-height: 1.6;\n        }\n        .content {\n            max-width: 600px;\n            margin: auto;\n            padding: 20px;\n            border: 1px solid #ccc;\n            border-radius: 10px;\n            background-color: #f9f9f9;\n        }\n        h1 {\n            text-align: center;\n            color: #333;\n        }\n    </style>\n</head>\n<body>\n    <div class=\"content\">\n        <h1>Langsame Netzwerkgeschwindigkeit</h1>\n        <p>Hallo IT-Team,</p>\n        <p>ich wollte euch informieren, dass die Netzwerkgeschwindigkeit seit heute Morgen sehr langsam ist. Es dauert sehr lange, E-Mails zu laden und auf unsere internen Systeme zuzugreifen.</p>\n        <p>Ich bin mir nicht sicher, woran es liegt, aber es beeintr\u00e4chtigt meine Arbeit. K\u00f6nnt ihr das bitte \u00fcberpr\u00fcfen?</p>\n        <p>Vielen Dank f\u00fcr eure Hilfe.</p>\n        <p>Viele Gr\u00fc\u00dfe,</p>\n        <p>[Ihr Name]</p>\n        <p>[Abteilung]</p>\n        <p>[Kontaktinformationen]</p>\n    </div>\n</body>\n</html>\n",
@@ -34,24 +34,25 @@
     },
     {
         "id": 4,
-        "title": "Datenbankfehler",
-        "description": "Ein Datenbankadministrator meldet pers\u00f6nlich, dass ungew\u00f6hnliche SQL-Abfragen die Datenbank belasten.",
-        "exercise_benefit": "\u00dcbt die Erkennung und Reaktion auf SQL-Injection-Angriffe.",
-        "expected_response": "Die Teilnehmer sollten die Log-Dateien der Datenbank analysieren, die SQL-Injection-Angriffe identifizieren und die Schwachstellen schlie\u00c3\u0178en.",
+        "title": "Database Error",
+        "description": "A database administrator reports in person that unusual SQL queries are stressing the database.",
+        "exercise_benefit": "Practices detecting and responding to SQL injection attacks.",
+        "expected_response": "Participants should analyze the database log files, identify the SQL injection attacks, and close the vulnerabilities.",
         "communication_type": "text",
         "duration": 10,
         "nachrichtentext": "<!DOCTYPE html>\n<html lang=\"de\">\n<head>\n    <meta charset=\"UTF-8\">\n    <title>Erh\u00f6hte Belastung der Datenbank</title>\n    <style>\n        body {\n            font-family: Arial, sans-serif;\n            margin: 20px;\n            line-height: 1.6;\n        }\n        .content {\n            max-width: 600px;\n            margin: auto;\n            padding: 20px;\n            border: 1px solid #ccc;\n            border-radius: 10px;\n            background-color: #f9f9f9;\n        }\n        h1 {\n            text-align: center;\n            color: #333;\n        }\n        .log {\n            background-color: #333;\n            color: #fff;\n            padding: 10px;\n            border-radius: 5px;\n            font-family: monospace;\n        }\n    </style>\n</head>\n<body>\n    <div class=\"content\">\n        <h1>Erh\u00f6hte Belastung der Datenbank</h1>\n        <p>Hallo IT-Team,</p>\n        <p>ich m\u00f6chte euch darauf aufmerksam machen, dass ich in den letzten Stunden eine erh\u00f6hte Belastung unserer Datenbank durch ungew\u00f6hnliche SQL-Abfragen beobachtet habe. Diese Abfragen f\u00fchren zu erheblichen Performance-Einbu\u00dfen und beeintr\u00e4chtigen die normale Funktionalit\u00e4t unserer Anwendungen.</p>\n        <p>Hier einige Details:</p>\n        <ul>\n            <li><strong>Zeitpunkt des Auftretens:</strong> Heute, ab ca. 10:30 Uhr</li>\n            <li><strong>Art der Abfragen:</strong> Komplexe JOINs und Sub-Queries, die ungew\u00f6hnlich viel Zeit und Ressourcen beanspruchen</li>\n            <li><strong>Betroffene Datenbank:</strong> [Name der Datenbank]</li>\n            <li><strong>Auswirkungen:</strong> Verlangsamung der Anwendungsleistung, gelegentliche Timeouts</li>\n        </ul>\n        <p>Ich habe bereits einige der auff\u00e4lligen Abfragen identifiziert und protokolliert. Es w\u00e4re hilfreich, wenn wir diese zeitnah analysieren und entsprechende Ma\u00dfnahmen ergreifen k\u00f6nnten, um die Performance wiederherzustellen.</p>\n        <p>Hier ist ein Auszug aus dem Performance-Log:</p>\n        <div class=\"log\">\n            2024-06-04 10:31:12 - Query Time: 45s - SELECT * FROM orders JOIN customers ON orders.customer_id = customers.id WHERE orders.date > '2024-01-01';<br>\n            2024-06-04 10:32:05 - Query Time: 50s - SELECT * FROM sales JOIN products ON sales.product_id = products.id WHERE sales.amount > 1000;<br>\n            2024-06-04 10:33:14 - Query Time: 40s - SELECT * FROM transactions WHERE EXISTS (SELECT 1 FROM accounts WHERE transactions.account_id = accounts.id AND accounts.balance > 5000);<br>\n            2024-06-04 10:34:45 - Query Time: 55s - SELECT * FROM users JOIN roles ON users.role_id = roles.id WHERE roles.name = 'admin';<br>\n            2024-06-04 10:35:30 - Query Time: 48s - SELECT * FROM logs WHERE event = 'login' AND timestamp > '2024-06-04 09:00:00';<br>\n        </div>\n        <p>Bitte lasst mich wissen, wie wir am besten vorgehen sollen.</p>\n        <p>Vielen Dank f\u00fcr eure Unterst\u00fctzung.</p>\n        <p>Beste Gr\u00fc\u00dfe,</p>\n        <p>[Ihr Name]</p>\n        <p>Datenbankadministrator</p>\n        <p>[Kontaktinformationen]</p>\n    </div>\n</body>\n</html>\n"
     },
     {
         "id": 5,
-        "title": "Malware-Alarm",
-        "description": "Das Antivirenprogramm meldet einen Malware-Fund auf einem Mitarbeiter-PC.",
-        "exercise_benefit": "\u00dcbt die Reaktion auf Malware-Infektionen.",
-        "expected_response": "Die Teilnehmer sollten die Malware isolieren, das infizierte System bereinigen und die Quelle der Infektion identifizieren.",
+        "title": "Malware Alert",
+        "description": "The antivirus program reports a malware detection on an employee's PC.",
+        "exercise_benefit": "Practices responding to malware infections.",
+        "expected_response": "Participants should isolate the malware, clean the infected system, and identify the source of the infection.",
         "communication_type": "email",
         "duration": 33,
-        "nachrichtentext": "Hallo IT-Support-Team,\n\ndas Antivirenprogramm auf meinem PC hat gerade eine Malware-Infektion entdeckt. Die Warnung kam heute um [Zeit] und betrifft eine Datei, die ich nicht bewusst heruntergeladen habe.\n\nHier sind die Details:\n\nBetroffene Datei: [Dateiname und Pfad]\nZeitpunkt des Fundes: Heute, um [Zeit]\nName der Malware: [Malware-Name, falls bekannt]\nAktionen des Antivirenprogramms: [z.B. \"In Quarant\u00e4ne verschoben\", \"L\u00f6schversuch fehlgeschlagen\" etc.]\nIch habe den PC derzeit vom Netzwerk getrennt, um eine m\u00f6gliche Ausbreitung zu verhindern. Ich bitte um eine schnelle \u00dcberpr\u00fcfung und Unterst\u00fctzung bei der Bereinigung meines Systems.\n\nVielen Dank im Voraus.\n\nMit freundlichen Gr\u00fc\u00dfen,\n\n[Ihr Name]\n[Abteilung]\n[Kontaktinformationen]"
+        "nachrichtentext": "Hello IT Support Team,\n\nthe antivirus program on my PC has just detected a malware infection. The alert came today at [time] and involves a file I did not intentionally download.\n\nHere are the details:\n\nAffected file: [Filename and path]\nTime of detection: Today, at [time]\nName of the malware: [Malware name, if known]\nActions taken by the antivirus program: [e.g., \"Quarantined\", \"Deletion attempt failed\", etc.]\nI have currently disconnected the PC from the network to prevent possible spread. I request a prompt review and assistance in cleaning my system.\n\nThank you in advance.\n\nBest regards,\n\n[Your Name]\n[Department]\n[Contact Information]"
     },
+    
     {
         "id": 6,
         "title": "Sicherheitsl\u00fccke entdeckt",
@@ -292,48 +293,46 @@
         "duration": 10,
         "nachrichtentext": "\u00dcbungsende"
     },
-{
-            "id": 101,
-            "title": "Erste Warnung",
-            "description": "Ein Benutzer meldet verdächtige Aktivitäten auf seinem Computer.",
-            "exercise_benefit": "Übt das Erkennen und Melden von verdächtigen Aktivitäten.",
-            "expected_response": "Die Teilnehmer sollten die Warnung ernst nehmen und sofort Maßnahmen zur Untersuchung ergreifen.",
-            "communication_type": "email",
-            "duration": 5,
-            "nachrichtentext": "<!DOCTYPE html>\n<html lang=\"de\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Text in HTML</title>\n</head>\n<body>\n    <p>Hallo,</p>\n\n    <p>ich habe heute eine E-Mail bekommen, die durchaus vertrauenswürdig erscheint. Allerdings schickt mir dieser Absender sonst keine solchen Anhänge. Eventuell handelt es sich um eine Phishing Mail.</p>\n\n    <p>Beste Grüße,</p>\n\n    <p>Kurt Lamensloh</p>\n</body>\n</html>\n",
-            "nachrichtentextPlain": "Hallo, \nich habe heute eine E-Mail bekommen, die durchaus vertrauenswürdig erscheint. Allerdings schickt mir dieser Absender sonst keine solchen Anhänge. Eventuell handelt es sich um eine Phishing Mail.\nBeste Grüße \nKurt Lamensloh"
-        },
-        {
-            "id": 102,
-            "title": "Systemausfall",
-            "description": "Mehrere Systeme beginnen, nicht mehr zu reagieren.",
-            "exercise_benefit": "Übt die Reaktion auf einen Systemausfall.",
-            "expected_response": "Die Teilnehmer sollten die Ursache des Ausfalls ermitteln und entsprechende Maßnahmen zur Wiederherstellung ergreifen.",
-            "communication_type": "text",
-            "duration": 10,
-            "nachrichtentext": "Systemausfall: Mehrere Systeme reagieren nicht mehr."
-        },
-        {
-            "id": 201,
-            "title": "Phishing-E-Mail",
-            "description": "Ein Mitarbeiter erhält eine verdächtige E-Mail, die nach Anmeldeinformationen fragt.",
-            "exercise_benefit": "Übt die Erkennung und Reaktion auf Phishing-E-Mails.",
-            "expected_response": "Die Teilnehmer sollten die E-Mail analysieren, den Anhang nicht öffnen und die IT-Sicherheitsabteilung informieren.",
-            "communication_type": "email",
-            "duration": 3,
-            "nachrichtentext": "<!DOCTYPE html>\n<html lang=\"de\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Phishing E-Mail</title>\n</head>\n<body>\n    <p>Hallo,</p>\n\n    <p>ich habe eine E-Mail erhalten, die verdächtig erscheint. Sie fordert mich auf, auf einen Link zu klicken und meine Anmeldeinformationen einzugeben.</p>\n\n    <p>Beste Grüße,</p>\n\n    <p>Ein Mitarbeiter</p>\n</body>\n</html>\n",
-            "nachrichtentextPlain": "Hallo,\nich habe eine E-Mail erhalten, die verdächtig erscheint. Sie fordert mich auf, auf einen Link zu klicken und meine Anmeldeinformationen einzugeben.\nBeste Grüße,\nEin Mitarbeiter"
-        },
-        {
-            "id": 202,
-            "title": "Datendiebstahl",
-            "description": "Vertrauliche Daten werden von einem kompromittierten Konto gestohlen.",
-            "exercise_benefit": "Übt die Reaktion auf Datendiebstahl.",
-            "expected_response": "Die Teilnehmer sollten die Sicherheitslücke schließen und weitere unbefugte Zugriffe verhindern.",
-            "communication_type": "text",
-            "duration": 7,
-            "nachrichtentext": "Datendiebstahl: Vertrauliche Daten wurden gestohlen."
-        }
-    
-    
+    {
+        "id": 101,
+        "title": "Erste Warnung",
+        "description": "Ein Benutzer meldet verd\u00c3\u00a4chtige Aktivit\u00c3\u00a4ten auf seinem Computer.",
+        "exercise_benefit": "\u00c3\u0153bt das Erkennen und Melden von verd\u00c3\u00a4chtigen Aktivit\u00c3\u00a4ten.",
+        "expected_response": "Die Teilnehmer sollten die Warnung ernst nehmen und sofort Ma\u00c3\u0178nahmen zur Untersuchung ergreifen.",
+        "communication_type": "email",
+        "duration": 5,
+        "nachrichtentext": "<!DOCTYPE html>\n<html lang=\"de\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Text in HTML</title>\n</head>\n<body>\n    <p>Hallo,</p>\n\n    <p>ich habe heute eine E-Mail bekommen, die durchaus vertrauensw\u00c3\u00bcrdig erscheint. Allerdings schickt mir dieser Absender sonst keine solchen Anh\u00c3\u00a4nge. Eventuell handelt es sich um eine Phishing Mail.</p>\n\n    <p>Beste Gr\u00c3\u00bc\u00c3\u0178e,</p>\n\n    <p>Kurt Lamensloh</p>\n</body>\n</html>\n",
+        "nachrichtentextPlain": "Hallo, \nich habe heute eine E-Mail bekommen, die durchaus vertrauensw\u00c3\u00bcrdig erscheint. Allerdings schickt mir dieser Absender sonst keine solchen Anh\u00c3\u00a4nge. Eventuell handelt es sich um eine Phishing Mail.\nBeste Gr\u00c3\u00bc\u00c3\u0178e \nKurt Lamensloh"
+    },
+    {
+        "id": 102,
+        "title": "Systemausfall",
+        "description": "Mehrere Systeme beginnen, nicht mehr zu reagieren.",
+        "exercise_benefit": "\u00c3\u0153bt die Reaktion auf einen Systemausfall.",
+        "expected_response": "Die Teilnehmer sollten die Ursache des Ausfalls ermitteln und entsprechende Ma\u00c3\u0178nahmen zur Wiederherstellung ergreifen.",
+        "communication_type": "text",
+        "duration": 10,
+        "nachrichtentext": "Systemausfall: Mehrere Systeme reagieren nicht mehr."
+    },
+    {
+        "id": 201,
+        "title": "Phishing-E-Mail",
+        "description": "Ein Mitarbeiter erh\u00c3\u00a4lt eine verd\u00c3\u00a4chtige E-Mail, die nach Anmeldeinformationen fragt.",
+        "exercise_benefit": "\u00c3\u0153bt die Erkennung und Reaktion auf Phishing-E-Mails.",
+        "expected_response": "Die Teilnehmer sollten die E-Mail analysieren, den Anhang nicht \u00c3\u00b6ffnen und die IT-Sicherheitsabteilung informieren.",
+        "communication_type": "email",
+        "duration": 3,
+        "nachrichtentext": "<!DOCTYPE html>\n<html lang=\"de\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Phishing E-Mail</title>\n</head>\n<body>\n    <p>Hallo,</p>\n\n    <p>ich habe eine E-Mail erhalten, die verd\u00c3\u00a4chtig erscheint. Sie fordert mich auf, auf einen Link zu klicken und meine Anmeldeinformationen einzugeben.</p>\n\n    <p>Beste Gr\u00c3\u00bc\u00c3\u0178e,</p>\n\n    <p>Ein Mitarbeiter</p>\n</body>\n</html>\n",
+        "nachrichtentextPlain": "Hallo,\nich habe eine E-Mail erhalten, die verd\u00c3\u00a4chtig erscheint. Sie fordert mich auf, auf einen Link zu klicken und meine Anmeldeinformationen einzugeben.\nBeste Gr\u00c3\u00bc\u00c3\u0178e,\nEin Mitarbeiter"
+    },
+    {
+        "id": 202,
+        "title": "Datendiebstahl",
+        "description": "Vertrauliche Daten werden von einem kompromittierten Konto gestohlen.",
+        "exercise_benefit": "\u00c3\u0153bt die Reaktion auf Datendiebstahl.",
+        "expected_response": "Die Teilnehmer sollten die Sicherheitsl\u00c3\u00bccke schlie\u00c3\u0178en und weitere unbefugte Zugriffe verhindern.",
+        "communication_type": "text",
+        "duration": 7,
+        "nachrichtentext": "Datendiebstahl: Vertrauliche Daten wurden gestohlen."
+    }
 ]

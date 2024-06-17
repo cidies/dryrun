@@ -1,9 +1,9 @@
 [
     {
         "id": 1,
-        "name": "Ransomware Angriff - Pharma Batchumgebung",
+        "name": "Ransomware attack - Pharma batch environment",
         "status": "Planned",
-        "description": "Ein gezielter Ransomware-Angriff hat die Produktionssysteme der Pharma Batchumgebung lahmgelegt und die Produktionsdaten verschl\u00fcsselt. Die Unterbrechung der Systeme f\u00fchrte zu einem sofortigen Produktionsstopp und gef\u00e4hrdete die termingerechte Lieferung kritischer Medikamente. Die IT-Abteilung arbeitet daran, die Malware zu entfernen und die Systeme mithilfe von Backups wiederherzustellen, w\u00e4hrend gleichzeitig Ma\u00dfnahmen zur Verhinderung zuk\u00fcnftiger Angriffe implementiert werden.",
+        "description": "A targeted ransomware attack has crippled the production systems of the pharma batch environment and encrypted the production data. The disruption of the systems led to an immediate production halt and jeopardized the timely delivery of critical medications. The IT department is working to remove the malware and restore the systems using backups, while simultaneously implementing measures to prevent future attacks.",
         "inject_order": [
             1,
             3,
@@ -24,12 +24,12 @@
         },
         "target_team": "",
         "planned": "",
-        "last_performed": "2024-06-13T13:43:10.328037",
+        "last_performed": "2024-06-17T17:18:51.604783",
         "execution_type": "manual"
     },
     {
         "id": 2,
-        "name": "Phishing Angriff - Anwaltskanzlei K\u00f6ln",
+        "name": "Phishing attack - Law firm in Cologne",
         "inject_order": [
             25,
             26,
@@ -45,13 +45,14 @@
             "2": "OK"
         },
         "last_performed": "2024-06-04T17:49:37.605179",
-        "description": "Die \u00dcbung soll die Reaktionsf\u00e4higkeit der Anwaltskanzlei auf Phishing-Angriffe testen und verbessern. Es sollen Schwachstellen in den bestehenden Sicherheitsprotokollen identifiziert und behoben sowie die allgemeine Sicherheitsbewusstsein der Mitarbeiter gest\u00e4rkt werden.",
+        "description": "The exercise aims to test and improve the law firm's responsiveness to phishing attacks. It seeks to identify and address vulnerabilities in the existing security protocols, as well as enhance the overall security awareness of the employees.",
         "target_team": "",
-        "planned": "2024-06-08T21:31"
+        "planned": "2024-06-08T21:31",
+        "execution_type": "manual"
     },
     {
         "id": 3,
-        "name": "DDoS Angriff - Webshop",
+        "name": "DDoS attack - Webshop",
         "inject_order": [
             1,
             2,
@@ -66,7 +67,8 @@
         "last_performed": "2024-05-26T23:07:01.463142",
         "description": "",
         "target_team": "",
-        "planned": "2024-06-10T23:58"
+        "planned": "2024-06-10T23:58",
+        "execution_type": "manual"
     },
     {
         "id": 4,

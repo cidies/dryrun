@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
 
-
 <h2>Inject Bearbeiten</h2>
 <form id="edit-inject-form" action="{{ url_for('edit_inject', inject_id=inject.id) }}" method="post" style="display: flex; flex-direction: column; align-items: start; overflow: auto; height: 80vh;">
     <button type="submit">Speichern</button>
@@ -36,7 +35,6 @@
     <label for="edit-duration">Dauer:</label>
     <input type="number" id="edit-duration" value="{{ inject.duration }}" style="margin-bottom: 10px;">
 
-
     <label for="edit-communication_type">Kommunikationsart:</label>
     <select id="edit-communication_type" style="margin-bottom: 10px;">
         <option value="email" {% if inject.communication_type == 'email' %}selected{% endif %}>Email</option>
@@ -48,10 +46,46 @@
     <button type="submit">Speichern</button>
 </form>
 
+<h3>Datei hochladen</h3>
+<form id="upload-form" enctype="multipart/form-data">
+    <input type="hidden" id="upload-inject-id" value="{{ inject.id }}">
+    <label for="file-title">Titel:</label>
+    <input type="text" id="file-title" name="title" required>
+    <input type="file" id="file" name="file" required>
+    <button type="submit" class="button">Upload</button>
+</form>
+<div id="upload-info"></div>
 
-
+<h3>Hochgeladene Dateien</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Titel</th>
+            <th>Pfad</th>
+            <th>Embed HTML</th>
+            <th>Download-Link</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for file in inject.files %}
+        <tr>
+            <td>{{ file.title }}</td>
+            <td><input type="text" value="{{ request.url_root }}{{ file.url }}" readonly></td>
+            <td>
+                {% if file.url.endswith('.png') or file.url.endswith('.jpg') or file.url.endswith('.jpeg') or file.url.endswith('.gif') %}
+                <input type="text" value="&lt;img src='{{ request.url_root }}{{ file.url }}' alt='{{ file.title }}'&gt;" readonly>
+                {% else %}
+                <input type="text" value="&lt;a href='{{ request.url_root }}{{ file.url }}' download&gt;{{ file.title }}&lt;/a&gt;" readonly>
+                {% endif %}
+            </td>
+            <td><a href="{{ request.url_root }}{{ file.url }}" target="_blank">{{ file.url }}</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script>
 $(window).on('load', function() {
     $('#edit-inject-form').on('submit', function(e) {
@@ -73,7 +107,7 @@ $(window).on('load', function() {
             exercise_benefit: $('#edit-exercise-benefit').val(),
             expected_response: $('#edit-expected-response').val(),
             communication_type: $('#edit-communication_type').val(),
-            duration: parseInt($('#edit-duration').val(), 10),  // Add this line
+            duration: parseInt($('#edit-duration').val(), 10),
             nachrichtentext:  $('#edit-nachrichtentext').val(),
             nachrichtentextPlain:  $('#edit-nachrichtentextPlain').val(),
         };
@@ -90,6 +124,39 @@ $(window).on('load', function() {
             error: function(jqXHR, textStatus, errorThrown) {
                 // Dieser Code wird ausgeführt, wenn der Server einen Fehler zurückgibt
                 alert('Ein Fehler ist aufgetreten: ' + textStatus);
+            }
+        });
+    });
+
+    $('#upload-form').on('submit', function(e) {
+        e.preventDefault();
+        var formData = new FormData();
+        var file = $('#file')[0].files[0];
+        var title = $('#file-title').val();
+        var injectId = $('#upload-inject-id').val();
+        formData.append('file', file);
+        formData.append('title', title);
+        formData.append('inject_id', injectId);
+
+        $.ajax({
+            url: '/upload_file',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(data) {
+                if (data.status === 'success') {
+                    var fileUrl = data.file_url;
+                    $('#upload-info').html(`<p>Datei hochgeladen: <a href="${fileUrl}" target="_blank">${fileUrl}</a></p>`);
+                    toastr.success('Datei erfolgreich hochgeladen.');
+                } else {
+                    toastr.error('Fehler beim Hochladen der Datei: ' + data.message);
+                }
+                location.reload();  // Reload the page to show the updated files
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                toastr.error('Fehler beim Hochladen der Datei.');
+                console.error('Error:', textStatus, errorThrown);
             }
         });
     });

@@ -7,8 +7,18 @@
         "expected_response": "Participants should analyze the email, avoid opening the attachment, and inform the IT security department.",
         "communication_type": "email",
         "duration": 5,
-        "nachrichtentext": "<!DOCTYPE html>\n<html lang=\"de\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Text in HTML</title>\n</head>\n<body>\n    <p>Hallo,</p>\n\n    <p>ich habe heute eine E-Mail bekommen, die durchaus vertrauensw\u00fcrdig erscheint. Allerdings schickt mir dieser Absender sonst keine solchen Anh\u00e4nge. Eventuell handelt es sich um eine Phishing Mail.</p>\n\n    <p>Beste Gr\u00fc\u00dfe,</p>\n\n    <p>Kurt Lamensloh</p>\n</body>\n</html>\n",
-        "nachrichtentextPlain": "Hello,\n\nToday I received an email that appears quite trustworthy. However, this sender usually does not send such attachments. It might be a phishing email.\n\nBest regards,  \nKurt Lamensloh"
+        "nachrichtentext": "<!DOCTYPE html>\n<html lang=\"de\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Text in HTML</title>\n</head>\n<body>\n    <p>Hallo,</p>\n\n    <p>ich habe heute eine E-Mail bekommen, die durchaus vertrauensw\u00fcrdig erscheint. Allerdings schickt mir dieser Absender sonst keine solchen Anh\u00e4nge. Eventuell handelt es sich um eine Phishing Mail.</p>\n    <img src='http://0.0.0.0:5010//uploads/IMG_4344.jpeg' alt='Lackmuss'>\n\n    <p>Beste Gr\u00fc\u00dfe,</p>\n\n    <p>Kurt Lamensloh</p>\n</body>\n</html>\n",
+        "nachrichtentextPlain": "Hello,\n\nToday I received an email that appears quite trustworthy. However, this sender usually does not send such attachments. It might be a phishing email.\n\nBest regards,  \nKurt Lamensloh",
+        "files": [
+            {
+                "title": "Reportfile",
+                "url": "/uploads/report.pdf"
+            },
+            {
+                "title": "Lackmuss",
+                "url": "/uploads/IMG_4344.jpeg"
+            }
+        ]
     },
     {
         "id": 2,
@@ -52,7 +62,6 @@
         "duration": 33,
         "nachrichtentext": "Hello IT Support Team,\n\nthe antivirus program on my PC has just detected a malware infection. The alert came today at [time] and involves a file I did not intentionally download.\n\nHere are the details:\n\nAffected file: [Filename and path]\nTime of detection: Today, at [time]\nName of the malware: [Malware name, if known]\nActions taken by the antivirus program: [e.g., \"Quarantined\", \"Deletion attempt failed\", etc.]\nI have currently disconnected the PC from the network to prevent possible spread. I request a prompt review and assistance in cleaning my system.\n\nThank you in advance.\n\nBest regards,\n\n[Your Name]\n[Department]\n[Contact Information]"
     },
-    
     {
         "id": 6,
         "title": "Sicherheitsl\u00fccke entdeckt",

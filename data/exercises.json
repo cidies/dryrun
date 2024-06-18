@@ -235,5 +235,15 @@
             "2": "Message kam nicht an.",
             "3": "Keine klare Ende Meldung!"
         }
+    },
+    {
+        "name": "Remote Patient Monitoring under Attack",
+        "description": "",
+        "target_team": "",
+        "planned": "",
+        "id": 14,
+        "type": "",
+        "interval": "",
+        "inject_order": []
     }
 ]

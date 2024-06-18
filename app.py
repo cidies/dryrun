@@ -1,6 +1,6 @@
 # Noch zu tun:
 
-from flask import Flask, render_template, request, jsonify, redirect, url_for, session
+from flask import Flask, render_template, request, jsonify, redirect, url_for, flash, send_from_directory
 from threading import Timer
 import json
 import os
@@ -23,19 +23,30 @@ from flask import send_file
 from flask_cors import CORS
 import schedule
 
+from werkzeug.utils import secure_filename
 
-
+UPLOAD_FOLDER = 'uploads'
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'pdf', 'doc', 'docx'}
 
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.secret_key = os.environ.get('SECRET_KEY', '2309489358910358')
-toastr = Toastr(app)
-CORS(app)
 socketio = SocketIO(app)
+CORS(app)
+toastr = Toastr(app)
+
+
+# Ensure the upload folder exists
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 DATA_DIR = 'data'
 CHAT_LOG_FILE = 'chat_log.json'
-config_path = 'c:\\temp\\config.json'
-#config_path = '/tmp/config.json'
+#config_path = 'c:\\temp\\config.json'
+config_path = '/tmp/config.json'
 
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
@@ -56,6 +67,42 @@ def dashboard():
     exercises = load_json('exercises.json')
     return render_template('dashboard.html', notifications=notifications, exercises=exercises)
 
+
+
+
+@app.route('/upload_file', methods=['POST'])
+def upload_file():
+    if 'file' not in request.files or 'title' not in request.form or 'inject_id' not in request.form:
+        return jsonify({'status': 'error', 'message': 'Missing file, title, or inject_id'})
+
+    file = request.files['file']
+    title = request.form['title']
+    inject_id = int(request.form['inject_id'])
+
+    if file.filename == '':
+        return jsonify({'status': 'error', 'message': 'No selected file'})
+    if file and allowed_file(file.filename):
+        filename = secure_filename(file.filename)
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        file_url = url_for('uploaded_file', filename=filename)
+
+        injects = load_json('injects.json')
+        for inject in injects:
+            if inject['id'] == inject_id:
+                if 'files' not in inject:
+                    inject['files'] = []
+                inject['files'].append({'title': title, 'url': file_url})
+                save_json('injects.json', injects)
+                break
+
+        return jsonify({'status': 'success', 'file_url': file_url})
+    else:
+        return jsonify({'status': 'error', 'message': 'File type not allowed'})
+
+
+@app.route('/uploads/<filename>')
+def uploaded_file(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
 
 ###############################
@@ -685,7 +732,8 @@ def edit_inject(inject_id):
                 'communication_type': data.get('communication_type', inject['communication_type']),
                 'duration': data.get('duration', inject['duration']),
                 'nachrichtentext': data.get('nachrichtentext', inject['nachrichtentext']),
-                'nachrichtentextPlain': data.get('nachrichtentextPlain', inject['nachrichtentextPlain'])
+                'nachrichtentextPlain': data.get('nachrichtentextPlain', inject['nachrichtentextPlain']),
+                'files': inject.get('files', [])
             }
 
             inject_index = next((index for (index, d) in enumerate(injects) if d['id'] == inject_id), None)
@@ -704,6 +752,7 @@ def edit_inject(inject_id):
     except Exception as e:
         logging.error(f"An error occurred: {e}")
         return "An error occurred while processing your request", 500
+
 
 def textnote_internal(user, message):
     data = {'user': user, 'message': message}

@@ -342,12 +342,50 @@
     },
     {
         "id": 202,
-        "title": "Datendiebstahl",
-        "description": "Vertrauliche Daten werden von einem kompromittierten Konto gestohlen.",
-        "exercise_benefit": "\u00c3\u0153bt die Reaktion auf Datendiebstahl.",
-        "expected_response": "Die Teilnehmer sollten die Sicherheitsl\u00c3\u00bccke schlie\u00c3\u0178en und weitere unbefugte Zugriffe verhindern.",
+        "title": "Data theft",
+        "description": "Confidential data is stolen from a compromised account.",
+        "exercise_benefit": "Practices the reaction to data theft.",
+        "expected_response": "Participants should close the security hole and prevent further unauthorized access.",
         "communication_type": "text",
         "duration": 7,
-        "nachrichtentext": "Datendiebstahl: Vertrauliche Daten wurden gestohlen."
+        "nachrichtentext": "Datendiebstahl: Vertrauliche Daten wurden gestohlen.",
+        "nachrichtentextPlain": "",
+        "files": []
+    },
+    {
+        "id": 34,
+        "title": "Unusual Database Access",
+        "description": "The database administrator notices unusual accesses to patient data from an IP address outside the usual network.",
+        "exercise_benefit": "",
+        "expected_response": "",
+        "communication_type": "email",
+        "duration": null,
+        "nachrichtentext": "",
+        "nachrichtentextPlain": "",
+        "files": []
+    },
+    {
+        "id": 35,
+        "title": "Suspicious Logs",
+        "description": "Analysis of server logs shows multiple failed login attempts followed by successful logins from the same IP address.",
+        "exercise_benefit": "n/a",
+        "expected_response": "n/a",
+        "communication_type": "email",
+        "duration": 60,
+        "nachrichtentext": "n/a",
+        "nachrichtentextPlain": "n/a",
+        "files": []
+    },
+    {
+        "id": 36,
+        "title": "Forensic Investigation Begins",
+        "description": "A forensic analyst is brought in and begins analyzing the compromised systems.",
+        "exercise_benefit": "n/a",
+        "expected_response": "n/a",
+        "communication_type": "text",
+        "duration": 111,
+        "nachrichtentext": "n/a",
+        "nachrichtentextPlain": "n/a",
+        "files": []
     }
 ]

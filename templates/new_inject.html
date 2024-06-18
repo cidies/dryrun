@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New Inject</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <style>
+        .form-section {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="my-4">New Inject</h1>
+        <form id="new-inject-form" action="{{ url_for('new_inject') }}" method="post" class="mb-4">
+            <div class="form-group form-section">
+                <label for="new-title">Title:</label>
+                <input type="text" id="new-title" name="title" class="form-control" required>
+            </div>
+            <div class="form-group form-section">
+                <label for="new-description">Description:</label>
+                <textarea id="new-description" name="description" class="form-control" rows="5" required></textarea>
+            </div>
+            <div class="form-group form-section">
+                <label for="new-exercise-benefit">Exercise Benefit:</label>
+                <textarea id="new-exercise-benefit" name="exercise_benefit" class="form-control" rows="5" required></textarea>
+            </div>
+            <div class="form-group form-section">
+                <label for="new-expected-response">Expected handling:</label>
+                <textarea id="new-expected-response" name="expected_response" class="form-control" rows="5" required></textarea>
+            </div>
+            <div class="form-group form-section">
+                <label for="new-nachrichtentext">Message:</label>
+                <textarea id="new-nachrichtentext" name="nachrichtentext" class="form-control" rows="5" required></textarea>
+            </div>
+            <div class="form-group form-section">
+                <label for="new-nachrichtentextPlain">Message plain:</label>
+                <textarea id="new-nachrichtentextPlain" name="nachrichtentextPlain" class="form-control" rows="5" required></textarea>
+            </div>
+            <div class="form-group form-section">
+                <label for="new-duration">Wait after (in seconds):</label>
+                <input type="number" id="new-duration" name="duration" class="form-control" required>
+            </div>
+            <div class="form-group form-section">
+                <label for="new-communication_type">Notification type:</label>
+                <select id="new-communication_type" name="communication_type" class="form-control" required>
+                    <option value="email">Email</option>
+                    <option value="text">Text</option>
+                    <option value="call">Anruf</option>
+                    <option value="personally">Persönlich</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+    $(window).on('load', function() {
+        $('#new-inject-form').on('submit', function(e) {
+            e.preventDefault();
+            console.log('Formular abgesendet');
+
+            var data = {
+                title: $('#new-title').val(),
+                description: $('#new-description').val(),
+                exercise_benefit: $('#new-exercise-benefit').val(),
+                expected_response: $('#new-expected-response').val(),
+                communication_type: $('#new-communication_type').val(),
+                duration: parseInt($('#new-duration').val(), 10),
+                nachrichtentext:  $('#new-nachrichtentext').val(),
+                nachrichtentextPlain:  $('#new-nachrichtentextPlain').val(),
+            };
+
+            $.ajax({
+                url: $(this).attr('action'),
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(data),
+                success: function(response) {
+                    toastr.success('Data successfully saved!');
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    toastr.error('An error occurred: ' + textStatus);
+                }
+            });
+        });
+    });
+    </script>
+</body>
+</html>
+{% endblock %}

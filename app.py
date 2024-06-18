@@ -45,8 +45,8 @@ def allowed_file(filename):
 
 DATA_DIR = 'data'
 CHAT_LOG_FILE = 'chat_log.json'
-#config_path = 'c:\\temp\\config.json'
-config_path = '/tmp/config.json'
+config_path = 'c:\\temp\\config.json'
+#config_path = '/tmp/config.json'
 
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
@@ -699,7 +699,42 @@ def execute_inject(inject):
     logging.info(f"Inject executed: {inject['title']} via {communication_type}")
 
 
+@app.route('/new_inject', methods=['GET', 'POST'])
+def new_inject():
+    try:
+        scenarios = load_json('scenarios.json')
+        injects = load_json('injects.json')
 
+        if request.method == 'POST':
+            data = request.get_json()
+
+            print("Received data:", data)
+            logging.info(f"Nachrichtentext as received from client: {data.get('nachrichtentext')}")
+
+            # Set default values for missing fields
+            new_inject = {
+                'id': len(injects) + 1,  # Assuming id is a sequential integer
+                'title': data.get('title', ""),
+                'description': data.get('description', ""),
+                'exercise_benefit': data.get('exercise_benefit', ""),
+                'expected_response': data.get('expected_response', ""),
+                'communication_type': data.get('communication_type', ""),
+                'duration': data.get('duration', ""),
+                'nachrichtentext': data.get('nachrichtentext', ""),
+                'nachrichtentextPlain': data.get('nachrichtentextPlain', ""),
+                'files': data.get('files', [])
+            }
+
+            injects.append(new_inject)
+            save_json('injects.json', injects)
+
+            logging.debug(f"Nachrichtentext as packed into dictionary for JSON: {new_inject['nachrichtentext']}")
+
+        return render_template('new_inject.html', scenarios=scenarios)
+
+    except Exception as e:
+        logging.error(f"An error occurred: {e}")
+        return "An error occurred while processing your request", 500
 
 
 

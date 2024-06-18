@@ -32,6 +32,8 @@
     th:nth-child(4) {
         width: 15%;
     }
+
+
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
 <script>
@@ -44,7 +46,6 @@ toastr.options = {
 
 window.onload = function() {
     var socket = io.connect('http://' + document.domain + ':' + location.port);
-    var socketChat = io.connect('http://' + document.domain + ':' + location.port + '/chat');
     console.log('[*] Socket.IO connection established on domain: ' + document.domain + ' and port: ' + location.port);
     socket.on('message', function(message) {
         console.log('[*] Message received: ', message.data, ' from domain: ', document.domain, ' on port: ', location.port);
@@ -58,8 +59,7 @@ window.onload = function() {
     }
 
 
-    if (message.data && message.data.startsWith('Inject')) {
-    
+        if (message.data.startsWith('Inject')) {
             var table = document.getElementById('injectTable');
             if (table) {
                 var row = table.insertRow(-1);
@@ -94,14 +94,9 @@ window.onload = function() {
             console.log('[*] Listener getNextInject added to next-inject-button');
             document.addEventListener('DOMContentLoaded', observeTableChanges);
             console.log('[*] Listener observeTableChanges added to document');
-        }
-    });
 
-    // Pause-Button Ereignis-Listener
-    document.getElementById('pause-button').addEventListener('click', function() {
-        socket.emit('pause_exercise');
-        socketChat.emit('send_message', "ölöl", "ölölöl");
-        console.log('[*] PUSH P A U S E !!!');
+
+        }
     });
 };
 
@@ -166,8 +161,10 @@ function observeTableChanges() {
         <!-- Details des nächsten Injects werden hier angezeigt -->
     </div>
     <button id="next-inject-button">What next</button>
-    <button id="pause-button">Pause</button> <!-- Pause-Button hinzugefügt -->
 </div>
+
+
+
 
 <input type="hidden" id="exerciseId" value="{{ exercise.id }}">
 <h2>Inject Status</h2>

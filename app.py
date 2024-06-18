@@ -864,16 +864,14 @@ def email(title, description):
         smtp_server.login(username, password)
         smtp_server.sendmail(sender, receiver, msg.as_string())
         smtp_server.close()
-        logging.info(f"[emailnote] Sent email notification with title: {title} and description: {description}")
+        #logging.debug(f"[emailnote] Sent email notification with title: {title} and description: {description}")
     except Exception as e:
         logging.error(f"[emailnote] Failed to send email notification with title: {title} and description: {description}. Error: {e}")
 
 
 
 def gmail(title, description):
-    # Load the config file
-    #config_path = 'c:\\temp\\config.json'
-    #config_path = '\\tmp\\config.json'
+
     with open(config_path, 'r') as f:
         config = json.load(f)
 

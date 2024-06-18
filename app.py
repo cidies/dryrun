@@ -4,6 +4,7 @@ from flask import Flask, render_template, request, jsonify, redirect, url_for, f
 from threading import Timer
 import json
 import os
+import io
 from flask_toastr import Toastr
 from flask import flash, get_flashed_messages
 import time
@@ -24,6 +25,9 @@ from flask_cors import CORS
 import schedule
 
 from werkzeug.utils import secure_filename
+import pandas as pd
+from tempfile import TemporaryDirectory
+
 
 UPLOAD_FOLDER = 'uploads'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'pdf', 'doc', 'docx'}
@@ -208,20 +212,52 @@ def scenarios():
         logging.error('Failed to load scenarios: %s', e)
         return "Failed to load scenarios", 500
 
-@app.route('/edit_scenario/<id>')
+@app.route('/new_scenario', methods=['GET', 'POST'])
+def new_scenario():
+    try:
+        if request.method == 'POST':
+            data = request.get_json()
+            scenarios = load_json('scenarios.json')
+            new_scenario = {
+                'id': max(s['id'] for s in scenarios) + 1 if scenarios else 1,
+                'name': data['name'],
+                'difficulty': data['difficulty'],
+                'description': data['description']
+            }
+            scenarios.append(new_scenario)
+            save_json('scenarios.json', scenarios)
+            return jsonify({'status': 'success'})
+        return render_template('new_scenario.html')
+    except Exception as e:
+        logging.error(f"Failed to create scenario: {e}")
+        return "Failed to create scenario", 500
+
+
+@app.route('/edit_scenario/<int:id>', methods=['GET', 'POST'])
 def edit_scenario(id):
     try:
-        logging.info('[ES01] Loading scenario with id: %s', id)
         scenario = load_scenario(id)
-        if scenario is not None:
-            logging.info('[ES02] Loaded scenario: %s', scenario)
-            return render_template('edit_scenario.html', scenario=scenario)
-        else:
-            logging.error('Scenario not found with id: %s', id)
-            return "Scenario not found", 404
+        if request.method == 'POST':
+            data = request.get_json()
+            scenario.update({
+                'name': data['name'],
+                'difficulty': data['difficulty'],
+                'description': data['description']
+            })
+            save_scenario(scenario)
+            return jsonify({'status': 'success'})
+        return render_template('edit_scenario.html', scenario=scenario)
     except Exception as e:
-        logging.error('Failed to load scenario: %s', e)
+        logging.error(f"Failed to load scenario: {e}")
         return "Failed to load scenario", 500
+
+def save_scenario(updated_scenario):
+    scenarios = load_json('scenarios.json')
+    for i, scenario in enumerate(scenarios):
+        if scenario['id'] == updated_scenario['id']:
+            scenarios[i] = updated_scenario
+            break
+    save_json('scenarios.json', scenarios)
 
 
 
@@ -787,6 +823,52 @@ def edit_inject(inject_id):
     except Exception as e:
         logging.error(f"An error occurred: {e}")
         return "An error occurred while processing your request", 500
+
+
+@app.route('/export_injects', methods=['GET'])
+def export_injects():
+    try:
+        injects = load_json('injects.json')
+        
+        # Data preparation for Excel
+        data = []
+        for inject in injects:
+            assigned_scenarios = inject.get('assigned_scenarios', [])
+            data.append({
+                'Id': inject['id'],
+                'Title': inject['title'],
+                'Type of communication': inject['communication_type'],
+                'Description': inject['description'],
+                'Exercise benefit': inject['exercise_benefit'],
+                'Expected handling': inject['expected_response'],
+                'Assigned scenarios': ', '.join([id_to_name(scenario_id) for scenario_id in assigned_scenarios])
+            })
+        
+        # Convert to DataFrame
+        df = pd.DataFrame(data)
+        
+        with TemporaryDirectory() as tempdir:
+            excel_path = os.path.join(tempdir, 'injects_export.xlsx')
+            df.to_excel(excel_path, index=False)
+            
+            # Read the file content and send it as a response
+            with open(excel_path, 'rb') as f:
+                file_content = f.read()
+
+        return send_file(
+            io.BytesIO(file_content),
+            mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            as_attachment=True,
+            download_name='injects_export.xlsx'  # Use download_name instead of attachment_filename
+        )
+    except Exception as e:
+        logging.error(f"An error occurred while exporting injects: {e}")
+        return jsonify({'message': 'An error occurred while exporting injects', 'error': str(e)}), 500
+
+
+
+
+##### N O T E S #####
 
 
 def textnote_internal(user, message):

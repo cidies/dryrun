@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Edit Scenario</title>
+    <title>New Scenario</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <style>
@@ -40,34 +40,34 @@
 </head>
 <body>
     <div class="container">
-        <h1 class="my-4">Edit Scenario</h1>
-        <form id="edit-scenario-form" action="{{ url_for('edit_scenario', id=scenario.id) }}" method="post" class="mb-4">
+        <h1 class="my-4">New Scenario</h1>
+        <form id="new-scenario-form" action="{{ url_for('new_scenario') }}" method="post" class="mb-4">
             <div class="form-group form-section">
-                <label for="edit-name">Name:</label>
-                <input type="text" id="edit-name" name="name" class="form-control" value="{{ scenario.name }}" required>
+                <label for="new-name">Name:</label>
+                <input type="text" id="new-name" name="name" class="form-control" required>
             </div>
             <div class="form-group form-section">
                 <label>Difficulty:</label><br>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" id="difficulty-undefined" name="difficulty" value="undefined" {% if scenario.difficulty == 'undefined' %}checked{% endif %}>
+                    <input class="form-check-input" type="radio" id="difficulty-undefined" name="difficulty" value="undefined">
                     <label class="form-check-label" for="difficulty-undefined">Undefined</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" id="difficulty-heavy" name="difficulty" value="heavy" {% if scenario.difficulty == 'heavy' %}checked{% endif %}>
+                    <input class="form-check-input" type="radio" id="difficulty-heavy" name="difficulty" value="heavy">
                     <label class="form-check-label" for="difficulty-heavy">Heavy</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" id="difficulty-medium" name="difficulty" value="medium" {% if scenario.difficulty == 'medium' %}checked{% endif %}>
+                    <input class="form-check-input" type="radio" id="difficulty-medium" name="difficulty" value="medium">
                     <label class="form-check-label" for="difficulty-medium">Medium</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" id="difficulty-low" name="difficulty" value="low" {% if scenario.difficulty == 'low' %}checked{% endif %}>
+                    <input class="form-check-input" type="radio" id="difficulty-low" name="difficulty" value="low">
                     <label class="form-check-label" for="difficulty-low">Low</label>
                 </div>
             </div>
             <div class="form-group form-section">
-                <label for="edit-description">Description:</label>
-                <textarea id="edit-description" name="description" class="form-control" rows="5" required>{{ scenario.description }}</textarea>
+                <label for="new-description">Description:</label>
+                <textarea id="new-description" name="description" class="form-control" rows="5" required></textarea>
             </div>
 
             <div class="form-group form-section">
@@ -77,7 +77,7 @@
                         {% if incidents %}
                             {% for incident in incidents %}
                                 <div class="incident-item">
-                                    <input type="checkbox" id="incident_{{ incident.id }}" name="incidents" value="{{ incident.id }}" {% if incident.id in scenario.assigned_incidents %}checked{% endif %}>
+                                    <input type="checkbox" id="incident_{{ incident.id }}" name="incidents" value="{{ incident.id }}">
                                     <label for="incident_{{ incident.id }}">{{ incident.title }}</label>
                                 </div>
                             {% endfor %}
@@ -87,10 +87,11 @@
                     </div>
                 </div>
             </div>
+
             <div class="form-group form-section">
                 <button type="submit" class="btn btn-primary">Submit</button>
-                <button type="button" class="btn btn-secondary" id="submit-close">Submit & Close</button>
-                <button type="button" class="btn btn-danger" id="cancel">Cancel</button>
+                <button type="button" class="btn btn-success" id="submit-close">Submit & Close</button>
+                <button type="button" class="btn btn-secondary" id="cancel">Cancel</button>
             </div>
         </form>
     </div>
@@ -99,7 +100,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script>
     $(window).on('load', function() {
-        $('#edit-scenario-form').on('submit', function(e) {
+        $('#new-scenario-form').on('submit', function(e) {
             e.preventDefault();
             submitForm(false);
         });
@@ -121,14 +122,14 @@
             });
 
             var data = {
-                name: $('#edit-name').val(),
+                name: $('#new-name').val(),
                 difficulty: $('input[name="difficulty"]:checked').val(),
-                description: $('#edit-description').val(),
+                description: $('#new-description').val(),
                 assigned_incidents: incidents
             };
 
             $.ajax({
-                url: $('#edit-scenario-form').attr('action'),
+                url: $('#new-scenario-form').attr('action'),
                 type: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify(data),

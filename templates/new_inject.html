@@ -54,7 +54,11 @@
                     <option value="personally">Persönlich</option>
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <div class="form-group form-section">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="button" class="btn btn-success" id="submit-close">Submit & Close</button>
+                <button type="button" class="btn btn-secondary" id="cancel">Cancel</button>
+            </div>
         </form>
     </div>
 
@@ -64,6 +68,18 @@
     $(window).on('load', function() {
         $('#new-inject-form').on('submit', function(e) {
             e.preventDefault();
+            submitForm(false);
+        });
+
+        $('#submit-close').on('click', function() {
+            submitForm(true);
+        });
+
+        $('#cancel').on('click', function() {
+            window.location.href = '{{ url_for("injects") }}';
+        });
+
+        function submitForm(closeAfterSubmit) {
             console.log('Formular abgesendet');
 
             var data = {
@@ -78,18 +94,21 @@
             };
 
             $.ajax({
-                url: $(this).attr('action'),
+                url: $('#new-inject-form').attr('action'),
                 type: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify(data),
                 success: function(response) {
-                    toastr.success('Data successfully saved!');
+                    toastr.success('Daten erfolgreich gespeichert!');
+                    if (closeAfterSubmit) {
+                        window.location.href = '{{ url_for("injects") }}';
+                    }
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
-                    toastr.error('An error occurred: ' + textStatus);
+                    toastr.error('Ein Fehler ist aufgetreten: ' + textStatus);
                 }
             });
-        });
+        }
     });
     </script>
 </body>

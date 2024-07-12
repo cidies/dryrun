@@ -523,6 +523,61 @@
         "nachrichtentext": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <title>Website Engineer Report</title>\n    <style>\n        body {\n            font-family: Arial, sans-serif;\n            margin: 20px;\n            line-height: 1.6;\n        }\n        .content {\n            max-width: 600px;\n            margin: auto;\n            padding: 20px;\n            border: 1px solid #ccc;\n            border-radius: 10px;\n            background-color: #f9f9f9;\n        }\n        h1 {\n            text-align: center;\n            color: #333;\n        }\n    </style>\n</head>\n<body>\n    <div class=\"content\">\n        <h1>Website Engineer Report</h1>\n        <p>Hello Team,</p>\n        <p>The website engineer has confirmed that the reported changes on our official website do not exist. It is likely that the customer accessed a fake website.</p>\n        <p>We need to investigate the possibility of a fake website and guide the customer on how to avoid phishing sites in the future.</p>\n        <p>Best regards,</p>\n        <p>[Your Name]</p>\n        <p>[Department]</p>\n        <p>[Contact Information]</p>\n    </div>\n</body>\n</html>\n",
         "nachrichtentextPlain": "Hello Team,\n\nThe website engineer has confirmed that the reported changes on our official website do not exist. It is likely that the customer accessed a fake website.\n\nWe need to investigate the possibility of a fake website and guide the customer on how to avoid phishing sites in the future.\n\nBest regards,\n\n[Your Name]\n[Department]\n[Contact Information]",
         "files": []
+    },
+    {
+        "id": 47,
+        "title": "Field engineer Notebook infected.",
+        "description": "The field engineer finds out that his own machine is infected.",
+        "exercise_benefit": "The team will learn that it can be confusing to know, if a infection is the consequence or the root cause in such cases.",
+        "expected_response": "Participants should activate a forensician to analyse when and how the infection happened and compair with other timestamps..",
+        "communication_type": "text",
+        "duration": 11,
+        "nachrichtentext": "<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Field Engineer Notebook Infection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+        }
+        .content {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>Field Engineer Notebook Infection</h1>
+        <p>Hello Team,</p>
+        <p>It has been confirmed that the field engineer's notebook is infected. </p>
+        <p>Best regards,</p>
+        <p>[Your Name]</p>
+        <p>[Department]</p>
+        <p>[Contact Information]</p>
+    </div>
+</body>
+</html>",
+        "nachrichtentextPlain": "Hello Team,
+
+It has been confirmed that the field engineer's notebook is infected.
+Best regards,
+
+[Your Name]
+[Department]
+[Contact Information]",
+        "files": []
     }
     
 ]

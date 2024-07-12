@@ -535,7 +535,7 @@
         "nachrichtentext": "<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset=\"UTF-8\">
     <title>Field Engineer Notebook Infection</title>
     <style>
         body {
@@ -558,7 +558,7 @@
     </style>
 </head>
 <body>
-    <div class="content">
+    <div class=\"content\">
         <h1>Field Engineer Notebook Infection</h1>
         <p>Hello Team,</p>
         <p>It has been confirmed that the field engineer's notebook is infected. </p>

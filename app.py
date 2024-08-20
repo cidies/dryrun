@@ -175,10 +175,14 @@ def reports():
     reports = load_json('reports.json')
     return render_template('reports.html', reports=reports)
 
+
+
 @app.route('/injects', endpoint='injects')
 def injects_route():
     injects_data = load_json('injects.json')
     return render_template('injects.html', injects=injects_data)
+
+
 
 def get_inject_by_id(inject_id):
     injects_data = load_json('injects.json')

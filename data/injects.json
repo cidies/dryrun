@@ -5,7 +5,7 @@
         "description": "An employee reports a suspicious email that contains an attachment with a strange name.",
         "exercise_benefit": "Practice recognizing and reporting phishing attempts.",
         "expected_response": "Participants should analyze the email, avoid opening the attachment, and inform the IT security department.",
-        "communication_type": "email",
+        "communication_type": "text",
         "duration": 5,
         "nachrichtentext": "<!DOCTYPE html>\n<html lang=\"de\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <p3>Text in HTML</p3>\n</head>\n<body>\n<p>Hello,</p>\n\n<p>Today, I received an email that seems quite trustworthy. However, this sender does not usually send me such attachments. It might be a phishing email.</p>\n\n<p>Best regards,</p>\n\n\n    <p>Kurt Lamensloh</p>\n</body>\n</html>\n",
         "nachrichtentextPlain": "Hello,\n\nToday I received an email that appears quite trustworthy. However, this sender usually does not send such attachments. It might be a phishing email.\n\nBest regards,  \nKurt Lamensloh",
@@ -43,10 +43,11 @@
         "description": "An employee calls and reports that communication over the internal network is unusually slow.",
         "exercise_benefit": "Practices identifying network manipulations.",
         "expected_response": "Participants should review the network logs, identify the Man-in-the-Middle attack, and take appropriate countermeasures.",
-        "communication_type": "email",
+        "communication_type": "text",
         "duration": 5,
         "nachrichtentext": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <p3>Slow Network Speed</p3>\n    <style>\n        body {\n            font-family: Arial, sans-serif;\n            margin: 20px;\n            line-height: 1.6;\n        }\n        .content {\n            max-width: 600px;\n            margin: auto;\n            padding: 20px;\n            border: 1px solid #ccc;\n            border-radius: 10px;\n            background-color: #f9f9f9;\n        }\n        h1 {\n            text-align: center;\n            color: #333;\n        }\n    </style>\n</head>\n<body>\n    <div class=\"content\">\n        <h3>Slow Network Speed</h3>\n        <p>Hello IT Team,</p>\n        <p>I wanted to inform you that the network speed has been very slow since this morning. It takes a long time to load emails and access our internal systems.</p>\n        <p>I'm not sure what the cause is, but it's affecting my work. Could you please check on this?</p>\n        <p>Thank you for your help.</p>\n        <p>Best regards,</p>\n        <p>[Your Name]</p>\n        <p>[Department]</p>\n        <p>[Contact Information]</p>\n    </div>\n</body>\n</html>\n",
-        "nachrichtentextPlain": "Slow Network Speed\n\nHello IT Team,\n\nI wanted to inform you that the network speed has been very slow since this morning. It takes a long time to load emails and access our internal systems.\n\nI'm not sure what the cause is, but it's affecting my work. Could you please check on this?\n\nThank you for your help.\n\nBest regards,\n\n[Your Name]\n[Department]\n[Contact Information]"
+        "nachrichtentextPlain": "Slow Network Speed\n\nHello IT Team,\n\nI wanted to inform you that the network speed has been very slow since this morning. It takes a long time to load emails and access our internal systems.\n\nI'm not sure what the cause is, but it's affecting my work. Could you please check on this?\n\nThank you for your help.\n\nBest regards,\n\n[Your Name]\n[Department]\n[Contact Information]",
+        "files": []
     },
     {
         "id": 4,
@@ -64,10 +65,11 @@
         "description": "The antivirus program reports a malware detection on an employee's PC.",
         "exercise_benefit": "Practices responding to malware infections.",
         "expected_response": "Participants should isolate the malware, clean the infected system, and identify the source of the infection.",
-        "communication_type": "email",
+        "communication_type": "text",
         "duration": 33,
         "nachrichtentext": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <p3>Malware Alert</p3>\n    <style>\n        body {\n            font-family: Arial, sans-serif;\n            margin: 20px;\n            line-height: 1.6;\n        }\n        .content {\n            max-width: 600px;\n            margin: auto;\n            padding: 20px;\n            border: 1px solid #ccc;\n            border-radius: 10px;\n            background-color: #f9f9f9;\n        }\n        h1 {\n            text-align: center;\n            color: #333;\n        }\n    </style>\n</head>\n<body>\n    <div class=\"content\">\n        <h3>Malware Alert</h3>\n        <p>Hello IT Support Team,</p>\n        <p>The antivirus program on my PC has just detected a malware infection. The alert came today at [time] and involves a file I did not intentionally download.</p>\n        <p>Here are the details:</p>\n        <ul>\n            <li><strong>Affected file:</strong> [Filename and path]</li>\n            <li><strong>Time of detection:</strong> Today, at [time]</li>\n            <li><strong>Name of the malware:</strong> [Malware name, if known]</li>\n            <li><strong>Actions taken by the antivirus program:</strong> [e.g., \"Quarantined\", \"Deletion attempt failed\", etc.]</li>\n        </ul>\n        <p>I have currently disconnected the PC from the network to prevent possible spread. I request a prompt review and assistance in cleaning my system.</p>\n        <p>Thank you in advance.</p>\n        <p>Best regards,</p>\n        <p>[Your Name]</p>\n        <p>[Department]</p>\n        <p>[Contact Information]</p>\n    </div>\n</body>\n</html>\n",
-        "nachrichtentextPlain": "Hello IT Support Team,\n\nthe antivirus program on my PC has just detected a malware infection. The alert came today at [time] and involves a file I did not intentionally download.\n\nHere are the details:\n\nAffected file: [Filename and path]\nTime of detection: Today, at [time]\nName of the malware: [Malware name, if known]\nActions taken by the antivirus program: [e.g., \"Quarantined\", \"Deletion attempt failed\", etc.]\n\nI have currently disconnected the PC from the network to prevent possible spread. I request a prompt review and assistance in cleaning my system.\n\nThank you in advance.\n\nBest regards,\n\n[Your Name]\n[Department]\n[Contact Information]"
+        "nachrichtentextPlain": "Hello IT Support Team,\n\nthe antivirus program on my PC has just detected a malware infection. The alert came today at [time] and involves a file I did not intentionally download.\n\nHere are the details:\n\nAffected file: [Filename and path]\nTime of detection: Today, at [time]\nName of the malware: [Malware name, if known]\nActions taken by the antivirus program: [e.g., \"Quarantined\", \"Deletion attempt failed\", etc.]\n\nI have currently disconnected the PC from the network to prevent possible spread. I request a prompt review and assistance in cleaning my system.\n\nThank you in advance.\n\nBest regards,\n\n[Your Name]\n[Department]\n[Contact Information]",
+        "files": []
     },
     {
         "id": 6,
@@ -147,13 +149,15 @@
     },
     {
         "id": 13,
-        "title": "Gezielte Phishing-E-Mail",
-        "description": "Ein hochrangiger Mitarbeiter meldet den Erhalt einer gezielten Phishing-E-Mail, die sehr echt aussieht.",
-        "exercise_benefit": "\u00dcbt die Erkennung und Reaktion auf gezielte Phishing-Angriffe.",
-        "expected_response": "Die Teilnehmer sollten die E-Mail analysieren, den Anhang nicht \u00f6ffnen und die IT-Sicherheitsabteilung informieren.",
-        "communication_type": "email",
+        "title": "Targeted phishing e-mail",
+        "description": "A high-ranking employee reports receiving a targeted phishing email that looks very real.",
+        "exercise_benefit": "Practices recognizing and reacting to targeted phishing attacks.",
+        "expected_response": "Participants should analyze the e-mail, not open the attachment and inform the IT security department.",
+        "communication_type": "text",
         "duration": 10,
-        "nachrichtentext": "na"
+        "nachrichtentext": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Phishing Email Example</title>\n</head>\n<body style=\"font-family: Arial, sans-serif; line-height: 1.6;\">\n\n    <p><strong>From:</strong> IT Department &lt;it-support@companyname.com&gt;</p>\n    <p><strong>Subject:</strong> Urgent: Important Security Update Required</p>\n\n    <p>Dear [Employee Name],</p>\n\n    <p>We want to inform you that our IT security policies require an urgent update to ensure the protection of our internal systems. This update is necessary due to recently identified security vulnerabilities in the company's software.</p>\n\n    <p>To continue safeguarding our data, we kindly ask you to open the attached document <strong>\"Security_Update_2024.pdf\"</strong> and follow the instructions provided.</p>\n\n    <p><strong>Important Notes:</strong></p>\n    <ul>\n        <li>This update must be completed within the next 24 hours to ensure continued access to our systems.</li>\n        <li>Failure to complete this update may result in temporary restrictions to your account until the necessary actions are taken.</li>\n    </ul>\n\n    <p>If you have any questions, please contact our IT department directly at extension 1234 or via email at <a href=\"mailto:it-support@companyname.com\">it-support@companyname.com</a>.</p>\n\n    <p>We appreciate your cooperation and understanding.</p>\n\n    <p>Best regards,</p>\n\n    <p>IT Support Team<br>Company Name Inc.</p>\n\n    <hr>\n\n\n</body>\n</html>\n",
+        "nachrichtentextPlain": "Subject: Urgent: Important Security Update Required\n\nDear [Employee Name],\n\nWe want to inform you that our IT security policies require an urgent update to ensure the protection of our internal systems. This update is necessary due to recently identified security vulnerabilities in the company's software.\n\nTo continue safeguarding our data, we kindly ask you to open the attached document \"Security_Update_2024.pdf\" and follow the instructions provided.\n\nImportant Notes:\n\nThis update must be completed within the next 24 hours to ensure continued access to our systems.\nFailure to complete this update may result in temporary restrictions to your account until the necessary actions are taken.\nIf you have any questions, please contact our IT department directly at extension 1234 or via email at it-support@companyname.com.\n\nWe appreciate your cooperation and understanding.\n\nBest regards,\n\nIT Support Team",
+        "files": []
     },
     {
         "id": 14,
@@ -536,5 +540,4 @@
         "nachrichtentextPlain": "Hello Team, It has been confirmed that the field engineer's notebook is infected. Best regards, [Your Name] [Department] [Contact Information]",
         "files": []
     }
-    
 ]

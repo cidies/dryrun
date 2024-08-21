@@ -19,15 +19,15 @@
 
 <h2>Dashboard</h2>
 <div class="exercise-container">
-  <h3>Aktuelle Übungen</h3>
+  <h3>Current Exercises</h3>
   {% for exercise in exercises %}
     <div class="exercise">
       <strong>Name:</strong> {{ exercise.name }}<br>
       <strong>Status:</strong> {{ exercise.status }}<br>
-      <strong>Beschreibung:</strong> {{ exercise.description }}<br>
-      <strong>Letzte Durchführung:</strong> {{ exercise.last_performed }}<br>
+      <strong>Description:</strong> {{ exercise.description }}<br>
+      <strong>Last execution:</strong> {{ exercise.last_performed }}<br>
       {% if exercise.inject_comment %}
-        <strong>Kommentare:</strong>
+        <strong>Comment:</strong>
         <ul>
           {% for key, value in exercise.inject_comment.items() %}
             <li><strong>{{ key }}:</strong> {{ value }}</li>

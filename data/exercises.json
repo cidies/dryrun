@@ -7,12 +7,8 @@
         "inject_order": [
             1,
             3,
-            2,
-            26,
-            25,
             28,
             4,
-            7,
             6,
             29
         ],
@@ -21,10 +17,11 @@
             "5": "Endlich",
             "1": "TOP Alles gleich erkannt.",
             "3": "Aber es \u00fcberschreibt die vorherigen LOGS?!?!?!?!",
-            "4": "Hier fehlt noch eine Ende-Meldung."
+            "4": "Hier fehlt noch eine Ende-Meldung.",
+            "29": ""
         },
         "target_team": "",
-        "planned": "",
+        "planned": "2024-08-09T14:39",
         "last_performed": "2024-08-21T14:23:01.992583",
         "execution_type": "manual"
     },

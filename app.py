@@ -432,7 +432,7 @@ def perform_exercise(exercise):
             time.sleep(1)
         
         logging.info(f"[PE.05] Executing inject {inject_id}: {title} for {duration} seconds")
-        socketio.emit('message', {'data': f'Inject {inject_id} wird ausgeführt: {title} für {duration} Sekunden per {communication_type}'})
+        socketio.emit('message', {'data': f'Inject {inject_id} executed: {title}, duration {duration} seconds via {communication_type}'})
 
         # Check if communication_type is not None
         if communication_type:

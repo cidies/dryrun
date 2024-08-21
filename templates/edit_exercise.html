@@ -137,7 +137,7 @@
                             {% for inject_id in exercise.inject_order %}
                                 {% set inject = injects | selectattr('id', 'equalto', inject_id) | first %}
                                 {% if inject %}
-                                    <li data-id="{{ inject.id }}" draggable="true" ondblclick="removeInject(this)" onclick="showInjectDetails({{ inject.id }})">
+                                    <li data-id="{{ inject.id }}" draggable="true" oncontextmenu="if(confirm('Would you really like to remove?')) { removeInject(this); } return false;" onclick="showInjectDetails({{ inject.id }})">
                                         {{ inject.title }}
                                         <button class="button button-execute" type="button" onclick="executeInject({{ inject.id }})">Execute</button>
                                     </li>
@@ -290,7 +290,7 @@
             .then(response => response.json())
             .then(data => {
                 if (data.status === 'success') {
-                    toastr.success(`Inject ${injectId} erfolgreich ausgeführt.`);
+                    toastr.success(`Inject ${injectId} succesfully.`);
                 } else {
                     toastr.error(`Fehler beim Ausführen des Injects ${injectId}: ${data.message}`);
                 }

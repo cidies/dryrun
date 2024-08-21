@@ -410,12 +410,6 @@
         ]
     },
     {
-        "id": 42,
-        "name": "aaaa",
-        "difficulty": "dd",
-        "description": "dd"
-    },
-    {
         "id": 43,
         "name": "Cryptominer",
         "difficulty": "medium",

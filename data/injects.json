@@ -161,95 +161,105 @@
     },
     {
         "id": 14,
-        "title": "Massenhafte Anmeldeversuche",
-        "description": "Das Sicherheitssystem meldet massenhafte Anmeldeversuche mit bekannten Anmeldedaten.",
-        "exercise_benefit": "\u00dcbt die Erkennung und Reaktion auf Credential-Stuffing-Angriffe.",
-        "expected_response": "Die Teilnehmer sollten die betroffenen Konten sperren, die IP-Adressen blockieren und die Benutzer zur Passwort\u00e4nderung auffordern.",
-        "communication_type": "email",
+        "title": "Massive Login Attempts",
+        "description": "The security system reports massive login attempts using known credentials.",
+        "exercise_benefit": "Practices the detection and response to credential stuffing attacks.",
+        "expected_response": "Participants should lock the affected accounts, block the IP addresses, and prompt users to change their passwords.",
+        "communication_type": "text",
         "duration": 10,
-        "nachrichtentext": "na"
-    },
-    {
-        "id": 15,
-        "title": "Lieferant meldet Sicherheitsvorfall",
-        "description": "Ein Lieferant ruft an und meldet einen Sicherheitsvorfall, der m\u00f6glicherweise die Lieferkette betrifft.",
-        "exercise_benefit": "\u00dcbt die Reaktion auf Angriffe auf die Lieferkette.",
-        "expected_response": "Die Teilnehmer sollten den Vorfall untersuchen, die betroffenen Systeme isolieren und den Lieferanten unterst\u00dctzen.",
-        "communication_type": "call",
-        "duration": 10,
-        "nachrichtentext": "na"
-    },
-    {
-        "id": 16,
-        "title": "Unbefugte Berechtigungserh\u00f6hung",
-        "description": "Das System meldet eine unbefugte Berechtigungserh\u00f6hung  eines Benutzerkontos.",
-        "exercise_benefit": "\u00dcbt die Erkennung und Reaktion auf Privilege-Escalation-Angriffe.",
-        "expected_response": "Die Teilnehmer sollten das Konto sperren, die Protokolle \u00dcberpr\u00dcfen und die Schwachstelle beheben.",
-        "communication_type": "email",
-        "duration": 10,
-        "nachrichtentext": "na"
-    },
-    {
-        "id": 17,
-        "title": "Hijacking einer Benutzersitzung",
-        "description": "Ein Benutzer meldet, dass seine Sitzung beendet wurde und er nicht mehr auf das System zugreifen kann.",
-        "exercise_benefit": "\u00dcbt die Erkennung und Reaktion auf Session-Hijacking-Angriffe.",
-        "expected_response": "Die Teilnehmer sollten die Sitzungsprotokolle \u00dcberpr\u00dcfen, die Sitzung zur\u00dccksetzen und die Sicherheitsvorkehrungen verst\u00e4rken.",
-        "communication_type": "email",
-        "duration": 10,
-        "nachrichtentext": "na"
-    },
-    {
-        "id": 18,
-        "title": "Initial Phishing Email",
-        "description": "Versenden einer gef\u00e4lschten E-Mail von einem angeblich bekannten Dienstleister, der die Empf\u00e4nger auffordert, auf einen Link zu klicken, um ihre Kontoinformationen zu aktualisieren.",
-        "exercise_benefit": "\u00dcberpr\u00dcfung des Bewusstseins und der Vorsicht der Mitarbeiter gegen\u00dcber Phishing-Angriffen.",
-        "expected_response": "Die Teilnehmer sollten die E-Mail analysieren, den Link nicht anklicken und die IT-Sicherheitsabteilung informieren.",
-        "communication_type": "email",
-        "duration": 10,
-        "nachrichtentext": "na"
-    },
-    {
-        "id": 19,
-        "title": "Fake Login Page",
-        "description": "Erstellen einer gef\u00e4lschten Anmeldeseite, die identisch mit der legitimen Unternehmensseite aussieht, um Anmeldedaten zu sammeln.",
-        "exercise_benefit": "Test der F\u00e4higkeit zur Erkennung von gef\u00e4lschten Webseiten.",
-        "expected_response": "Die Teilnehmer sollten die Seite nicht nutzen, die IT-Sicherheitsabteilung informieren und die Seite melden.",
-        "communication_type": "web",
-        "duration": 10,
-        "nachrichtentext": "na"
-    },
-    {
-        "id": 20,
-        "title": "Follow-up Email",
-        "description": "Versenden einer Follow-up E-Mail an Mitarbeiter, die den initialen Phishing-Link nicht angeklickt haben, um sie erneut zur Handlung aufzufordern.",
-        "exercise_benefit": "\u00dcberpr\u00dcfung des erneuten Versuchs zur T\u00e4uschung von Mitarbeitern.",
-        "expected_response": "Die Teilnehmer sollten die E-Mail ignorieren und die IT-Sicherheitsabteilung informieren.",
-        "communication_type": "email",
-        "duration": 10,
-        "nachrichtentext": "na"
-    },
-    {
-        "id": 21,
-        "title": "Spear Phishing Email",
-        "description": "Versenden einer personalisierten Phishing-E-Mail an einen spezifischen Mitarbeiter mit Informationen, die aus sozialen Medien oder anderen Quellen gesammelt wurden.",
-        "exercise_benefit": "Test der Wachsamkeit von Mitarbeitern gegen\u00dcber personalisierten Phishing-Versuchen.",
-        "expected_response": "Die Teilnehmer sollten die E-Mail analysieren, den Link nicht anklicken und die IT-Sicherheitsabteilung informieren.",
-        "communication_type": "email",
-        "duration": 10,
-        "nachrichtentext": "na"
-    },
-    {
-        "id": 22,
-        "title": "Executive Phishing",
-        "description": "Versenden einer gef\u00e4lschten E-Mail im Namen eines hochrangigen Managers oder Gesch\u00e4ftsf\u00dchrers, die eine dringende Aktion erfordert.",
-        "exercise_benefit": "Test der Bereitschaft der Mitarbeiter, Autorit\u00e4ten zu hinterfragen und Informationen zu sch\u00dctzen.",
-        "expected_response": "Die Teilnehmer sollten die E-Mail ignorieren und die IT-Sicherheitsabteilung informieren.",
-        "communication_type": "email",
-        "duration": 10,
-        "nachrichtentext": "na"
-    },
-    {
+        "nachrichtentext": "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\"><title>Security Alert: Massive Login Attempts Detected</title><style>body {font-family: Arial, sans-serif;margin: 20px;line-height: 1.6;}.content {max-width: 600px;margin: auto;padding: 20px;border: 1px solid #ccc;border-radius: 10px;background-color: #f9f9f9;}h1 {text-align: center;color: #333;}</style></head><body><div class=\"content\"><h1>Security Alert: Massive Login Attempts Detected</h1><p>Hello Incident Response Team,</p><p>We have detected a large number of login attempts using known credentials. This activity suggests the possibility of a credential stuffing attack.</p><p>Please investigate the matter and take appropriate action.</p><p>Best regards,</p><p>[Your Name]</p><p>[Department]</p><p>[Contact Information]</p></div></body></html>",
+        "nachrichtentextPlain": "Security Alert: Massive Login Attempts Detected\n\nHello Incident Response Team,\n\nWe have detected a large number of login attempts using known credentials. This activity suggests the possibility of a credential stuffing attack.\n\nPlease investigate the matter and take appropriate action.\n\nBest regards,\n[Your Name]\n[Department]\n[Contact Information]"
+        },    
+        {
+            "id": 15,
+            "title": "Supplier Reports Security Incident",
+            "description": "A supplier calls and reports a security incident that may potentially affect the supply chain.",
+            "exercise_benefit": "Practices the response to supply chain attacks.",
+            "expected_response": "Participants should investigate the incident, isolate affected systems, and support the supplier.",
+            "communication_type": "text",
+            "duration": 10,
+            "nachrichtentext": "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\"><title>Security Alert: Supplier Incident Reported</title><style>body {font-family: Arial, sans-serif;margin: 20px;line-height: 1.6;}.content {max-width: 600px;margin: auto;padding: 20px;border: 1px solid #ccc;border-radius: 10px;background-color: #f9f9f9;}h1 {text-align: center;color: #333;}</style></head><body><div class=\"content\"><h1>Security Alert: Supplier Incident Reported</h1><p>Hello Incident Response Team,</p><p>A supplier has contacted us to report a security incident that may potentially impact the supply chain.</p><p>Please investigate the issue and take necessary actions as needed.</p><p>Best regards,</p><p>[Your Name]</p><p>[Department]</p><p>[Contact Information]</p></div></body></html>",
+            "nachrichtentextPlain": "Security Alert: Supplier Incident Reported\n\nHello Incident Response Team,\n\nA supplier has contacted us to report a security incident that may potentially impact the supply chain.\n\nPlease investigate the issue and take necessary actions as needed.\n\nBest regards,\n[Your Name]\n[Department]\n[Contact Information]"
+        },
+        {
+            "id": 16,
+            "title": "Unauthorized Privilege Escalation",
+            "description": "The system reports an unauthorized privilege escalation of a user account.",
+            "exercise_benefit": "Practices the detection and response to privilege escalation attacks.",
+            "expected_response": "Participants should lock the account, review the logs, and resolve the vulnerability.",
+            "communication_type": "email",
+            "duration": 10,
+            "nachrichtentext": "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\"><title>Security Alert: Unauthorized Privilege Escalation</title><style>body {font-family: Arial, sans-serif;margin: 20px;line-height: 1.6;}.content {max-width: 600px;margin: auto;padding: 20px;border: 1px solid #ccc;border-radius: 10px;background-color: #f9f9f9;}h1 {text-align: center;color: #333;}</style></head><body><div class=\"content\"><h1>Security Alert: Unauthorized Privilege Escalation</h1><p>Hello Incident Response Team,</p><p>The system has detected an unauthorized privilege escalation for a user account.</p><p>Please investigate this issue and take the necessary actions to address it.</p><p>Best regards,</p><p>[Your Name]</p><p>[Department]</p><p>[Contact Information]</p></div></body></html>",
+            "nachrichtentextPlain": "Security Alert: Unauthorized Privilege Escalation\n\nHello Incident Response Team,\n\nThe system has detected an unauthorized privilege escalation for a user account.\n\nPlease investigate this issue and take the necessary actions to address it.\n\nBest regards,\n[Your Name]\n[Department]\n[Contact Information]"
+        },
+        {
+            "id": 17,
+            "title": "User Session Hijacking",
+            "description": "A user reports that their session was terminated and they can no longer access the system.",
+            "exercise_benefit": "Practices the detection and response to session hijacking attacks.",
+            "expected_response": "Participants should review the session logs, reset the session, and strengthen security measures.",
+            "communication_type": "email",
+            "duration": 10,
+            "nachrichtentext": "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\"><title>Security Alert: User Session Hijacking</title><style>body {font-family: Arial, sans-serif;margin: 20px;line-height: 1.6;}.content {max-width: 600px;margin: auto;padding: 20px;border: 1px solid #ccc;border-radius: 10px;background-color: #f9f9f9;}h1 {text-align: center;color: #333;}</style></head><body><div class=\"content\"><h1>Security Alert: User Session Hijacking</h1><p>Hello Incident Response Team,</p><p>A user has reported that their session was unexpectedly terminated, and they are unable to access the system.</p><p>Please investigate this issue and take the necessary actions to resolve it.</p><p>Best regards,</p><p>[Your Name]</p><p>[Department]</p><p>[Contact Information]</p></div></body></html>",
+            "nachrichtentextPlain": "Security Alert: User Session Hijacking\n\nHello Incident Response Team,\n\nA user has reported that their session was unexpectedly terminated, and they are unable to access the system.\n\nPlease investigate this issue and take the necessary actions to resolve it.\n\nBest regards,\n[Your Name]\n[Department]\n[Contact Information]"
+        },    
+        {
+            "id": 18,
+            "title": "Initial Phishing Email",
+            "description": "Sending a fake email from a supposedly known service provider, asking recipients to click on a link to update their account information.",
+            "exercise_benefit": "Tests employee awareness and caution against phishing attacks.",
+            "expected_response": "Participants should analyze the email, not click the link, and inform the IT security department.",
+            "communication_type": "email",
+            "duration": 10,
+            "nachrichtentext": "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\"><title>Security Alert: Phishing Email Detected</title><style>body {font-family: Arial, sans-serif;margin: 20px;line-height: 1.6;}.content {max-width: 600px;margin: auto;padding: 20px;border: 1px solid #ccc;border-radius: 10px;background-color: #f9f9f9;}h1 {text-align: center;color: #333;}</style></head><body><div class=\"content\"><h1>Security Alert: Phishing Email Detected</h1><p>Hello Incident Response Team,</p><p>A suspicious email has been detected, purportedly from a known service provider, asking recipients to click on a link to update their account information. This email is likely a phishing attempt.</p><p>Please investigate the email and take appropriate action.</p><p>Best regards,</p><p>[Your Name]</p><p>[Department]</p><p>[Contact Information]</p></div></body></html>",
+            "nachrichtentextPlain": "Security Alert: Phishing Email Detected\n\nHello Incident Response Team,\n\nA suspicious email has been detected, purportedly from a known service provider, asking recipients to click on a link to update their account information. This email is likely a phishing attempt.\n\nPlease investigate the email and take appropriate action.\n\nBest regards,\n[Your Name]\n[Department]\n[Contact Information]"
+        },        
+        {
+            "id": 19,
+            "title": "Fake Login Page",
+            "description": "Creation of a fake login page that looks identical to the legitimate company page, designed to collect login credentials.",
+            "exercise_benefit": "Tests the ability to detect fake websites.",
+            "expected_response": "Participants should not use the page, inform the IT security department, and report the page.",
+            "communication_type": "text",
+            "duration": 10,
+            "nachrichtentext": "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\"><title>Security Alert: Fake Login Page Detected</title><style>body {font-family: Arial, sans-serif;margin: 20px;line-height: 1.6;}.content {max-width: 600px;margin: auto;padding: 20px;border: 1px solid #ccc;border-radius: 10px;background-color: #f9f9f9;}h1 {text-align: center;color: #333;}</style></head><body><div class=\"content\"><h1>Security Alert: Fake Login Page Detected</h1><p>Hello Incident Response Team,</p><p>A fake login page has been identified, which closely resembles the legitimate company login page. The purpose of this page is likely to collect login credentials.</p><p>Please investigate the issue and take the necessary actions to address it.</p><p>Best regards,</p><p>[Your Name]</p><p>[Department]</p><p>[Contact Information]</p></div></body></html>",
+            "nachrichtentextPlain": "Security Alert: Fake Login Page Detected\n\nHello Incident Response Team,\n\nA fake login page has been identified, which closely resembles the legitimate company login page. The purpose of this page is likely to collect login credentials.\n\nPlease investigate the issue and take the necessary actions to address it.\n\nBest regards,\n[Your Name]\n[Department]\n[Contact Information]"
+        },
+            {
+                "id": 20,
+                "title": "Follow-up Phishing Email",
+                "description": "Sending a follow-up email to employees who did not click the initial phishing link, encouraging them to take action again.",
+                "exercise_benefit": "Tests the effectiveness of repeated attempts to deceive employees.",
+                "expected_response": "Participants should ignore the email and inform the IT security department.",
+                "communication_type": "email",
+                "duration": 10,
+                "nachrichtentext": "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\"><title>Security Alert: Follow-up Phishing Email</title><style>body {font-family: Arial, sans-serif;margin: 20px;line-height: 1.6;}.content {max-width: 600px;margin: auto;padding: 20px;border: 1px solid #ccc;border-radius: 10px;background-color: #f9f9f9;}h1 {text-align: center;color: #333;}</style></head><body><div class=\"content\"><h1>Security Alert: Follow-up Phishing Email Detected</h1><p>Hello Incident Response Team,</p><p>A follow-up phishing email has been sent to employees who did not engage with the initial phishing link. The email encourages them to take action again.</p><p>Please investigate this email and take appropriate actions.</p><p>Best regards,</p><p>[Your Name]</p><p>[Department]</p><p>[Contact Information]</p></div></body></html>",
+                "nachrichtentextPlain": "Security Alert: Follow-up Phishing Email Detected\n\nHello Incident Response Team,\n\nA follow-up phishing email has been sent to employees who did not engage with the initial phishing link. The email encourages them to take action again.\n\nPlease investigate this email and take appropriate actions.\n\nBest regards,\n[Your Name]\n[Department]\n[Contact Information]"
+            },
+            {
+                "id": 21,
+                "title": "Spear Phishing Email",
+                "description": "Sending a personalized phishing email to a specific employee using information gathered from social media or other sources.",
+                "exercise_benefit": "Tests employee awareness against personalized phishing attempts.",
+                "expected_response": "Participants should analyze the email, not click the link, and inform the IT security department.",
+                "communication_type": "email",
+                "duration": 10,
+                "nachrichtentext": "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\"><title>Security Alert: Spear Phishing Email Detected</title><style>body {font-family: Arial, sans-serif;margin: 20px;line-height: 1.6;}.content {max-width: 600px;margin: auto;padding: 20px;border: 1px solid #ccc;border-radius: 10px;background-color: #f9f9f9;}h1 {text-align: center;color: #333;}</style></head><body><div class=\"content\"><h1>Security Alert: Spear Phishing Email Detected</h1><p>Hello Incident Response Team,</p><p>A personalized spear phishing email has been sent to a specific employee. The email contains details gathered from social media or other sources and attempts to deceive the employee into clicking a malicious link.</p><p>Please investigate this email and take appropriate actions.</p><p>Best regards,</p><p>[Your Name]</p><p>[Department]</p><p>[Contact Information]</p></div></body></html>",
+                "nachrichtentextPlain": "Security Alert: Spear Phishing Email Detected\n\nHello Incident Response Team,\n\nA personalized spear phishing email has been sent to a specific employee. The email contains details gathered from social media or other sources and attempts to deceive the employee into clicking a malicious link.\n\nPlease investigate this email and take appropriate actions.\n\nBest regards,\n[Your Name]\n[Department]\n[Contact Information]"
+            },
+            
+            {
+                "id": 22,
+                "title": "Executive Phishing",
+                "description": "Sending a fake email in the name of a high-ranking manager or executive, requiring urgent action.",
+                "exercise_benefit": "Tests employee preparedness to question authority and protect sensitive information.",
+                "expected_response": "Participants should ignore the email and inform the IT security department.",
+                "communication_type": "text",
+                "duration": 10,
+                "nachrichtentext": "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\"><title>Security Alert: Executive Phishing Attempt Detected</title><style>body {font-family: Arial, sans-serif;margin: 20px;line-height: 1.6;}.content {max-width: 600px;margin: auto;padding: 20px;border: 1px solid #ccc;border-radius: 10px;background-color: #f9f9f9;}h1 {text-align: center;color: #333;}</style></head><body><div class=\"content\"><h1>Security Alert: Executive Phishing Attempt Detected</h1><p>Hello Incident Response Team,</p><p>A phishing email, posing as a high-ranking manager or executive, has been detected. The email demands urgent action from employees and is likely an attempt to deceive and collect sensitive information.</p><p><strong>Forwarded Phishing Email Example:</strong></p><blockquote><p><strong>From:</strong> CEO &lt;ceo@company.com&gt;<br><strong>To:</strong> Employee &lt;employee@company.com&gt;<br><strong>Subject:</strong> URGENT: Immediate Action Required</p><p>Dear [Employee],</p><p>I need you to process an urgent payment immediately. Please ensure this is handled today without any delays. This is highly confidential, so do not share this with anyone.</p><p>Send me the details once it's done.</p><p>Best regards,<br>[CEO's Name]</p></blockquote><p>Please investigate this email and take the necessary actions to address it.</p><p>Best regards,</p><p>[Your Name]</p><p>[Department]</p><p>[Contact Information]</p></div></body></html>",
+                "nachrichtentextPlain": "Security Alert: Executive Phishing Attempt Detected\n\nHello Incident Response Team,\n\nA phishing email, posing as a high-ranking manager or executive, has been detected. The email demands urgent action from employees and is likely an attempt to deceive and collect sensitive information.\n\nPlease investigate this email and take necessary actions to address it.\n\nBest regards,\n[Your Name]\n[Department]\n[Contact Information]"
+            },
+            {
         "id": 23,
         "title": "Credential Harvesting",
         "description": "Sending an email with a link to a page pretending to be an IT support portal to collect login credentials.",
@@ -392,9 +402,14 @@
         "expected_response": "Immediate alert to the incident response team about the suspicious log activity.\nVerification of the IP address and review of user accounts accessed during the successful logins.\nImmediate password reset for affected user accounts.\nEnhanced monitoring of login attempts and suspicious activities.\nImplementation of account lockout policies after a certain number of failed login attempts.\nCommunication with users about the potential security breach and recommendations for stronger passwords.\nDetailed documentation and reporting of the incident.",
         "communication_type": "text",
         "duration": 60,
-        "nachrichtentext": "<p><strong>Incident Alert: Suspicious Logs Detected</strong></p>\n<p>Dear Incident Response Team,</p>\n<p>During routine server log analysis, we have identified multiple failed login attempts followed by successful logins from the same IP address. This pattern suggests that an unauthorized entity may have been attempting to brute-force login credentials.</p>\n<p><strong>Immediate Actions Required:</strong></p>\n<ul>\n    <li>Verify the IP address and review the user accounts accessed during the successful logins.</li>\n    <li>Reset passwords for affected user accounts immediately.</li>\n    <li>Enhance monitoring of login attempts and suspicious activities.</li>\n    <li>Implement account lockout policies after a certain number of failed login attempts.</li>\n    <li>Communicate with users about the potential security breach and recommend stronger passwords.</li>\n</ul>\n<p>Please prioritize this issue and provide updates on the progress of the investigation.</p>\n<p>Best regards,<br>[Your Name]<br>Incident Response Coordinator</p>\n",
+        "nachrichtentext": "<p><strong>Incident Alert: Suspicious Logs Detected</strong></p>\n<p>Dear Incident Response Team,</p>\n<p>During routine server log analysis, we have identified multiple failed login attempts followed by successful logins from the same IP address. This pattern suggests that an unauthorized entity may have been attempting to brute-force login credentials.</p>\n<p><strong>Immediate Actions Required:</strong></p>\n<ul>\n    <li>Verify the IP address and review the user accounts accessed during the successful logins.</li>\n    <li>Reset passwords for affected user accounts immediately.</li>\n    <li>Enhance monitoring of login attempts and suspicious activities.</li>\n    <li>Implement account lockout policies after a certain number of failed login attempts.</li>\n    <li>Communicate with users about the potential security breach and recommend stronger passwords.</li>\n</ul>\n<p>Please prioritize this issue and provide updates on the progress of the investigation.</p>\n<p><strong>Download the suspicious log file:</strong> <a href=\"/uploads/windowseventlog01.txt\">windowseventlog01.txt</a></p>\n<p>Best regards,<br>Chris Walton<br>Incident Response Coordinator</p>\n",
         "nachrichtentextPlain": "Incident Alert: Suspicious Logs Detected\n\nDear Incident Response Team,\n\nDuring routine server log analysis, we have identified multiple failed login attempts followed by successful logins from the same IP address. This pattern suggests that an unauthorized entity may have been attempting to brute-force login credentials.\n\nImmediate Actions Required:\n\nVerify the IP address and review the user accounts accessed during the successful logins.\nReset passwords for affected user accounts immediately.\nEnhance monitoring of login attempts and suspicious activities.\nImplement account lockout policies after a certain number of failed login attempts.\nCommunicate with users about the potential security breach and recommend stronger passwords.\nPlease prioritize this issue and provide updates on the progress of the investigation.\n\nBest regards,\n[Your Name]\nIncident Response Coordinator",
-        "files": []
+        "files": [
+            {
+                "title": "Logfile",
+                "url": "/uploads/windowseventlog01.txt"
+            }
+        ]
     },
     {
         "id": 36,
@@ -539,5 +554,46 @@
         "nachrichtentext": "<!DOCTYPE html><html lang=\"en\"><head> <meta charset=\"UTF-8\"><title>Field Engineer Notebook Infection</title><style> body {font-family: Arial, sans-serif;margin: 20px;line-height: 1.6;}.content {max-width: 600px;margin: auto;padding: 20px;border: 1px solid #ccc;border-radius: 10px;background-color: #f9f9f9;}h1 {text-align: center;color: #333;}</style></head> <body><div class=\"content\"><h1>Field Engineer Notebook Infection</h1><p>Hello Team,</p><p>It has been confirmed that the field engineer's notebook is infected. </p><p>Best regards,</p><p>[Your Name]</p><p>[Department]</p><p>[Contact Information]</p></div></body></html>",
         "nachrichtentextPlain": "Hello Team, It has been confirmed that the field engineer's notebook is infected. Best regards, [Your Name] [Department] [Contact Information]",
         "files": []
+    },
+    {
+        "id": 48,
+        "title": "Field engineer send ransom note BAD RABBIT.",
+        "description": "The field engineer send a screenshot of the ransom note.",
+        "exercise_benefit": "The team will practically learn how to ransom notes is shows.",
+        "expected_response": "Participants should introduce more practically in ransomware methods.",
+        "communication_type": "text",
+        "duration": 11,
+        "nachrichtentext": "<!DOCTYPE html><html lang=\"en\"><head> <meta charset=\"UTF-8\"><title>Ransomware Alert: Ransom Note Detected</title><style> body {font-family: Arial, sans-serif;margin: 20px;line-height: 1.6;}.content {max-width: 600px;margin: auto;padding: 20px;border: 1px solid #ccc;border-radius: 10px;background-color: #f9f9f9;}h1 {text-align: center;color: #333;}</style></head> <body><div class=\"content\"><h1>Ransomware Alert: Ransom Note Detected</h1><p>Hello Incident Response Team,</p><p>During our investigation of a compromised system, we have identified a ransomware infection. A ransom note has been left by the attackers.</p><p><strong>Screenshot of the ransom note:</strong></p><p><img src=\"/uploads/rn_badrappit.png\" alt=\"Ransom Note Screenshot\" style=\"max-width: 100%; height: auto; border: 1px solid #ccc;\"></p><p>Please review the screenshot and proceed with immediate actions to mitigate the infection and assess the damage.</p><p>Best regards,</p><p>[Your Name]</p><p>[Department]</p><p>[Contact Information]</p></div></body></html>",
+        "nachrichtentextPlain": "Ransomware Alert: Ransom Note Detected\n\nHello Incident Response Team,\n\nDuring our investigation of a compromised system, we have identified a ransomware infection. A ransom note has been left by the attackers.\n\nScreenshot of the ransom note: /uploads/rn_badrappit.jpg\n\nPlease review the screenshot and proceed with immediate actions to mitigate the infection and assess the damage.\n\nBest regards,\n[Your Name]\n[Department]\n[Contact Information]",
+        "files": [
+            {
+                "title": "Logfile",
+                "url": "/uploads/rn_badrappit.png"
+            }
+        ]
+    },
+    {
+        "id": 49,
+        "title": "Shodan Alert: Vulnerability Detected",
+        "description": "A Shodan alert has been triggered, showing a potential vulnerability on a system. The details provided by Shodan are attached for review.",
+        "exercise_benefit": "Tests the ability to analyze and respond to external vulnerability scanning alerts.",
+        "expected_response": "Participants should analyze the alert, review the system configuration, and take necessary actions to address the vulnerability.",
+        "communication_type": "text",
+        "duration": 10,
+        "nachrichtentext": "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\"><title>Shodan Alert: Vulnerability Detected</title><style>body {font-family: Arial, sans-serif;margin: 20px;line-height: 1.6;}.content {max-width: 600px;margin: auto;padding: 20px;border: 1px solid #ccc;border-radius: 10px;background-color: #f9f9f9;}h1 {text-align: center;color: #333;}</style></head><body><div class=\"content\"><h1>Shodan Alert: Vulnerability Detected</h1><p>Hello Incident Response Team,</p><p>A Shodan alert has been triggered for the IP address <strong>82.165.243.208</strong> on port 443/tcp.</p><p>According to the alert, an <strong>Apache httpd 2.4.59</strong> server was found with the following details:</p><pre>HTTP/1.1 200 OK<br>Date: Thu, 05 Sep 2024 20:44:27 GMT<br>Server: Apache/2.4.59 (Debian)<br>Last-Modified: Sun, 25 Aug 2024 16:11:10 GMT<br>ETag: \"3dc3-6208441aea380\"<br>Accept-Ranges: bytes<br>Content-Length: 15811<br>Vary: Accept-Encoding<br>Content-Type: text/html</pre><p>This alert suggests that the system might be vulnerable and requires immediate attention.</p><p>Please review the attached Shodan alert and proceed with the investigation.</p><p>Best regards,</p><p>[Your Name]</p><p>[Department]</p><p>[Contact Information]</p></div></body></html>",
+        "nachrichtentextPlain": "Shodan Alert: Vulnerability Detected\n\nHello Incident Response Team,\n\nA Shodan alert has been triggered for the IP address 82.165.243.208 on port 443/tcp.\n\nAccording to the alert, an Apache httpd 2.4.59 server was found with the following details:\n\nHTTP/1.1 200 OK\nDate: Thu, 05 Sep 2024 20:44:27 GMT\nServer: Apache/2.4.59 (Debian)\nLast-Modified: Sun, 25 Aug 2024 16:11:10 GMT\nETag: \"3dc3-6208441aea380\"\nAccept-Ranges: bytes\nContent-Length: 15811\nVary: Accept-Encoding\nContent-Type: text/html\n\nThis alert suggests that the system might be vulnerable and requires immediate attention.\n\nPlease review the attached Shodan alert and proceed with the investigation.\n\nBest regards,\n[Your Name]\n[Department]\n[Contact Information]"
+    },
+    {
+        "id": 50,
+        "title": "SIEM Alert: Potential Security Incident Detected",
+        "description": "A SIEM alert has been triggered, indicating potential malicious activity on the network. The details provided by the SIEM system are attached for review.",
+        "exercise_benefit": "Tests the ability to analyze and respond to internal network security monitoring alerts.",
+        "expected_response": "Participants should analyze the alert, review the system logs, and take necessary actions to mitigate the potential threat.",
+        "communication_type": "text",
+        "duration": 10,
+        "nachrichtentext": "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\"><title>SIEM Alert: Potential Security Incident Detected</title><style>body {font-family: Arial, sans-serif;margin: 20px;line-height: 1.6;}.content {max-width: 600px;margin: auto;padding: 20px;border: 1px solid #ccc;border-radius: 10px;background-color: #f9f9f9;}h1 {text-align: center;color: #333;}</style></head><body><div class=\"content\"><h1>SIEM Alert: Potential Security Incident Detected</h1><p>Hello Incident Response Team,</p><p>A SIEM alert has been triggered, indicating potential malicious activity on the network involving IP address <strong>192.168.1.100</strong>.</p><p>Here are the details of the alert:</p><pre>Event Time: 2024-09-05 18:35:12 UTC<br>Source IP: 192.168.1.100<br>Destination IP: 192.168.1.200<br>Destination Port: 3389 (Remote Desktop Protocol)<br>Event Type: Multiple failed login attempts<br>Event Severity: High<br>Log Source: Windows Security Logs<br>Alert: Possible brute-force attempt detected on RDP</pre><p>This alert suggests a possible brute-force attack targeting the Remote Desktop Protocol (RDP). Immediate investigation is required to confirm if any compromise has occurred.</p><p>Please review the attached SIEM alert and proceed with the investigation.</p><p>Best regards,</p><p>[Your Name]</p><p>[Department]</p><p>[Contact Information]</p></div></body></html>",
+        "nachrichtentextPlain": "SIEM Alert: Potential Security Incident Detected\n\nHello Incident Response Team,\n\nA SIEM alert has been triggered, indicating potential malicious activity on the network involving IP address 192.168.1.100.\n\nHere are the details of the alert:\n\nEvent Time: 2024-09-05 18:35:12 UTC\nSource IP: 192.168.1.100\nDestination IP: 192.168.1.200\nDestination Port: 3389 (Remote Desktop Protocol)\nEvent Type: Multiple failed login attempts\nEvent Severity: High\nLog Source: Windows Security Logs\nAlert: Possible brute-force attempt detected on RDP\n\nThis alert suggests a possible brute-force attack targeting the Remote Desktop Protocol (RDP). Immediate investigation is required to confirm if any compromise has occurred.\n\nPlease review the attached SIEM alert and proceed with the investigation.\n\nBest regards,\n[Your Name]\n[Department]\n[Contact Information]"
     }
+    
+    
 ]

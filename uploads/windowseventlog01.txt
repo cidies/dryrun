@@ -1,0 +1,139 @@
+Event ID: 4625
+Log Name: Security
+Source: Microsoft-Windows-Security-Auditing
+Date: 2024-09-06 12:45:32 PM
+Task Category: Logon
+Level: Information
+Keywords: Audit Failure
+User: N/A
+Computer: WORKSTATION01
+Description:
+An account failed to log on.
+
+Subject:
+    Security ID:        S-1-0-0
+    Account Name:       -
+    Account Domain:     -
+    Logon ID:           0x0
+
+Logon Type: 3 (Network)
+
+Account For Which Logon Failed:
+    Security ID:        S-1-0-0
+    Account Name:       admin_user
+    Account Domain:     WORKGROUP
+
+Failure Information:
+    Failure Reason:     Unknown user name or bad password
+    Status:             0xC000006D
+    Sub Status:         0xC000006A
+
+Process Information:
+    Caller Process ID:  0x0
+    Caller Process Name: -
+
+Network Information:
+    Workstation Name:   WORKSTATION01
+    Source Network Address: 192.168.1.50
+    Source Port:        51423
+
+------------------------------------------------------------
+
+Event ID: 4625
+Log Name: Security
+Source: Microsoft-Windows-Security-Auditing
+Date: 2024-09-06 12:46:10 PM
+Task Category: Logon
+Level: Information
+Keywords: Audit Failure
+User: N/A
+Computer: WORKSTATION01
+Description:
+An account failed to log on.
+
+Subject:
+    Security ID:        S-1-0-0
+    Account Name:       -
+    Account Domain:     -
+    Logon ID:           0x0
+
+Logon Type: 3 (Network)
+
+Account For Which Logon Failed:
+    Security ID:        S-1-0-0
+    Account Name:       admin_user
+    Account Domain:     WORKGROUP
+
+Failure Information:
+    Failure Reason:     Unknown user name or bad password
+    Status:             0xC000006D
+    Sub Status:         0xC000006A
+
+Process Information:
+    Caller Process ID:  0x0
+    Caller Process Name: -
+
+Network Information:
+    Workstation Name:   WORKSTATION01
+    Source Network Address: 192.168.1.50
+    Source Port:        51423
+
+------------------------------------------------------------
+
+Event ID: 4624
+Log Name: Security
+Source: Microsoft-Windows-Security-Auditing
+Date: 2024-09-06 12:47:30 PM
+Task Category: Logon
+Level: Information
+Keywords: Audit Success
+User: N/A
+Computer: WORKSTATION01
+Description:
+An account was successfully logged on.
+
+Subject:
+    Security ID:        S-1-5-21-3623811015-3361044348-30300820-1000
+    Account Name:       admin_user
+    Account Domain:     WORKGROUP
+    Logon ID:           0x29A
+
+Logon Type: 3 (Network)
+
+New Logon:
+    Security ID:        S-1-5-21-3623811015-3361044348-30300820-1000
+    Account Name:       admin_user
+    Account Domain:     WORKGROUP
+    Logon ID:           0x29A
+    Logon GUID:         {00000000-0000-0000-0000-000000000000}
+
+Process Information:
+    Process ID:         0x44c
+    Process Name:       C:\Windows\System32\svchost.exe
+
+Network Information:
+    Workstation Name:   WORKSTATION01
+    Source Network Address: 192.168.1.50
+    Source Port:        51423
+
+------------------------------------------------------------
+
+Event ID: 4672
+Log Name: Security
+Source: Microsoft-Windows-Security-Auditing
+Date: 2024-09-06 12:48:10 PM
+Task Category: Special Logon
+Level: Information
+Keywords: Audit Success
+User: N/A
+Computer: WORKSTATION01
+Description:
+Special privileges assigned to new logon.
+
+Subject:
+    Security ID:        S-1-5-21-3623811015-3361044348-30300820-1000
+    Account Name:       admin_user
+    Account Domain:     WORKGROUP
+    Logon ID:           0x29A
+
+Privileges:        SeSecurityPrivilege, SeBackupPrivilege, SeRestorePrivilege

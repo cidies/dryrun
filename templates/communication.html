@@ -1,52 +1,59 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+<style>
+
+    .send-button:hover {
+      background-color: #91b8bd;
+  }
+  .message {
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 4px;
+      background-color: #a6c7d6;
+  }
+  .message .timestamp {
+      font-size: 0.8em;
+      color: #999;
+  }
+  .message .user {
+      font-weight: bold;
+  }
+
+  .chat-input {
+      width: 80%;
+      padding: 10px;
+      margin-right: 10px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+  }
+
+  .chat-input:hover {
+      background-color: #91b8bd; /* Hellblau */
+  }
+
+  .chat-input:focus {
+      background-color: white;
+      outline: none; /* Entfernt den Standard-Fokusrahmen */
+  }
+
+
+</style>
+
+
 <div class="chat">
-    <h3>Team-Chat</h3>
     <div id="chat-window" class="chat-window">
         <!-- Chat-Nachrichten werden hier angezeigt -->
     </div>
     <input type="text" id="chat-input" class="chat-input" placeholder="Nachricht eingeben">
     <button id="send-button" class="send-button">Senden</button>
 </div>
-<!--
-<div class="video-calls">
-    <h3>Video-Calls</h3>
-    <button>Meeting starten</button>
-    <button>Meeting beitreten</button>
-</div>
-<div class="forums">
-    <h3>Foren</h3>
-    <div id="forum">
-        <p><strong>Thema:</strong> Neue Bedrohungen</p>
-        <p>Beitrag: Analyse der neuesten Ransomware-Varianten</p>
-        <p>Beitrag: Strategien zur Verhinderung von DDoS-Angriffen</p>
-    </div>
-</div>
--->
+
 
 <audio id="ping-sound" src="/static/sounds/newmessage.wav" preload="auto"></audio>
 
-<style>
 
-    
-    .send-button:hover {
-        background-color: #45a049;
-    }
-    .message {
-        margin-bottom: 10px;
-        padding: 10px;
-        border-radius: 4px;
-        background-color: #e1f5fe;
-    }
-    .message .timestamp {
-        font-size: 0.8em;
-        color: #999;
-    }
-    .message .user {
-        font-weight: bold;
-    }
-</style>
 
 
 <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>

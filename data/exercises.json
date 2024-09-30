@@ -1,8 +1,8 @@
 [
     {
         "id": 1,
-        "name": "Ransomware attack - Pharma batch environment",
-        "status": "Planned",
+        "name": "Ransomware Attack - Pharma Batch Environment",
+        "status": "Completed",
         "description": "A targeted ransomware attack has crippled the production systems of the pharma batch environment and encrypted the production data. The disruption of the systems led to an immediate production halt and jeopardized the timely delivery of critical medications. The IT department is working to remove the malware and restore the systems using backups, while simultaneously implementing measures to prevent future attacks.",
         "inject_order": [
             1,

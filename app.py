@@ -47,13 +47,26 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+
 DATA_DIR = 'data'
+#CONF_DIR = '/tmp'
 CHAT_LOG_FILE = 'chat_log.json'
-config_path = 'c:\\temp\\config.json'
-#config_path = '/tmp/config.json'
+
+if os.name == 'nt':  # Windows
+    config_path = 'c:\\temp'
+else:  # macOS/Linux
+    config_path = '/tmp'
+
+# Alternativ können Sie auch os.path.join verwenden, um plattformunabhängige Pfade zu erstellen
+config_path = os.path.join(config_path, 'config.json')
+
+print(f"#### Config path is set to: {config_path}")
 
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
+logger.debug(f"#### Config path is set to: {config_path}")
+
+
 
 def load_json(filename):
     logger.info('Dies ist ein Info-Log-Eintrag')
@@ -70,9 +83,6 @@ def dashboard():
     notifications = load_json('notifications.json')
     exercises = load_json('exercises.json')
     return render_template('dashboard.html', notifications=notifications, exercises=exercises)
-
-
-
 
 @app.route('/upload_file', methods=['POST'])
 def upload_file():
@@ -142,7 +152,6 @@ def get_chat_log():
         chat_log = []
 
     return jsonify(chat_log)
-
 
 
 class ChatNamespace(Namespace):

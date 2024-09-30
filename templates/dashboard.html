@@ -2,40 +2,57 @@
 
 {% block content %}
 
+<!-- Include Bootstrap CSS in your base.html file -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
 <style>
     .exercise-container {
         width: 100%;
+        margin-top: 20px;
     }
     .exercise {
-        padding: 8px;
+        padding: 15px;
+        margin-bottom: 15px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
     .exercise:nth-child(even) {
-        background-color: #f2f2f2;
+        background-color: #f8f9fa;
     }
     .exercise:nth-child(odd) {
-        background-color: #ddd;
+        background-color: #e9ecef;
+    }
+    .exercise h4 {
+        margin-bottom: 10px;
+    }
+    .exercise ul {
+        padding-left: 20px;
     }
 </style>
 
-<h2>Dashboard</h2>
-<div class="exercise-container">
-  <h3>Current Exercises</h3>
-  {% for exercise in exercises %}
-    <div class="exercise">
-      <strong>Name:</strong> {{ exercise.name }}<br>
-      <strong>Status:</strong> {{ exercise.status }}<br>
-      <strong>Description:</strong> {{ exercise.description }}<br>
-      <strong>Last execution:</strong> {{ exercise.last_performed }}<br>
-      {% if exercise.inject_comment %}
-        <strong>Comment:</strong>
-        <ul>
-          {% for key, value in exercise.inject_comment.items() %}
-            <li><strong>{{ key }}:</strong> {{ value }}</li>
-          {% endfor %}
-        </ul>
-      {% endif %}
+<div class="container mt-5">
+    <h2 class="mb-4">Dashboard</h2>
+    <div class="exercise-container">
+        <h3 class="mb-3">Current Exercises</h3>
+        {% for exercise in exercises %}
+            <div class="exercise card">
+                <div class="card-body">
+                    <h4 class="card-title">{{ exercise.name }}</h4>
+                    <p class="card-text"><strong>Status:</strong> {{ exercise.status }}</p>
+                    <p class="card-text"><strong>Description:</strong> {{ exercise.description }}</p>
+                    <p class="card-text"><strong>Last execution:</strong> {{ exercise.last_performed }}</p>
+                    {% if exercise.inject_comment %}
+                        <strong>Comment:</strong>
+                        <ul class="list-unstyled">
+                            {% for key, value in exercise.inject_comment.items() %}
+                                <li><strong>{{ key }}:</strong> {{ value }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
     </div>
-  {% endfor %}
 </div>
 
 {% endblock %}
